@@ -1,6 +1,6 @@
-## Page Builder
+# Marketlify Page Builder
 
-Goals:
+## Project Goals:
 
 - Create a page builder that can be used to create a single web page.
 - All saving is local storage. Just export/download HTML.
