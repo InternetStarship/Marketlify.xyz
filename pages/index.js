@@ -7,6 +7,7 @@ import Canvas from '../components/Canvas'
 import Toolbar from '../components/Toolbar'
 import Sidebar from '../components/Sidebar'
 import { useState, useEffect } from 'react'
+import _ from 'lodash'
 
 export default function Builder() {
   const [page, setPage] = useState(null)
@@ -39,6 +40,7 @@ export default function Builder() {
   }
 
   function updatePage(updated) {
+    console.log({ updated })
     setPage(updated)
     setUpdated(Date.now())
   }

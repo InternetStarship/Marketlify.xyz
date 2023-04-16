@@ -12,25 +12,40 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   const [selectedType, setSelectedType] = useState()
 
   useEffect(() => {
-    if (styles) {
-      const currentElement = findById(selectedId, page.sections)
-      currentElement.style = _.cloneDeep(styles)
-
-      updatePage(page)
-    }
-  }, [styles])
-
-  useEffect(() => {
     const currentElement = findById(selectedId, page.sections)
+    const type = findTypeById(selectedId, page.sections)
     if (currentElement) {
       setStyles(currentElement.style)
-      setSelectedType(currentElement.type)
+      setSelectedType(type)
     }
   }, [selectedId])
 
   const handleChange = event => {
     const { name, value } = event.target
-    setStyles({ ...styles, [name]: value })
+    const newStyles = { ...styles, [name]: value }
+    setStyles(newStyles)
+    handleSave(newStyles)
+  }
+
+  const handleSave = newStyles => {
+    const currentElement = getIndexesById(selectedId, page.sections)
+    const type = findTypeById(selectedId, page.sections)
+
+    if (type === 'section') {
+      page.sections[currentElement.sectionIndex].style = newStyles
+    } else if (type === 'row') {
+      page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
+    } else if (type === 'column') {
+      page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        currentElement.columnIndex
+      ].style = newStyles
+    } else if (type === 'element') {
+      page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        currentElement.columnIndex
+      ].elements[currentElement.elementIndex].style = newStyles
+    }
+
+    updatePage(_.cloneDeep(page))
   }
 
   const renderInputs = () => {
@@ -75,10 +90,76 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     return null
   }
 
+  function getIndexesById(id, sections) {
+    for (let sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
+      const section = sections[sectionIndex]
+      if (section.id === id) {
+        return { sectionIndex, rowIndex: -1, columnIndex: -1, elementIndex: -1 }
+      }
+
+      const rows = section.rows
+      for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+        const row = rows[rowIndex]
+        if (row.id === id) {
+          return { sectionIndex, rowIndex, columnIndex: -1, elementIndex: -1 }
+        }
+
+        const columns = row.columns
+        for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+          const column = columns[columnIndex]
+          if (column.id === id) {
+            return { sectionIndex, rowIndex, columnIndex, elementIndex: -1 }
+          }
+
+          const elements = column.elements
+          for (let elementIndex = 0; elementIndex < elements.length; elementIndex++) {
+            const element = elements[elementIndex]
+            if (element.id === id) {
+              return { sectionIndex, rowIndex, columnIndex, elementIndex }
+            }
+          }
+        }
+      }
+    }
+
+    return null
+  }
+
+  function findTypeById(id, sections) {
+    for (const section of sections) {
+      if (section.id === id) {
+        return 'section'
+      }
+
+      const rows = section.rows
+      for (const row of rows) {
+        if (row.id === id) {
+          return 'row'
+        }
+
+        const columns = row.columns
+        for (const column of columns) {
+          if (column.id === id) {
+            return 'column'
+          }
+
+          const elements = column.elements
+          for (const element of elements) {
+            if (element.id === id) {
+              return 'element'
+            }
+          }
+        }
+      }
+    }
+
+    return null
+  }
+
   return (
     <>
-      <div className="text-lg flex items-center justify-between font-bold mb-6">
-        <h3>Editing {selectedType}</h3>
+      <div className="text-xl flex items-center justify-between font-bold mb-4">
+        <h3 className="capitalize">Editing {selectedType}</h3>
         <button className="text-slate-500" onClick={close}>
           <AiOutlineCloseCircle />
         </button>

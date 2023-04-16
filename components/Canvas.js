@@ -30,9 +30,25 @@ export default function Canvas({ page, edit, viewport, updated }) {
         </div>
 
         {data.sections.map(section => (
-          <div className="section" key={section.id} style={section.style}>
+          <div
+            className="section"
+            key={section.id}
+            style={section.style}
+            onClick={e => {
+              e.stopPropagation()
+              edit(section)
+            }}
+          >
             {section.rows.map(row => (
-              <div className="row" key={row.id} style={row.style}>
+              <div
+                className="row"
+                key={row.id}
+                style={row.style}
+                onClick={e => {
+                  e.stopPropagation()
+                  edit(row)
+                }}
+              >
                 {row.columns.map(column => (
                   <div className="column" key={column.id}>
                     {column.elements.map(element => (
@@ -40,7 +56,10 @@ export default function Canvas({ page, edit, viewport, updated }) {
                         className="element"
                         key={element.id}
                         style={element.style}
-                        onClick={() => edit(element)}
+                        onClick={e => {
+                          e.stopPropagation()
+                          edit(element)
+                        }}
                       >
                         <Element element={element} />
                       </div>

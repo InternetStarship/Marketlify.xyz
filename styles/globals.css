@@ -7,9 +7,10 @@
 @tailwind utilities;
 
 #sidebar {
-  @apply bg-slate-50 border-r p-8 shadow-xl border-slate-300;
+  @apply bg-slate-50 p-8 shadow-xl;
   width: 380px;
   height: calc(100vh - 30px);
+  overflow-y: scroll;
 }
 .sidebar-fieldset {
   @apply mb-4;
@@ -19,6 +20,22 @@
 }
 .sidebar-input {
   @apply border border-slate-300 p-2 w-full rounded shadow-sm;
+}
+
+#sidebar::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: #eff4f9;
+  padding: 2px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: #d3dbe4;
+  border-radius: 10px;
+}
+
+#sidebar::-webkit-scrollbar-corner {
+  background: none;
 }
 
 .section:hover,
