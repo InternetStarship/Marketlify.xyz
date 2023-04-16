@@ -1,4 +1,4 @@
-<img src="/public/images/logo.png" width="200" />
+<img src="/public/images/logo.png" width="400" />
 
 ## Project Goals:
 
