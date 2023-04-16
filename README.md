@@ -36,11 +36,7 @@ Goals:
 - Export HTML
 - Toggle Mobile/Tablet/Desktop
 
-## Read Only License 1.0
-
-The ROL is an open source license for closed source projects to share thoughts on internet.
-
-> As simple as dos and don'ts.
+## Read Only License
 
 #### YOU CAN:
 - Clone or download the project
@@ -54,6 +50,5 @@ The ROL is an open source license for closed source projects to share thoughts o
 - Make changes or modify the project
 - Re-upload the project on the internet
 - Re-submit the project to any market place
-- Take screenshots from the project
 - Copy & paste the files or code to any other project
-- Print the code as a physical paper
+- Print the code as a physical paper (jk, you can do that)
