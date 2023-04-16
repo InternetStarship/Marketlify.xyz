@@ -21,24 +21,6 @@
   @apply border border-slate-300 p-2 w-full rounded shadow-sm;
 }
 
-#canvasContainer {
-  @apply p-6;
-}
-
-#mainCanvas {
-  @apply mx-auto border border-slate-300 shadow-xl bg-white;
-  width: 100%;
-  max-width: 1200px;
-  transition: max-width 0.5s ease;
-}
-
-#mainCanvas.mobile {
-  max-width: 460px;
-}
-#mainCanvas.tablet {
-  max-width: 760px;
-}
-
 .section:hover,
 .row:hover,
 .element:hover {
@@ -54,4 +36,71 @@
 
 .toolbar-button-primary {
   @apply bg-blue-700 border border-b-2 border-blue-800 hover:bg-blue-900 text-blue-100 font-bold py-2 px-3 rounded-md;
+}
+
+/* Canvas */
+
+#canvasContainer {
+  @apply p-6;
+}
+
+#mainCanvas {
+  @apply mx-auto border border-slate-300 shadow-xl bg-white rounded-md overflow-hidden;
+  width: 100%;
+  max-width: 1200px;
+  transition: max-width 0.5s ease;
+}
+
+#mainCanvas.mobile {
+  max-width: 460px;
+}
+#mainCanvas.tablet {
+  max-width: 760px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.traffic-lights {
+  display: flex;
+}
+
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.traffic-light-close {
+  background-color: #ff5f56;
+}
+
+.traffic-light-minimize {
+  background-color: #ffbd2e;
+}
+
+.traffic-light-maximize {
+  background-color: #27c93f;
+}
+
+.url-bar {
+  flex-grow: 1;
+  margin: 0 16px;
+  padding: 4px 8px;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.url-bar {
+  @apply text-slate-400;
 }

@@ -6,7 +6,7 @@
 import { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
-export default function Panel({ page, close, selectedId }) {
+export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({
     color: '#6A9FB5',
     fontFamily: 'sans-serif',
@@ -22,8 +22,7 @@ export default function Panel({ page, close, selectedId }) {
   useEffect(() => {
     const currentElement = findById(selectedId, page.sections)
     currentElement.style = styles
-    console.log('styles updates', currentElement.style)
-    // TODO - update the styles of page;
+    updatePage(page)
   }, [styles])
 
   const handleChange = event => {

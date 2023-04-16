@@ -7,7 +7,7 @@ import Canvas from '../components/Canvas'
 import Toolbar from '../components/Toolbar'
 import Sidebar from '../components/Sidebar'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Builder() {
   const [page, setPage] = useState({
@@ -124,6 +124,11 @@ export default function Builder() {
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
+  const [updated, setUpdated] = useState(null)
+
+  // useEffect(() => {
+  //   setPage(page)
+  // }, [page])
 
   function edit(element) {
     setCurrent('editing')
@@ -138,6 +143,12 @@ export default function Builder() {
     setCurrent('')
   }
 
+  function updatePage(updated) {
+    console.log('updated', updated)
+    setPage(updated)
+    setUpdated(Date.now())
+  }
+
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
       <Toolbar
@@ -148,9 +159,15 @@ export default function Builder() {
         }}
       />
       <div className="flex flex-row">
-        <Sidebar current={current} selectedId={selectedId} page={page} close={closeSidebar} />
+        <Sidebar
+          current={current}
+          selectedId={selectedId}
+          page={page}
+          close={closeSidebar}
+          updatePage={updatePage}
+        />
         <div className="w-full">
-          <Canvas page={page} edit={edit} viewport={viewport} />
+          <Canvas page={page} edit={edit} viewport={viewport} updated={updated} />
         </div>
       </div>
     </main>

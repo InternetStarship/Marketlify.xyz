@@ -8,7 +8,7 @@ Goals:
 ## Tasks
 
 - * Ability to edit section / element
--- Parse styles and create inputs
+
 - Hover bar for section / element
 - Ability to add a section, element, etc
 - Ability to CRUD element, etc
@@ -17,6 +17,7 @@ Goals:
 
 ## Optional Things
 
+- Save to Local Storage (max 5mb per page)
 - Layers
 - Drag and drop 
 - Preview
@@ -24,6 +25,7 @@ Goals:
 - SEO Preview
 - Tooltips
 - Google Fonts
+- Color Picker
 
 ---
 
