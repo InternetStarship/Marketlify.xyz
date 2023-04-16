@@ -8,8 +8,6 @@
 ## Currently Working On:
 
 - [x] Hover bar for section / element
-- [x] Delete, update, duplicate pages (via local storage)
-
 
 ## Tasks
 
@@ -19,6 +17,7 @@
 - [x] Page Settings
 - [x] On export set max width for sections via page settings
 - [x] Notifications
+- [x] Delete, update, duplicate pages (via local storage)
 
 
 ## Optional Things

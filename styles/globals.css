@@ -43,7 +43,7 @@
 .section:hover,
 .row:hover,
 .element:hover {
-  @apply bg-slate-100 cursor-pointer;
+  @apply cursor-pointer;
 }
 
 .toolbar-button {
@@ -122,4 +122,24 @@
 }
 .url-bar {
   @apply text-slate-400;
+}
+
+/* hover */
+
+#hoverBar {
+  pointer-events: none;
+}
+
+#hoverBarTop {
+  @apply absolute w-full flex items-center justify-between text-xl;
+  top: -15px;
+  pointer-events: all;
+}
+#hoverBarBottom {
+  @apply absolute flex justify-center py-3 text-center text-xl mx-auto;
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+  bottom: -25px;
+  pointer-events: all;
 }

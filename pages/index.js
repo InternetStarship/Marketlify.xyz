@@ -78,7 +78,9 @@ export default function Builder() {
           updatePage={updatePage}
         />
         <div className="w-full">
-          {page && <Canvas page={page} edit={edit} viewport={viewport} updated={updated} />}
+          {page && (
+            <Canvas page={page} edit={edit} viewport={viewport} updated={updated} updatePage={updatePage} />
+          )}
         </div>
       </div>
     </main>
