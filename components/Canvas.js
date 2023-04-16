@@ -10,20 +10,19 @@ export default function Canvas({ page, edit, viewport, updated }) {
   const [data, setData] = useState(page)
 
   useEffect(() => {
-    console.log('page has been updated')
     setData(page)
   }, [updated])
 
   return (
     <main id="canvasContainer">
       <div id="mainCanvas" className={viewport}>
-        <div class="top-bar">
-          <div class="traffic-lights">
-            <div class="traffic-light traffic-light-close"></div>
-            <div class="traffic-light traffic-light-minimize"></div>
-            <div class="traffic-light traffic-light-maximize"></div>
+        <div className="top-bar">
+          <div className="traffic-lights">
+            <div className="traffic-light traffic-light-close"></div>
+            <div className="traffic-light traffic-light-minimize"></div>
+            <div className="traffic-light traffic-light-maximize"></div>
           </div>
-          <div class="url-bar">
+          <div className="url-bar">
             <a href="http://www.wynterfunnels.com" target="_blank">
               https://www.wynterfunnels.com
             </a>

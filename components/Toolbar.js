@@ -111,7 +111,7 @@ export default function Toolbar({ page, viewport, updateViewport }) {
     <main className="w-full bg-slate-100 border-b border-slate-300 shadow-xl p-2 flex justify-between items-center">
       <div className="font-bold text-2xl">PageBuilder</div>
       <div className="flex space-x-2">
-        <div class="flex items-center  space-x-2 mr-2">
+        <div className="flex items-center  space-x-2 mr-2">
           <button
             onClick={() => {
               updateViewport('desktop')

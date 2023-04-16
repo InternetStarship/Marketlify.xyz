@@ -7,23 +7,24 @@ import { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export default function Panel({ page, close, selectedId, updatePage }) {
-  const [styles, setStyles] = useState({
-    color: '#6A9FB5',
-    fontFamily: 'sans-serif',
-    fontSize: '48px',
-    fontWeight: 400,
-    fontStyle: 'normal',
-    textDecoration: 'none',
-    textAlign: 'left',
-    lineHeight: 1.5,
-    letterSpacing: 0, // test
-  })
+  const [styles, setStyles] = useState({})
+  const [selectedType, setSelectedType] = useState()
+
+  useEffect(() => {
+    if (styles) {
+      const currentElement = findById(selectedId, page.sections)
+      currentElement.style = styles
+      updatePage(page)
+    }
+  }, [styles])
 
   useEffect(() => {
     const currentElement = findById(selectedId, page.sections)
-    currentElement.style = styles
-    updatePage(page)
-  }, [styles])
+    if (currentElement) {
+      setStyles(currentElement.style)
+      setSelectedType(currentElement.type)
+    }
+  }, [selectedId])
 
   const handleChange = event => {
     const { name, value } = event.target
@@ -35,21 +36,23 @@ export default function Panel({ page, close, selectedId, updatePage }) {
       return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
     }
 
-    return Object.entries(styles).map(([key, value]) => (
-      <div key={key} className="sidebar-fieldset">
-        <label className="sidebar-label" htmlFor={key}>
-          {makeLabelPretty(key)}:
-        </label>
-        <input
-          className="sidebar-input"
-          type="text"
-          id={key}
-          name={key}
-          value={value}
-          onChange={handleChange}
-        />
-      </div>
-    ))
+    if (styles) {
+      return Object.entries(styles).map(([key, value]) => (
+        <div key={key} className="sidebar-fieldset">
+          <label className="sidebar-label" htmlFor={key}>
+            {makeLabelPretty(key)}:
+          </label>
+          <input
+            className="sidebar-input"
+            type="text"
+            id={key}
+            name={key}
+            value={value}
+            onChange={handleChange}
+          />
+        </div>
+      ))
+    }
   }
 
   function findById(id, obj = sections) {
@@ -73,7 +76,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   return (
     <>
       <div className="text-lg flex items-center justify-between font-bold mb-6">
-        <h3>Editing [page type]</h3>
+        <h3>Editing {selectedType}</h3>
         <button className="text-slate-500" onClick={close}>
           <AiOutlineCloseCircle />
         </button>

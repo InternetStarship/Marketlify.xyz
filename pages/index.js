@@ -6,133 +6,30 @@
 import Canvas from '../components/Canvas'
 import Toolbar from '../components/Toolbar'
 import Sidebar from '../components/Sidebar'
-
 import { useState, useEffect } from 'react'
 
 export default function Builder() {
-  const [page, setPage] = useState({
-    page: {
-      background: {
-        color: '#ffffff',
-        image: {
-          url: '',
-          position: 'center',
-          repeat: 'no-repeat',
-          size: 'cover',
-        },
-      },
-      color: '#000000',
-      fontFamily: 'sans-serif',
-    },
-    seo: {
-      title: '',
-      description: '',
-      keywords: '',
-      url: '',
-      image: '',
-      favicon: '',
-    },
-    code: {
-      head: '',
-      body: '',
-    },
-    sections: [
-      {
-        id: 1,
-        title: 'Section 1',
-        style: {
-          backgroundColor: '#ffffff',
-          backgroundImage: '',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          borderWidth: 0,
-          borderStyle: 'solid',
-          borderColor: '#000000',
-          boxShadowX: 0,
-          boxShadowY: 0,
-          boxShadowBlur: 0,
-          boxShadowSpread: 0,
-          boxShadowColor: '#000000',
-          layoutWidth: '100%',
-          layoutHeight: '100%',
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingBottom: 0,
-          paddingLeft: 0,
-          marginTop: 0,
-          marginRight: 0,
-          marginBottom: 0,
-          marginLeft: 0,
-        },
-        rows: [
-          {
-            id: 2,
-            style: {
-              backgroundColor: '#ffffff',
-              backgroundImage: '',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              borderWidth: 0,
-              borderStyle: 'solid',
-              borderColor: '#000000',
-              boxShadowX: 0,
-              boxShadowY: 0,
-              boxShadowBlur: 0,
-              boxShadowSpread: 0,
-              boxShadowColor: '#000000',
-              layoutWidth: '100%',
-              layoutHeight: '100%',
-              paddingTop: 0,
-              paddingRight: 0,
-              paddingBottom: 0,
-              paddingLeft: 0,
-              marginTop: 0,
-              marginRight: 0,
-              marginBottom: 0,
-              marginLeft: 0,
-            },
-            columns: [
-              {
-                id: 3,
-                elements: [
-                  {
-                    id: 4,
-                    type: 'text',
-                    content: 'Hello World!',
-                    style: {
-                      color: '#6A9FB5',
-                      fontFamily: 'sans-serif',
-                      fontSize: '47px',
-                      fontWeight: 400,
-                      fontStyle: 'normal',
-                      textDecoration: 'none',
-                      textAlign: 'left',
-                      lineHeight: 1.5,
-                      letterSpacing: 0,
-                    },
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ], // this is test data
-  })
+  const [page, setPage] = useState(null)
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
   const [updated, setUpdated] = useState(null)
 
-  // useEffect(() => {
-  //   setPage(page)
-  // }, [page])
+  useEffect(() => {
+    fetch('/api/testdata', {
+      method: 'GET',
+    }).then(response => {
+      response.json().then(data => {
+        console.log('data', data)
+
+        setPage(data)
+      })
+    })
+  }, [])
 
   function edit(element) {
-    setCurrent('editing')
     setSelectedId(element.id)
+    setCurrent('editing')
   }
 
   function settings() {
@@ -167,7 +64,7 @@ export default function Builder() {
           updatePage={updatePage}
         />
         <div className="w-full">
-          <Canvas page={page} edit={edit} viewport={viewport} updated={updated} />
+          {page && <Canvas page={page} edit={edit} viewport={viewport} updated={updated} />}
         </div>
       </div>
     </main>

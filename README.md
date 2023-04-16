@@ -14,10 +14,11 @@ Goals:
 - Ability to CRUD element, etc
 - Text Editing (bold, etc)
 - Page Settings
+- Save to Local Storage (max 5mb per page)
+
 
 ## Optional Things
 
-- Save to Local Storage (max 5mb per page)
 - Layers
 - Drag and drop 
 - Preview
