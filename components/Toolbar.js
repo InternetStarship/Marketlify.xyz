@@ -4,11 +4,13 @@
  */
 
 import { HiOutlineCog } from 'react-icons/hi'
-import { BsLayers, BsFiletypeHtml, BsTabletLandscape } from 'react-icons/bs'
+import { BsLayers, BsTabletLandscape } from 'react-icons/bs'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
+import { MdPreview } from 'react-icons/md'
+import { FaDownload } from 'react-icons/fa'
 
-export default function Toolbar({ page }) {
+export default function Toolbar({ page, viewport, updateViewport }) {
   function exportHTML(data) {
     const {
       page,
@@ -101,18 +103,6 @@ export default function Toolbar({ page }) {
     console.log('...')
   }
 
-  function toggleMobile() {
-    console.log('...')
-  }
-
-  function toggleTablet() {
-    console.log('...')
-  }
-
-  function toggleDesktop() {
-    console.log('...')
-  }
-
   function toggleLayers() {
     console.log('...')
   }
@@ -121,30 +111,33 @@ export default function Toolbar({ page }) {
     <main className="w-full bg-slate-100 border-b border-slate-300 shadow-xl p-2 flex justify-between items-center">
       <div className="font-bold text-2xl">PageBuilder</div>
       <div className="flex space-x-2">
-        <button
-          onClick={() => {
-            toggleMobile()
-          }}
-          className="toolbar-button"
-        >
-          <AiOutlineMobile />
-        </button>
-        <button
-          onClick={() => {
-            toggleTablet()
-          }}
-          className="toolbar-button"
-        >
-          <BsTabletLandscape />
-        </button>
-        <button
-          onClick={() => {
-            toggleDesktop()
-          }}
-          className="toolbar-button"
-        >
-          <BiDesktop />
-        </button>
+        <div class="flex items-center  space-x-2 mr-2">
+          <button
+            onClick={() => {
+              updateViewport('desktop')
+            }}
+            className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
+          >
+            <BiDesktop />
+          </button>
+          <button
+            onClick={() => {
+              updateViewport('tablet')
+            }}
+            className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
+          >
+            <BsTabletLandscape />
+          </button>
+          <button
+            onClick={() => {
+              updateViewport('mobile')
+            }}
+            className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
+          >
+            <AiOutlineMobile />
+          </button>
+        </div>
+
         <button
           onClick={() => {
             toggleLayers()
@@ -163,12 +156,19 @@ export default function Toolbar({ page }) {
         </button>
         <button
           onClick={() => {
+            // toggleSettings()
+          }}
+          className="toolbar-button"
+        >
+          <MdPreview />
+        </button>
+        <button
+          onClick={() => {
             exportHTML(page)
           }}
-          className="flex items-center toolbar-button"
+          className="flex items-center toolbar-button-primary"
         >
-          <BsFiletypeHtml className="mr-2" />
-          Export
+          <FaDownload />
         </button>
       </div>
     </main>

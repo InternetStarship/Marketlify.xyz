@@ -123,6 +123,7 @@ export default function Builder() {
   })
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
+  const [viewport, setViewport] = useState('desktop')
 
   function edit(element) {
     setCurrent('editing')
@@ -139,11 +140,17 @@ export default function Builder() {
 
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
-      <Toolbar page={page} />
+      <Toolbar
+        page={page}
+        viewport={viewport}
+        updateViewport={value => {
+          setViewport(value)
+        }}
+      />
       <div className="flex flex-row">
         <Sidebar current={current} selectedId={selectedId} page={page} close={closeSidebar} />
         <div className="w-full">
-          <Canvas page={page} edit={edit} />
+          <Canvas page={page} edit={edit} viewport={viewport} />
         </div>
       </div>
     </main>

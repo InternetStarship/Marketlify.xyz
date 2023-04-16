@@ -3,19 +3,19 @@
  *   All rights reserved.
  */
 
-import Element from "./builder/Element";
+import Element from './builder/Element'
 
-export default function Canvas({ page, edit }) {
+export default function Canvas({ page, edit, viewport }) {
   return (
     <main id="canvasContainer">
-      <div id="mainCanvas">
-        {page.sections.map((section) => (
+      <div id="mainCanvas" className={viewport}>
+        {page.sections.map(section => (
           <div className="section" key={section.id} style={section.style}>
-            {section.rows.map((row) => (
+            {section.rows.map(row => (
               <div className="row" key={row.id} style={row.style}>
-                {row.columns.map((column) => (
+                {row.columns.map(column => (
                   <div className="column" key={column.id}>
-                    {column.elements.map((element) => (
+                    {column.elements.map(element => (
                       <div
                         className="element"
                         key={element.id}
@@ -33,5 +33,5 @@ export default function Canvas({ page, edit }) {
         ))}
       </div>
     </main>
-  );
+  )
 }

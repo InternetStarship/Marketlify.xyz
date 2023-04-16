@@ -19,7 +19,6 @@ Goals:
 
 - Layers
 - Drag and drop 
-- Toggle Mobile/Tablet/Desktop
 - Preview
 - Selected Breadcrumb
 - SEO Preview
@@ -33,3 +32,4 @@ Goals:
 - Create base layout
 - Page JSON structure (state)
 - Export HTML
+- Toggle Mobile/Tablet/Desktop
