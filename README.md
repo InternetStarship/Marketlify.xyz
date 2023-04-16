@@ -3,14 +3,13 @@
 Goals:
 
 - Create a page builder that can be used to create a single web page.
-- No saving. Just export/download HTML.
+- All saving is local storage. Just export/download HTML.
 
 ## Tasks
 
-- Ability to edit section / element
-- Hover bar for section / element
 - Ability to add a section, element, etc
 - Ability to CRUD element, etc
+- Hover bar for section / element
 - Text Editing (bold, etc)
 - Page Settings
 - Save to Local Storage (max 5mb per page)
@@ -26,6 +25,7 @@ Goals:
 - Tooltips
 - Google Fonts
 - Color Picker
+- Make Panel Better
 
 ---
 
@@ -35,6 +35,8 @@ Goals:
 - Page JSON structure (state)
 - Export HTML
 - Toggle Mobile/Tablet/Desktop
+- Ability to edit section / element
+
 
 ## Read Only License
 
