@@ -3,7 +3,9 @@
  *   All rights reserved.
  */
 
-export default function Canvas({ page }) {
+import Element from "./builder/Element";
+
+export default function Canvas({ page, edit }) {
   return (
     <main id="canvasContainer">
       <div id="mainCanvas">
@@ -18,12 +20,9 @@ export default function Canvas({ page }) {
                         className="element"
                         key={element.id}
                         style={element.style}
+                        onClick={() => edit(element)}
                       >
-                        {element.type === "text" ? (
-                          <p>{element.content}</p>
-                        ) : (
-                          <p>Unknown Element Type</p>
-                        )}
+                        <Element element={element} />
                       </div>
                     ))}
                   </div>

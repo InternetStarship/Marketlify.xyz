@@ -3,6 +3,14 @@
  *   All rights reserved.
  */
 
-export default function Elements() {
-  return <main className="">We'll see if this matters heh</main>;
+export default function Elements({ element }) {
+  return (
+    <>
+      {element.type === "text" ? (
+        <p>{element.content}</p>
+      ) : (
+        <p>Unknown Element Type</p>
+      )}
+    </>
+  );
 }

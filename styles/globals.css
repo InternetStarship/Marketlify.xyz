@@ -7,9 +7,18 @@
 @tailwind utilities;
 
 #sidebar {
-  @apply bg-slate-50 border-r shadow-xl border-slate-300;
+  @apply bg-slate-50 border-r p-8 shadow-xl border-slate-300;
   width: 380px;
   height: calc(100vh - 30px);
+}
+.sidebar-fieldset {
+  @apply mb-4;
+}
+.sidebar-label {
+  @apply text-slate-500 font-medium mb-2 text-sm;
+}
+.sidebar-input {
+  @apply border border-slate-300 p-2 w-full rounded shadow-sm;
 }
 
 #canvasContainer {

@@ -41,53 +41,57 @@ export default function Builder() {
         id: 1,
         title: "Section 1",
         style: {
-          background: {
-            color: "#ffffff",
-            image: {
-              url: "",
-              position: "center",
-              repeat: "no-repeat",
-              size: "cover",
-            },
-          },
-          border: {
-            width: 0,
-            style: "solid",
-            color: "#000000",
-          },
-          shadow: {
-            x: 0,
-            y: 0,
-            blur: 0,
-            spread: 0,
-            color: "#000000",
-          },
+          backgroundColor: "#ffffff",
+          backgroundImage: "",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          borderWidth: 0,
+          borderStyle: "solid",
+          borderColor: "#000000",
+          boxShadowX: 0,
+          boxShadowY: 0,
+          boxShadowBlur: 0,
+          boxShadowSpread: 0,
+          boxShadowColor: "#000000",
+          layoutWidth: "100%",
+          layoutHeight: "100%",
+          paddingTop: 0,
+          paddingRight: 0,
+          paddingBottom: 0,
+          paddingLeft: 0,
+          marginTop: 0,
+          marginRight: 0,
+          marginBottom: 0,
+          marginLeft: 0,
         },
         rows: [
           {
             id: 2,
             style: {
-              background: {
-                color: "#ffffff",
-                image: {
-                  url: "",
-                  position: "center",
-                  repeat: "no-repeat",
-                  size: "cover",
-                },
-              },
-              border: {
-                width: 0,
-                style: "solid",
-                color: "#000000",
-              },
-              shadow: {
-                x: 0,
-                y: 0,
-                blur: 0,
-                spread: 0,
-                color: "#000000",
-              },
+              backgroundColor: "#ffffff",
+              backgroundImage: "",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              borderWidth: 0,
+              borderStyle: "solid",
+              borderColor: "#000000",
+              boxShadowX: 0,
+              boxShadowY: 0,
+              boxShadowBlur: 0,
+              boxShadowSpread: 0,
+              boxShadowColor: "#000000",
+              layoutWidth: "100%",
+              layoutHeight: "100%",
+              paddingTop: 0,
+              paddingRight: 0,
+              paddingBottom: 0,
+              paddingLeft: 0,
+              marginTop: 0,
+              marginRight: 0,
+              marginBottom: 0,
+              marginLeft: 0,
             },
             columns: [
               {
@@ -100,7 +104,7 @@ export default function Builder() {
                     style: {
                       color: "#000000",
                       fontFamily: "sans-serif",
-                      fontSize: 16,
+                      fontSize: 46,
                       fontWeight: 400,
                       fontStyle: "normal",
                       textDecoration: "none",
@@ -117,14 +121,34 @@ export default function Builder() {
       },
     ], // this is test data
   });
+  const [current, setCurrent] = useState("");
+  const [selectedId, setSelectedId] = useState("");
+
+  function edit(element) {
+    setCurrent("editing");
+    setSelectedId(element.id);
+  }
+
+  function settings() {
+    setCurrent("settings");
+  }
+
+  function closeSidebar() {
+    setCurrent("");
+  }
 
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
       <Toolbar />
       <div className="flex flex-row">
-        <Sidebar />
+        <Sidebar
+          current={current}
+          selectedId={selectedId}
+          page={page}
+          close={closeSidebar}
+        />
         <div className="w-full">
-          <Canvas page={page} />
+          <Canvas page={page} edit={edit} />
         </div>
       </div>
     </main>
