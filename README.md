@@ -7,9 +7,10 @@
 
 ## Currently Working On:
 
-- [x] Hover bar: Close when clicking outside of canvas
-- [x] Hover bar Bug: hovering method is not working properly
-- [x] Ability to Delete, Duplicate element, etc
+- [x] Hover Bar: Close when clicking outside of canvas
+- [x] Hover Bar: [Bug] hovering method is not working properly
+- [x] Hover Bar: Move Up/Down
+- [x] Hover Bar: Ability to Delete, Duplicate element, etc
 
 ## Tasks
 
@@ -17,10 +18,11 @@
 - [x] Page Settings
 - [x] On export set max width for sections via page settings
 - [x] Notifications
-- [x] Delete, update, duplicate pages (via local storage)
-- [x] HoverBar Move Up/Down
+- [x] Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [x] Elements (Button, Image, List, Video, etc)
 
-## Optional Things
+
+## Optional Tasks
 
 - [x] Layers
 - [x] Drag and drop 
@@ -32,9 +34,10 @@
 - [x] Color Picker
 - [x] Make Panel Better
 - [x] Optimize and Format Exported HTML
+- [x] Ability to add columns
 
 
-## Done (for an MVP)
+## Completed Tasks (for an MVP)
 
 - [x] Create base layout
 - [x] Page JSON structure (state)
@@ -43,6 +46,13 @@
 - [x] Ability to edit section / element
 - [x] Save to Local Storage (max 5mb per page)
 - [x] Ability to add a section, element, etc
+
+## Tech Goals
+
+- [x] Dynamic Style Editing (no hardcoded css)
+- [x] Entirely local storage (no backend)
+- [x] Fast and lightweight
+- [x] Add affiliate links everywhere.
 
 
 ---
