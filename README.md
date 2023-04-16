@@ -51,4 +51,4 @@ Goals:
 - Re-upload the project on the internet
 - Re-submit the project to any market place
 - Copy & paste the files or code to any other project
-- Print the code as a physical paper (jk, you can do that)
+- Print the code on physical paper (jk, you can do that)
