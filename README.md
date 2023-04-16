@@ -32,7 +32,6 @@ Goals:
 - [x] Make Panel Better
 - [x] Optimize and Format Exported HTML
 
----
 
 ## Done (for an MVP)
 
@@ -42,6 +41,7 @@ Goals:
 - [x] Toggle Mobile/Tablet/Desktop
 - [x] Ability to edit section / element
 
+---
 
 ## Read Only License
 
