@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import _ from 'lodash'
 
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
@@ -13,7 +14,8 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   useEffect(() => {
     if (styles) {
       const currentElement = findById(selectedId, page.sections)
-      currentElement.style = styles
+      currentElement.style = _.cloneDeep(styles)
+
       updatePage(page)
     }
   }, [styles])
@@ -59,14 +61,14 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     if (Array.isArray(obj)) {
       for (const item of obj) {
         const result = findById(id, item)
-        if (result) return result
+        if (result) return _.cloneDeep(result)
       }
     } else if (typeof obj === 'object') {
-      if (obj.id === id) return obj
+      if (obj.id === id) return _.cloneDeep(obj)
 
       for (const key in obj) {
         const result = findById(id, obj[key])
-        if (result) return result
+        if (result) return _.cloneDeep(result)
       }
     }
 

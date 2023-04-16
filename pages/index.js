@@ -20,8 +20,6 @@ export default function Builder() {
       method: 'GET',
     }).then(response => {
       response.json().then(data => {
-        console.log('data', data)
-
         setPage(data)
       })
     })
@@ -41,7 +39,6 @@ export default function Builder() {
   }
 
   function updatePage(updated) {
-    console.log('updated', updated)
     setPage(updated)
     setUpdated(Date.now())
   }
