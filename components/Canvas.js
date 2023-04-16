@@ -3,8 +3,8 @@
  *   All rights reserved.
  */
 
-import Element from './Builder/Element'
-import HoverBar from './Builder/HoverBar'
+import Element from './PageBuilder/Element'
+import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 
 export default function Canvas({ page, edit, viewport, updated, updatePage, selectedId, updateSelectedId }) {
