@@ -3,40 +3,38 @@
  *   All rights reserved.
  */
 
-import { useState, useEffect } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useState, useEffect } from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export default function Panel({ page, close, selectedId }) {
   const [styles, setStyles] = useState({
-    color: "#000000",
-    fontFamily: "sans-serif",
-    fontSize: 46,
+    color: '#6A9FB5',
+    fontFamily: 'sans-serif',
+    fontSize: '48px',
     fontWeight: 400,
-    fontStyle: "normal",
-    textDecoration: "none",
-    textAlign: "left",
+    fontStyle: 'normal',
+    textDecoration: 'none',
+    textAlign: 'left',
     lineHeight: 1.5,
     letterSpacing: 0, // test
-  });
+  })
 
   useEffect(() => {
-    const currentElement = findById(selectedId, page.sections);
-    currentElement.style = styles;
-    console.log("styles updates", currentElement.style);
+    const currentElement = findById(selectedId, page.sections)
+    currentElement.style = styles
+    console.log('styles updates', currentElement.style)
     // TODO - update the styles of page;
-  }, [styles]);
+  }, [styles])
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setStyles({ ...styles, [name]: value });
-  };
+  const handleChange = event => {
+    const { name, value } = event.target
+    setStyles({ ...styles, [name]: value })
+  }
 
   const renderInputs = () => {
-    const makeLabelPretty = (key) => {
-      return key
-        .replace(/([A-Z])/g, " $1")
-        .replace(/^./, (str) => str.toUpperCase());
-    };
+    const makeLabelPretty = key => {
+      return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
+    }
 
     return Object.entries(styles).map(([key, value]) => (
       <div key={key} className="sidebar-fieldset">
@@ -52,25 +50,25 @@ export default function Panel({ page, close, selectedId }) {
           onChange={handleChange}
         />
       </div>
-    ));
-  };
+    ))
+  }
 
   function findById(id, obj = sections) {
     if (Array.isArray(obj)) {
       for (const item of obj) {
-        const result = findById(id, item);
-        if (result) return result;
+        const result = findById(id, item)
+        if (result) return result
       }
-    } else if (typeof obj === "object") {
-      if (obj.id === id) return obj;
+    } else if (typeof obj === 'object') {
+      if (obj.id === id) return obj
 
       for (const key in obj) {
-        const result = findById(id, obj[key]);
-        if (result) return result;
+        const result = findById(id, obj[key])
+        if (result) return result
       }
     }
 
-    return null;
+    return null
   }
 
   return (
@@ -83,5 +81,5 @@ export default function Panel({ page, close, selectedId }) {
       </div>
       {renderInputs()}
     </>
-  );
+  )
 }

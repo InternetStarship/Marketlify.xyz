@@ -28,11 +28,15 @@
 #mainCanvas {
   @apply mx-auto border border-slate-300 shadow-xl bg-white;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
 .section:hover,
 .row:hover,
 .element:hover {
   @apply bg-slate-100 cursor-pointer;
+}
+
+.toolbar-button {
+  @apply bg-slate-100 border border-b-2 border-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 px-3 rounded-md;
 }

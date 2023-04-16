@@ -3,59 +3,59 @@
  *   All rights reserved.
  */
 
-import Canvas from "../components/Canvas";
-import Toolbar from "../components/Toolbar";
-import Sidebar from "../components/Sidebar";
+import Canvas from '../components/Canvas'
+import Toolbar from '../components/Toolbar'
+import Sidebar from '../components/Sidebar'
 
-import { useState } from "react";
+import { useState } from 'react'
 
 export default function Builder() {
   const [page, setPage] = useState({
     page: {
       background: {
-        color: "#ffffff",
+        color: '#ffffff',
         image: {
-          url: "",
-          position: "center",
-          repeat: "no-repeat",
-          size: "cover",
+          url: '',
+          position: 'center',
+          repeat: 'no-repeat',
+          size: 'cover',
         },
       },
-      color: "#000000",
-      fontFamily: "sans-serif",
+      color: '#000000',
+      fontFamily: 'sans-serif',
     },
     seo: {
-      title: "",
-      description: "",
-      keywords: "",
-      url: "",
-      image: "",
-      favicon: "",
+      title: '',
+      description: '',
+      keywords: '',
+      url: '',
+      image: '',
+      favicon: '',
     },
     code: {
-      head: "",
-      body: "",
+      head: '',
+      body: '',
     },
     sections: [
       {
         id: 1,
-        title: "Section 1",
+        title: 'Section 1',
         style: {
-          backgroundColor: "#ffffff",
-          backgroundImage: "",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          backgroundColor: '#ffffff',
+          backgroundImage: '',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
           borderWidth: 0,
-          borderStyle: "solid",
-          borderColor: "#000000",
+          borderStyle: 'solid',
+          borderColor: '#000000',
           boxShadowX: 0,
           boxShadowY: 0,
           boxShadowBlur: 0,
           boxShadowSpread: 0,
-          boxShadowColor: "#000000",
-          layoutWidth: "100%",
-          layoutHeight: "100%",
+          boxShadowColor: '#000000',
+          layoutWidth: '100%',
+          layoutHeight: '100%',
           paddingTop: 0,
           paddingRight: 0,
           paddingBottom: 0,
@@ -69,21 +69,21 @@ export default function Builder() {
           {
             id: 2,
             style: {
-              backgroundColor: "#ffffff",
-              backgroundImage: "",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
+              backgroundColor: '#ffffff',
+              backgroundImage: '',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
               borderWidth: 0,
-              borderStyle: "solid",
-              borderColor: "#000000",
+              borderStyle: 'solid',
+              borderColor: '#000000',
               boxShadowX: 0,
               boxShadowY: 0,
               boxShadowBlur: 0,
               boxShadowSpread: 0,
-              boxShadowColor: "#000000",
-              layoutWidth: "100%",
-              layoutHeight: "100%",
+              boxShadowColor: '#000000',
+              layoutWidth: '100%',
+              layoutHeight: '100%',
               paddingTop: 0,
               paddingRight: 0,
               paddingBottom: 0,
@@ -99,16 +99,16 @@ export default function Builder() {
                 elements: [
                   {
                     id: 4,
-                    type: "text",
-                    content: "Hello World!",
+                    type: 'text',
+                    content: 'Hello World!',
                     style: {
-                      color: "#000000",
-                      fontFamily: "sans-serif",
-                      fontSize: 46,
+                      color: '#6A9FB5',
+                      fontFamily: 'sans-serif',
+                      fontSize: '47px',
                       fontWeight: 400,
-                      fontStyle: "normal",
-                      textDecoration: "none",
-                      textAlign: "left",
+                      fontStyle: 'normal',
+                      textDecoration: 'none',
+                      textAlign: 'left',
                       lineHeight: 1.5,
                       letterSpacing: 0,
                     },
@@ -120,37 +120,32 @@ export default function Builder() {
         ],
       },
     ], // this is test data
-  });
-  const [current, setCurrent] = useState("");
-  const [selectedId, setSelectedId] = useState("");
+  })
+  const [current, setCurrent] = useState('')
+  const [selectedId, setSelectedId] = useState('')
 
   function edit(element) {
-    setCurrent("editing");
-    setSelectedId(element.id);
+    setCurrent('editing')
+    setSelectedId(element.id)
   }
 
   function settings() {
-    setCurrent("settings");
+    setCurrent('settings')
   }
 
   function closeSidebar() {
-    setCurrent("");
+    setCurrent('')
   }
 
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
-      <Toolbar />
+      <Toolbar page={page} />
       <div className="flex flex-row">
-        <Sidebar
-          current={current}
-          selectedId={selectedId}
-          page={page}
-          close={closeSidebar}
-        />
+        <Sidebar current={current} selectedId={selectedId} page={page} close={closeSidebar} />
         <div className="w-full">
           <Canvas page={page} edit={edit} />
         </div>
       </div>
     </main>
-  );
+  )
 }
