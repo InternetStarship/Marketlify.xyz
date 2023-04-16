@@ -21,3 +21,9 @@
   width: 100%;
   max-width: 1000px;
 }
+
+.section:hover,
+.row:hover,
+.element:hover {
+  @apply bg-slate-100 cursor-pointer;
+}

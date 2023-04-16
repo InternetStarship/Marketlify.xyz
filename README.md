@@ -8,12 +8,13 @@ Goals:
 ## Steps
 
 - Create base layout
+- Page JSON structure (state)
 - Ability to add a section
 - Ability to add a text element
 - Ability to edit section / element
 - CRUD for sections/elements
 - Page Settings
-- Export HTML + CSS
+- Export HTML + CSS (JSON to HTML)
 
 ## Optional Things
 
