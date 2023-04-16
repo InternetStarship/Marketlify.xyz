@@ -20,6 +20,8 @@
 - [x] Notifications
 - [x] Delete, update, duplicate pages, add name, sort by date (via local storage)
 - [x] Elements (Button, Image, List, Video, etc)
+- [x] Sections (Hero, Features, Testimonials, etc)
+- [x] Add Dynamic CSS Style (dropdown + button in panel)
 
 
 ## Optional Tasks
