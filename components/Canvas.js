@@ -7,7 +7,7 @@ import Element from './Builder/Element'
 import HoverBar from './Builder/HoverBar'
 import { useState, useEffect } from 'react'
 
-export default function Canvas({ page, edit, viewport, updated, updatePage }) {
+export default function Canvas({ page, edit, viewport, updated, updatePage, selectedId, updateSelectedId }) {
   const [data, setData] = useState(page)
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
@@ -26,6 +26,8 @@ export default function Canvas({ page, edit, viewport, updated, updatePage }) {
       width: `${element.offsetWidth}px`,
       height: `${element.offsetHeight}px`,
     })
+
+    updateSelectedId(parseInt(elementId.replace('marketlify-', '')))
   }
 
   return (
@@ -50,7 +52,9 @@ export default function Canvas({ page, edit, viewport, updated, updatePage }) {
           </div>
         </div>
 
-        {hovering && <HoverBar position={position} page={page} updatePage={updatePage} />}
+        {hovering && (
+          <HoverBar position={position} page={page} updatePage={updatePage} selectedId={selectedId} />
+        )}
 
         {data.sections.map(section => (
           <div

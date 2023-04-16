@@ -3,48 +3,94 @@
  *   All rights reserved.
  */
 
-import { FaArrowUp, FaArrowDown, FaPlus, FaCog } from 'react-icons/fa'
+import { FaArrowUp, FaArrowDown, FaPlus, FaCopy, FaTrash } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
+import findById from '@/utils/findById'
+import findTypeById from '@/utils/findTypeById'
+import getIndexesById from '@/utils/getIndexesById'
+import defaults from '@/utils/defaults'
 
-export default function HoverBar({ position, page, updatePage }) {
+export default function HoverBar({ position, page, updatePage, selectedId }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
 
   useEffect(() => {
     setUpdatedPosition(position)
   }, [position])
 
+  function generateUniqueId(existingIds) {
+    let uniqueId
+
+    do {
+      uniqueId = Math.floor(Math.random() * 1000000)
+    } while (existingIds.has(uniqueId))
+
+    return uniqueId
+  }
+
   function add() {
-    // todo make this so its not hardcoded
-    page.sections[0].rows[0].columns[0].elements.push({
-      id: 499,
-      type: 'text',
-      content: 'New Element World!',
-      style: {
-        color: 'blue',
-        fontFamily: 'sans-serif',
-        fontSize: '97px',
-        fontWeight: 400,
-        fontStyle: 'normal',
-        textDecoration: 'none',
-        textAlign: 'left',
-        lineHeight: 1.5,
-        letterSpacing: '0px',
-      },
+    const type = findTypeById(selectedId, page.sections)
+    const currentElement = getIndexesById(selectedId, page.sections)
+    const existingIds = new Set()
+
+    page.sections.forEach(section => {
+      existingIds.add(section.id)
+      section.rows.forEach(row => {
+        existingIds.add(row.id)
+        row.columns.forEach(column => {
+          existingIds.add(column.id)
+          column.elements.forEach(element => {
+            existingIds.add(element.id)
+          })
+        })
+      })
     })
+
+    let newItem
+
+    switch (type) {
+      case 'section':
+        newItem = { ...defaults.section, id: generateUniqueId(existingIds) }
+        page.sections.push(newItem)
+        break
+
+      case 'row':
+        newItem = { ...defaults.row, id: generateUniqueId(existingIds) }
+        page.sections[currentElement.sectionIndex].rows.push(newItem)
+        break
+
+      case 'column':
+        newItem = { ...defaults.column, id: generateUniqueId(existingIds) }
+        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.push(newItem)
+        break
+
+      case 'element':
+        newItem = { ...defaults.elements[0], id: generateUniqueId(existingIds) }
+        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements.push(newItem)
+        break
+
+      default:
+        return
+    }
+
     updatePage(page)
-    console.log('add')
   }
 
   function moveUp() {
-    console.log('moveUp')
+    alert('moveUp')
   }
 
   function moveDown() {
-    console.log('moveDown')
+    alert('moveDown')
   }
 
-  function edit() {
-    console.log('edit')
+  function remove() {
+    alert('remove')
+  }
+
+  function duplicate() {
+    alert('duplicate')
   }
 
   return (
@@ -59,12 +105,7 @@ export default function HoverBar({ position, page, updatePage }) {
         zIndex: 999999,
       }}
     >
-      <div
-        id="hoverBarTop"
-        onClick={() => {
-          edit()
-        }}
-      >
+      <div id="hoverBarTop">
         <div className="flex">
           <div
             onClick={() => {
@@ -85,8 +126,21 @@ export default function HoverBar({ position, page, updatePage }) {
         </div>
 
         <div className="flex">
-          <div className="bg-blue-500 p-1 rounded-sm text-white">
-            <FaCog />
+          <div
+            onClick={() => {
+              duplicate()
+            }}
+            className="bg-blue-500 p-1 rounded-sm text-white"
+          >
+            <FaCopy />
+          </div>
+          <div
+            onClick={() => {
+              remove()
+            }}
+            className="bg-blue-500 p-1 rounded-sm text-white"
+          >
+            <FaTrash />
           </div>
         </div>
       </div>

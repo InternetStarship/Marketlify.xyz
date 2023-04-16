@@ -7,12 +7,12 @@
 
 ## Currently Working On:
 
-- [x] Hover bar for section / element
+- [x] Hover bar: Close when clicking outside of canvas
+- [x] Hover bar Bug: hovering method is not working properly
+- [x] Ability to Delete, Duplicate element, etc
 
 ## Tasks
 
-- [x] Ability to add a section, element, etc
-- [x] Ability to CRUD element, etc
 - [x] Text Editing (bold, etc)
 - [x] Page Settings
 - [x] On export set max width for sections via page settings
@@ -42,6 +42,7 @@
 - [x] Toggle Mobile/Tablet/Desktop
 - [x] Ability to edit section / element
 - [x] Save to Local Storage (max 5mb per page)
+- [x] Ability to add a section, element, etc
 
 
 ---

@@ -79,7 +79,17 @@ export default function Builder() {
         />
         <div className="w-full">
           {page && (
-            <Canvas page={page} edit={edit} viewport={viewport} updated={updated} updatePage={updatePage} />
+            <Canvas
+              page={page}
+              edit={edit}
+              viewport={viewport}
+              updated={updated}
+              updatePage={updatePage}
+              selectedId={selectedId}
+              updateSelectedId={id => {
+                setSelectedId(id)
+              }}
+            />
           )}
         </div>
       </div>

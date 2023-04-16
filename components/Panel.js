@@ -6,6 +6,9 @@
 import { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import _ from 'lodash'
+import findById from '@/utils/findById'
+import findTypeById from '@/utils/findTypeById'
+import getIndexesById from '@/utils/getIndexesById'
 
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
@@ -70,90 +73,6 @@ export default function Panel({ page, close, selectedId, updatePage }) {
         </div>
       ))
     }
-  }
-
-  function findById(id, obj = sections) {
-    if (Array.isArray(obj)) {
-      for (const item of obj) {
-        const result = findById(id, item)
-        if (result) return _.cloneDeep(result)
-      }
-    } else if (typeof obj === 'object') {
-      if (obj.id === id) return _.cloneDeep(obj)
-
-      for (const key in obj) {
-        const result = findById(id, obj[key])
-        if (result) return _.cloneDeep(result)
-      }
-    }
-
-    return null
-  }
-
-  function getIndexesById(id, sections) {
-    for (let sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
-      const section = sections[sectionIndex]
-      if (section.id === id) {
-        return { sectionIndex, rowIndex: -1, columnIndex: -1, elementIndex: -1 }
-      }
-
-      const rows = section.rows
-      for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
-        const row = rows[rowIndex]
-        if (row.id === id) {
-          return { sectionIndex, rowIndex, columnIndex: -1, elementIndex: -1 }
-        }
-
-        const columns = row.columns
-        for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
-          const column = columns[columnIndex]
-          if (column.id === id) {
-            return { sectionIndex, rowIndex, columnIndex, elementIndex: -1 }
-          }
-
-          const elements = column.elements
-          for (let elementIndex = 0; elementIndex < elements.length; elementIndex++) {
-            const element = elements[elementIndex]
-            if (element.id === id) {
-              return { sectionIndex, rowIndex, columnIndex, elementIndex }
-            }
-          }
-        }
-      }
-    }
-
-    return null
-  }
-
-  function findTypeById(id, sections) {
-    for (const section of sections) {
-      if (section.id === id) {
-        return 'section'
-      }
-
-      const rows = section.rows
-      for (const row of rows) {
-        if (row.id === id) {
-          return 'row'
-        }
-
-        const columns = row.columns
-        for (const column of columns) {
-          if (column.id === id) {
-            return 'column'
-          }
-
-          const elements = column.elements
-          for (const element of elements) {
-            if (element.id === id) {
-              return 'element'
-            }
-          }
-        }
-      }
-    }
-
-    return null
   }
 
   return (
