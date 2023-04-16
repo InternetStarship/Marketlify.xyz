@@ -8,6 +8,7 @@ import Toolbar from '../components/Toolbar'
 import Sidebar from '../components/Sidebar'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
+import Head from 'next/head'
 
 export default function Builder() {
   const [page, setPage] = useState(null)
@@ -40,13 +41,16 @@ export default function Builder() {
   }
 
   function updatePage(updated) {
-    console.log({ updated })
     setPage(updated)
     setUpdated(Date.now())
   }
 
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
+      <Head>
+        <title>Marketlify - Page Builder</title>
+      </Head>
+
       <Toolbar
         page={page}
         viewport={viewport}
