@@ -37,6 +37,8 @@
 - [ ] Make Panel Better
 - [ ] Optimize and Format Exported HTML
 - [ ] Ability to add columns
+- [ ] Make it work on Mobile
+- [ ] Mobile Optimizations for Page Builder
 
 
 ## Completed Tasks (for an MVP)
