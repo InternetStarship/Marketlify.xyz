@@ -1,15 +1,22 @@
 ## Page Builder
 
-First, run the development server:
+Goals:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Create a page builder that can be used to create a single web page.
+- No saving. Just export/download HTML.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Steps
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Create base layout
+- Ability to add a section
+- Ability to add a text element
+- Ability to edit section / element
+- CRUD for sections/elements
+- Page Settings
+- Export HTML + CSS
+
+## Optional Things
+
+- Layers
+- Drag and drop 
+- Toggle Mobile/Tablet/Desktop

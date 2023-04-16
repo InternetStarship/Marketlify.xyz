@@ -1,27 +1,23 @@
+/*
+ *   Copyright (c) 2023 Wynter Jones
+ *   All rights reserved.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+#sidebar {
+  @apply bg-slate-50 border-r shadow-xl border-slate-300;
+  width: 380px;
+  height: calc(100vh - 30px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+#canvasContainer {
+  @apply p-6;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+#mainCanvas {
+  @apply mx-auto border border-slate-300 shadow-xl bg-white;
+  width: 100%;
+  max-width: 1000px;
 }
