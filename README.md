@@ -1,4 +1,4 @@
-# Marketlify Page Builder
+<img src="/images/logo.png" width="200" />
 
 ## Project Goals:
 
