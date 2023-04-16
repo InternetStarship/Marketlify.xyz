@@ -18,7 +18,7 @@
 - [x] On export set max width for sections via page settings
 - [x] Notifications
 - [x] Delete, update, duplicate pages (via local storage)
-
+- [x] HoverBar Move Up/Down
 
 ## Optional Things
 
