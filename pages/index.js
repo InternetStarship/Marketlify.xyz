@@ -4,7 +4,7 @@
  */
 
 import Canvas from '../components/Canvas'
-import Toolbar from '../components/Toolbar'
+import Toolbar from '../components/Toolbar/Toolbar'
 import Sidebar from '../components/Sidebar'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
@@ -45,6 +45,11 @@ export default function Builder() {
     setUpdated(Date.now())
   }
 
+  function load(data) {
+    setPage(data)
+    setUpdated(Date.now())
+  }
+
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
       <Head>
@@ -62,6 +67,7 @@ export default function Builder() {
         updateViewport={value => {
           setViewport(value)
         }}
+        load={load}
       />
       <div className="flex flex-row">
         <Sidebar

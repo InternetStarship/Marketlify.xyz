@@ -7,9 +7,12 @@ import { HiOutlineCog } from 'react-icons/hi'
 import { BsLayers, BsTabletLandscape } from 'react-icons/bs'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
-import { FaDownload, FaRegEye, FaSave } from 'react-icons/fa'
+import { FaDownload, FaRegEye } from 'react-icons/fa'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import SaveButton from './SaveButton'
+import PagesButton from './PagesButton'
 
-export default function Toolbar({ page, viewport, updateViewport }) {
+export default function Toolbar({ page, viewport, updateViewport, load }) {
   function exportHTML(data) {
     const {
       page,
@@ -106,12 +109,29 @@ export default function Toolbar({ page, viewport, updateViewport }) {
     alert('todo')
   }
 
-  function save() {
+  function preview() {
     alert('todo')
   }
 
-  function preview() {
-    alert('todo')
+  function newPage() {
+    load({
+      page: {
+        backgroundColor: '#ffffff',
+      },
+      seo: {
+        title: 'New Page',
+        description: '',
+        keywords: '',
+        url: '',
+        image: '',
+        favicon: '',
+      },
+      code: {
+        head: '',
+        body: '',
+      },
+      sections: [],
+    })
   }
 
   return (
@@ -119,8 +139,8 @@ export default function Toolbar({ page, viewport, updateViewport }) {
       <div className="font-bold text-2xl">
         <img src="/images/logo.png" alt="logo" className="h-10 inline-block" />
       </div>
-      <div className="flex space-x-2">
-        <div className="flex items-center  space-x-2 mr-6">
+      <div className="flex">
+        <div className="flex items-center space-x-1 mr-6">
           <button
             onClick={() => {
               updateViewport('desktop')
@@ -155,39 +175,46 @@ export default function Toolbar({ page, viewport, updateViewport }) {
           </button>
         </div>
 
-        <button
-          onClick={() => {
-            toggleLayers()
-          }}
-          className="toolbar-button"
-        >
-          <BsLayers />
-        </button>
-        <button
-          onClick={() => {
-            toggleSettings()
-          }}
-          className="toolbar-button"
-        >
-          <HiOutlineCog />
-        </button>
+        <div className="flex items-center space-x-1 mr-6">
+          <button
+            onClick={() => {
+              toggleLayers()
+            }}
+            className="toolbar-button"
+          >
+            <BsLayers />
+          </button>
+          <button
+            onClick={() => {
+              toggleSettings()
+            }}
+            className="toolbar-button"
+          >
+            <HiOutlineCog />
+          </button>
+        </div>
+        <div className="flex items-center space-x-1">
+          <button
+            onClick={() => {
+              newPage()
+            }}
+            className="toolbar-button-primary"
+          >
+            <AiOutlinePlusCircle />
+          </button>
 
-        <button
-          onClick={() => {
-            save(page)
-          }}
-          className="flex items-center toolbar-button-primary"
-        >
-          <FaSave />
-        </button>
-        <button
-          onClick={() => {
-            exportHTML(page)
-          }}
-          className="flex items-center toolbar-button-primary"
-        >
-          <FaDownload />
-        </button>
+          <PagesButton load={load} />
+          <SaveButton page={page} name={'First Page'} />
+
+          <button
+            onClick={() => {
+              exportHTML(page)
+            }}
+            className="flex items-center toolbar-button-primary"
+          >
+            <FaDownload />
+          </button>
+        </div>
       </div>
     </main>
   )

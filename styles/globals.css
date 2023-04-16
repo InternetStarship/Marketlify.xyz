@@ -6,6 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './pages.css';
+
 #sidebar {
   @apply bg-slate-50 p-8 shadow-xl;
   width: 380px;
