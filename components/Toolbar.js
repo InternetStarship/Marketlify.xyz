@@ -7,8 +7,7 @@ import { HiOutlineCog } from 'react-icons/hi'
 import { BsLayers, BsTabletLandscape } from 'react-icons/bs'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
-import { MdPreview } from 'react-icons/md'
-import { FaDownload } from 'react-icons/fa'
+import { FaDownload, FaRegEye, FaSave } from 'react-icons/fa'
 
 export default function Toolbar({ page, viewport, updateViewport }) {
   function exportHTML(data) {
@@ -100,11 +99,19 @@ export default function Toolbar({ page, viewport, updateViewport }) {
   }
 
   function toggleSettings() {
-    console.log('...')
+    alert('todo')
   }
 
   function toggleLayers() {
-    console.log('...')
+    alert('todo')
+  }
+
+  function save() {
+    alert('todo')
+  }
+
+  function preview() {
+    alert('todo')
   }
 
   return (
@@ -113,7 +120,7 @@ export default function Toolbar({ page, viewport, updateViewport }) {
         <img src="/images/logo.png" alt="logo" className="h-10 inline-block" />
       </div>
       <div className="flex space-x-2">
-        <div className="flex items-center  space-x-2 mr-2">
+        <div className="flex items-center  space-x-2 mr-6">
           <button
             onClick={() => {
               updateViewport('desktop')
@@ -138,6 +145,14 @@ export default function Toolbar({ page, viewport, updateViewport }) {
           >
             <AiOutlineMobile />
           </button>
+          <button
+            onClick={() => {
+              preview()
+            }}
+            className="toolbar-button"
+          >
+            <FaRegEye />
+          </button>
         </div>
 
         <button
@@ -156,13 +171,14 @@ export default function Toolbar({ page, viewport, updateViewport }) {
         >
           <HiOutlineCog />
         </button>
+
         <button
           onClick={() => {
-            // toggleSettings()
+            save(page)
           }}
-          className="toolbar-button"
+          className="flex items-center toolbar-button-primary"
         >
-          <MdPreview />
+          <FaSave />
         </button>
         <button
           onClick={() => {

@@ -5,37 +5,42 @@ Goals:
 - Create a page builder that can be used to create a single web page.
 - All saving is local storage. Just export/download HTML.
 
+## Currently Working On:
+
+- [x] Ability to add a section, element, etc
+
 ## Tasks
 
-- Ability to add a section, element, etc
-- Ability to CRUD element, etc
-- Hover bar for section / element
-- Text Editing (bold, etc)
-- Page Settings
-- Save to Local Storage (max 5mb per page)
+- [x] Ability to CRUD element, etc
+- [x] Hover bar for section / element
+- [x] Text Editing (bold, etc)
+- [x] Page Settings
+- [x] On export set max width for sections via page settings
+- [x] Save to Local Storage (max 5mb per page)
 
 
 ## Optional Things
 
-- Layers
-- Drag and drop 
-- Preview
-- Selected Breadcrumb
-- SEO Preview
-- Tooltips
-- Google Fonts
-- Color Picker
-- Make Panel Better
+- [x] Layers
+- [x] Drag and drop 
+- [x] Preview
+- [x] Selected Breadcrumb
+- [x] SEO Preview
+- [x] Tooltips
+- [x] Google Fonts
+- [x] Color Picker
+- [x] Make Panel Better
+- [x] Optimize and Format Exported HTML
 
 ---
 
 ## Done (for an MVP)
 
-- Create base layout
-- Page JSON structure (state)
-- Export HTML
-- Toggle Mobile/Tablet/Desktop
-- Ability to edit section / element
+- [x] Create base layout
+- [x] Page JSON structure (state)
+- [x] Export HTML
+- [x] Toggle Mobile/Tablet/Desktop
+- [x] Ability to edit section / element
 
 
 ## Read Only License
