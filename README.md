@@ -7,8 +7,7 @@ Goals:
 
 ## Tasks
 
-- * Ability to edit section / element
-
+- Ability to edit section / element
 - Hover bar for section / element
 - Ability to add a section, element, etc
 - Ability to CRUD element, etc
