@@ -7,16 +7,16 @@
 
 ## Currently Working On:
 
-- [x] Ability to add a section, element, etc
+- [x] Hover bar for section / element
+- [x] Save to Local Storage (max 5mb per page)
 
 ## Tasks
 
+- [x] Ability to add a section, element, etc
 - [x] Ability to CRUD element, etc
-- [x] Hover bar for section / element
 - [x] Text Editing (bold, etc)
 - [x] Page Settings
 - [x] On export set max width for sections via page settings
-- [x] Save to Local Storage (max 5mb per page)
 
 
 ## Optional Things
