@@ -48,7 +48,12 @@ export default function Builder() {
   return (
     <main className="w-full h-screen overflow-hidden bg-slate-300">
       <Head>
-        <title>Marketlify - Page Builder</title>
+        <title>Marketlify - The Free Page Builder</title>
+        <link rel="icon" type="image/png" href="/images/icon.png" />
+        <meta
+          name="description"
+          content="Create web pages without signing up, save locally, export and host anywhere."
+        />
       </Head>
 
       <Toolbar
