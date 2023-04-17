@@ -141,7 +141,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
         <img src="/images/logo.png" alt="logo" className="h-10 inline-block" />
       </div>
       <div className="flex">
-        <div className="flex items-center space-x-1 mr-6">
+        <div className="flex items-center space-x-2">
           <button
             onClick={() => {
               updateViewport('desktop')
@@ -149,7 +149,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
           >
             <BiDesktop />
-            <span className="hidden lg:inline-block">Desktop</span>
+            <span className="hidden xl:inline-block">Desktop</span>
           </button>
           <button
             onClick={() => {
@@ -158,7 +158,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
           >
             <BsTabletLandscape />
-            <span className="hidden lg:inline-block">Tablet</span>
+            <span className="hidden xl:inline-block">Tablet</span>
           </button>
           <button
             onClick={() => {
@@ -167,7 +167,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
           >
             <AiOutlineMobile />
-            <span className="hidden lg:inline-block">Mobile</span>
+            <span className="hidden xl:inline-block">Mobile</span>
           </button>
           <button
             onClick={() => {
@@ -176,11 +176,9 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <SlSizeFullscreen />
-            <span className="hidden lg:inline-block">Fullscreen</span>
+            <span className="hidden xl:inline-block">Fullscreen</span>
           </button>
-        </div>
 
-        <div className="flex items-center space-x-1 mr-6">
           <button
             onClick={() => {
               toggleLayers()
@@ -188,7 +186,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <BsLayers />
-            <span className="hidden lg:inline-block">Layout</span>
+            <span className="hidden xl:inline-block">Layout</span>
           </button>
           <button
             onClick={() => {
@@ -197,10 +195,9 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <HiOutlineCog />
-            <span className="hidden lg:inline-block">Page Settings</span>
+            <span className="hidden xl:inline-block">Settings</span>
           </button>
-        </div>
-        <div className="flex items-center space-x-1">
+
           <button
             onClick={() => {
               newPage()
@@ -208,7 +205,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <AiOutlinePlusCircle />
-            <span className="hidden lg:inline-block">New Page</span>
+            <span className="hidden xl:inline-block">New</span>
           </button>
 
           <PagesButton load={load} />
@@ -221,7 +218,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="flex items-center toolbar-button-secondary"
           >
             <FaDownload />
-            <span className="hidden lg:inline-block">Download</span>
+            <span className="hidden xl:inline-block">Download</span>
           </button>
         </div>
       </div>
