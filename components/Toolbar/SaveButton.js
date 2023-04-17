@@ -43,6 +43,7 @@ function SaveButton({ page, name }) {
   return (
     <button onClick={save} className="flex items-center toolbar-button-primary">
       <FaSave />
+      <span className="hidden lg:inline-block">Save Changes</span>
     </button>
   )
 }

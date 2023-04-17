@@ -47,14 +47,18 @@
 }
 
 .toolbar-button {
-  @apply bg-slate-100 border border-b-2 border-slate-300 hover:bg-slate-300 text-slate-800 font-bold py-2 px-3 rounded-md;
+  @apply bg-white border border-b-2 flex text-sm items-center space-x-2 border-slate-300 hover:bg-slate-100 text-slate-800 font-medium py-2 px-3 rounded-md;
 }
 .toolbar-button.active {
-  @apply bg-orange-200 border border-b-2 border-orange-300 hover:bg-orange-300 text-orange-800 font-bold py-2 px-3 rounded-md;
+  @apply bg-orange-200 border border-b-2 border-orange-300 hover:bg-orange-100 text-orange-800 font-medium py-2 px-3 rounded-md;
 }
 
 .toolbar-button-primary {
-  @apply bg-blue-700 border border-b-2 border-blue-800 hover:bg-blue-900 text-blue-100 font-bold py-2 px-3 rounded-md;
+  @apply bg-blue-700 border border-b-2 flex text-sm items-center space-x-2 border-blue-800 hover:bg-blue-600 text-white font-medium py-2 px-3 rounded-md;
+}
+
+.toolbar-button-secondary {
+  @apply bg-green-600 border border-b-2 flex text-sm items-center space-x-2 border-green-700 hover:bg-green-500 text-white font-medium py-2 px-3 rounded-md;
 }
 
 /* Canvas */

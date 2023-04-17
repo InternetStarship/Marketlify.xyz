@@ -5,9 +5,10 @@
 
 import { HiOutlineCog } from 'react-icons/hi'
 import { BsLayers, BsTabletLandscape } from 'react-icons/bs'
+import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
-import { FaDownload, FaRegEye } from 'react-icons/fa'
+import { FaDownload } from 'react-icons/fa'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import SaveButton from './SaveButton'
 import PagesButton from './PagesButton'
@@ -148,6 +149,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
           >
             <BiDesktop />
+            <span className="hidden lg:inline-block">Desktop</span>
           </button>
           <button
             onClick={() => {
@@ -156,6 +158,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
           >
             <BsTabletLandscape />
+            <span className="hidden lg:inline-block">Tablet</span>
           </button>
           <button
             onClick={() => {
@@ -164,6 +167,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
           >
             <AiOutlineMobile />
+            <span className="hidden lg:inline-block">Mobile</span>
           </button>
           <button
             onClick={() => {
@@ -171,7 +175,8 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             }}
             className="toolbar-button"
           >
-            <FaRegEye />
+            <SlSizeFullscreen />
+            <span className="hidden lg:inline-block">Fullscreen</span>
           </button>
         </div>
 
@@ -183,6 +188,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <BsLayers />
+            <span className="hidden lg:inline-block">Layout</span>
           </button>
           <button
             onClick={() => {
@@ -191,6 +197,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <HiOutlineCog />
+            <span className="hidden lg:inline-block">Page Settings</span>
           </button>
         </div>
         <div className="flex items-center space-x-1">
@@ -198,9 +205,10 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             onClick={() => {
               newPage()
             }}
-            className="toolbar-button-primary"
+            className="toolbar-button"
           >
             <AiOutlinePlusCircle />
+            <span className="hidden lg:inline-block">New Page</span>
           </button>
 
           <PagesButton load={load} />
@@ -210,9 +218,10 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             onClick={() => {
               exportHTML(page)
             }}
-            className="flex items-center toolbar-button-primary"
+            className="flex items-center toolbar-button-secondary"
           >
             <FaDownload />
+            <span className="hidden lg:inline-block">Download</span>
           </button>
         </div>
       </div>

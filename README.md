@@ -8,14 +8,17 @@
 ## Currently Working On
 
 - [ ] Add Dynamic CSS Style (dropdown + button in panel)
+- [ ] Google Fonts
+- [ ] Color Picker
+- [ ] Make Panel Better
 
 ## Tasks
 
 - [ ] Text Editing: (bold, align, etc)
 - [ ] Page Settings: (design + seo)
 - [ ] Storage: Delete, update, duplicate pages, add name, sort by date (via local storage)
-- [ ] Elements: (Button, Image, List, Video, etc)
-- [ ] Sections: (Hero, Features, Testimonials, etc)
+- [ ] Elements Panel: (Button, Image, List, Video, etc)
+- [ ] Sections Panel: (Hero, Features, Testimonials, etc)
 - [ ] Rows: (1 Column, 2 Column, 3 Column, etc)
 
 
@@ -24,17 +27,14 @@
 - [ ] Notifications
 - [ ] Layers
 - [ ] Drag and drop 
-- [ ] Preview
-- [ ] Selected Breadcrumb
-- [ ] SEO Preview
+- [ ] Full Screen Preview
+- [ ] Selected / Hover Breadcrumb
 - [ ] Tooltips
-- [ ] Google Fonts
-- [ ] Color Picker
-- [ ] Make Panel Better
 - [ ] Optimize and Format Exported HTML
 - [ ] Ability to add columns
 - [ ] Make it work on Mobile
 - [ ] Mobile Optimizations for Page Builder
+- [ ] Gradient colors, filter, shadows, etc
 
 ## Bugs
 
