@@ -13,6 +13,139 @@ import getIndexesById from '@/utils/getIndexesById'
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
   const [selectedType, setSelectedType] = useState()
+  const [selectedStyle, setSelectedStyle] = useState()
+  const [cssAttributes, setCssAttributes] = useState([
+    'alignContent',
+    'alignItems',
+    'alignSelf',
+    'backgroundColor',
+    'backgroundAttachment',
+    'backgroundBlendMode',
+    'backgroundClip',
+    'backgroundColor',
+    'backgroundImage',
+    'backgroundOrigin',
+    'backgroundPosition',
+    'backgroundRepeat',
+    'backgroundSize',
+    'borderBottomColor',
+    'borderBottomStyle',
+    'borderBottomWidth',
+    'borderColor',
+    'borderLeftColor',
+    'borderLeftStyle',
+    'borderLeftWidth',
+    'borderRadius',
+    'borderRightColor',
+    'borderRightStyle',
+    'borderRightWidth',
+    'borderTopColor',
+    'borderTopStyle',
+    'borderTopWidth',
+    'bottom',
+    'boxShadow',
+    'boxSizing',
+    'clear',
+    'color',
+    'columnGap',
+    'columnRuleColor',
+    'columnRuleStyle',
+    'columnRuleWidth',
+    'columnSpan',
+    'columnWidth',
+    'display',
+    'flex',
+    'flexBasis',
+    'flexDirection',
+    'flexFlow',
+    'flexGrow',
+    'flexShrink',
+    'flexWrap',
+    'float',
+    'fontFamily',
+    'fontFeatureSettings',
+    'fontKerning',
+    'fontSize',
+    'fontStretch',
+    'fontStyle',
+    'fontVariant',
+    'fontVariantCaps',
+    'fontWeight',
+    'gap',
+    'grid',
+    'gridArea',
+    'gridAutoColumns',
+    'gridAutoFlow',
+    'gridAutoRows',
+    'gridColumn',
+    'gridColumnEnd',
+    'gridColumnGap',
+    'gridColumnStart',
+    'gridGap',
+    'gridRow',
+    'gridRowEnd',
+    'gridRowGap',
+    'gridRowStart',
+    'gridTemplate',
+    'gridTemplateAreas',
+    'gridTemplateColumns',
+    'gridTemplateRows',
+    'height',
+    'justifyContent',
+    'justifyItems',
+    'justifySelf',
+    'left',
+    'letterSpacing',
+    'lineHeight',
+    'listStyleImage',
+    'listStylePosition',
+    'listStyleType',
+    'margin',
+    'marginBottom',
+    'marginLeft',
+    'marginRight',
+    'marginTop',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'objectFit',
+    'objectPosition',
+    'opacity',
+    'order',
+    'outlineColor',
+    'outlineOffset',
+    'outlineStyle',
+    'outlineWidth',
+    'overflow',
+    'overflowX',
+    'overflowY',
+    'padding',
+    'paddingBottom',
+    'paddingLeft',
+    'paddingRight',
+    'paddingTop',
+    'placeContent',
+    'placeItems',
+    'placeSelf',
+    'position',
+    'right',
+    'rowGap',
+    'textDecorationColor',
+    'textDecorationLine',
+    'textDecorationStyle',
+    'textIndent',
+    'textShadow',
+    'textTransform',
+    'top',
+    'verticalAlign',
+    'visibility',
+    'whiteSpace',
+    'width',
+    'wordBreak',
+    'wordSpacing',
+    'zIndex',
+  ])
 
   useEffect(() => {
     const currentElement = findById(selectedId, page.sections)
@@ -75,15 +208,49 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     }
   }
 
+  function addStyle() {
+    const newStyles = _.cloneDeep(styles)
+    newStyles[selectedStyle] = ''
+    setStyles(newStyles)
+    handleSave(newStyles)
+    setSelectedStyle('')
+  }
+
+  function camelCaseToTitleCase(camelCaseStr) {
+    let titleCaseStr = camelCaseStr.replace(/([A-Z])/g, ' $1').toLowerCase()
+    titleCaseStr = titleCaseStr.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+
+    return titleCaseStr
+  }
+
   return (
     <>
-      <div className="text-xl flex items-center justify-between font-bold mb-4">
+      <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
         <h3 className="capitalize">Editing {selectedType}</h3>
-        <button className="text-slate-500" onClick={close}>
+        <button onClick={close}>
           <AiOutlineCloseCircle />
         </button>
       </div>
-      {renderInputs()}
+      <div className="text-sm p-3 border-b border-slate-300 text-slate-700 space-x-3 bg-slate-200 flex items-center justify-between font-bold">
+        <select
+          value={selectedStyle}
+          onChange={e => {
+            setSelectedStyle(e.target.value)
+          }}
+          className="w-full p-2 rounded border font-medium border-slate-300"
+        >
+          <option>Select a CSS Attribute</option>
+          {cssAttributes.map(attribute => (
+            <option key={attribute} value={attribute}>
+              {camelCaseToTitleCase(attribute)}
+            </option>
+          ))}
+        </select>
+        <button className="toolbar-button" onClick={addStyle}>
+          Add
+        </button>
+      </div>
+      <div>{renderInputs()}</div>
     </>
   )
 }

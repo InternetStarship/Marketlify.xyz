@@ -7,19 +7,17 @@
 
 ## Currently Working On
 
-- [ ] Add Dynamic CSS Style (dropdown + button in panel)
-- [ ] Google Fonts
 - [ ] Color Picker
-- [ ] Make Panel Better
+- [ ] Google Fonts
 
 ## Tasks
 
-- [ ] Text Editing: (bold, align, etc)
-- [ ] Page Settings: (design + seo)
-- [ ] Storage: Delete, update, duplicate pages, add name, sort by date (via local storage)
-- [ ] Elements Panel: (Button, Image, List, Video, etc)
-- [ ] Sections Panel: (Hero, Features, Testimonials, etc)
-- [ ] Rows: (1 Column, 2 Column, 3 Column, etc)
+- [ ] *Text Editing:* (bold, align, etc)
+- [ ] *Page Settings:* (design + seo)
+- [ ] *Storage:* Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [ ] *Elements Panel:* (Button, Image, List, Video, etc)
+- [ ] *Sections Panel:* (Hero, Features, Testimonials, etc)
+- [ ] *Rows:* (1 Column, 2 Column, 3 Column, etc)
 
 
 ## Optional Tasks
@@ -39,7 +37,7 @@
 ## Bugs
 
 - [ ] Export: Set max width for sections via page settings
-- [ ] Editing: Re-click to edit section or row
+- [ ] Editing: Re-click to edit section or row and hover on edit issue
 
 
 ## Completed Tasks
@@ -52,14 +50,7 @@
 - [x] Save to Local Storage (max 5mb per page)
 - [x] Ability to add a section, element, etc
 - [x] Hover Bar: CRUD / Up / Down / Type / Color
-
-
-## Tech Goals
-
-- [ ] Dynamic Style Editing (no hardcoded css)
-- [ ] Entirely local storage (no backend)
-- [ ] Fast and lightweight
-- [ ] Add affiliate links everywhere.
+- [x] Add Dynamic CSS Style (dropdown + button in panel)
 
 
 ---

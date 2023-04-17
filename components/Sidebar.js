@@ -21,7 +21,7 @@ export default function Sidebar({ current, page, close, selectedId, updatePage }
       )}
       {selected === 'settings' && <Settings />}
       {selected === '' && (
-        <div className="text-sm text-center text-slate-600">
+        <div className="text-sm text-center p-12 text-slate-600">
           Select an element to edit or edit the page settings or whatever a page builder does.
         </div>
       )}

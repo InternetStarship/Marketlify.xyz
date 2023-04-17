@@ -233,43 +233,43 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
           >
             <div id="hoverBarTop">
               <div className="flex hoverBarLeft rounded-br p-1">
-                <div
+                <button
                   onClick={() => {
                     move(-1)
                   }}
                   className="p-1 text-white"
                 >
                   <FaArrowUp />
-                </div>
-                <div
+                </button>
+                <button
                   onClick={() => {
                     move(1)
                   }}
                   className="p-1 text-white"
                 >
                   <FaArrowDown />
-                </div>
+                </button>
 
                 <div className="p-1 text-sm font-medium uppercase text-white">{hoverType}</div>
               </div>
 
               <div className="flex hoverBarRight rounded-bl p-1">
-                <div
+                <button
                   onClick={() => {
                     duplicate()
                   }}
                   className="p-1 text-white"
                 >
                   <FaCopy />
-                </div>
-                <div
+                </button>
+                <button
                   onClick={() => {
                     remove()
                   }}
                   className="p-1 text-white"
                 >
                   <FaTrash />
-                </div>
+                </button>
               </div>
             </div>
 
