@@ -193,7 +193,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
       return Object.entries(styles).map(([key, value]) => (
         <div key={key} className="sidebar-fieldset">
           <label className="sidebar-label" htmlFor={key}>
-            {makeLabelPretty(key)}:
+            {makeLabelPretty(key)}
           </label>
           <input
             className="sidebar-input"
@@ -208,7 +208,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     }
   }
 
-  function addStyle() {
+  function addStyle(selectedStyle) {
     const newStyles = _.cloneDeep(styles)
     newStyles[selectedStyle] = ''
     setStyles(newStyles)
@@ -236,19 +236,17 @@ export default function Panel({ page, close, selectedId, updatePage }) {
           value={selectedStyle}
           onChange={e => {
             setSelectedStyle(e.target.value)
+            addStyle(e.target.value)
           }}
           className="w-full p-2 rounded border font-medium border-slate-300"
         >
-          <option>Select a CSS Attribute</option>
-          {cssAttributes.map(attribute => (
-            <option key={attribute} value={attribute}>
+          <option>Select &amp; Add a CSS Attribute</option>
+          {cssAttributes.map((attribute, index) => (
+            <option key={index} value={attribute}>
               {camelCaseToTitleCase(attribute)}
             </option>
           ))}
         </select>
-        <button className="toolbar-button" onClick={addStyle}>
-          Add
-        </button>
       </div>
       <div>{renderInputs()}</div>
     </>

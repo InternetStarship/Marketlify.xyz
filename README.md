@@ -7,6 +7,7 @@
 
 ## Currently Working On
 
+- [ ] Delete CSS Style
 - [ ] Color Picker
 - [ ] Google Fonts
 
