@@ -60,7 +60,7 @@
 /* Canvas */
 
 #canvasContainer {
-  @apply p-6;
+  @apply p-6 h-screen overflow-y-scroll pb-32;
 }
 
 #mainCanvas {

@@ -65,24 +65,28 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
     switch (type) {
       case 'section':
         newItem = { ...defaults.section, id: generateUniqueId(existingIds) }
-        page.sections.push(newItem)
+        page.sections.splice(currentElement.sectionIndex + 1, 0, newItem)
         break
 
       case 'row':
         newItem = { ...defaults.row, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows.push(newItem)
+        page.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex + 1, 0, newItem)
         break
 
       case 'column':
         newItem = { ...defaults.column, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.push(newItem)
+        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+          currentElement.columnIndex + 1,
+          0,
+          newItem
+        )
         break
 
       case 'element':
         newItem = { ...defaults.elements[0], id: generateUniqueId(existingIds) }
         page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
-        ].elements.push(newItem)
+        ].elements.splice(currentElement.elementIndex + 1, 0, newItem)
         break
 
       default:
@@ -92,12 +96,49 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
     updatePage(page)
   }
 
-  function moveUp() {
-    alert('moveUp')
+  function move(direction) {
+    const type = findTypeById(selectedId, page.sections)
+    const currentElement = getIndexesById(selectedId, page.sections)
+
+    console.log({ direction, selectedId, type, currentElement })
+
+    switch (type) {
+      case 'section':
+        moveItem(page.sections, currentElement.sectionIndex, direction)
+        break
+
+      case 'row':
+        moveItem(page.sections[currentElement.sectionIndex].rows, currentElement.rowIndex, direction)
+        break
+
+      case 'column':
+        moveItem(
+          page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns,
+          currentElement.columnIndex,
+          direction
+        )
+        break
+
+      case 'element':
+        moveItem(
+          page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+            currentElement.columnIndex
+          ].elements,
+          currentElement.elementIndex,
+          direction
+        )
+        break
+    }
+
+    updatePage(page)
   }
 
-  function moveDown() {
-    alert('moveDown')
+  function moveItem(array, currentIndex, direction) {
+    const newIndex = currentIndex + direction
+    if (newIndex >= 0 && newIndex < array.length) {
+      const item = array.splice(currentIndex, 1)[0]
+      array.splice(newIndex, 0, item)
+    }
   }
 
   function remove() {
@@ -148,24 +189,28 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
     switch (type) {
       case 'section':
         newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections.push(newItem)
+        page.sections.splice(currentElement.sectionIndex, 0, newItem)
         break
 
       case 'row':
         newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows.push(newItem)
+        page.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 0, newItem)
         break
 
       case 'column':
         newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.push(newItem)
+        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+          currentElement.columnIndex,
+          0,
+          newItem
+        )
         break
 
       case 'element':
         newItem = { ...element, id: generateUniqueId(existingIds) }
         page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
-        ].elements.push(newItem)
+        ].elements.splice(currentElement.elementIndex, 0, newItem)
         break
     }
 
@@ -188,7 +233,7 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
         <div className="flex">
           <div
             onClick={() => {
-              moveUp()
+              move(-1)
             }}
             className="bg-blue-500 p-1 rounded-sm text-white"
           >
@@ -196,7 +241,7 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
           </div>
           <div
             onClick={() => {
-              moveDown()
+              move(1)
             }}
             className="bg-blue-500 p-1 rounded-sm text-white"
           >

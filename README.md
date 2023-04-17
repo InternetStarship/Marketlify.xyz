@@ -8,24 +8,21 @@
 ## Currently Working On:
 
 - [ ] Hover Bar: Close when clicking outside of canvas
-- [ ] Hover Bar: [Bug] hovering method is not working properly
-- [ ] Hover Bar: Move Up/Down
-
+- [ ] Add Dynamic CSS Style (dropdown + button in panel)
 
 ## Tasks
 
-- [ ] Text Editing (bold, etc)
-- [ ] Page Settings
-- [ ] On export set max width for sections via page settings
-- [ ] Notifications
-- [ ] Delete, update, duplicate pages, add name, sort by date (via local storage)
-- [ ] Elements (Button, Image, List, Video, etc)
-- [ ] Sections (Hero, Features, Testimonials, etc)
-- [ ] Add Dynamic CSS Style (dropdown + button in panel)
+- [ ] Text Editing: (bold, align, etc)
+- [ ] Page Settings: (design + seo)
+- [ ] Storage: Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [ ] Elements: (Button, Image, List, Video, etc)
+- [ ] Sections: (Hero, Features, Testimonials, etc)
+- [ ] Rows: (1 Column, 2 Column, 3 Column, etc)
 
 
 ## Optional Tasks
 
+- [ ] Notifications
 - [ ] Layers
 - [ ] Drag and drop 
 - [ ] Preview
@@ -40,6 +37,11 @@
 - [ ] Make it work on Mobile
 - [ ] Mobile Optimizations for Page Builder
 
+## Bugs
+
+- [ ] Hover Bar: [Bug] hovering method is not working properly
+- [ ] Export: Set max width for sections via page settings
+
 
 ## Completed Tasks (for an MVP)
 
@@ -51,6 +53,8 @@
 - [x] Save to Local Storage (max 5mb per page)
 - [x] Ability to add a section, element, etc
 - [x] Hover Bar: Ability to Delete, Duplicate element, etc
+- [x] Hover Bar: Move Up/Down
+
 
 ## Tech Goals
 

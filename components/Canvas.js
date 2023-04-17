@@ -56,59 +56,61 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
           <HoverBar position={position} page={page} updatePage={updatePage} selectedId={selectedId} />
         )}
 
-        {data.sections.map(section => (
-          <div
-            className="section"
-            id={'marketlify-' + section.id}
-            key={section.id}
-            style={section.style}
-            onClick={e => {
-              e.stopPropagation()
-              edit(section)
-            }}
-            onMouseEnter={e => {
-              hover('marketlify-' + section.id)
-            }}
-          >
-            {section.rows.map(row => (
-              <div
-                className="row"
-                id={'marketlify-' + row.id}
-                key={row.id}
-                style={row.style}
-                onClick={e => {
-                  e.stopPropagation()
-                  edit(row)
-                }}
-                onMouseEnter={e => {
-                  hover('marketlify-' + row.id)
-                }}
-              >
-                {row.columns.map(column => (
-                  <div className="column" id={'marketlify-' + column.id} key={column.id}>
-                    {column.elements.map(element => (
-                      <div
-                        className="element"
-                        id={'marketlify-' + element.id}
-                        key={element.id}
-                        style={element.style}
-                        onClick={e => {
-                          e.stopPropagation()
-                          edit(element)
-                        }}
-                        onMouseEnter={e => {
-                          hover('marketlify-' + element.id)
-                        }}
-                      >
-                        <Element element={element} />
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
+        <div id="canvasWrapper">
+          {data.sections.map(section => (
+            <div
+              className="section"
+              id={'marketlify-' + section.id}
+              key={section.id}
+              style={section.style}
+              onClick={e => {
+                e.stopPropagation()
+                edit(section)
+              }}
+              onMouseEnter={e => {
+                hover('marketlify-' + section.id)
+              }}
+            >
+              {section.rows.map(row => (
+                <div
+                  className="row"
+                  id={'marketlify-' + row.id}
+                  key={row.id}
+                  style={row.style}
+                  onClick={e => {
+                    e.stopPropagation()
+                    edit(row)
+                  }}
+                  onMouseEnter={e => {
+                    hover('marketlify-' + row.id)
+                  }}
+                >
+                  {row.columns.map(column => (
+                    <div className="column" id={'marketlify-' + column.id} key={column.id}>
+                      {column.elements.map(element => (
+                        <div
+                          className="element"
+                          id={'marketlify-' + element.id}
+                          key={element.id}
+                          style={element.style}
+                          onClick={e => {
+                            e.stopPropagation()
+                            edit(element)
+                          }}
+                          onMouseEnter={e => {
+                            hover('marketlify-' + element.id)
+                          }}
+                        >
+                          <Element element={element} />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   )
