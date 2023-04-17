@@ -7,14 +7,12 @@
 
 ## Currently Working On
 
-- [ ] Color Picker
-- [ ] Google Fonts
+- [ ] **Page Settings:** (design + seo)
 
 ## Tasks
 
-- [ ] **Text Editing:** (bold, align, etc)
-- [ ] **Page Settings:** (design + seo)
 - [ ] **Storage:** Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [ ] **Text Editing:** (bold, align, etc)
 - [ ] **Elements Panel:** (Button, Image, List, Video, etc)
 - [ ] **Sections Panel:** (Hero, Features, Testimonials, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
@@ -38,6 +36,8 @@
 
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
+- [ ] Google Fonts: Load fonts on load
+- [ ] Color Picker: On input click show as dropdown
 
 
 ## Completed Tasks

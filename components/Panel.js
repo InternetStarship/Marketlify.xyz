@@ -241,7 +241,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
           {key === 'fontFamily' && (
             <Suspense fallback={`Loading...`}>
               <FontPicker
-                apiKey={process.env.FONTS_API}
+                apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
                 activeFontFamily={'Roboto'}
                 onChange={nextFont => {
                   console.log(nextFont)
