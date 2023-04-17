@@ -13,12 +13,12 @@
 
 ## Tasks
 
-- [ ] *Text Editing:* (bold, align, etc)
-- [ ] *Page Settings:* (design + seo)
-- [ ] *Storage:* Delete, update, duplicate pages, add name, sort by date (via local storage)
-- [ ] *Elements Panel:* (Button, Image, List, Video, etc)
-- [ ] *Sections Panel:* (Hero, Features, Testimonials, etc)
-- [ ] *Rows:* (1 Column, 2 Column, 3 Column, etc)
+- [ ] **Text Editing:** (bold, align, etc)
+- [ ] **Page Settings:** (design + seo)
+- [ ] **Storage:** Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [ ] **Elements Panel:** (Button, Image, List, Video, etc)
+- [ ] **Sections Panel:** (Hero, Features, Testimonials, etc)
+- [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
 
 
 ## Optional Tasks
