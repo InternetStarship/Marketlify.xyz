@@ -10,6 +10,7 @@ import _ from 'lodash'
 import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
+import { ChromePicker } from 'react-color'
 
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
@@ -164,6 +165,22 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     handleSave(newStyles)
   }
 
+  const handleColorChange = color => {
+    let newStyles = {
+      ...styles,
+      color: color.hex,
+    }
+    if (color.rgb.a) {
+      newStyles = {
+        ...styles,
+        color: `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`,
+      }
+    }
+
+    setStyles(newStyles)
+    handleSave(newStyles)
+  }
+
   const handleSave = newStyles => {
     const currentElement = getIndexesById(selectedId, page.sections)
     const type = findTypeById(selectedId, page.sections)
@@ -211,6 +228,11 @@ export default function Panel({ page, close, selectedId, updatePage }) {
             value={value}
             onChange={handleChange}
           />
+          {/* {(key.includes('color') || key.includes('Color')) && (
+            <div className="absolute right-0 top-0" style={{ zIndex: 99999 }}>
+              <ChromePicker color={value} onChange={handleColorChange} />
+            </div>
+          )} */}
         </div>
       ))
     }
