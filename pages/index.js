@@ -28,7 +28,6 @@ export default function Builder() {
   }, [])
 
   function edit(element) {
-    console.log('click to edit')
     setSelectedId(element.id)
     setCurrent('editing')
   }

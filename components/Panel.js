@@ -136,6 +136,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     'position',
     'right',
     'rowGap',
+    'textAlign',
     'textDecorationColor',
     'textDecorationLine',
     'textDecorationStyle',
