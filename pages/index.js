@@ -82,6 +82,7 @@ export default function Builder() {
             <Canvas
               page={page}
               edit={edit}
+              current={current}
               viewport={viewport}
               updated={updated}
               updatePage={updatePage}

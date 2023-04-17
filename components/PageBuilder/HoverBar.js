@@ -10,7 +10,7 @@ import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import defaults from '@/utils/defaults'
 
-export default function HoverBar({ position, page, updatePage, selectedId }) {
+export default function HoverBar({ position, page, updatePage, selectedId, current, hoverType }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
   const [existingIds] = useState(new Set())
 
@@ -99,8 +99,6 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
   function move(direction) {
     const type = findTypeById(selectedId, page.sections)
     const currentElement = getIndexesById(selectedId, page.sections)
-
-    console.log({ direction, selectedId, type, currentElement })
 
     switch (type) {
       case 'section':
@@ -218,67 +216,75 @@ export default function HoverBar({ position, page, updatePage, selectedId }) {
   }
 
   return (
-    <main
-      id="hoverBar"
-      className="border-2 border-blue-500 fixed"
-      style={{
-        width: updatedPosition.width,
-        height: updatedPosition.height,
-        top: updatedPosition.top,
-        left: updatedPosition.left,
-        zIndex: 999999,
-      }}
-    >
-      <div id="hoverBarTop">
-        <div className="flex">
-          <div
-            onClick={() => {
-              move(-1)
+    <>
+      {current !== '' && <div className="w-full h-full absolute z-20"></div>}
+      {current === '' && (
+        <div className={'hoverTheme-' + hoverType}>
+          <main
+            id="hoverBar"
+            className="border-2 fixed"
+            style={{
+              width: updatedPosition.width,
+              height: updatedPosition.height,
+              top: updatedPosition.top,
+              left: updatedPosition.left,
+              zIndex: 999999,
             }}
-            className="bg-blue-500 p-1 rounded-sm text-white"
           >
-            <FaArrowUp />
-          </div>
-          <div
-            onClick={() => {
-              move(1)
-            }}
-            className="bg-blue-500 p-1 rounded-sm text-white"
-          >
-            <FaArrowDown />
-          </div>
-        </div>
+            <div id="hoverBarTop">
+              <div className="flex hoverBarLeft rounded-br p-1">
+                <div
+                  onClick={() => {
+                    move(-1)
+                  }}
+                  className="p-1 text-white"
+                >
+                  <FaArrowUp />
+                </div>
+                <div
+                  onClick={() => {
+                    move(1)
+                  }}
+                  className="p-1 text-white"
+                >
+                  <FaArrowDown />
+                </div>
 
-        <div className="flex">
-          <div
-            onClick={() => {
-              duplicate()
-            }}
-            className="bg-blue-500 p-1 rounded-sm text-white"
-          >
-            <FaCopy />
-          </div>
-          <div
-            onClick={() => {
-              remove()
-            }}
-            className="bg-blue-500 p-1 rounded-sm text-white"
-          >
-            <FaTrash />
-          </div>
-        </div>
-      </div>
+                <div className="p-1 text-sm font-medium uppercase text-white">{hoverType}</div>
+              </div>
 
-      <div id="hoverBarBottom">
-        <div
-          onClick={() => {
-            add()
-          }}
-          className="bg-blue-500 p-1 rounded-full text-white"
-        >
-          <FaPlus />
+              <div className="flex hoverBarRight rounded-bl p-1">
+                <div
+                  onClick={() => {
+                    duplicate()
+                  }}
+                  className="p-1 text-white"
+                >
+                  <FaCopy />
+                </div>
+                <div
+                  onClick={() => {
+                    remove()
+                  }}
+                  className="p-1 text-white"
+                >
+                  <FaTrash />
+                </div>
+              </div>
+            </div>
+
+            <div id="hoverBarBottom">
+              <div
+                onClick={() => {
+                  add()
+                }}
+              >
+                <FaPlus />
+              </div>
+            </div>
+          </main>
         </div>
-      </div>
-    </main>
+      )}
+    </>
   )
 }

@@ -47,10 +47,10 @@
 }
 
 .toolbar-button {
-  @apply bg-slate-100 border border-b-2 border-slate-400 hover:bg-slate-300 text-slate-800 font-bold py-2 px-3 rounded-md;
+  @apply bg-slate-100 border border-b-2 border-slate-300 hover:bg-slate-300 text-slate-800 font-bold py-2 px-3 rounded-md;
 }
 .toolbar-button.active {
-  @apply bg-orange-200 border border-b-2 border-orange-400 hover:bg-orange-300 text-orange-800 font-bold py-2 px-3 rounded-md;
+  @apply bg-orange-200 border border-b-2 border-orange-300 hover:bg-orange-300 text-orange-800 font-bold py-2 px-3 rounded-md;
 }
 
 .toolbar-button-primary {
@@ -68,6 +68,10 @@
   width: 100%;
   max-width: 1200px;
   transition: max-width 0.5s ease;
+}
+
+#canvasWrapper {
+  @apply relative overflow-hidden;
 }
 
 #mainCanvas.mobile {
@@ -121,25 +125,62 @@
   white-space: nowrap;
 }
 .url-bar {
-  @apply text-slate-400;
+  @apply text-slate-500;
 }
 
 /* hover */
 
 #hoverBar {
+  @apply absolute;
   pointer-events: none;
 }
 
 #hoverBarTop {
   @apply absolute w-full flex items-center justify-between text-xl;
-  top: -15px;
+  top: 0;
   pointer-events: all;
 }
 #hoverBarBottom {
-  @apply absolute flex justify-center py-3 text-center text-xl mx-auto;
-  width: 100px;
+  @apply absolute flex justify-center text-center text-xl mx-auto bg-blue-500 px-1 py-2 rounded-t text-white;
+  width: 50px;
   left: 50%;
-  margin-left: -50px;
-  bottom: -25px;
+  margin-left: -25px;
+  bottom: 0;
   pointer-events: all;
+}
+
+.hoverTheme-section #hoverBar {
+  @apply border-green-500;
+}
+.hoverTheme-section .hoverBarRight,
+.hoverTheme-section .hoverBarLeft,
+.hoverTheme-section #hoverBarBottom {
+  @apply bg-green-500;
+}
+
+.hoverTheme-row #hoverBar {
+  @apply border-blue-500;
+}
+.hoverTheme-row .hoverBarRight,
+.hoverTheme-row .hoverBarLeft,
+.hoverTheme-row #hoverBarBottom {
+  @apply bg-blue-500;
+}
+
+.hoverTheme-column #hoverBar {
+  @apply border-slate-500;
+}
+.hoverTheme-column .hoverBarRight,
+.hoverTheme-column .hoverBarLeft,
+.hoverTheme-column #hoverBarBottom {
+  @apply bg-slate-500;
+}
+
+.hoverTheme-element #hoverBar {
+  @apply border-orange-500;
+}
+.hoverTheme-element .hoverBarRight,
+.hoverTheme-element .hoverBarLeft,
+.hoverTheme-element #hoverBarBottom {
+  @apply bg-orange-500;
 }

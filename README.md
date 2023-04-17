@@ -7,7 +7,6 @@
 
 ## Currently Working On
 
-- [ ] Hover Bar: Close when clicking outside of canvas
 - [ ] Add Dynamic CSS Style (dropdown + button in panel)
 
 ## Tasks
@@ -39,8 +38,8 @@
 
 ## Bugs
 
-- [ ] Hover Bar: [Bug] hovering method is not working properly
 - [ ] Export: Set max width for sections via page settings
+- [ ] Editing: Re-click to edit section or row
 
 
 ## Completed Tasks
@@ -52,8 +51,7 @@
 - [x] Ability to edit section / element
 - [x] Save to Local Storage (max 5mb per page)
 - [x] Ability to add a section, element, etc
-- [x] Hover Bar: Ability to Delete, Duplicate element, etc
-- [x] Hover Bar: Move Up/Down
+- [x] Hover Bar: CRUD / Up / Down / Type / Color
 
 
 ## Tech Goals

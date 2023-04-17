@@ -6,11 +6,22 @@
 import Element from './PageBuilder/Element'
 import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
+import findTypeById from '@/utils/findTypeById'
 
-export default function Canvas({ page, edit, viewport, updated, updatePage, selectedId, updateSelectedId }) {
+export default function Canvas({
+  page,
+  edit,
+  viewport,
+  updated,
+  updatePage,
+  selectedId,
+  updateSelectedId,
+  current,
+}) {
   const [data, setData] = useState(page)
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
+  const [hoverType, setHoverType] = useState('')
 
   useEffect(() => {
     setData(page)
@@ -18,6 +29,8 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
 
   function hover(elementId) {
     const element = document.getElementById(elementId)
+    const type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.sections)
+    setHoverType(type)
     setHovering(true)
 
     setPosition({
@@ -31,13 +44,7 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
   }
 
   return (
-    <main
-      id="canvasContainer"
-      onMouseOut={e => {
-        // buggy, needs work
-        // setHovering(false)
-      }}
-    >
+    <main id="canvasContainer">
       <div id="mainCanvas" className={viewport}>
         <div className="top-bar">
           <div className="traffic-lights">
@@ -52,11 +59,24 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
           </div>
         </div>
 
-        {hovering && (
-          <HoverBar position={position} page={page} updatePage={updatePage} selectedId={selectedId} />
-        )}
+        <div
+          id="canvasWrapper"
+          onMouseLeave={e => {
+            e.stopPropagation()
+            setHovering(false)
+          }}
+        >
+          {hovering && (
+            <HoverBar
+              position={position}
+              page={page}
+              updatePage={updatePage}
+              selectedId={selectedId}
+              current={current}
+              hoverType={hoverType}
+            />
+          )}
 
-        <div id="canvasWrapper">
           {data.sections.map(section => (
             <div
               className="section"
@@ -67,7 +87,8 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
                 e.stopPropagation()
                 edit(section)
               }}
-              onMouseEnter={e => {
+              onMouseOver={e => {
+                e.stopPropagation()
                 hover('marketlify-' + section.id)
               }}
             >
@@ -81,7 +102,8 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
                     e.stopPropagation()
                     edit(row)
                   }}
-                  onMouseEnter={e => {
+                  onMouseOver={e => {
+                    e.stopPropagation()
                     hover('marketlify-' + row.id)
                   }}
                 >
@@ -97,7 +119,8 @@ export default function Canvas({ page, edit, viewport, updated, updatePage, sele
                             e.stopPropagation()
                             edit(element)
                           }}
-                          onMouseEnter={e => {
+                          onMouseOver={e => {
+                            e.stopPropagation()
                             hover('marketlify-' + element.id)
                           }}
                         >
