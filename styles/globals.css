@@ -22,7 +22,13 @@ body {
   @apply px-3 py-2 border-b border-slate-200 flex items-center justify-between;
 }
 .sidebar-label {
-  @apply text-slate-500 font-medium text-sm w-full;
+  @apply text-slate-500 font-medium text-sm w-full flex items-center justify-between pr-2;
+}
+.sidebar-label div {
+  @apply cursor-pointer hidden;
+}
+.sidebar-label:hover div {
+  @apply block;
 }
 .sidebar-input {
   @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm;

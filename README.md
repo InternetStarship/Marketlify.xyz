@@ -7,7 +7,6 @@
 
 ## Currently Working On
 
-- [ ] Delete CSS Style
 - [ ] Color Picker
 - [ ] Google Fonts
 
@@ -51,7 +50,7 @@
 - [x] Save to Local Storage (max 5mb per page)
 - [x] Ability to add a section, element, etc
 - [x] Hover Bar: CRUD / Up / Down / Type / Color
-- [x] Add Dynamic CSS Style (dropdown + button in panel)
+- [x] Add Dynamic CSS Styles
 
 
 ---

@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { FaTimes } from 'react-icons/fa'
 import _ from 'lodash'
 import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
@@ -194,6 +195,13 @@ export default function Panel({ page, close, selectedId, updatePage }) {
         <div key={key} className="sidebar-fieldset">
           <label className="sidebar-label" htmlFor={key}>
             {makeLabelPretty(key)}
+            <div
+              onClick={() => {
+                removeStyle(key)
+              }}
+            >
+              <FaTimes />
+            </div>
           </label>
           <input
             className="sidebar-input"
@@ -214,6 +222,13 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     setStyles(newStyles)
     handleSave(newStyles)
     setSelectedStyle('')
+  }
+
+  function removeStyle(key) {
+    const newStyles = _.cloneDeep(styles)
+    delete newStyles[key]
+    setStyles(newStyles)
+    handleSave(newStyles)
   }
 
   function camelCaseToTitleCase(camelCaseStr) {
