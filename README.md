@@ -8,7 +8,7 @@
 ## Currently Working On
 
 - [ ] **Data Structure:** Separate styles and data (json)
-- [ ] **Storage:** update,  add name, sort by date (via local storage)
+- [ ] **Storage:** create from blank, update, add name to ui, sort by date
 
 ## Main Tasks
 
