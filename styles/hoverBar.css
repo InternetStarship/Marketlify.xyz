@@ -29,6 +29,10 @@
   pointer-events: all;
 }
 
+.hoverBarRight {
+  margin-top: -5px !important;
+}
+
 .hoverTheme-section #hoverBar {
   @apply border-green-500;
 }

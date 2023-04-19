@@ -232,12 +232,14 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
             }}
           >
             <div id="hoverBarTop">
-              <div className="flex hoverBarLeft rounded-br p-1">
+              <div className="flex hoverBarLeft rounded-br ">
                 <button
                   onClick={() => {
                     move(-1)
                   }}
-                  className="p-1 text-white"
+                  className="p-2 text-white"
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Move Up"
                 >
                   <FaArrowUp />
                 </button>
@@ -245,20 +247,24 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
                   onClick={() => {
                     move(1)
                   }}
-                  className="p-1 text-white"
+                  className="p-2 text-white"
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Move Down"
                 >
                   <FaArrowDown />
                 </button>
 
-                <div className="p-1 text-sm font-medium uppercase text-white">{hoverType}</div>
+                <div className="p-2 px-2.5 text-base font-bold uppercase text-white">{hoverType}</div>
               </div>
 
-              <div className="flex hoverBarRight rounded-bl p-1">
+              <div className="flex hoverBarRight rounded-bl">
                 <button
                   onClick={() => {
                     duplicate()
                   }}
-                  className="p-1 text-white"
+                  className="p-2 text-white"
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Duplicate"
                 >
                   <FaCopy />
                 </button>
@@ -266,21 +272,24 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
                   onClick={() => {
                     remove()
                   }}
-                  className="p-1 text-white"
+                  className="p-2 text-white"
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Remove"
                 >
                   <FaTrash />
                 </button>
               </div>
             </div>
 
-            <div id="hoverBarBottom">
-              <div
-                onClick={() => {
-                  add()
-                }}
-              >
-                <FaPlus />
-              </div>
+            <div
+              id="hoverBarBottom"
+              onClick={() => {
+                add()
+              }}
+              data-tooltip-id="tooltip"
+              data-tooltip-content={`Add New ${hoverType}`}
+            >
+              <FaPlus />
             </div>
           </main>
         </div>

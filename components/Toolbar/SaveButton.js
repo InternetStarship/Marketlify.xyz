@@ -44,9 +44,14 @@ function SaveButton({ page, name }) {
   }
 
   return (
-    <button onClick={save} className="flex items-center toolbar-button-primary">
+    <button
+      onClick={save}
+      className="flex items-center toolbar-button-primary"
+      data-tooltip-id="tooltip"
+      data-tooltip-content="Save changes to your web browser."
+    >
       <FaSave />
-      <span className="hidden xl:inline-block">Save Changes</span>
+      <span className="hidden xl:inline-block">Save</span>
     </button>
   )
 }

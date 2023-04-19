@@ -59,9 +59,13 @@ function PageButton({ load }) {
 
   return (
     <>
-      <button onClick={openModal} className="flex items-center toolbar-button">
+      <button
+        onClick={openModal}
+        className="flex items-center toolbar-button"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="My Pages"
+      >
         <BsDatabase />
-        <span className="hidden xl:inline-block">My Pages</span>
       </button>
       {isModalOpen && (
         <div className="page-modal-overlay">

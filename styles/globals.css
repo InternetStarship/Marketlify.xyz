@@ -14,6 +14,7 @@
 @import './canvas.css';
 @import './hoverBar.css';
 @import './toasty.css';
+@import './tooltips.css';
 
 body {
   font-family: 'Nunito Sans', sans-serif;

@@ -10,6 +10,7 @@ import Head from '../components/Head'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
 import { ToastContainer } from 'react-toastify'
+import { Tooltip } from 'react-tooltip'
 
 export default function Builder() {
   const [page, setPage] = useState(null)
@@ -104,6 +105,7 @@ export default function Builder() {
         newestOnTop={true}
         theme="dark"
       />
+      <Tooltip id="tooltip" />
     </main>
   )
 }
