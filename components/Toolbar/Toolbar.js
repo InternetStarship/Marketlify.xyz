@@ -13,6 +13,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 import SaveButton from './SaveButton'
 import PagesButton from './PagesButton'
 import exportHTML from '@/utils/exportHTML'
+import { toast } from 'react-toastify'
 
 export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen }) {
   function toggleSettings() {
@@ -42,6 +43,7 @@ export default function Toolbar({ page, viewport, updateViewport, load, updateFu
       },
       sections: [],
     })
+    toast('New page created.')
   }
 
   return (

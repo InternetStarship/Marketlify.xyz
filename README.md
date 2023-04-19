@@ -7,7 +7,6 @@
 
 ## Currently Working On
 
-- [ ] Notifications
 - [ ] Tooltips
 
 ## Main Tasks
@@ -57,6 +56,7 @@
 - [x] Hover Bar: CRUD / Up / Down / Type / Color
 - [x] Add Dynamic CSS Styles
 - [x] Full Screen Preview
+- [x] Notifications
 
 ---
 

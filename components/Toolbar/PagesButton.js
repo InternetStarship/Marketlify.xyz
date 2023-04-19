@@ -5,6 +5,7 @@
 
 import { BsDatabase } from 'react-icons/bs'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 function PageButton({ load }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -23,8 +24,9 @@ function PageButton({ load }) {
     if (page) {
       closeModal()
       load(page.data)
+      toast('Page has been loaded.')
     } else {
-      console.error(`Page with ID "${pageId}" not found in local storage`)
+      toast(`Page with ID "${pageId}" not found in local storage.`)
     }
   }
 

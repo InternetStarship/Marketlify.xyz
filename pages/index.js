@@ -9,6 +9,7 @@ import Sidebar from '../components/Sidebar'
 import Head from '../components/Head'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
+import { ToastContainer } from 'react-toastify'
 
 export default function Builder() {
   const [page, setPage] = useState(null)
@@ -95,6 +96,14 @@ export default function Builder() {
           )}
         </div>
       </div>
+
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={true}
+        theme="dark"
+      />
     </main>
   )
 }

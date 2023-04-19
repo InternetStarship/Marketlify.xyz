@@ -2,7 +2,9 @@
  *   Copyright (c) 2023 Wynter Jones
  *   All rights reserved.
  */
+
 import { FaSave } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 function SaveButton({ page, name }) {
   function save() {
@@ -12,9 +14,10 @@ function SaveButton({ page, name }) {
 
     if (checkLocalStorageSize(dataSize)) {
       localStorage.setItem(`marketlify~${name}~${uuid}`, jsonData)
+      toast('Page has been saved to your browser.')
       return uuid
     } else {
-      alert('Your page is too large to save to your browser. Please try again with a smaller page.')
+      toast('Your page is too large to save to your browser. Please try again with a smaller page.')
       return null
     }
   }
