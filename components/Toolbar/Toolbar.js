@@ -4,104 +4,17 @@
  */
 
 import { HiOutlineCog } from 'react-icons/hi'
-import { BsLayers, BsTabletLandscape } from 'react-icons/bs'
+import { BsLayers } from 'react-icons/bs'
 import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
-import { FaDownload } from 'react-icons/fa'
+import { FaDownload, FaTabletAlt } from 'react-icons/fa'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import SaveButton from './SaveButton'
 import PagesButton from './PagesButton'
+import exportHTML from '@/utils/exportHTML'
 
 export default function Toolbar({ page, viewport, updateViewport, load }) {
-  function exportHTML(data) {
-    const {
-      page,
-      seo: { title, description, keywords, url, image, favicon },
-      code: { head, body },
-      sections,
-    } = data
-
-    const objectToCSS = obj =>
-      Object.entries(obj)
-        .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`)
-        .join(' ')
-
-    const pageStyle = objectToCSS(page)
-
-    const renderSections = () =>
-      sections
-        .map(({ style, rows }) => {
-          const sectionStyle = objectToCSS(style)
-
-          const renderRows = () =>
-            rows
-              .map(({ columns }) => {
-                const renderColumns = () =>
-                  columns
-                    .map(({ elements }) => {
-                      const renderElements = () =>
-                        elements
-                          .map(({ type, content, style }) => {
-                            if (type === 'text') {
-                              const elementStyle = objectToCSS(style)
-                              return `<div class="element" style="${elementStyle}">${content}</div>`
-                            }
-                            return ''
-                          })
-                          .join('')
-                      return `<div class="column">${renderElements()}</div>`
-                    })
-                    .join('')
-                return `<div class="row">${renderColumns()}</div>`
-              })
-              .join('')
-          return `<section class="section" style="${sectionStyle}">${renderRows()}</section>`
-        })
-        .join('')
-
-    downloadFile(`
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="${description}">
-    <meta name="keywords" content="${keywords}">
-    <meta property="og:title" content="${title}">
-    <meta property="og:description" content="${description}">
-    <meta property="og:url" content="${url}">
-    <meta property="og:image" content="${image}">
-    <link rel="icon" href="${favicon}">
-    <title>${title}</title>
-    <style>
-      body {
-        ${pageStyle}
-      }
-    </style>
-    ${head}
-  </head>
-  <body>
-    ${renderSections()}
-    ${body}
-  </body>
-  </html>
-`)
-  }
-
-  function downloadFile(content, fileName = 'index.html') {
-    const blob = new Blob([content], { type: 'text/html;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-
-    link.href = url
-    link.download = fileName
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    URL.revokeObjectURL(url)
-  }
-
   function toggleSettings() {
     alert('todo')
   }
@@ -149,7 +62,6 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
           >
             <BiDesktop />
-            <span className="hidden xl:inline-block">Desktop</span>
           </button>
           <button
             onClick={() => {
@@ -157,8 +69,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             }}
             className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
           >
-            <BsTabletLandscape />
-            <span className="hidden xl:inline-block">Tablet</span>
+            <FaTabletAlt />
           </button>
           <button
             onClick={() => {
@@ -167,7 +78,6 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
           >
             <AiOutlineMobile />
-            <span className="hidden xl:inline-block">Mobile</span>
           </button>
           <button
             onClick={() => {
@@ -176,7 +86,6 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <SlSizeFullscreen />
-            <span className="hidden xl:inline-block">Fullscreen</span>
           </button>
 
           <button
@@ -205,7 +114,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
             className="toolbar-button"
           >
             <AiOutlinePlusCircle />
-            <span className="hidden xl:inline-block">New</span>
+            <span className="hidden xl:inline-block">New Page</span>
           </button>
 
           <PagesButton load={load} />
