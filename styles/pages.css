@@ -29,8 +29,7 @@
 }
 
 .page-modal-title {
-  @apply text-4xl font-bold mb-4;
-  margin-top: 0;
+  @apply text-4xl font-bold;
 }
 
 .page-list {

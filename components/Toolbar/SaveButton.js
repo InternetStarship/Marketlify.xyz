@@ -5,16 +5,24 @@
 
 import { FaSave } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import prettySize from '@/utils/prettySize'
 
 function SaveButton({ page, name }) {
   function save() {
     const uuid = generateUUID()
-    const jsonData = JSON.stringify(page)
-    const dataSize = new Blob([jsonData], { type: 'application/json' }).size
+    const savedData = {
+      name: name,
+      size: prettySize(JSON.stringify(page)),
+      date: new Date().toISOString(),
+      page,
+    }
+    const dataSize = new Blob([savedData], { type: 'application/json' }).size
+
+    console.log(savedData)
 
     if (checkLocalStorageSize(dataSize)) {
-      localStorage.setItem(`marketlify~${name}~${uuid}`, jsonData)
-      toast('Page has been saved to your browser.')
+      localStorage.setItem(`marketlify_v1_${uuid}`, JSON.stringify(savedData))
+      toast('Page has been saved to your web browser. (local storage)')
       return uuid
     } else {
       toast('Your page is too large to save to your browser. Please try again with a smaller page.')

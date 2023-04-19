@@ -4,9 +4,10 @@
  */
 
 import { BsDatabase } from 'react-icons/bs'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { FaTrashAlt, FaCopy } from 'react-icons/fa'
+import moment from 'moment'
 
 function PageButton({ load }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -33,10 +34,10 @@ function PageButton({ load }) {
 
   function getPageFromLocalStorage(pageId) {
     if (typeof localStorage !== 'undefined') {
-      const key = `marketlify~${pageId}`
+      const key = `marketlify_v1_${pageId}`
       const data = localStorage.getItem(key)
       if (data !== null) {
-        return { id: pageId, data: JSON.parse(data) }
+        return { id: pageId, name: data.name, size: data.size, date: data.date, data: JSON.parse(data.data) }
       }
     }
     return null
@@ -47,10 +48,14 @@ function PageButton({ load }) {
     if (typeof localStorage !== 'undefined') {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i)
-        if (key.startsWith('marketlify~')) {
+        const data = JSON.parse(localStorage.getItem(key))
+        if (key.startsWith('marketlify_v1_')) {
           pages.push({
             id: key.substring(11),
-            data: JSON.parse(localStorage.getItem(key)),
+            name: data.name,
+            size: data.size,
+            date: data.date,
+            data: data.data,
           })
         }
       }
@@ -60,7 +65,7 @@ function PageButton({ load }) {
 
   function removePage(pageId) {
     if (typeof localStorage !== 'undefined') {
-      const key = `marketlify~${pageId}`
+      const key = `marketlify_v1_${pageId}`
       localStorage.removeItem(key)
     }
     return null
@@ -68,7 +73,7 @@ function PageButton({ load }) {
 
   function duplicatePage(pageId) {
     if (typeof localStorage !== 'undefined') {
-      const key = `marketlify~${pageId}-duplicated`
+      const key = `marketlify_v1_${pageId}-duplicated`
       const data = getPageFromLocalStorage(pageId)
       localStorage.setItem(key, JSON.stringify(data.data))
     }
@@ -88,8 +93,8 @@ function PageButton({ load }) {
       {isModalOpen && (
         <div className="page-modal-overlay">
           <div className="page-modal">
-            <div className="flex items-center justify-between w-full">
-              <h2 className="page-modal-title">My Pages</h2>
+            <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
+              <h2 className="page-modal-title">Pages Library</h2>
               <div>
                 <button onClick={closeModal} className="page-modal-close-button">
                   Close
@@ -97,14 +102,29 @@ function PageButton({ load }) {
               </div>
             </div>
             <ul className="page-list">
+              {pages.length === 0 && (
+                <div className="px-12 py-3">
+                  <h3 className="mb-6 text-lg">
+                    It looks like you haven't created any pages yet. Your Pages Library is where all of your
+                    saved pages will be stored for easy access, even when you're offline.
+                  </h3>
+                  <h3 className="mb-6 text-lg">
+                    To get started, simply create a new page using our intuitive page builder, and save your
+                    changes to your local browser for safekeeping.
+                  </h3>
+                  <h3 className="text-lg">Your pages are always private and accessible only to you.</h3>
+                </div>
+              )}
               {pages.map(page => (
                 <li key={page.id}>
                   <div className="page-item" onClick={() => handlePageClick(page.id)}>
                     <div>
-                      <h3>{page.id.split('~')[0]}</h3>
-                      <h4 className="text-xs text-slate-400">Created on June 17th, 2817 - Size: 3.2mb</h4>
+                      <h3>{page.name}</h3>
+                      <h4 className="text-xs text-slate-400">
+                        Created {moment(page.date).fromNow()} - Size: {page.size}
+                      </h4>
                     </div>
-                    <div>
+                    <div className="space-x-2">
                       <button
                         onClick={e => {
                           e.stopPropagation()
