@@ -17,6 +17,8 @@ export default function Canvas({
   selectedId,
   updateSelectedId,
   current,
+  fullscreen,
+  updateFullscreen,
 }) {
   const [data, setData] = useState(page)
   const [hovering, setHovering] = useState(false)
@@ -44,7 +46,13 @@ export default function Canvas({
   }
 
   return (
-    <main id="canvasContainer">
+    <main id="canvasContainer" className={fullscreen ? 'fullscreen' : ''}>
+      {fullscreen && (
+        <div id="fullscreenClose" onClick={updateFullscreen}>
+          Close Fullscreen
+        </div>
+      )}
+
       <div id="mainCanvas" className={viewport}>
         <div className="top-bar">
           <div className="traffic-lights">

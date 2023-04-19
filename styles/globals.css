@@ -2,223 +2,24 @@
  *   Copyright (c) 2023 Wynter Jones
  *   All rights reserved.
  */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @import './pages.css';
+@import './urlBar.css';
+@import './sidebar.css';
+@import './toolbar.css';
+@import './canvas.css';
+@import './hoverBar.css';
 
 body {
   font-family: 'Nunito Sans', sans-serif;
-}
-
-#sidebar {
-  @apply bg-slate-50 shadow-xl;
-  width: 380px;
-  height: calc(100vh - 58px);
-  overflow-x: hidden;
-}
-.sidebar-fieldset {
-  @apply px-3 py-2 border-b border-slate-200 flex items-center justify-between relative;
-}
-.sidebar-label {
-  @apply text-slate-500 font-medium text-sm w-full flex items-center justify-between pr-2;
-}
-.sidebar-label div {
-  @apply cursor-pointer hidden;
-}
-.sidebar-label:hover div {
-  @apply block;
-}
-.sidebar-input {
-  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm;
-  width: 100px;
-}
-
-#sidebar::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
-  background: none;
-  padding: 2px;
-}
-
-#sidebar::-webkit-scrollbar-thumb {
-  background: #d3dbe4;
-  border-radius: 10px;
-}
-
-#sidebar::-webkit-scrollbar-corner {
-  background: none;
 }
 
 .section:hover,
 .row:hover,
 .element:hover {
   @apply cursor-pointer;
-}
-
-.toolbar-button {
-  @apply bg-white border border-b-2 flex text-sm items-center space-x-2 border-slate-300 hover:bg-slate-100 text-slate-800 font-medium py-2 px-3 rounded-md;
-}
-.toolbar-button.active {
-  @apply bg-orange-200 border border-b-2 border-orange-300 hover:bg-orange-100 text-orange-800 font-medium py-2 px-3 rounded-md;
-}
-
-.toolbar-button-primary {
-  @apply bg-blue-700 border border-b-2 flex text-sm items-center space-x-2 border-blue-800 hover:bg-blue-600 text-white font-medium py-2 px-3 rounded-md;
-}
-
-.toolbar-button-secondary {
-  @apply bg-green-600 border border-b-2 flex text-sm items-center space-x-2 border-green-700 hover:bg-green-500 text-white font-medium py-2 px-3 rounded-md;
-}
-
-.toolbar-button svg {
-  @apply w-4 h-4;
-}
-
-/* Canvas */
-
-#canvasContainer {
-  @apply p-6 h-screen overflow-y-scroll pb-32;
-}
-
-#canvasContainer::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
-  background: none;
-  padding: 2px;
-}
-
-#canvasContainer::-webkit-scrollbar-thumb {
-  background: #d3dbe4;
-  border-radius: 10px;
-}
-
-#canvasContainer::-webkit-scrollbar-corner {
-  background: none;
-}
-
-#mainCanvas {
-  @apply mx-auto border border-slate-300 shadow-xl bg-white rounded-md overflow-hidden;
-  width: 100%;
-  max-width: 1200px;
-  transition: max-width 0.5s ease;
-}
-
-#canvasWrapper {
-  @apply relative overflow-hidden;
-}
-
-#mainCanvas.mobile {
-  max-width: 460px;
-}
-#mainCanvas.tablet {
-  max-width: 760px;
-}
-
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background-color: #f0f0f0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.traffic-lights {
-  display: flex;
-}
-
-.traffic-light {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 4px;
-}
-
-.traffic-light-close {
-  background-color: #ff5f56;
-}
-
-.traffic-light-minimize {
-  background-color: #ffbd2e;
-}
-
-.traffic-light-maximize {
-  background-color: #27c93f;
-}
-
-.url-bar {
-  flex-grow: 1;
-  margin: 0 16px;
-  padding: 4px 8px;
-  background-color: #fff;
-  border-radius: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.url-bar {
-  @apply text-slate-500;
-}
-
-/* hover */
-
-#hoverBar {
-  @apply absolute;
-  pointer-events: none;
-}
-
-#hoverBarTop {
-  @apply absolute w-full flex items-center justify-between text-xl;
-  top: 0;
-  pointer-events: none;
-}
-#hoverBarTop button {
-  pointer-events: all;
-}
-#hoverBarBottom {
-  @apply absolute flex justify-center text-center text-xl mx-auto bg-blue-500 px-1 py-2 rounded-t text-white;
-  width: 50px;
-  left: 50%;
-  margin-left: -25px;
-  bottom: 0;
-  pointer-events: all;
-}
-
-.hoverTheme-section #hoverBar {
-  @apply border-green-500;
-}
-.hoverTheme-section .hoverBarRight,
-.hoverTheme-section .hoverBarLeft,
-.hoverTheme-section #hoverBarBottom {
-  @apply bg-green-500;
-}
-
-.hoverTheme-row #hoverBar {
-  @apply border-blue-500;
-}
-.hoverTheme-row .hoverBarRight,
-.hoverTheme-row .hoverBarLeft,
-.hoverTheme-row #hoverBarBottom {
-  @apply bg-blue-500;
-}
-
-.hoverTheme-column #hoverBar {
-  @apply border-slate-500;
-}
-.hoverTheme-column .hoverBarRight,
-.hoverTheme-column .hoverBarLeft,
-.hoverTheme-column #hoverBarBottom {
-  @apply bg-slate-500;
-}
-
-.hoverTheme-element #hoverBar {
-  @apply border-orange-500;
-}
-.hoverTheme-element .hoverBarRight,
-.hoverTheme-element .hoverBarLeft,
-.hoverTheme-element #hoverBarBottom {
-  @apply bg-orange-500;
 }

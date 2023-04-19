@@ -16,6 +16,7 @@ export default function Builder() {
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
   const [updated, setUpdated] = useState(null)
+  const [fullscreen, setFullscreen] = useState(false)
 
   useEffect(() => {
     fetch('/api/testdata', {
@@ -61,6 +62,9 @@ export default function Builder() {
           setViewport(value)
         }}
         load={load}
+        updateFullscreen={() => {
+          setFullscreen(true)
+        }}
       />
       <div className="flex flex-row">
         <Sidebar
@@ -82,6 +86,10 @@ export default function Builder() {
               selectedId={selectedId}
               updateSelectedId={id => {
                 setSelectedId(id)
+              }}
+              fullscreen={fullscreen}
+              updateFullscreen={() => {
+                setFullscreen(false)
               }}
             />
           )}

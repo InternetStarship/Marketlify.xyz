@@ -1,0 +1,71 @@
+/*
+ *   Copyright (c) 2023 Wynter Jones
+ *   All rights reserved.
+ */
+
+#canvasContainer {
+  @apply p-6 h-screen overflow-y-scroll pb-32;
+  transition: width height 0.5s ease;
+}
+
+#canvasContainer::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: none;
+  padding: 2px;
+}
+
+#canvasContainer::-webkit-scrollbar-thumb {
+  background: #d3dbe4;
+  border-radius: 10px;
+}
+
+#canvasContainer::-webkit-scrollbar-corner {
+  background: none;
+}
+
+#mainCanvas {
+  @apply mx-auto border border-slate-300 shadow-xl bg-white rounded-md overflow-hidden;
+  width: 100%;
+  max-width: 1200px;
+  transition: max-width 0.5s ease;
+}
+
+#canvasWrapper {
+  @apply relative overflow-hidden;
+}
+
+#mainCanvas.mobile {
+  max-width: 460px;
+}
+#mainCanvas.tablet {
+  max-width: 760px;
+}
+
+#canvasContainer.fullscreen {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  background: #ccc;
+}
+
+#canvasContainer.fullscreen #mainCanvas {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+#fullscreenClose {
+  @apply absolute top-0 mx-auto rounded-b-md text-sm text-center font-bold cursor-pointer bg-slate-200 text-slate-700 shadow-xl;
+  padding: 10px;
+  display: none;
+  width: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#canvasContainer.fullscreen #fullscreenClose {
+  display: block;
+}

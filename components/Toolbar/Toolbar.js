@@ -14,16 +14,12 @@ import SaveButton from './SaveButton'
 import PagesButton from './PagesButton'
 import exportHTML from '@/utils/exportHTML'
 
-export default function Toolbar({ page, viewport, updateViewport, load }) {
+export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen }) {
   function toggleSettings() {
     alert('todo')
   }
 
   function toggleLayers() {
-    alert('todo')
-  }
-
-  function preview() {
     alert('todo')
   }
 
@@ -79,12 +75,7 @@ export default function Toolbar({ page, viewport, updateViewport, load }) {
           >
             <AiOutlineMobile />
           </button>
-          <button
-            onClick={() => {
-              preview()
-            }}
-            className="toolbar-button"
-          >
+          <button onClick={updateFullscreen} className="toolbar-button">
             <SlSizeFullscreen />
           </button>
 

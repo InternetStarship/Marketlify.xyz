@@ -7,30 +7,35 @@
 
 ## Currently Working On
 
+- [ ] Notifications
+- [ ] Tooltips
+
+## Main Tasks
+
 - [ ] **Page Settings:** (design + seo)
-
-## Tasks
-
 - [ ] **Storage:** Delete, update, duplicate pages, add name, sort by date (via local storage)
 - [ ] **Text Editing:** (bold, align, etc)
-- [ ] **Elements Panel:** (Button, Image, List, Video, etc)
-- [ ] **Sections Panel:** (Hero, Features, Testimonials, etc)
+- [ ] **Elements:** (Button, Image, List, Video, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
+- [ ] **Data Structure:** Separate styles and data (json)
 
 
-## Optional Tasks
+## Secondary Tasks
 
-- [ ] Notifications
-- [ ] Layers
+- [ ] Layout (layers)
 - [ ] Drag and drop 
-- [ ] Full Screen Preview
 - [ ] Selected / Hover Breadcrumb
-- [ ] Tooltips
 - [ ] Optimize and Format Exported HTML
 - [ ] Ability to add columns
 - [ ] Make it work on Mobile
 - [ ] Mobile Optimizations for Page Builder
 - [ ] Gradient colors, filter, shadows, etc
+- [ ] Light & Dark Mode
+
+## Content
+
+- [ ] Starter templates (very basic)
+- [ ] Starter blocks (sections)
 
 ## Bugs
 
@@ -40,7 +45,7 @@
 - [ ] Color Picker: On input click show as dropdown
 
 
-## Completed Tasks
+## Completed Tasks (for MVP)
 
 - [x] Create base layout
 - [x] Page JSON structure (state)
@@ -51,7 +56,7 @@
 - [x] Ability to add a section, element, etc
 - [x] Hover Bar: CRUD / Up / Down / Type / Color
 - [x] Add Dynamic CSS Styles
-
+- [x] Full Screen Preview
 
 ---
 

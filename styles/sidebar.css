@@ -1,0 +1,43 @@
+/*
+ *   Copyright (c) 2023 Wynter Jones
+ *   All rights reserved.
+ */
+
+#sidebar {
+  @apply bg-slate-50 shadow-xl;
+  width: 380px;
+  height: calc(100vh - 58px);
+  overflow-x: hidden;
+}
+.sidebar-fieldset {
+  @apply px-3 py-2 border-b border-slate-200 flex items-center justify-between relative;
+}
+.sidebar-label {
+  @apply text-slate-500 font-medium text-sm w-full flex items-center justify-between pr-2;
+}
+.sidebar-label div {
+  @apply cursor-pointer hidden;
+}
+.sidebar-label:hover div {
+  @apply block;
+}
+.sidebar-input {
+  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm;
+  width: 100px;
+}
+
+#sidebar::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: none;
+  padding: 2px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: #d3dbe4;
+  border-radius: 10px;
+}
+
+#sidebar::-webkit-scrollbar-corner {
+  background: none;
+}
