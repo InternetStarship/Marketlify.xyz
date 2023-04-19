@@ -14,7 +14,9 @@ import { ChromePicker } from 'react-color'
 import dynamic from 'next/dynamic'
 const FontPicker = dynamic(() => import('font-picker-react'), {
   suspense: true,
+  ssr: false,
 })
+
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
   const [selectedType, setSelectedType] = useState()
@@ -240,14 +242,16 @@ export default function Panel({ page, close, selectedId, updatePage }) {
           )} */}
 
           {key === 'fontFamily' && (
-            <FontPicker
-              apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
-              activeFontFamily={'Roboto'}
-              onChange={nextFont => {
-                console.log(nextFont)
-                handleFontChange(nextFont.family)
-              }}
-            />
+            <Suspense fallback={`Loading...`}>
+              <FontPicker
+                apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
+                activeFontFamily={'Roboto'}
+                onChange={nextFont => {
+                  console.log(nextFont)
+                  handleFontChange(nextFont.family)
+                }}
+              />
+            </Suspense>
           )}
 
           {key !== 'fontFamily' && (
