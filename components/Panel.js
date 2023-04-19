@@ -240,16 +240,14 @@ export default function Panel({ page, close, selectedId, updatePage }) {
           )} */}
 
           {key === 'fontFamily' && (
-            <Suspense fallback={`Loading...`}>
-              <FontPicker
-                apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
-                activeFontFamily={'Roboto'}
-                onChange={nextFont => {
-                  console.log(nextFont)
-                  handleFontChange(nextFont.family)
-                }}
-              />
-            </Suspense>
+            <FontPicker
+              apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
+              activeFontFamily={'Roboto'}
+              onChange={nextFont => {
+                console.log(nextFont)
+                handleFontChange(nextFont.family)
+              }}
+            />
           )}
 
           {key !== 'fontFamily' && (
