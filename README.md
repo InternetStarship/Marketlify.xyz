@@ -7,12 +7,12 @@
 
 ## Currently Working On
 
-- [ ] **Storage:** Delete, update, duplicate pages, add name, sort by date (via local storage)
 - [ ] **Data Structure:** Separate styles and data (json)
+- [ ] **Storage:** update,  add name, sort by date (via local storage)
 
 ## Main Tasks
 
-- [ ] **Settings:** Page Styles
+- [ ] **Settings:** Page Styles (`<Panel />`)
 - [ ] **Text Editing:** (bold, align, etc)
 - [ ] **Elements:** (Button, Image, List, Video, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)

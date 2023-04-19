@@ -22,14 +22,14 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  width: 400px;
+  width: 800px;
   max-width: 90%;
   max-height: 90%;
   overflow: auto;
 }
 
 .page-modal-title {
-  @apply text-2xl font-bold;
+  @apply text-4xl font-bold mb-4;
   margin-top: 0;
 }
 
@@ -37,27 +37,20 @@
   list-style: none;
   padding: 0;
   margin: 10px 0;
+  @apply space-y-3;
 }
 
-.page-list button {
-  font-size: 1rem;
-  padding: 8px;
-  width: 100%;
-  text-align: left;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #ccc;
+.page-list .page-item {
+  @apply text-lg border rounded shadow-sm p-3 cursor-pointer flex items-center justify-between;
 }
 
-.page-list button:hover,
-.page-list button:focus {
-  outline: none;
-  background-color: #eee;
+.page-list .page-item:hover,
+.page-list .page-item:focus {
+  @apply shadow-xl;
 }
 
 .page-modal-close-button {
   display: block;
-  margin: 20px auto 0;
   padding: 8px 16px;
   background-color: #333;
   color: white;
