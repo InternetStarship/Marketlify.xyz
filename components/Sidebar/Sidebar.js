@@ -3,11 +3,11 @@
  *   All rights reserved.
  */
 
-import Panel from '../components/Panel'
-import Settings from '../components/Settings'
+import Panel from './Panel'
+import Settings from './Settings'
 import { useState, useEffect } from 'react'
 
-export default function Sidebar({ current, page, close, selectedId, updatePage }) {
+export default function Sidebar({ current, page, close, selectedId, updatePage, updateCurrent }) {
   const [selected, setSelected] = useState(current)
 
   useEffect(() => {
@@ -19,10 +19,12 @@ export default function Sidebar({ current, page, close, selectedId, updatePage }
       {selected === 'editing' && (
         <Panel page={page} close={close} selectedId={selectedId} updatePage={updatePage} />
       )}
-      {selected === 'settings' && <Settings />}
+      {selected === 'settings' && (
+        <Settings updateCurrent={updateCurrent} page={page} updatePage={updatePage} />
+      )}
       {selected === '' && (
-        <div className="text-sm text-center p-12 text-slate-600">
-          Select an element to edit or edit the page settings or whatever a page builder does.
+        <div className="text-lg font-medium text-center p-12 text-slate-600">
+          Welcome to Marketlify Builder! A free offline page builder.
         </div>
       )}
     </main>

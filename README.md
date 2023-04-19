@@ -7,29 +7,27 @@
 
 ## Currently Working On
 
-- [ ] Tooltips
+- [ ] **Storage:** Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [ ] **Data Structure:** Separate styles and data (json)
 
 ## Main Tasks
 
-- [ ] **Page Settings:** (design + seo)
-- [ ] **Storage:** Delete, update, duplicate pages, add name, sort by date (via local storage)
+- [ ] **Settings:** Page Styles
 - [ ] **Text Editing:** (bold, align, etc)
 - [ ] **Elements:** (Button, Image, List, Video, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
-- [ ] **Data Structure:** Separate styles and data (json)
-
 
 ## Secondary Tasks
 
+- [ ] Make it work on Mobile
 - [ ] Layout (layers)
 - [ ] Drag and drop 
 - [ ] Selected / Hover Breadcrumb
 - [ ] Optimize and Format Exported HTML
 - [ ] Ability to add columns
-- [ ] Make it work on Mobile
-- [ ] Mobile Optimizations for Page Builder
-- [ ] Gradient colors, filter, shadows, etc
-- [ ] Light & Dark Mode
+- [ ] Mobile Only Settings
+- [ ] Custom inputs for Gradient colors, filter, shadows, etc
+- [ ] Light & Dark Mode (ui)
 
 ## Content
 
@@ -57,6 +55,8 @@
 - [x] Add Dynamic CSS Styles
 - [x] Full Screen Preview
 - [x] Notifications
+- [x] Tooltips
+- [x] Page seo (title, description, image url)
 
 ---
 

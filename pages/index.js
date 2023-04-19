@@ -5,7 +5,7 @@
 
 import Canvas from '../components/Canvas'
 import Toolbar from '../components/Toolbar/Toolbar'
-import Sidebar from '../components/Sidebar'
+import Sidebar from '../components/Sidebar/Sidebar'
 import Head from '../components/Head'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
@@ -67,6 +67,9 @@ export default function Builder() {
         updateFullscreen={() => {
           setFullscreen(true)
         }}
+        updateCurrent={value => {
+          setCurrent(value)
+        }}
       />
       <div className="flex flex-row">
         <Sidebar
@@ -75,6 +78,9 @@ export default function Builder() {
           page={page}
           close={closeSidebar}
           updatePage={updatePage}
+          updateCurrent={value => {
+            setCurrent(value)
+          }}
         />
         <div className="w-full">
           {page && (

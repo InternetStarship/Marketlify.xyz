@@ -15,9 +15,9 @@ import PagesButton from './PagesButton'
 import exportHTML from '@/utils/exportHTML'
 import { toast } from 'react-toastify'
 
-export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen }) {
+export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen, updateCurrent }) {
   function toggleSettings() {
-    alert('todo')
+    updateCurrent('settings')
   }
 
   function toggleLayers() {

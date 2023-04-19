@@ -26,6 +26,17 @@
   width: 100px;
 }
 
+.sidebar-fieldset-full {
+  @apply px-3 py-2 border-b border-slate-200 relative;
+}
+.sidebar-fieldset-full label {
+  @apply mb-1;
+}
+.sidebar-input-full {
+  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm;
+  width: 100%;
+}
+
 #sidebar::-webkit-scrollbar {
   height: 12px;
   width: 12px;
