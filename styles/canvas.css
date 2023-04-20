@@ -25,14 +25,14 @@
 }
 
 #mainCanvas {
-  @apply mx-auto border border-slate-300 shadow-xl bg-white rounded-md overflow-hidden;
+  @apply mx-auto border border-slate-300 shadow-xl bg-white rounded-md;
   width: 100%;
   max-width: 1200px;
   transition: max-width 0.5s ease;
 }
 
 #canvasWrapper {
-  @apply relative overflow-hidden;
+  @apply relative;
 }
 
 #mainCanvas.mobile {

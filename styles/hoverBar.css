@@ -68,3 +68,43 @@
 .hoverTheme-element #hoverBarBottom {
   @apply bg-orange-500;
 }
+
+.blocks-popup {
+  @apply absolute z-10 bg-white p-6 shadow-2xl rounded-md grid grid-cols-3 gap-3 border-2 border-slate-200;
+  top: 35px;
+  left: 50%;
+  margin-left: -275px;
+  width: 550px;
+  min-height: 250px;
+}
+
+.blocks-popup.elementTheme {
+  @apply border-orange-500;
+}
+.blocks-popup.rowTheme {
+  @apply border-blue-500;
+}
+.blocks-popup.sectionTheme {
+  @apply border-green-500;
+}
+
+.blocks-popup .block {
+  @apply p-3 text-center cursor-pointer text-slate-700 border rounded;
+  transition: transform 0.2s ease;
+}
+.blocks-popup .block svg {
+  @apply w-8 h-8 mx-auto mb-2 text-slate-300;
+}
+.blocks-popup .block span {
+  @apply text-sm font-bold text-slate-500 flex-none;
+}
+
+.blocks-popup .block:hover {
+  @apply bg-slate-100;
+  transform: scale(1.05);
+}
+
+.blocks-popup .block:hover span,
+.blocks-popup .block:hover svg {
+  @apply text-slate-700;
+}

@@ -9,10 +9,15 @@ import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import defaults from '@/utils/defaults'
+import { IoText, IoImageOutline } from 'react-icons/io5'
+import { AiOutlineUnorderedList } from 'react-icons/ai'
+import { RxButton } from 'react-icons/rx'
+import { TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
 
 export default function HoverBar({ position, page, updatePage, selectedId, current, hoverType }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
   const [existingIds] = useState(new Set())
+  const [popup, setPopup] = useState(false)
 
   useEffect(() => {
     page.styles.sections?.forEach(section => {
@@ -31,6 +36,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
 
   useEffect(() => {
     setUpdatedPosition(position)
+    setPopup(false)
   }, [position])
 
   function generateUniqueId(existingIds) {
@@ -221,11 +227,11 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex, 0, newItem)
 
-        page.content.push({
-          id: newId,
-          content: content.content,
-          type: content.type,
-        })
+        // page.content.push({
+        //   id: newId,
+        //   content: content.content,
+        //   type: content.type,
+        // })
         break
     }
 
@@ -299,14 +305,112 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
             </div>
 
             <div
+              className="relative"
               id="hoverBarBottom"
               onClick={() => {
-                add()
+                setPopup(true)
               }}
               data-tooltip-id="tooltip"
               data-tooltip-content={`Add New ${hoverType}`}
             >
               <FaPlus />
+
+              {popup && (
+                <div className={`blocks-popup ${hoverType}Theme`}>
+                  {hoverType === 'section' && (
+                    <>
+                      <div className="block">
+                        <TbContainer />
+                        <span>Full</span>
+                      </div>
+                      <div className="block">
+                        <TbContainer />
+                        <span>Extra Large</span>
+                      </div>
+                      <div className="block">
+                        <TbContainer />
+                        <span>Large</span>
+                      </div>
+                      <div className="block">
+                        <TbContainer />
+                        <span>Medium</span>
+                      </div>
+                      <div className="block">
+                        <TbContainer />
+                        <span>Small</span>
+                      </div>
+                      <div className="block">
+                        <TbContainer />
+                        <span>Extra Small</span>
+                      </div>
+                    </>
+                  )}
+                  {hoverType === 'row' && (
+                    <>
+                      <div className="block">
+                        <TbColumns1 />
+                        <span>1 Column</span>
+                      </div>
+                      <div className="block">
+                        <TbColumns2 />
+                        <span>2 Columns</span>
+                      </div>
+                      <div className="block">
+                        <TbColumns3 />
+                        <span>3 Columns</span>
+                      </div>
+                      <div className="block">
+                        <TbColumnInsertLeft />
+                        <span>4 Columns</span>
+                      </div>
+                      <div className="block">
+                        <TbColumnInsertLeft />
+                        <span>5 Columns</span>
+                      </div>
+                      <div className="block">
+                        <TbColumnInsertLeft />
+                        <span>6 Columns</span>
+                      </div>
+                    </>
+                  )}
+                  {hoverType === 'column' && (
+                    <>
+                      <div className="block">
+                        <TbColumnInsertLeft />
+                        <span>Add 1 Column</span>
+                      </div>
+                    </>
+                  )}
+                  {hoverType === 'element' && (
+                    <>
+                      <div className="block">
+                        <IoText />
+                        <span>Headline</span>
+                      </div>
+                      <div className="block">
+                        <IoText />
+                        <span>Sub Headline</span>
+                      </div>
+                      <div className="block">
+                        <IoText />
+                        <span>Paragraph</span>
+                      </div>
+                      <div className="block">
+                        <AiOutlineUnorderedList />
+                        <span>List</span>
+                      </div>
+                      <div className="block">
+                        <IoImageOutline />
+                        <span>Image</span>
+                      </div>
+                      <div className="block">
+                        <RxButton />
+                        <span>Button</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </main>
         </div>
