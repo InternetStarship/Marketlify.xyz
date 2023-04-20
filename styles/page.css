@@ -1,0 +1,11 @@
+/*
+ *   Copyright (c) 2023 Wynter Jones
+ *   All rights reserved.
+ */
+
+.row {
+  @apply flex flex-row justify-evenly items-center;
+}
+.column {
+  @apply w-full;
+}

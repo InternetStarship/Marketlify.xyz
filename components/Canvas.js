@@ -127,6 +127,8 @@ export default function Canvas({
                   {row.columns.length === 0 && <Empty message="Add Columns to Row" />}
                   {row.columns?.map(column => (
                     <div className="column" id={'marketlify-' + column.id} key={column.id}>
+                      {column.elements.length === 0 && <Empty message="Add Elements to Column" />}
+
                       {column.elements?.map(element => (
                         <div
                           className="element"

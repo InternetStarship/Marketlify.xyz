@@ -10,10 +10,9 @@
 - [ ] **Storage:** Update, sort by date
 - [ ] **Settings:** Page Styles (`<Panel />`)
 - [ ] **Text Editing:** (bold, align, etc)
-- [ ] **Elements Panel:** (Button, Image, List, Video, etc)
+- [ ] **Elements:** (Button, Image, List, Video, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
-- [ ] Blank section / row / element
-- [ ] Popup for new Section / Row / Element
+- [ ] Blank section & row
 
 ## Secondary Tasks
 
@@ -65,3 +64,4 @@
 - [x] Tooltips
 - [x] Page seo (title, description, image url)
 - [x] Data Structure - Separate styles and data (json)
+- [x] Popup for new Section / Row / Element
