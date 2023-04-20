@@ -12,6 +12,8 @@
 - [ ] **Text Editing:** (bold, align, etc)
 - [ ] **Elements Panel:** (Button, Image, List, Video, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
+- [ ] Blank section / row / element
+- [ ] Popup for new Section / Row / Element
 
 ## Secondary Tasks
 
@@ -39,7 +41,8 @@
 
 ## Bugs
 
-- [ ] Duplicate and Remove not working (due to data structure change)
+- [ ] Hover bar optimizations
+- [ ] Duplicate not working (due to data structure change)
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
 - [ ] Google Fonts: Load fonts on load

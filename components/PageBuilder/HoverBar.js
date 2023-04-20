@@ -15,7 +15,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
-    page.sections?.forEach(section => {
+    page.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -91,6 +91,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
         page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex + 1, 0, newItem)
+
         page.content.push({
           id: newId,
           content: 'Example Content',
@@ -102,7 +103,6 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
         return
     }
 
-    console.log(page)
     updatePage(page)
   }
 
@@ -112,16 +112,16 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
 
     switch (type) {
       case 'section':
-        moveItem(page.sections, currentElement.sectionIndex, direction)
+        moveItem(page.styles.sections, currentElement.sectionIndex, direction)
         break
 
       case 'row':
-        moveItem(page.sections[currentElement.sectionIndex].rows, currentElement.rowIndex, direction)
+        moveItem(page.styles.sections[currentElement.sectionIndex].rows, currentElement.rowIndex, direction)
         break
 
       case 'column':
         moveItem(
-          page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns,
+          page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns,
           currentElement.columnIndex,
           direction
         )
@@ -129,7 +129,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
 
       case 'element':
         moveItem(
-          page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
             currentElement.columnIndex
           ].elements,
           currentElement.elementIndex,
@@ -151,7 +151,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
 
   function remove() {
     const id = selectedId
-    const obj = page
+    const obj = page.styles
 
     for (let i = 0; i < obj.sections.length; i++) {
       if (obj.sections[i].id === id) {
@@ -193,21 +193,22 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
     const currentElement = getIndexesById(selectedId, page.styles.sections)
 
     let newItem
+    const newId = generateUniqueId(existingIds)
 
     switch (type) {
       case 'section':
-        newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections.splice(currentElement.sectionIndex, 0, newItem)
+        newItem = { ...element, id: newId }
+        page.styles.sections.splice(currentElement.sectionIndex, 0, newItem)
         break
 
       case 'row':
-        newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 0, newItem)
+        newItem = { ...element, id: newId }
+        page.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 0, newItem)
         break
 
       case 'column':
-        newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+        newItem = { ...element, id: newId }
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
           currentElement.columnIndex,
           0,
           newItem
@@ -215,10 +216,16 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
         break
 
       case 'element':
-        newItem = { ...element, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        newItem = { ...element, id: newId }
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex, 0, newItem)
+
+        page.content.push({
+          id: newId,
+          content: content.content,
+          type: content.type,
+        })
         break
     }
 

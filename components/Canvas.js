@@ -4,6 +4,7 @@
  */
 
 import Element from './PageBuilder/Element'
+import Empty from './PageBuilder/Empty'
 import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
@@ -107,6 +108,7 @@ export default function Canvas({
                 hover('marketlify-' + section.id)
               }}
             >
+              {section.rows.length === 0 && <Empty message="Add Row to Section" />}
               {section.rows?.map(row => (
                 <div
                   className="row"
@@ -122,6 +124,7 @@ export default function Canvas({
                     hover('marketlify-' + row.id)
                   }}
                 >
+                  {row.columns.length === 0 && <Empty message="Add Columns to Row" />}
                   {row.columns?.map(column => (
                     <div className="column" id={'marketlify-' + column.id} key={column.id}>
                       {column.elements?.map(element => (
