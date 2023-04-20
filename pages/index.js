@@ -14,6 +14,7 @@ import { Tooltip } from 'react-tooltip'
 
 export default function Builder() {
   const [page, setPage] = useState(null)
+  const [pageName, setPageName] = useState('Untitled Page')
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
@@ -70,6 +71,7 @@ export default function Builder() {
         updateCurrent={value => {
           setCurrent(value)
         }}
+        name={pageName}
       />
       <div className="flex flex-row">
         <Sidebar
@@ -98,6 +100,10 @@ export default function Builder() {
               fullscreen={fullscreen}
               updateFullscreen={() => {
                 setFullscreen(false)
+              }}
+              name={pageName}
+              updateName={name => {
+                setPageName(name)
               }}
             />
           )}

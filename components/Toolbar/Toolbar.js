@@ -9,41 +9,26 @@ import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
 import { FaDownload, FaTabletAlt } from 'react-icons/fa'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
 import SaveButton from './SaveButton'
 import PagesButton from './PagesButton'
+import NewPageButton from './NewPage'
 import exportHTML from '@/utils/exportHTML'
-import { toast } from 'react-toastify'
 
-export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen, updateCurrent }) {
+export default function Toolbar({
+  page,
+  viewport,
+  updateViewport,
+  load,
+  updateFullscreen,
+  updateCurrent,
+  name,
+}) {
   function toggleSettings() {
     updateCurrent('settings')
   }
 
   function toggleLayers() {
     alert('todo')
-  }
-
-  function newPage() {
-    load({
-      page: {
-        backgroundColor: '#ffffff',
-      },
-      seo: {
-        title: 'New Page',
-        description: '',
-        keywords: '',
-        url: '',
-        image: '',
-        favicon: '',
-      },
-      code: {
-        head: '',
-        body: '',
-      },
-      sections: [],
-    })
-    toast('New page created.')
   }
 
   return (
@@ -114,19 +99,8 @@ export default function Toolbar({ page, viewport, updateViewport, load, updateFu
           </button>
 
           <PagesButton load={load} />
-
-          <button
-            onClick={() => {
-              newPage()
-            }}
-            className="toolbar-button"
-            data-tooltip-id="tooltip"
-            data-tooltip-content="New Page"
-          >
-            <AiOutlinePlusCircle />
-          </button>
-
-          <SaveButton page={page} name={'First Page'} />
+          <NewPageButton load={load} />
+          <SaveButton page={page} name={name} />
 
           <button
             onClick={() => {

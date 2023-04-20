@@ -15,7 +15,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
-    page.sections.forEach(section => {
+    page.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -44,10 +44,10 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
   }
 
   function add() {
-    const type = findTypeById(selectedId, page.sections)
-    const currentElement = getIndexesById(selectedId, page.sections)
+    const type = findTypeById(selectedId, page.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.styles.sections)
 
-    page.sections.forEach(section => {
+    page.styles.sections.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -61,44 +61,54 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
     })
 
     let newItem
+    const newId = generateUniqueId(existingIds)
 
     switch (type) {
       case 'section':
-        newItem = { ...defaults.section, id: generateUniqueId(existingIds) }
-        page.sections.splice(currentElement.sectionIndex + 1, 0, newItem)
+        newItem = { ...defaults.section, id: newId }
+        page.styles.sections.splice(currentElement.sectionIndex + 1, 0, newItem)
+
         break
 
       case 'row':
-        newItem = { ...defaults.row, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex + 1, 0, newItem)
+        newItem = { ...defaults.row, id: newId }
+        page.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex + 1, 0, newItem)
+
         break
 
       case 'column':
-        newItem = { ...defaults.column, id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+        newItem = { ...defaults.column, id: newId }
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
           currentElement.columnIndex + 1,
           0,
           newItem
         )
+
         break
 
       case 'element':
-        newItem = { ...defaults.elements[0], id: generateUniqueId(existingIds) }
-        page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        newItem = { ...defaults.elements[0], id: newId }
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex + 1, 0, newItem)
+        page.content.push({
+          id: newId,
+          content: 'Example Content',
+          type: 'headline',
+        })
         break
 
       default:
         return
     }
 
+    console.log(page)
     updatePage(page)
   }
 
   function move(direction) {
-    const type = findTypeById(selectedId, page.sections)
-    const currentElement = getIndexesById(selectedId, page.sections)
+    const type = findTypeById(selectedId, page.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.styles.sections)
 
     switch (type) {
       case 'section':
@@ -178,9 +188,9 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
   }
 
   function duplicate() {
-    const element = findById(selectedId, page.sections)
-    const type = findTypeById(selectedId, page.sections)
-    const currentElement = getIndexesById(selectedId, page.sections)
+    const element = findById(selectedId, page.styles.sections)
+    const type = findTypeById(selectedId, page.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.styles.sections)
 
     let newItem
 

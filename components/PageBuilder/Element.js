@@ -3,14 +3,11 @@
  *   All rights reserved.
  */
 
-export default function Elements({ element }) {
-  return (
-    <>
-      {element.type === "text" ? (
-        <p>{element.content}</p>
-      ) : (
-        <p>Unknown Element Type</p>
-      )}
-    </>
-  );
+import findContentById from '@/utils/findContentById'
+import { useState } from 'react'
+
+export default function Elements({ element, data }) {
+  const [elementData, setElementData] = useState(findContentById(element.id, data.content))
+
+  return <>{elementData.type === 'headline' ? <p>{elementData.content}</p> : <p>Unknown Element Type</p>}</>
 }

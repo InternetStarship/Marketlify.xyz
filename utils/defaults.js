@@ -6,31 +6,30 @@
 const defaults = {
   section: {
     id: null,
-    title: 'Section',
+    properties: {},
     style: {},
     rows: [],
   },
   row: {
     id: null,
-    title: 'Row',
+    properties: {},
     style: {},
     columns: [],
   },
   column: {
     id: null,
-    title: 'Column',
+    properties: {},
     style: {},
     elements: [],
   },
   elements: [
     {
       id: null,
-      type: 'text',
-      content: 'New Text Element',
+      properties: {},
       style: {
         color: 'black',
         fontFamily: 'sans-serif',
-        fontSize: '47px',
+        fontSize: '37px',
         fontWeight: 700,
       },
     },

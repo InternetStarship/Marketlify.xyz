@@ -156,8 +156,8 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   ])
 
   useEffect(() => {
-    const currentElement = findById(selectedId, page.sections)
-    const type = findTypeById(selectedId, page.sections)
+    const currentElement = findById(selectedId, page.styles.sections)
+    const type = findTypeById(selectedId, page.styles.sections)
     if (currentElement) {
       setStyles(currentElement.style)
       setSelectedType(type)
@@ -196,8 +196,8 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   }
 
   const handleSave = newStyles => {
-    const currentElement = getIndexesById(selectedId, page.sections)
-    const type = findTypeById(selectedId, page.sections)
+    const currentElement = getIndexesById(selectedId, page.styles.sections)
+    const type = findTypeById(selectedId, page.styles.sections)
 
     if (type === 'section') {
       page.sections[currentElement.sectionIndex].style = newStyles

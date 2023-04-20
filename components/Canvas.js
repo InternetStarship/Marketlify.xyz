@@ -19,6 +19,8 @@ export default function Canvas({
   current,
   fullscreen,
   updateFullscreen,
+  name,
+  updateName,
 }) {
   const [data, setData] = useState(page)
   const [hovering, setHovering] = useState(false)
@@ -31,7 +33,7 @@ export default function Canvas({
 
   function hover(elementId) {
     const element = document.getElementById(elementId)
-    const type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.sections)
+    const type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.styles.sections)
     setHoverType(type)
     setHovering(true)
 
@@ -61,9 +63,14 @@ export default function Canvas({
             <div className="traffic-light traffic-light-maximize"></div>
           </div>
           <div className="url-bar">
-            <a href="http://www.wynterfunnels.com" target="_blank">
-              https://www.wynterfunnels.com
-            </a>
+            <input
+              type="text"
+              value={name}
+              onChange={e => {
+                updateName(e.target.value)
+              }}
+              className="w-full"
+            />
           </div>
         </div>
 
@@ -85,7 +92,7 @@ export default function Canvas({
             />
           )}
 
-          {data.sections.map(section => (
+          {data.styles.sections?.map(section => (
             <div
               className="section"
               id={'marketlify-' + section.id}
@@ -100,7 +107,7 @@ export default function Canvas({
                 hover('marketlify-' + section.id)
               }}
             >
-              {section.rows.map(row => (
+              {section.rows?.map(row => (
                 <div
                   className="row"
                   id={'marketlify-' + row.id}
@@ -115,9 +122,9 @@ export default function Canvas({
                     hover('marketlify-' + row.id)
                   }}
                 >
-                  {row.columns.map(column => (
+                  {row.columns?.map(column => (
                     <div className="column" id={'marketlify-' + column.id} key={column.id}>
-                      {column.elements.map(element => (
+                      {column.elements?.map(element => (
                         <div
                           className="element"
                           id={'marketlify-' + element.id}
@@ -132,7 +139,7 @@ export default function Canvas({
                             hover('marketlify-' + element.id)
                           }}
                         >
-                          <Element element={element} />
+                          <Element element={element} data={data} />
                         </div>
                       ))}
                     </div>

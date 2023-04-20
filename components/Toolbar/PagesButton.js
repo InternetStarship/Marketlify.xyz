@@ -34,7 +34,7 @@ function PageButton({ load }) {
 
   function getPageFromLocalStorage(pageId) {
     if (typeof localStorage !== 'undefined') {
-      const key = `marketlify_v1_${pageId}`
+      const key = `marketlify_v2_${pageId}`
       const data = localStorage.getItem(key)
       if (data !== null) {
         return { id: pageId, name: data.name, size: data.size, date: data.date, data: JSON.parse(data.data) }
@@ -49,7 +49,7 @@ function PageButton({ load }) {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i)
         const data = JSON.parse(localStorage.getItem(key))
-        if (key.startsWith('marketlify_v1_')) {
+        if (key.startsWith('marketlify_v2_')) {
           pages.push({
             id: key.substring(11),
             name: data.name,
@@ -65,7 +65,7 @@ function PageButton({ load }) {
 
   function removePage(pageId) {
     if (typeof localStorage !== 'undefined') {
-      const key = `marketlify_v1_${pageId}`
+      const key = `marketlify_v2_${pageId}`
       localStorage.removeItem(key)
     }
     return null
@@ -73,9 +73,9 @@ function PageButton({ load }) {
 
   function duplicatePage(pageId) {
     if (typeof localStorage !== 'undefined') {
-      const key = `marketlify_v1_${pageId}-duplicated`
+      const key = `marketlify_v2_${pageId}-duplicated`
       const data = getPageFromLocalStorage(pageId)
-      localStorage.setItem(key, JSON.stringify(data.data))
+      localStorage.setItem(key, JSON.stringify(data))
     }
     return null
   }
@@ -89,6 +89,7 @@ function PageButton({ load }) {
         data-tooltip-content="My Pages"
       >
         <BsDatabase />
+        <span className="hidden xl:inline-block">My Pages</span>
       </button>
       {isModalOpen && (
         <div className="page-modal-overlay">

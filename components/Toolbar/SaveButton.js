@@ -21,7 +21,7 @@ function SaveButton({ page, name }) {
     console.log(savedData)
 
     if (checkLocalStorageSize(dataSize)) {
-      localStorage.setItem(`marketlify_v1_${uuid}`, JSON.stringify(savedData))
+      localStorage.setItem(`marketlify_v2_${uuid}`, JSON.stringify(savedData))
       toast('Page has been saved to your web browser. (local storage)')
       return uuid
     } else {
