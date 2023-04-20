@@ -7,14 +7,10 @@
 
 ## Currently Working On
 
-- [ ] **Storage:** Create from blank, update, add name to ui, sort by date
-- [ ] **Data Structure:** Separate styles and data (json)
-
-## Main Tasks
-
+- [ ] **Storage:** Update, sort by date
 - [ ] **Settings:** Page Styles (`<Panel />`)
 - [ ] **Text Editing:** (bold, align, etc)
-- [ ] **Elements:** (Button, Image, List, Video, etc)
+- [ ] **Elements Panel:** (Button, Image, List, Video, etc)
 - [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
 
 ## Secondary Tasks
@@ -22,11 +18,11 @@
 - [ ] Make it work on Mobile
 - [ ] Layout (layers)
 - [ ] Drag and drop 
-- [ ] Selected / Hover Breadcrumb
+- [ ] Selected element Breadcrumb
 - [ ] Optimize and Format Exported HTML
 - [ ] Ability to add columns
 - [ ] Mobile Only Settings
-- [ ] Custom inputs for Gradient colors, filter, shadows, etc
+- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Light & Dark Mode (ui)
 
 ## Content
@@ -34,8 +30,16 @@
 - [ ] Starter templates (very basic)
 - [ ] Starter blocks (sections)
 
+## Nice to Have (future $$$)
+
+- [ ] Connect to Hosting
+- [ ] Connect to ChatGPT
+- [ ] Connect to Auto Responder
+- [ ] Connect to Payment Processor
+
 ## Bugs
 
+- [ ] Duplicate and Remove not working (due to data structure change)
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
 - [ ] Google Fonts: Load fonts on load
@@ -57,3 +61,4 @@
 - [x] Notifications
 - [x] Tooltips
 - [x] Page seo (title, description, image url)
+- [x] Data Structure - Separate styles and data (json)
