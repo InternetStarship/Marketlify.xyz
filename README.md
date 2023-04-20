@@ -7,12 +7,10 @@
 
 ## Currently Working On
 
-- [ ] **Storage:** Update, sort by date
 - [ ] **Settings:** Page Styles (`<Panel />`)
 - [ ] **Text Editing:** (bold, align, etc)
-- [ ] **Elements:** (Button, Image, List, Video, etc)
-- [ ] **Rows:** (1 Column, 2 Column, 3 Column, etc)
-- [ ] Blank section & row
+- [ ] **Storage:** Update, sorting, etc
+
 
 ## Secondary Tasks
 
@@ -65,3 +63,6 @@
 - [x] Page seo (title, description, image url)
 - [x] Data Structure - Separate styles and data (json)
 - [x] Popup for new Section / Row / Element
+- [x] Blank section & row
+- [x] Elements Basics (Button, Image, List, etc)
+- [x] Rows Basics (1 Column, 2 Column, 3 Column, etc)
