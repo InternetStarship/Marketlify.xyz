@@ -4,7 +4,7 @@
  */
 
 .toolbar-button {
-  @apply bg-white flex font-bold uppercase items-center space-x-2 border-slate-200 text-slate-800 py-2 px-3 rounded-md;
+  @apply bg-white flex text-sm font-bold uppercase items-center space-x-2 border-slate-200 text-slate-800 py-2 px-3 rounded-md;
 }
 .toolbar-button:hover {
   @apply bg-slate-100;
