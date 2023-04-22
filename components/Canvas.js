@@ -8,6 +8,7 @@ import Empty from './PageBuilder/Empty'
 import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
+import AddDropdown from './PageBuilder/AddDropdown'
 
 export default function Canvas({
   page,
@@ -27,25 +28,81 @@ export default function Canvas({
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
+  const [existingIds] = useState(new Set())
+  const [popup, setPopup] = useState(false)
+
+  useEffect(() => {
+    page.styles.sections?.forEach(section => {
+      existingIds.add(section.id)
+      section.rows.forEach(row => {
+        existingIds.add(row.id)
+        row.columns.forEach(column => {
+          existingIds.add(column.id)
+          column.elements.forEach(element => {
+            existingIds.add(element.id)
+          })
+        })
+      })
+    })
+  }, [])
 
   useEffect(() => {
     setData(page)
   }, [updated])
 
-  function hover(elementId) {
-    const element = document.getElementById(elementId)
-    const type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.styles.sections)
-    setHoverType(type)
-    setHovering(true)
+  function generateUniqueId(existingIds) {
+    let uniqueId
 
-    setPosition({
-      top: `${element.offsetTop}px`,
-      left: `${element.offsetLeft}px`,
-      width: `${element.offsetWidth}px`,
-      height: `${element.offsetHeight}px`,
-    })
+    do {
+      uniqueId = Math.floor(Math.random() * 1000000)
+    } while (existingIds.has(uniqueId))
 
-    updateSelectedId(parseInt(elementId.replace('marketlify-', '')))
+    return uniqueId
+  }
+
+  function hover(elementId, isEmpty = false, type = '') {
+    let element = document.getElementById(elementId)
+    if (type === '') {
+      type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.styles.sections)
+    }
+
+    // if (isEmpty && type === 'element') {
+    //   element = element.closest('column')
+    //   console.log('is element', element, elementId)
+    // } else
+
+    if (isEmpty && type === 'row') {
+      element = element.closest('section')
+    }
+
+    // console.log(element)
+
+    if (element) {
+      setHoverType(type)
+      setHovering(true)
+
+      setPosition({
+        top: `${element.offsetTop}px`,
+        left: `${element.offsetLeft}px`,
+        width: `${element.offsetWidth}px`,
+        height: `${element.offsetHeight}px`,
+      })
+
+      if (isEmpty) {
+        document.querySelector('.hoverBarRight').style.display = 'none'
+        document.querySelector('.hoverBarLeft').style.display = 'none'
+      } else if (document.querySelector('.hoverBarRight')) {
+        document.querySelector('.hoverBarRight').style.display = 'flex'
+        document.querySelector('.hoverBarLeft').style.display = 'flex'
+      }
+
+      if (isEmpty) {
+        const selected_id = parseInt(element.id.replace('marketlify-empty-', ''))
+        updateSelectedId(selected_id)
+      } else {
+        updateSelectedId(parseInt(elementId.replace('marketlify-', '')))
+      }
+    }
   }
 
   return (
@@ -93,7 +150,7 @@ export default function Canvas({
             />
           )}
 
-          {data.styles.sections?.map(section => (
+          {data.styles.sections?.map((section, sectionIndex) => (
             <div
               className="section"
               id={'marketlify-' + section.id}
@@ -108,12 +165,26 @@ export default function Canvas({
                 hover('marketlify-' + section.id)
               }}
             >
-              {section.rows.length === 0 && <Empty message="Add Row to Section" />}
-              {section.rows?.map(row => (
+              {section.rows.length === 0 && (
+                <div key={sectionIndex} className="p-3">
+                  <div
+                    className="element"
+                    id={'marketlify-' + 'empty-row-' + sectionIndex}
+                    onMouseOver={e => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      hover('marketlify-' + 'empty-row-' + sectionIndex, true, 'row')
+                    }}
+                  >
+                    <Empty message="Add Row" />
+                  </div>
+                </div>
+              )}
+              {section.rows?.map((row, rowIndex) => (
                 <div
                   className="row"
                   id={'marketlify-' + row.id}
-                  key={row.id}
+                  key={rowIndex}
                   style={row.style}
                   onClick={e => {
                     e.stopPropagation()
@@ -124,16 +195,29 @@ export default function Canvas({
                     hover('marketlify-' + row.id)
                   }}
                 >
-                  {row.columns.length === 0 && <Empty message="Add Columns to Row" />}
-                  {row.columns?.map(column => (
-                    <div className="column" id={'marketlify-' + column.id} key={column.id}>
-                      {column.elements.length === 0 && <Empty message="Add Elements to Column" />}
+                  {row.columns?.map((column, colIndex) => (
+                    <div key={colIndex} className="column" id={'marketlify-' + column.id}>
+                      {column.elements.length === 0 && (
+                        <div className="p-3">
+                          <div
+                            className="element"
+                            id={'marketlify-' + 'empty-' + column.id}
+                            onMouseOver={e => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                              hover('marketlify-' + 'empty-' + column.id, true, 'element')
+                            }}
+                          >
+                            <Empty message="Add Element" className="element" />
+                          </div>
+                        </div>
+                      )}
 
-                      {column.elements?.map(element => (
+                      {column.elements?.map((element, elementIndex) => (
                         <div
                           className="element"
                           id={'marketlify-' + element.id}
-                          key={element.id}
+                          key={elementIndex}
                           style={element.style}
                           onClick={e => {
                             e.stopPropagation()

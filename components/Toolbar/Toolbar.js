@@ -33,87 +33,86 @@ export default function Toolbar({
 
   return (
     <main className="w-full bg-slate-100 border-b border-slate-300 shadow-xl p-2 flex justify-between items-center">
-      <div className="font-bold text-2xl">
-        <img src="/images/logo.png" alt="logo" className="h-10 inline-block" />
+      <div className="flex space-x-2">
+        {/* <img src="/images/logo.png" alt="logo" className="h-10 inline-block" /> */}
+        <PagesButton load={load} />
+        <NewPageButton load={load} />
       </div>
-      <div className="flex">
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => {
-              updateViewport('desktop')
-            }}
-            className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Desktop"
-          >
-            <BiDesktop />
-          </button>
-          <button
-            onClick={() => {
-              updateViewport('tablet')
-            }}
-            className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Tablet"
-          >
-            <FaTabletAlt />
-          </button>
-          <button
-            onClick={() => {
-              updateViewport('mobile')
-            }}
-            className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Mobile"
-          >
-            <AiOutlineMobile />
-          </button>
-          <button
-            onClick={updateFullscreen}
-            className="toolbar-button"
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Fullscreen"
-          >
-            <SlSizeFullscreen />
-          </button>
+      <div className="flex items-center space-x-2">
+        <button
+          onClick={() => {
+            updateViewport('desktop')
+          }}
+          className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Desktop"
+        >
+          <BiDesktop />
+        </button>
+        <button
+          onClick={() => {
+            updateViewport('tablet')
+          }}
+          className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Tablet"
+        >
+          <FaTabletAlt />
+        </button>
+        <button
+          onClick={() => {
+            updateViewport('mobile')
+          }}
+          className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Mobile"
+        >
+          <AiOutlineMobile />
+        </button>
+        <button
+          onClick={updateFullscreen}
+          className="toolbar-button"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Fullscreen"
+        >
+          <SlSizeFullscreen />
+        </button>
 
-          <button
-            onClick={() => {
-              toggleLayers()
-            }}
-            className="toolbar-button"
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Layout"
-          >
-            <BsLayers />
-          </button>
-          <button
-            onClick={() => {
-              toggleSettings()
-            }}
-            className="toolbar-button"
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Page Settings"
-          >
-            <HiOutlineCog />
-          </button>
+        <button
+          onClick={() => {
+            toggleLayers()
+          }}
+          className="toolbar-button"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Layout"
+        >
+          <BsLayers />
+        </button>
+        <button
+          onClick={() => {
+            toggleSettings()
+          }}
+          className="toolbar-button"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Page Settings"
+        >
+          <HiOutlineCog />
+        </button>
+      </div>
+      <div className="flex space-x-2">
+        <SaveButton page={page} name={name} />
 
-          <PagesButton load={load} />
-          <NewPageButton load={load} />
-          <SaveButton page={page} name={name} />
-
-          <button
-            onClick={() => {
-              exportHTML(page)
-            }}
-            className="flex items-center toolbar-button-secondary"
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Download 'index.html' File"
-          >
-            <FaDownload />
-            <span className="hidden xl:inline-block">Download</span>
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            exportHTML(page)
+          }}
+          className="flex items-center toolbar-button-secondary"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Download 'index.html' File"
+        >
+          <FaDownload />
+          <span className="hidden xl:inline-block">Download</span>
+        </button>
       </div>
     </main>
   )

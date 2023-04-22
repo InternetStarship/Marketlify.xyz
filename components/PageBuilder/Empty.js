@@ -3,6 +3,15 @@
  *   All rights reserved.
  */
 
-export default function Empty({ message }) {
-  return <div className="border p-3 bg-slate-100">{message}</div>
+export default function Empty({ message, className, onMouseOver }) {
+  return (
+    <div>
+      <div
+        className={`border p-6 rounded shadow-sm bg-slate-200 text-center uppercase font-medium`}
+        // onMouseOver={onMouseOver}
+      >
+        {message}
+      </div>
+    </div>
+  )
 }
