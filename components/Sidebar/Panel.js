@@ -200,15 +200,15 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     const type = findTypeById(selectedId, page.styles.sections)
 
     if (type === 'section') {
-      page.sections[currentElement.sectionIndex].style = newStyles
+      page.styles.sections[currentElement.sectionIndex].style = newStyles
     } else if (type === 'row') {
-      page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
+      page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
     } else if (type === 'column') {
-      page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
         currentElement.columnIndex
       ].style = newStyles
     } else if (type === 'element') {
-      page.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
         currentElement.columnIndex
       ].elements[currentElement.elementIndex].style = newStyles
     }
