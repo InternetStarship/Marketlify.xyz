@@ -4,7 +4,7 @@
  */
 
 #sidebar {
-  @apply bg-slate-50 shadow-xl;
+  @apply bg-white shadow-sm;
   width: 380px;
   height: calc(100vh - 58px);
   overflow-x: hidden;

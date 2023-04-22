@@ -32,7 +32,7 @@ export default function Toolbar({
   }
 
   return (
-    <main className="w-full bg-slate-100 border-b border-slate-300 shadow-xl p-2 flex justify-between items-center">
+    <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
         {/* <img src="/images/logo.png" alt="logo" className="h-10 inline-block" /> */}
         <PagesButton load={load} />

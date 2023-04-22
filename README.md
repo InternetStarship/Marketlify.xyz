@@ -19,25 +19,24 @@
 - [ ] Drag and drop 
 - [ ] Selected element Breadcrumb
 - [ ] Optimize and Format Exported HTML
-- [ ] Ability to add columns
+- [ ] Ability to edit columns
 - [ ] Mobile Only Settings
 - [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Light & Dark Mode (ui)
+- [ ] Google Fonts
+- [ ] Undo / Redo
+- [ ] Add more elements
+- [ ] Add funnel pages
 
 ## Content
 
 - [ ] Starter templates (very basic)
 - [ ] Starter blocks (sections)
 
-## Nice to Have (future $$$)
-
-- [ ] Connect to Hosting
-- [ ] Connect to ChatGPT
-- [ ] Connect to Auto Responder
-- [ ] Connect to Payment Processor
-
 ## Bugs
 
+- [ ] Add coyote time to dropdown
+- [ ] Deleting or moving elements affects other elements
 - [ ] Hover bar optimizations
 - [ ] Duplicate not working (due to data structure change)
 - [ ] Export: Set max width for sections via page settings

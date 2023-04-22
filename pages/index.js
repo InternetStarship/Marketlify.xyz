@@ -55,7 +55,7 @@ export default function Builder() {
   }
 
   return (
-    <main className="w-full h-screen overflow-hidden bg-slate-300">
+    <main className="w-full h-screen overflow-hidden mainBG">
       <Head />
 
       <Toolbar

@@ -4,18 +4,21 @@
  */
 
 .toolbar-button {
-  @apply bg-white border border-b-2 flex  font-bold uppercase  items-center space-x-2 border-slate-200 hover:bg-slate-100 text-slate-800 py-2 px-3 rounded-md;
+  @apply bg-white flex font-bold uppercase items-center space-x-2 border-slate-200 text-slate-800 py-2 px-3 rounded-md;
+}
+.toolbar-button:hover {
+  @apply bg-slate-100;
 }
 .toolbar-button.active {
-  @apply bg-orange-200 border border-b-2 border-orange-300 hover:bg-orange-100 text-orange-800 font-medium py-2 px-3 rounded-md;
+  @apply bg-orange-200 border-orange-300 hover:bg-orange-100 text-orange-800 font-medium py-2 px-3 rounded-md;
 }
 
 .toolbar-button-primary {
-  @apply bg-blue-700 border border-b-2 flex text-sm items-center space-x-2 border-blue-800 hover:bg-blue-600 text-white font-bold uppercase py-2 px-3 rounded-md;
+  @apply bg-blue-500 flex text-sm items-center space-x-2 border-blue-800 hover:bg-blue-400 text-white font-bold uppercase py-2 px-3 rounded-md;
 }
 
 .toolbar-button-secondary {
-  @apply bg-green-600 border border-b-2 flex text-sm items-center space-x-2 border-green-700 hover:bg-green-500 text-white font-bold uppercase py-2 px-3 rounded-md;
+  @apply bg-slate-500 flex text-sm items-center space-x-2 hover:bg-slate-400 text-white font-bold uppercase py-2 px-3 rounded-md;
 }
 
 .toolbar-button svg {

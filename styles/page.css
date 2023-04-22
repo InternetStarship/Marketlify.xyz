@@ -4,7 +4,7 @@
  */
 
 .row {
-  @apply flex flex-row justify-evenly items-center;
+  @apply flex flex-row justify-evenly items-start;
 }
 .column {
   @apply w-full;

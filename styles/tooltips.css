@@ -4,12 +4,12 @@
  */
 :root {
   --rt-color-white: #fff;
-  --rt-color-dark: #222;
+  --rt-color-dark: #1e293b;
   --rt-color-success: #8dc572;
   --rt-color-error: #be6464;
   --rt-color-warning: #f0ad4e;
   --rt-color-info: #337ab7;
-  --rt-opacity: 0.9;
+  --rt-opacity: 1;
 }
 
 .styles-module_tooltip__mnnfp {
@@ -20,7 +20,9 @@
   left: 0;
   padding: 8px 16px;
   border-radius: 3px;
-  font-size: 90%;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease-out;
@@ -33,6 +35,7 @@
 }
 
 .styles-module_arrow__K0L3T {
+  display: none;
   position: absolute;
   background: inherit;
   width: 8px;
@@ -55,8 +58,8 @@
 
 /** Types variant **/
 .styles-module_dark__xNqje {
-  background: var(--rt-color-dark);
-  color: var(--rt-color-white);
+  @apply shadow bg-white;
+  color: var(--rt-color-dark);
 }
 
 .styles-module_light__Z6W-X {
