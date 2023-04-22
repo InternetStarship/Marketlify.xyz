@@ -66,19 +66,6 @@ export default function Canvas({
       type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.styles.sections)
     }
 
-    // if (isEmpty && type === 'element') {
-    //   element = element.closest('column')
-    //   console.log('is element', element, elementId)
-    // } else
-
-    // if (isEmpty && type === 'row') {
-    //   element = element.closest('section')
-    // }
-
-    console.log(type, isEmpty, element)
-
-    // console.log(element)
-
     if (element) {
       setHoverType(type)
       setHovering(true)
@@ -89,8 +76,6 @@ export default function Canvas({
         width: `${element.offsetWidth}px`,
         height: `${element.offsetHeight}px`,
       })
-
-      console.log('hovering', elementId, type, isEmpty)
 
       if (document.querySelector('.hoverBarRight')) {
         if (isEmpty) {

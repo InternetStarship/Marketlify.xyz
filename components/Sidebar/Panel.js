@@ -188,8 +188,6 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   }
 
   const handleFontChange = font => {
-    console.log(font)
-    // const { name, value } = event.target
     const newStyles = { ...styles, ['fontFamily']: font }
     setStyles(newStyles)
     handleSave(newStyles)
@@ -247,7 +245,6 @@ export default function Panel({ page, close, selectedId, updatePage }) {
                 apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
                 activeFontFamily={'Roboto'}
                 onChange={nextFont => {
-                  console.log(nextFont)
                   handleFontChange(nextFont.family)
                 }}
               />
