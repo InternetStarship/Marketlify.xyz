@@ -71,9 +71,11 @@ export default function Canvas({
     //   console.log('is element', element, elementId)
     // } else
 
-    if (isEmpty && type === 'row') {
-      element = element.closest('section')
-    }
+    // if (isEmpty && type === 'row') {
+    //   element = element.closest('section')
+    // }
+
+    console.log(type, isEmpty, element)
 
     // console.log(element)
 
@@ -87,6 +89,8 @@ export default function Canvas({
         width: `${element.offsetWidth}px`,
         height: `${element.offsetHeight}px`,
       })
+
+      console.log('hovering', elementId, type, isEmpty)
 
       if (document.querySelector('.hoverBarRight')) {
         if (isEmpty) {
@@ -171,11 +175,10 @@ export default function Canvas({
                 <div key={sectionIndex} className="p-3">
                   <div
                     className="element"
-                    id={'marketlify-' + 'empty-row-' + sectionIndex}
+                    id={'marketlify-' + 'empty-' + section.id}
                     onMouseOver={e => {
                       e.stopPropagation()
-                      e.preventDefault()
-                      hover('marketlify-' + 'empty-row-' + sectionIndex, true, 'row')
+                      hover('marketlify-' + 'empty-' + section.id, true, 'row')
                     }}
                   >
                     <Empty message="Add Row" />
