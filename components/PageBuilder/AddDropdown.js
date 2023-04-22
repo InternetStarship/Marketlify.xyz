@@ -9,6 +9,7 @@ import { RxButton } from 'react-icons/rx'
 import { TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
 import getIndexesById from '@/utils/getIndexesById'
 import defaults from '@/utils/defaults'
+import _ from 'lodash'
 
 export default function AddDropdown({
   children,
@@ -35,9 +36,9 @@ export default function AddDropdown({
     const newId = generateUniqueId(existingIds)
     const currentElement = getIndexesById(selectedId, page.styles.sections)
 
-    console.log(selectedId, currentElement)
-
-    const newItem = { ...defaults.elements[0], id: newId, type: type }
+    const newItem = _.cloneDeep(defaults.elements[0])
+    newItem.id = newId
+    newItem.type = type
 
     page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
       currentElement.columnIndex
@@ -51,7 +52,7 @@ export default function AddDropdown({
     })
 
     setPopup(false)
-    updatePage(page)
+    updatePage(_.cloneDeep(page))
   }
 
   function addSection(width) {
@@ -69,13 +70,16 @@ export default function AddDropdown({
 
     page.styles.sections.push(newItem)
     setPopup(false)
-    updatePage(page)
+    updatePage(_.cloneDeep(page))
   }
 
   function addRow(totalColumns) {
     const newId = generateUniqueId(existingIds)
-    const initialColumn = { ...defaults.column, id: generateUniqueId(existingIds) }
-    const columns = Array.from({ length: totalColumns }, () => ({ ...initialColumn }))
+    const columns = Array.from({ length: totalColumns }, () => {
+      const newColumn = _.cloneDeep(defaults.column)
+      newColumn.id = generateUniqueId(existingIds)
+      return newColumn
+    })
 
     const newItem = {
       ...defaults.row,
@@ -86,7 +90,7 @@ export default function AddDropdown({
     const { sectionIndex } = getIndexesById(selectedId, page.styles.sections)
     page.styles.sections[sectionIndex].rows.push(newItem)
     setPopup(false)
-    updatePage(page)
+    updatePage(_.cloneDeep(page))
   }
 
   return (

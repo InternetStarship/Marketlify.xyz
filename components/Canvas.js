@@ -88,12 +88,14 @@ export default function Canvas({
         height: `${element.offsetHeight}px`,
       })
 
-      if (isEmpty) {
-        document.querySelector('.hoverBarRight').style.display = 'none'
-        document.querySelector('.hoverBarLeft').style.display = 'none'
-      } else if (document.querySelector('.hoverBarRight')) {
-        document.querySelector('.hoverBarRight').style.display = 'flex'
-        document.querySelector('.hoverBarLeft').style.display = 'flex'
+      if (document.querySelector('.hoverBarRight')) {
+        if (isEmpty) {
+          document.querySelector('.hoverBarRight').style.display = 'none'
+          document.querySelector('.hoverBarLeft').style.display = 'none'
+        } else {
+          document.querySelector('.hoverBarRight').style.display = 'flex'
+          document.querySelector('.hoverBarLeft').style.display = 'flex'
+        }
       }
 
       if (isEmpty) {
