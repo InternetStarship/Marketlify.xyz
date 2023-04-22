@@ -204,16 +204,13 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
               </div>
 
               <div className="flex hoverBarRight rounded-bl">
-                <button
-                  onClick={() => {
-                    duplicate()
-                  }}
+                <div
                   className="p-2 text-white"
                   data-tooltip-id="tooltip"
                   data-tooltip-content={`Edit ${hoverType}`}
                 >
                   <FaCog />
-                </button>
+                </div>
                 <button
                   onClick={() => {
                     duplicate()

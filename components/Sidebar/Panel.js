@@ -12,10 +12,6 @@ import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import { ChromePicker } from 'react-color'
 import dynamic from 'next/dynamic'
-const FontPicker = dynamic(() => import('font-picker-react'), {
-  suspense: true,
-  ssr: false,
-})
 
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
@@ -239,7 +235,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
             </div>
           )} */}
 
-          {key === 'fontFamily' && (
+          {/* {key === 'fontFamily' && (
             <Suspense fallback={`Loading...`}>
               <FontPicker
                 apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
@@ -249,7 +245,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
                 }}
               />
             </Suspense>
-          )}
+          )} */}
 
           {key !== 'fontFamily' && (
             <input

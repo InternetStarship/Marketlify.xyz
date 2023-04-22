@@ -186,7 +186,12 @@ export default function Canvas({
                   }}
                 >
                   {row.columns?.map((column, colIndex) => (
-                    <div key={colIndex} className="column" id={'marketlify-' + column.id}>
+                    <div
+                      key={colIndex}
+                      className="column"
+                      style={column.style}
+                      id={'marketlify-' + column.id}
+                    >
                       {column.elements.length === 0 && (
                         <div className="p-3">
                           <div

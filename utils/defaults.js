@@ -19,7 +19,9 @@ const defaults = {
   column: {
     id: null,
     properties: {},
-    style: {},
+    style: {
+      padding: '10px',
+    },
     elements: [],
   },
   elements: {
