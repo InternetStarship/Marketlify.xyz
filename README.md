@@ -7,9 +7,11 @@
 
 ## Currently Working On
 
+- [ ] Redo with Immer
+- [ ] **Storage:** Funnels with multiple pages, update, sorting, etc
 - [ ] **Settings:** Page Styles (`<Panel />`)
 - [ ] **Text Editing:** (bold, align, etc)
-- [ ] **Storage:** Update, sorting, etc
+- [ ] Multiple Pages (add, delete, etc)
 
 
 ## Secondary Tasks
