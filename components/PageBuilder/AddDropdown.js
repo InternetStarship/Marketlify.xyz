@@ -36,7 +36,7 @@ export default function AddDropdown({
     const newId = generateUniqueId(existingIds)
     const currentElement = getIndexesById(selectedId, page.styles.sections)
 
-    const newItem = _.cloneDeep(defaults.elements[0])
+    const newItem = _.cloneDeep(defaults.elements[type])
     newItem.id = newId
     newItem.type = type
 
@@ -44,12 +44,41 @@ export default function AddDropdown({
       currentElement.columnIndex
     ].elements.push(newItem)
 
-    page.content.push({
-      id: newId,
-      content: 'Example Content',
-      src: 'https://placekitten.com/300/300',
-      type: type,
-    })
+    let data = {}
+
+    switch (type) {
+      case 'headline':
+        data = {
+          content: 'Main Headline Content',
+        }
+        break
+      case 'subheadline':
+        data = {
+          content: 'Sub Headline Example',
+        }
+        break
+      case 'paragraph':
+        data = {
+          content:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+        }
+        break
+      case 'image':
+        data = {
+          src: 'https://placekitten.com/300/300',
+        }
+        break
+      case 'button':
+        data = {
+          content: 'Example Content',
+          url: 'https://example.com',
+        }
+        break
+    }
+
+    data = { ...data, id: newId, type: type }
+
+    page.content.push(data)
 
     setPopup(false)
     updatePage(_.cloneDeep(page))
@@ -244,7 +273,7 @@ export default function AddDropdown({
               </div>
               <div
                 onClick={() => {
-                  addElement('sub-headline')
+                  addElement('subheadline')
                 }}
                 className="block"
               >

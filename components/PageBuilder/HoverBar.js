@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 
-import { FaArrowUp, FaArrowDown, FaPlus, FaCopy, FaTrash } from 'react-icons/fa'
+import { FaArrowUp, FaArrowDown, FaPlus, FaCopy, FaCog, FaTrash } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
@@ -204,6 +204,16 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
               </div>
 
               <div className="flex hoverBarRight rounded-bl">
+                <button
+                  onClick={() => {
+                    duplicate()
+                  }}
+                  className="p-2 text-white"
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content={`Edit ${hoverType}`}
+                >
+                  <FaCog />
+                </button>
                 <button
                   onClick={() => {
                     duplicate()

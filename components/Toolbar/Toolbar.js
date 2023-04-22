@@ -77,8 +77,7 @@ export default function Toolbar({
         >
           <SlSizeFullscreen />
         </button>
-
-        <button
+        {/* <button
           onClick={() => {
             toggleLayers()
           }}
@@ -87,7 +86,7 @@ export default function Toolbar({
           data-tooltip-content="Layout"
         >
           <BsLayers />
-        </button>
+        </button> */}
         <button
           onClick={() => {
             toggleSettings()
