@@ -14,8 +14,12 @@ export default function Elements({ element, data, style }) {
       {elementData.type === 'headline' && (
         <h1 style={style} dangerouslySetInnerHTML={{ __html: elementData.content }}></h1>
       )}
-      {elementData.type === 'subheadline' && <h2 style={style}>{elementData.content}</h2>}
-      {elementData.type === 'paragraph' && <p style={style}>{elementData.content}</p>}
+      {elementData.type === 'subheadline' && (
+        <h2 style={style} dangerouslySetInnerHTML={{ __html: elementData.content }}></h2>
+      )}
+      {elementData.type === 'paragraph' && (
+        <p style={style} dangerouslySetInnerHTML={{ __html: elementData.content }}></p>
+      )}
       {elementData.type === 'button' && <button style={style}>{elementData.content}</button>}
       {elementData.type === 'list' && <li style={style}>{elementData.content}</li>}
       {elementData.type === 'image' && <img style={style} src={elementData.src} />}

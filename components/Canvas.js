@@ -259,7 +259,11 @@ export default function Canvas({
                           key={element.id}
                           onClick={e => {
                             e.stopPropagation()
-                            if (element.type === 'headline') {
+                            if (
+                              element.type === 'headline' ||
+                              element.type === 'subheadline' ||
+                              element.type === 'paragraph'
+                            ) {
                               setEditingText(true)
                             } else {
                               setEditingText(false)
@@ -271,31 +275,42 @@ export default function Canvas({
                             hover('marketlify-' + element.id)
                           }}
                         >
-                          {editingText && element.type === 'headline' && (
-                            <TextEditor
-                              element={element}
-                              data={data}
-                              style={element.style}
-                              updateContent={value => {
-                                data.content.filter(content => content.id === element.id)[0].content = value
-                                updatePage(data)
-                              }}
-                              closeEditor={() => {
-                                setTimeout(() => {
-                                  setEditingText(false)
-                                }, 50)
-                              }}
-                              edit={() => {
-                                edit(element)
-                                setTimeout(() => {
-                                  setEditingText(false)
-                                }, 50)
-                              }}
-                            />
+                          {editingText && (
+                            <>
+                              {(element.type === 'headline' ||
+                                element.type === 'subheadline' ||
+                                element.type === 'paragraph') && (
+                                <TextEditor
+                                  element={element}
+                                  data={data}
+                                  style={element.style}
+                                  updateContent={value => {
+                                    data.content.filter(content => content.id === element.id)[0].content =
+                                      value
+                                    updatePage(data)
+                                  }}
+                                  closeEditor={() => {
+                                    setTimeout(() => {
+                                      setEditingText(false)
+                                    }, 50)
+                                  }}
+                                  edit={() => {
+                                    edit(element)
+                                    setTimeout(() => {
+                                      setEditingText(false)
+                                    }, 50)
+                                  }}
+                                />
+                              )}
+
+                              {element.type !== 'headline' &&
+                                element.type !== 'subheadline' &&
+                                element.type !== 'paragraph' && (
+                                  <Element element={element} data={data} style={element.style} />
+                                )}
+                            </>
                           )}
-                          {(!editingText || (editingText && element.type !== 'headline')) && (
-                            <Element element={element} data={data} style={element.style} />
-                          )}
+                          {!editingText && <Element element={element} data={data} style={element.style} />}
                         </div>
                       ))}
                     </div>
