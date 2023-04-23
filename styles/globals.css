@@ -35,3 +35,7 @@ body {
 .mainBG {
   background: #e5e5e5;
 }
+
+.ProseMirror-focused {
+  outline: none !important;
+}

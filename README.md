@@ -48,6 +48,7 @@
 
 ## Bugs
 
+- [ ] Duplicate section / row with new ids on inner elements
 - [ ] Add coyote time to dropdown
 - [ ] Hover bar optimizations (losing focus, etc)
 - [ ] Export: Set max width for sections via page settings

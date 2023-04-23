@@ -25,7 +25,7 @@
 }
 
 #mainCanvas {
-  @apply mx-auto border border-slate-300 shadow-xl bg-white rounded-md;
+  @apply mx-auto border border-slate-300 shadow bg-white;
   width: 100%;
   max-width: 1200px;
   transition: max-width 0.5s ease;

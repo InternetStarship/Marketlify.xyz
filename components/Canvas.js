@@ -9,6 +9,7 @@ import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
 import { FaCog } from 'react-icons/fa'
+import TextEditor from './PageBuilder/TextEditor'
 
 export default function Canvas({
   page,
@@ -29,6 +30,7 @@ export default function Canvas({
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
+  const [editingText, setEditingText] = useState(false)
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
@@ -44,6 +46,7 @@ export default function Canvas({
         })
       })
     })
+    setEditingText(false)
   }, [])
 
   useEffect(() => {
@@ -157,7 +160,7 @@ export default function Canvas({
             ></div>
           )}
 
-          {hovering && (
+          {hovering && !editingText && (
             <HoverBar
               position={position}
               page={page}
@@ -256,14 +259,43 @@ export default function Canvas({
                           key={element.id}
                           onClick={e => {
                             e.stopPropagation()
-                            edit(element)
+                            if (element.type === 'headline') {
+                              setEditingText(true)
+                            } else {
+                              setEditingText(false)
+                              edit(element)
+                            }
                           }}
                           onMouseOver={e => {
                             e.stopPropagation()
                             hover('marketlify-' + element.id)
                           }}
                         >
-                          <Element element={element} data={data} style={element.style} />
+                          {editingText && element.type === 'headline' && (
+                            <TextEditor
+                              element={element}
+                              data={data}
+                              style={element.style}
+                              updateContent={value => {
+                                data.content.filter(content => content.id === element.id)[0].content = value
+                                updatePage(data)
+                              }}
+                              closeEditor={() => {
+                                setTimeout(() => {
+                                  setEditingText(false)
+                                }, 50)
+                              }}
+                              edit={() => {
+                                edit(element)
+                                setTimeout(() => {
+                                  setEditingText(false)
+                                }, 50)
+                              }}
+                            />
+                          )}
+                          {(!editingText || (editingText && element.type !== 'headline')) && (
+                            <Element element={element} data={data} style={element.style} />
+                          )}
                         </div>
                       ))}
                     </div>
