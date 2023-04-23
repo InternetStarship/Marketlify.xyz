@@ -171,7 +171,6 @@ export default function HoverBar({
 
   return (
     <>
-      {current !== '' && <div className="w-full h-full absolute z-20"></div>}
       {current === '' && (
         <div className={'hoverTheme-' + hoverType}>
           <main

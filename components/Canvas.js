@@ -8,6 +8,7 @@ import Empty from './PageBuilder/Empty'
 import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
+import { FaCog } from 'react-icons/fa'
 
 export default function Canvas({
   page,
@@ -22,6 +23,7 @@ export default function Canvas({
   updateFullscreen,
   name,
   updateName,
+  updateCurrent,
 }) {
   const [data, setData] = useState(page)
   const [hovering, setHovering] = useState(false)
@@ -122,6 +124,15 @@ export default function Canvas({
               className="w-full"
             />
           </div>
+          <button
+            data-tooltip-id="tooltip"
+            data-tooltip-content="Page Settings"
+            onClick={() => {
+              updateCurrent('settings')
+            }}
+          >
+            <FaCog />
+          </button>
         </div>
 
         <div
@@ -132,6 +143,20 @@ export default function Canvas({
           }}
           style={data.styles.body}
         >
+          {current !== '' && (
+            <div
+              className="w-full h-full hover:bg-slate-900 opacity-25 absolute z-20"
+              onMouseOver={e => {
+                e.preventDefault()
+                e.stopPropagation()
+              }}
+              onClick={e => {
+                edit(null)
+                updateCurrent('')
+              }}
+            ></div>
+          )}
+
           {hovering && (
             <HoverBar
               position={position}

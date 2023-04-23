@@ -14,27 +14,10 @@ import PagesButton from './PagesButton'
 import NewPageButton from './NewPage'
 import exportHTML from '@/utils/exportHTML'
 
-export default function Toolbar({
-  page,
-  viewport,
-  updateViewport,
-  load,
-  updateFullscreen,
-  updateCurrent,
-  name,
-}) {
-  function toggleSettings() {
-    updateCurrent('settings')
-  }
-
-  function toggleLayers() {
-    alert('todo')
-  }
-
+export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen, name }) {
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
-        {/* <img src="/images/logo.png" alt="logo" className="h-10 inline-block" /> */}
         <PagesButton load={load} />
         <NewPageButton load={load} />
       </div>
@@ -87,16 +70,6 @@ export default function Toolbar({
         >
           <BsLayers />
         </button> */}
-        <button
-          onClick={() => {
-            toggleSettings()
-          }}
-          className="toolbar-button"
-          data-tooltip-id="tooltip"
-          data-tooltip-content="Page Settings"
-        >
-          <HiOutlineCog />
-        </button>
       </div>
       <div className="flex space-x-2">
         <SaveButton page={page} name={name} />

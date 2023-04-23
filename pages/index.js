@@ -32,8 +32,13 @@ export default function Builder() {
   }, [])
 
   function edit(element) {
-    setSelectedId(element.id)
-    setCurrent('editing')
+    if (element) {
+      setSelectedId(element.id)
+      setCurrent('editing')
+    } else {
+      setSelectedId(null)
+      setCurrent(null)
+    }
   }
 
   function settings() {
@@ -105,6 +110,9 @@ export default function Builder() {
               updateName={name => {
                 setPageName(name)
               }}
+              updateCurrent={value => {
+                setCurrent(value)
+              }}
             />
           )}
         </div>
@@ -117,6 +125,7 @@ export default function Builder() {
         newestOnTop={true}
         theme="dark"
       />
+
       <Tooltip id="tooltip" />
     </main>
   )

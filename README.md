@@ -10,6 +10,8 @@
 ## Page Building
 
 - [ ] Text Editing (h1, h2, p, bold, align, etc)
+- [ ] Searchable CSS Properties
+- [ ] Simplify Element Options
 - [ ] Drag and drop 
 - [ ] Undo
 - [ ] Layers View
