@@ -9,16 +9,18 @@
 
 ## Page Building
 
-- [ ] Text Editing (h1, h2, p, bold, align, etc)
 - [ ] Searchable CSS Properties
-- [ ] Simplify Element Options
 - [ ] Drag and drop 
+- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
+- [ ] Ability to edit columns in Row settings
+- [ ] Text Align 
+
+## Extra Features
+
 - [ ] Undo
 - [ ] Layers View
 - [ ] Selected element Breadcrumb
 - [ ] Google Fonts
-- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
-- [ ] Ability to edit columns in Row settings
 - [ ] Light & Dark Mode (ui)
 
 ## Mobile
@@ -48,12 +50,14 @@
 
 ## Bugs
 
+- [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
 - [ ] Add coyote time to dropdown
 - [ ] Hover bar optimizations (losing focus, etc)
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
 - [ ] Color Picker: On input click show as dropdown
+- [ ] Adding new doesnt add to correct position
 
 ---
 
@@ -79,3 +83,4 @@
 - [x] Rows Basics (1 Column, 2 Column, 3 Column, etc)
 - [x] No sections add section area
 - [x] Page Styles (`<Panel />`)
+- [x] Text Editing basics
