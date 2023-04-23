@@ -17,8 +17,6 @@ export default function DraggableLayer({ id, index, type, moveLayer, children, s
   const ref = useRef(null)
   const layer = { id, index, type, sectionId, rowId, columnId }
 
-  console.log({ id, index, type, moveLayer, sectionId, rowId, columnId })
-
   const [, drop] = useDrop({
     accept: layerTypes[type],
     hover(item, monitor) {

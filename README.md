@@ -54,7 +54,7 @@
 
 ## Bugs
 
-- [ ] Layers Move Rows, Columns, Elements issue
+- [ ] Layers issues
 - [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
 - [ ] Add coyote time to dropdown
