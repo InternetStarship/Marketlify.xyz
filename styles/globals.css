@@ -17,8 +17,13 @@
 @import './tooltips.css';
 @import './page.css';
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Inter', helvetica, arial, sans-serif;
 }
 
 .section:hover,

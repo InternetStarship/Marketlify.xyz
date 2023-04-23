@@ -197,7 +197,9 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
                   <FaArrowDown />
                 </button>
 
-                <div className="py-0 px-1.5 text-sm font-bold uppercase text-white">{hoverType}</div>
+                {hoverType !== 'element' && (
+                  <div className="py-0 px-2.5 text-sm font-bold uppercase text-white">{hoverType}</div>
+                )}
               </div>
 
               <div className="flex hoverBarRight rounded-bl space-x-1">

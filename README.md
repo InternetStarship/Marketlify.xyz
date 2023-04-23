@@ -5,29 +5,38 @@
 - Create a page builder that can be used to create a single web page.
 - All saving is local storage. Just export/download HTML.
 
-## Currently Working On
+## Page Building
 
-- [ ] **Storage:** Funnels with multiple pages, update, sorting, etc
-- [ ] **Settings:** Page Styles (`<Panel />`)
-- [ ] **Text Editing:** (bold, align, etc)
-- [ ] Multiple Pages (add, delete, etc)
+- [ ] Page Styles (`<Panel />`)
+- [ ] Text Editing (h1, h2, p, bold, align, etc)
 
+## Features
 
-## Secondary Tasks
-
-- [ ] Make it work on Mobile
-- [ ] Layout (layers)
+- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
+- [ ] Layers View
 - [ ] Drag and drop 
 - [ ] Selected element Breadcrumb
-- [ ] Optimize and Format Exported HTML
-- [ ] Ability to edit columns
-- [ ] Mobile Only Settings
-- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Light & Dark Mode (ui)
 - [ ] Google Fonts
 - [ ] Undo / Redo
-- [ ] Add more elements
-- [ ] Add funnel pages
+- [ ] Ability to edit columns in Row settings
+- [ ] No sections add section area
+- [ ] Intro popup
+
+## Mobile
+
+- [ ] Make it work on Mobile
+- [ ] Mobile Only Settings
+
+## Storage
+
+- [ ] Update, sorting, etc
+- [ ] Funnels + Add Pages
+
+## Export
+
+- [ ] Optimize and Format Exported HTML
+- [ ] Export to ClickFunnels 2.0
 
 ## Content
 
@@ -37,12 +46,13 @@
 ## Bugs
 
 - [ ] Add coyote time to dropdown
-- [ ] Hover bar optimizations
+- [ ] Hover bar optimizations (losing focus, etc)
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
 - [ ] Google Fonts: Load fonts on load
 - [ ] Color Picker: On input click show as dropdown
 
+---
 
 ## Completed Tasks (for MVP)
 
