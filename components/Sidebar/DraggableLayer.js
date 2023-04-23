@@ -8,8 +8,9 @@ const layerTypes = {
   element: 'element',
 }
 
-export default function DraggableLayer({ id, index, type, moveLayer, children }) {
+export default function DraggableLayer({ id, index, type, moveLayer, children, sectionId, rowId }) {
   const ref = useRef(null)
+  const layer = { id, index, type, sectionId, rowId }
 
   const [, drop] = useDrop({
     accept: layerTypes[type],
@@ -24,13 +25,13 @@ export default function DraggableLayer({ id, index, type, moveLayer, children })
         return
       }
 
-      moveLayer(dragIndex, hoverIndex, type, id)
+      moveLayer(item, layer, dragIndex, hoverIndex, type)
       item.index = hoverIndex
     },
   })
   const [{ isDragging }, drag] = useDrag({
     type: layerTypes[type],
-    item: { type: layerTypes[type], id: id, index },
+    item: { ...layer },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
