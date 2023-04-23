@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2023 Wynter Jones
+ *   All rights reserved.
+ */
+
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
@@ -8,9 +13,9 @@ const layerTypes = {
   element: 'element',
 }
 
-export default function DraggableLayer({ id, index, type, moveLayer, children, sectionId, rowId }) {
+export default function DraggableLayer({ id, index, type, moveLayer, children, sectionId, rowId, columnId }) {
   const ref = useRef(null)
-  const layer = { id, index, type, sectionId, rowId }
+  const layer = { id, index, type, sectionId, rowId, columnId }
 
   const [, drop] = useDrop({
     accept: layerTypes[type],
