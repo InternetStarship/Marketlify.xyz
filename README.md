@@ -5,23 +5,24 @@
 - Create a page builder that can be used to create a single web page.
 - All saving is local storage. Just export/download HTML.
 
+---
+
 ## Page Building
 
 - [ ] Page Styles (`<Panel />`)
 - [ ] Text Editing (h1, h2, p, bold, align, etc)
+- [ ] No sections add section area
 
 ## Features
 
 - [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
-- [ ] Layers View
 - [ ] Drag and drop 
+- [ ] Layers View
 - [ ] Selected element Breadcrumb
-- [ ] Light & Dark Mode (ui)
 - [ ] Google Fonts
 - [ ] Undo / Redo
 - [ ] Ability to edit columns in Row settings
-- [ ] No sections add section area
-- [ ] Intro popup
+- [ ] Light & Dark Mode (ui)
 
 ## Mobile
 
@@ -38,6 +39,11 @@
 - [ ] Optimize and Format Exported HTML
 - [ ] Export to ClickFunnels 2.0
 
+## Onboarding / UX
+
+- [ ] Intro popup
+- [ ] Export popup
+
 ## Content
 
 - [ ] Starter templates (very basic)
@@ -49,7 +55,6 @@
 - [ ] Hover bar optimizations (losing focus, etc)
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
-- [ ] Google Fonts: Load fonts on load
 - [ ] Color Picker: On input click show as dropdown
 
 ---
