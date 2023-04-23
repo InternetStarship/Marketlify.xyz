@@ -312,6 +312,10 @@ export default function Canvas({
                                       setEditingText(false)
                                     }, 50)
                                   }}
+                                  updateStyle={style => {
+                                    element.style = style
+                                    updatePage(data)
+                                  }}
                                 />
                               )}
 

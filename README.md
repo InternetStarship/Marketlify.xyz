@@ -13,7 +13,6 @@
 - [ ] Drag and drop
 - [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Ability to edit columns in Row settings
-- [ ] Text Align
 
 ## Extra Features
 
@@ -85,3 +84,4 @@
 - [x] Page Styles (`<Panel />`)
 - [x] Text Editing basics
 - [x] Layers View
+- [x] Text Align

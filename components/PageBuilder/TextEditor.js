@@ -15,11 +15,13 @@ import {
   FaAlignLeft,
   FaAlignRight,
   FaAlignCenter,
+  FaAlignJustify,
 } from 'react-icons/fa'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import _ from 'lodash'
 
-export default function TextEditor({ updateContent, element, data, style, closeEditor, edit }) {
+export default function TextEditor({ updateContent, element, data, style, closeEditor, edit, updateStyle }) {
   const [elementData, setElementData] = useState(findContentById(element.id, data.content))
 
   const editor = useEditor({
@@ -44,8 +46,8 @@ export default function TextEditor({ updateContent, element, data, style, closeE
           }}
         >
           <div
-            style={{ width: '550px', maxWidth: '100&%' }}
-            className="space-x-3 text-lg flex items-items justify-evenly"
+            style={{ width: '590px', maxWidth: '100%' }}
+            className="space-x-3 text-lg flex items-items justify-between"
           >
             <div className="flex">
               <button className="toolbar-button font-bold text-base" onClick={edit}>
@@ -57,49 +59,68 @@ export default function TextEditor({ updateContent, element, data, style, closeE
                 <button
                   onClick={() => editor.chain().focus().toggleBold().run()}
                   disabled={!editor.can().chain().focus().toggleBold().run()}
-                  className={editor.isActive('bold') ? 'is-active' : ''}
+                  className={`${editor.isActive('bold') ? 'active-text-toolbar' : ''} p-1`}
                 >
                   <FaBold />
                 </button>
                 <button
                   onClick={() => editor.chain().focus().toggleItalic().run()}
                   disabled={!editor.can().chain().focus().toggleItalic().run()}
-                  className={editor.isActive('italic') ? 'is-active' : ''}
+                  className={`${editor.isActive('italic') ? 'active-text-toolbar' : ''} p-1`}
                 >
                   <FaItalic />
                 </button>
                 <button
                   onClick={() => editor.chain().focus().toggleStrike().run()}
                   disabled={!editor.can().chain().focus().toggleStrike().run()}
-                  className={editor.isActive('strike') ? 'is-active' : ''}
+                  className={`${editor.isActive('strike') ? 'active-text-toolbar' : ''} p-1`}
                 >
                   <FaStrikethrough />
                 </button>
 
                 <button
-                // onClick={() => editor.chain().focus().toggleStrike().run()}
-                // disabled={!editor.can().chain().focus().toggleStrike().run()}
-                // className={editor.isActive('strike') ? 'is-active' : ''}
+                  onClick={() => {
+                    const newStyle = _.cloneDeep(style)
+                    newStyle.textAlign = 'left'
+                    updateStyle(newStyle)
+                  }}
+                  className={`${style.textAlign === 'left' ? 'active-text-toolbar' : ''} p-1 rounded`}
                 >
                   <FaAlignLeft />
                 </button>
                 <button
-                // onClick={() => editor.chain().focus().toggleStrike().run()}
-                // disabled={!editor.can().chain().focus().toggleStrike().run()}
-                // className={editor.isActive('strike') ? 'is-active' : ''}
+                  onClick={() => {
+                    const newStyle = _.cloneDeep(style)
+                    newStyle.textAlign = 'center'
+                    updateStyle(newStyle)
+                  }}
+                  className={`${style.textAlign === 'center' ? 'active-text-toolbar' : ''} p-1 rounded`}
                 >
                   <FaAlignCenter />
                 </button>
                 <button
-                // onClick={() => editor.chain().focus().toggleStrike().run()}
-                // disabled={!editor.can().chain().focus().toggleStrike().run()}
-                // className={editor.isActive('strike') ? 'is-active' : ''}
+                  onClick={() => {
+                    const newStyle = _.cloneDeep(style)
+                    newStyle.textAlign = 'right'
+                    updateStyle(newStyle)
+                  }}
+                  className={`${style.textAlign === 'right' ? 'active-text-toolbar' : ''} p-1 rounded`}
                 >
                   <FaAlignRight />
                 </button>
+                <button
+                  onClick={() => {
+                    const newStyle = _.cloneDeep(style)
+                    newStyle.textAlign = 'justify'
+                    updateStyle(newStyle)
+                  }}
+                  className={`${style.textAlign === 'justify' ? 'active-text-toolbar' : ''} p-1 rounded`}
+                >
+                  <FaAlignJustify />
+                </button>
               </div>
 
-              <div className="pl-12 space-x-6 flex">
+              <div className="pl-16 space-x-6 flex">
                 <button
                   onClick={() => editor.chain().focus().undo().run()}
                   disabled={!editor.can().chain().focus().undo().run()}
