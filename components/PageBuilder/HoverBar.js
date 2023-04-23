@@ -10,6 +10,7 @@ import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import AddDropdown from './AddDropdown'
 import _ from 'lodash'
+import generateUniqueId from '@/utils/generateUniqueId'
 
 export default function HoverBar({ position, page, updatePage, selectedId, current, hoverType }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
@@ -79,16 +80,6 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
     }
   }
 
-  function generateUniqueId(existingIds) {
-    let uniqueId
-
-    do {
-      uniqueId = Math.floor(Math.random() * 1000000)
-    } while (existingIds.has(uniqueId))
-
-    return uniqueId
-  }
-
   function remove() {
     const type = findTypeById(selectedId, page.styles.sections)
     const currentElement = getIndexesById(selectedId, page.styles.sections)
@@ -155,11 +146,12 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex, 0, newItem)
 
-        // page.content.push({
-        //   id: newId,
-        //   content: content.content,
-        //   type: content.type,
-        // })
+        const previousContent = page.content.find(content => content.id === selectedId)
+        page.content.push({
+          id: newId,
+          content: previousContent.content,
+          type: previousContent.type,
+        })
         break
     }
 
@@ -182,8 +174,8 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
               zIndex: 999999,
             }}
           >
-            <div id="hoverBarTop">
-              <div className="flex hoverBarLeft rounded-br ">
+            <div id="hoverBarTop" className="hoverSmallHidden">
+              <div className="flex items-center hoverBarLeft rounded-br">
                 <button
                   onClick={() => {
                     move(-1)
@@ -205,13 +197,10 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
                   <FaArrowDown />
                 </button>
 
-                <div className="p-2 px-2.5 text-base font-bold uppercase text-white">{hoverType}</div>
+                <div className="py-0 px-1.5 text-sm font-bold uppercase text-white">{hoverType}</div>
               </div>
 
-              <div className="flex hoverBarRight rounded-bl">
-                <div className="p-2 text-white" data-tooltip-id="tooltip" data-tooltip-content="Edit">
-                  <FaCog />
-                </div>
+              <div className="flex hoverBarRight rounded-bl space-x-1">
                 <button
                   onClick={() => {
                     duplicate()

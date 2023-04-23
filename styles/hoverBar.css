@@ -30,7 +30,8 @@
 }
 
 .hoverBarRight {
-  margin-top: -5px !important;
+  top: 0 !important;
+  z-index: 9999999999;
 }
 
 .hoverTheme-section #hoverBar {

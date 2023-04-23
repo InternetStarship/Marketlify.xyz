@@ -10,6 +10,7 @@ import { TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } f
 import getIndexesById from '@/utils/getIndexesById'
 import defaults from '@/utils/defaults'
 import _ from 'lodash'
+import generateUniqueId from '@/utils/generateUniqueId'
 
 export default function AddDropdown({
   children,
@@ -22,16 +23,6 @@ export default function AddDropdown({
   setPopup,
   id,
 }) {
-  function generateUniqueId(existingIds) {
-    let uniqueId
-
-    do {
-      uniqueId = Math.floor(Math.random() * 1000000)
-    } while (existingIds.has(uniqueId))
-
-    return uniqueId
-  }
-
   function addElement(type) {
     const newId = generateUniqueId(existingIds)
     const currentElement = getIndexesById(selectedId, page.styles.sections)

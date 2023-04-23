@@ -8,7 +8,6 @@ import Empty from './PageBuilder/Empty'
 import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
-import AddDropdown from './PageBuilder/AddDropdown'
 
 export default function Canvas({
   page,
@@ -50,16 +49,6 @@ export default function Canvas({
     setData(page)
   }, [updated])
 
-  function generateUniqueId(existingIds) {
-    let uniqueId
-
-    do {
-      uniqueId = Math.floor(Math.random() * 1000000)
-    } while (existingIds.has(uniqueId))
-
-    return uniqueId
-  }
-
   function hover(elementId, isEmpty = false, type = '') {
     let element = document.getElementById(elementId)
     if (type === '') {
@@ -76,6 +65,19 @@ export default function Canvas({
         width: `${element.offsetWidth}px`,
         height: `${element.offsetHeight}px`,
       })
+
+      const elementRect = element.getBoundingClientRect()
+      const width = elementRect.width
+
+      if (width < 280) {
+        document.querySelectorAll('.hoverSmallHidden').forEach(element => {
+          element.style.display = 'none'
+        })
+      } else {
+        document.querySelectorAll('.hoverSmallHidden').forEach(element => {
+          element.style.display = 'flex'
+        })
+      }
 
       if (document.querySelector('.hoverBarRight')) {
         if (isEmpty) {

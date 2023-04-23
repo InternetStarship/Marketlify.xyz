@@ -38,7 +38,6 @@
 
 - [ ] Add coyote time to dropdown
 - [ ] Hover bar optimizations
-- [ ] Duplicate not working (due to data structure change)
 - [ ] Export: Set max width for sections via page settings
 - [ ] Editing: Re-click to edit section or row and hover on edit issue
 - [ ] Google Fonts: Load fonts on load
