@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useDrag, useDrop } from 'react-dnd'
 
 const layerTypes = {
@@ -9,7 +8,7 @@ const layerTypes = {
   element: 'element',
 }
 
-export default function DraggableLayer({ layer, index, type, moveLayer }) {
+export default function DraggableLayer({ id, index, type, moveLayer, children }) {
   const ref = useRef(null)
 
   const [, drop] = useDrop({
@@ -25,14 +24,13 @@ export default function DraggableLayer({ layer, index, type, moveLayer }) {
         return
       }
 
-      moveLayer(dragIndex, hoverIndex, type)
+      moveLayer(dragIndex, hoverIndex, type, id)
       item.index = hoverIndex
     },
   })
-
   const [{ isDragging }, drag] = useDrag({
     type: layerTypes[type],
-    item: { type: layerTypes[type], id: layer.id, index },
+    item: { type: layerTypes[type], id: id, index },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
@@ -42,31 +40,6 @@ export default function DraggableLayer({ layer, index, type, moveLayer }) {
 
   drag(drop(ref))
 
-  const renderChildren = () => {
-    switch (type) {
-      case 'section':
-        return layer.rows.map((row, index) => (
-          <DraggableLayer key={row.id} index={index} layer={row} type="row" moveLayer={moveLayer} />
-        ))
-      case 'row':
-        return layer.columns.map((column, index) => (
-          <DraggableLayer key={column.id} index={index} layer={column} type="column" moveLayer={moveLayer} />
-        ))
-      case 'column':
-        return layer.elements.map((element, index) => (
-          <DraggableLayer
-            key={element.id}
-            index={index}
-            layer={element}
-            type="element"
-            moveLayer={moveLayer}
-          />
-        ))
-      default:
-        return null
-    }
-  }
-
   return (
     <div ref={ref} style={{ opacity }}>
       <div
@@ -75,9 +48,9 @@ export default function DraggableLayer({ layer, index, type, moveLayer }) {
         }`}
       >
         <span>{`${type}`}</span>
-        <span className="text-xs text-slate-500">{`#${layer.id}`}</span>
+        <span className="text-xs text-slate-500">{`#${id}`}</span>
       </div>
-      {renderChildren()}
+      {children}
     </div>
   )
 }

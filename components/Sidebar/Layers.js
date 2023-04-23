@@ -10,7 +10,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import DraggableLayer from './DraggableLayer'
 
 export default function Layers({ page, updatePage, updateCurrent }) {
-  const moveLayer = (dragIndex, hoverIndex, type) => {
+  const moveLayer = (dragIndex, hoverIndex, type, id) => {
     const updatedPage = { ...page }
 
     const moveArrayItem = (arr, fromIndex, toIndex) => {
@@ -24,31 +24,53 @@ export default function Layers({ page, updatePage, updateCurrent }) {
         moveArrayItem(updatedPage.styles.sections, dragIndex, hoverIndex)
         break
       case 'row':
-        const sectionIndexForRow = // find section index;
-          moveArrayItem(updatedPage.styles.sections[sectionIndexForRow].rows, dragIndex, hoverIndex)
+        let sectionIndexForRow
+
+        for (let sIndex = 0; sIndex < updatedPage.styles.sections.length; sIndex++) {
+          const section = updatedPage.styles.sections[sIndex]
+          const rowIndex = section.rows.findIndex(row => row.id === id)
+          if (rowIndex !== -1) {
+            sectionIndexForRow = sIndex
+            break
+          }
+        }
+
+        moveArrayItem(updatedPage.styles.sections[sectionIndexForRow].rows, dragIndex, hoverIndex)
         break
       case 'column':
-        const {
-          sectionIndex: sectionIndexForColumn,
-          rowIndex: rowIndexForColumn,
-        } = // find section and row index;
-          moveArrayItem(
-            updatedPage.styles.sections[sectionIndexForColumn].rows[rowIndexForColumn].columns,
-            dragIndex,
-            hoverIndex
-          )
+        let sectionIndexForColumn, rowIndexForColumn
+
+        for (let sIndex = 0; sIndex < updatedPage.styles.sections.length; sIndex++) {
+          const section = updatedPage.styles.sections[sIndex]
+          for (let rIndex = 0; rIndex < section.rows.length; rIndex++) {
+            const row = section.rows[rIndex]
+            const columnIndex = row.columns.findIndex(column => column.id === id)
+            if (columnIndex !== -1) {
+              sectionIndexForColumn = sIndex
+              rowIndexForColumn = rIndex
+              break
+            }
+          }
+          if (sectionIndexForColumn !== undefined) break
+        }
+
+        moveArrayItem(
+          updatedPage.styles.sections[sectionIndexForColumn].rows[rowIndexForColumn].columns,
+          dragIndex,
+          hoverIndex
+        )
         break
+
       case 'element':
         let sectionIndexForElement, rowIndexForElement, columnIndexForElement
 
-        // Find section, row, and column index
         for (let sIndex = 0; sIndex < updatedPage.styles.sections.length; sIndex++) {
           const section = updatedPage.styles.sections[sIndex]
           for (let rIndex = 0; rIndex < section.rows.length; rIndex++) {
             const row = section.rows[rIndex]
             for (let cIndex = 0; cIndex < row.columns.length; cIndex++) {
               const column = row.columns[cIndex]
-              const elementIndex = column.elements.findIndex(element => element.id === layer.id)
+              const elementIndex = column.elements.findIndex(element => element.id === id)
               if (elementIndex !== -1) {
                 sectionIndexForElement = sIndex
                 rowIndexForElement = rIndex
@@ -88,14 +110,38 @@ export default function Layers({ page, updatePage, updateCurrent }) {
       </div>
       <div className="p-3">
         <DndProvider backend={HTML5Backend}>
-          {page.styles.sections.map((section, index) => (
+          {page.styles.sections.map((section, sectionIndex) => (
             <DraggableLayer
               key={section.id}
-              index={index}
-              layer={section}
+              index={sectionIndex}
+              id={section.id}
               type="section"
               moveLayer={moveLayer}
-            />
+            >
+              {section.rows.map((row, rowIndex) => (
+                <DraggableLayer key={row.id} index={rowIndex} id={row.id} type="row" moveLayer={moveLayer}>
+                  {row.columns.map((column, columnIndex) => (
+                    <DraggableLayer
+                      key={column.id}
+                      index={columnIndex}
+                      id={column.id}
+                      type="column"
+                      moveLayer={moveLayer}
+                    >
+                      {column.elements.map((element, elementIndex) => (
+                        <DraggableLayer
+                          key={element.id}
+                          index={elementIndex}
+                          id={element.id}
+                          type="element"
+                          moveLayer={moveLayer}
+                        />
+                      ))}
+                    </DraggableLayer>
+                  ))}
+                </DraggableLayer>
+              ))}
+            </DraggableLayer>
           ))}
         </DndProvider>
       </div>
