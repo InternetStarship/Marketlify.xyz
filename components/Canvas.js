@@ -113,7 +113,7 @@ export default function Canvas({
 
       <div id="mainCanvas" className={viewport}>
         <div className="top-bar">
-          <div className="traffic-lights">
+          <div className="traffic-lights hidden md:flex mr-3">
             <div className="traffic-light traffic-light-close"></div>
             <div className="traffic-light traffic-light-minimize"></div>
             <div className="traffic-light traffic-light-maximize"></div>

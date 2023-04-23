@@ -4,7 +4,7 @@
  */
 
 #sidebar {
-  @apply bg-white shadow-sm;
+  @apply bg-white shadow-sm hidden md:block;
   width: 380px;
   height: calc(100vh - 58px);
   overflow-x: hidden;

@@ -21,7 +21,7 @@ export default function Toolbar({ page, viewport, updateViewport, load, updateFu
         <PagesButton load={load} />
         <NewPageButton load={load} />
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="items-center space-x-2 hidden md:flex">
         <button
           onClick={() => {
             updateViewport('desktop')
@@ -78,12 +78,12 @@ export default function Toolbar({ page, viewport, updateViewport, load, updateFu
           onClick={() => {
             exportHTML(page)
           }}
-          className="flex items-center toolbar-button-secondary"
+          className="flex items-center toolbar-button"
           data-tooltip-id="tooltip"
-          data-tooltip-content="Download 'index.html' File"
+          data-tooltip-content="Publish Your Site"
         >
           <FaDownload />
-          <span className="hidden xl:inline-block">Download</span>
+          <span className="hidden xl:inline-block">Export</span>
         </button>
       </div>
     </main>

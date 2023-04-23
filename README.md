@@ -9,16 +9,22 @@
 
 ## Page Building
 
-- [ ] Searchable CSS Properties
 - [ ] Drag and drop
-- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Ability to edit columns in Row settings
+
+## Panel
+
+- [ ] Searchable CSS Properties
+- [ ] Google Fonts
+- [ ] Unit Type
+- [ ] Color Picker
+- [ ] CSS editor
 
 ## Extra Features
 
+- [ ] Container Element
 - [ ] Undo
 - [ ] Selected element Breadcrumb
-- [ ] Google Fonts
 - [ ] Light & Dark Mode (ui)
 
 ## Mobile
@@ -54,9 +60,8 @@
 - [ ] Add coyote time to dropdown
 - [ ] Hover bar optimizations (losing focus, etc)
 - [ ] Export: Set max width for sections via page settings
-- [ ] Editing: Re-click to edit section or row and hover on edit issue
-- [ ] Color Picker: On input click show as dropdown
 - [ ] Adding new doesnt add to correct position
+- [ ] Dropdown menu position
 
 ---
 
