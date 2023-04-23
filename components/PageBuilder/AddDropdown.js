@@ -22,6 +22,7 @@ export default function AddDropdown({
   updatePage,
   setPopup,
   id,
+  updateHovering,
 }) {
   function addElement(type) {
     const newId = generateUniqueId(existingIds)
@@ -73,6 +74,7 @@ export default function AddDropdown({
 
     setPopup(false)
     updatePage(_.cloneDeep(page))
+    updateHovering(false)
   }
 
   function addSection(width) {
@@ -91,6 +93,7 @@ export default function AddDropdown({
     page.styles.sections.push(newItem)
     setPopup(false)
     updatePage(_.cloneDeep(page))
+    updateHovering(false)
   }
 
   function addRow(totalColumns) {
@@ -111,6 +114,7 @@ export default function AddDropdown({
     page.styles.sections[sectionIndex].rows.push(newItem)
     setPopup(false)
     updatePage(_.cloneDeep(page))
+    updateHovering(false)
   }
 
   return (

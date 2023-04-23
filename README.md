@@ -9,18 +9,13 @@
 
 ## Page Building
 
-- [ ] Page Styles (`<Panel />`)
 - [ ] Text Editing (h1, h2, p, bold, align, etc)
-- [ ] No sections add section area
-
-## Features
-
-- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Drag and drop 
+- [ ] Undo
 - [ ] Layers View
 - [ ] Selected element Breadcrumb
 - [ ] Google Fonts
-- [ ] Undo / Redo
+- [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Ability to edit columns in Row settings
 - [ ] Light & Dark Mode (ui)
 
@@ -79,3 +74,5 @@
 - [x] Blank section & row
 - [x] Elements Basics (Button, Image, List, etc)
 - [x] Rows Basics (1 Column, 2 Column, 3 Column, etc)
+- [x] No sections add section area
+- [x] Page Styles (`<Panel />`)

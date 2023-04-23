@@ -28,7 +28,6 @@ export default function Canvas({
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
   const [existingIds] = useState(new Set())
-  const [popup, setPopup] = useState(false)
 
   useEffect(() => {
     page.styles.sections?.forEach(section => {
@@ -131,6 +130,7 @@ export default function Canvas({
             e.stopPropagation()
             setHovering(false)
           }}
+          style={data.styles.body}
         >
           {hovering && (
             <HoverBar
@@ -140,7 +140,21 @@ export default function Canvas({
               selectedId={selectedId}
               current={current}
               hoverType={hoverType}
+              updateHovering={setHovering}
             />
+          )}
+
+          {data.styles.sections.length == 0 && (
+            <div
+              className="element"
+              id={'marketlify-' + 'empty-000'}
+              onMouseOver={e => {
+                e.stopPropagation()
+                hover('marketlify-' + 'empty-000', true, 'section')
+              }}
+            >
+              <Empty message="Add Section" />
+            </div>
           )}
 
           {data.styles.sections?.map((section, sectionIndex) => (
@@ -215,7 +229,6 @@ export default function Canvas({
                           className="element"
                           id={'marketlify-' + element.id}
                           key={element.id}
-                          style={element.style}
                           onClick={e => {
                             e.stopPropagation()
                             edit(element)
@@ -225,7 +238,7 @@ export default function Canvas({
                             hover('marketlify-' + element.id)
                           }}
                         >
-                          <Element element={element} data={data} />
+                          <Element element={element} data={data} style={element.style} />
                         </div>
                       ))}
                     </div>

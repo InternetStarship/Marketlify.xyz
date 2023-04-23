@@ -160,6 +160,13 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     }
   }, [selectedId])
 
+  useEffect(() => {
+    if (!selectedId) {
+      setStyles(page.styles.body)
+      setSelectedType('body')
+    }
+  }, [])
+
   const handleChange = event => {
     const { name, value } = event.target
     const newStyles = { ...styles, [name]: value }
@@ -190,21 +197,25 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   }
 
   const handleSave = newStyles => {
-    const currentElement = getIndexesById(selectedId, page.styles.sections)
-    const type = findTypeById(selectedId, page.styles.sections)
+    if (selectedId) {
+      const currentElement = getIndexesById(selectedId, page.styles.sections)
+      const type = findTypeById(selectedId, page.styles.sections)
 
-    if (type === 'section') {
-      page.styles.sections[currentElement.sectionIndex].style = newStyles
-    } else if (type === 'row') {
-      page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
-    } else if (type === 'column') {
-      page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-        currentElement.columnIndex
-      ].style = newStyles
-    } else if (type === 'element') {
-      page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-        currentElement.columnIndex
-      ].elements[currentElement.elementIndex].style = newStyles
+      if (type === 'section') {
+        page.styles.sections[currentElement.sectionIndex].style = newStyles
+      } else if (type === 'row') {
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
+      } else if (type === 'column') {
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].style = newStyles
+      } else if (type === 'element') {
+        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements[currentElement.elementIndex].style = newStyles
+      }
+    } else {
+      page.styles.body = newStyles
     }
 
     updatePage(_.cloneDeep(page))
@@ -286,12 +297,14 @@ export default function Panel({ page, close, selectedId, updatePage }) {
 
   return (
     <>
-      <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
-        <h3 className="capitalize">Editing {selectedType}</h3>
-        <button onClick={close}>
-          <AiOutlineCloseCircle />
-        </button>
-      </div>
+      {selectedId && (
+        <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
+          <h3 className="capitalize">Editing {selectedType}</h3>
+          <button onClick={close}>
+            <AiOutlineCloseCircle />
+          </button>
+        </div>
+      )}
       <div className="text-sm p-3 border-b border-slate-300 text-slate-700 space-x-3 bg-slate-200 flex items-center justify-between font-bold">
         <select
           value={selectedStyle}

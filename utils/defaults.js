@@ -59,6 +59,7 @@ const defaults = {
       id: null,
       properties: {},
       style: {
+        width: '100%',
         borderRadius: '5px',
       },
     },
@@ -73,7 +74,7 @@ const defaults = {
         fontWeight: 600,
         padding: '10px 20px',
         borderRadius: '5px',
-        display: 'inline-block',
+        display: 'block',
         textAlign: 'center',
       },
     },

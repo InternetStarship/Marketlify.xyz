@@ -6,8 +6,9 @@
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
+import Panel from './Panel'
 
-export default function Settings({ updateCurrent, page, updatePage, pageData }) {
+export default function Settings({ updateCurrent, page, updatePage }) {
   const [tab, setTab] = useState('seo')
   const [seo, setSeo] = useState({
     title: '',
@@ -56,7 +57,11 @@ export default function Settings({ updateCurrent, page, updatePage, pageData }) 
         </div>
       </div>
 
-      {tab === 'styles' && <>styles</>}
+      {tab === 'styles' && (
+        <>
+          <Panel page={page} close={close} updatePage={updatePage} />
+        </>
+      )}
 
       {tab === 'seo' && (
         <div className="text-sm p-3 px-0">

@@ -4,7 +4,7 @@
  */
 
 .toolbar-button {
-  @apply bg-white flex text-sm font-bold uppercase items-center space-x-2 border-slate-200 text-slate-800 py-2 px-3 rounded-md;
+  @apply bg-white flex text-sm font-medium uppercase items-center space-x-2 border-slate-200 text-slate-800 py-2 px-3 rounded-md;
 }
 .toolbar-button:hover {
   @apply bg-slate-100;
@@ -14,11 +14,11 @@
 }
 
 .toolbar-button-primary {
-  @apply bg-blue-500 flex text-sm items-center space-x-2 border-blue-800 hover:bg-blue-400 text-white font-bold uppercase py-2 px-3 rounded-md;
+  @apply bg-blue-500 flex text-sm items-center space-x-2 border-blue-800 hover:bg-blue-400 text-white font-medium uppercase py-2 px-3 rounded-md;
 }
 
 .toolbar-button-secondary {
-  @apply bg-slate-500 flex text-sm items-center space-x-2 hover:bg-slate-400 text-white font-bold uppercase py-2 px-3 rounded-md;
+  @apply bg-slate-500 flex text-sm items-center space-x-2 hover:bg-slate-400 text-white font-medium uppercase py-2 px-3 rounded-md;
 }
 
 .toolbar-button svg {
