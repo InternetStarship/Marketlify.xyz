@@ -21,7 +21,7 @@
   pointer-events: all;
 }
 #hoverBarBottom {
-  @apply absolute flex justify-center text-center text-xl mx-auto bg-blue-500 px-1 py-2 rounded-t text-white;
+  @apply absolute flex justify-center text-center cursor-pointer text-xl mx-auto bg-blue-500 px-1 py-2 rounded-t text-white;
   width: 50px;
   left: 50%;
   margin-left: -25px;

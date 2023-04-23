@@ -130,7 +130,7 @@ export default function AddDropdown({
         setPopup(true)
       }}
       data-tooltip-id="tooltip"
-      data-tooltip-content={`Add New ${hoverType}`}
+      data-tooltip-content={`Add ${hoverType}`}
     >
       {children}
 

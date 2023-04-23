@@ -7,7 +7,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useState, useEffect } from 'react'
 import _ from 'lodash'
 
-export default function Settings({ updateCurrent, page, updatePage }) {
+export default function Settings({ updateCurrent, page, updatePage, pageData }) {
   const [tab, setTab] = useState('seo')
   const [seo, setSeo] = useState({
     title: '',

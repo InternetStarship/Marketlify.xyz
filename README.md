@@ -7,7 +7,6 @@
 
 ## Currently Working On
 
-- [ ] Redo with Immer
 - [ ] **Storage:** Funnels with multiple pages, update, sorting, etc
 - [ ] **Settings:** Page Styles (`<Panel />`)
 - [ ] **Text Editing:** (bold, align, etc)
@@ -38,7 +37,6 @@
 ## Bugs
 
 - [ ] Add coyote time to dropdown
-- [ ] Deleting or moving elements affects other elements
 - [ ] Hover bar optimizations
 - [ ] Duplicate not working (due to data structure change)
 - [ ] Export: Set max width for sections via page settings

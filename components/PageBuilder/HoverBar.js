@@ -9,6 +9,7 @@ import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import AddDropdown from './AddDropdown'
+import _ from 'lodash'
 
 export default function HoverBar({ position, page, updatePage, selectedId, current, hoverType }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
@@ -78,42 +79,46 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
     }
   }
 
-  function remove() {
-    const id = selectedId
-    const obj = page.styles
+  function generateUniqueId(existingIds) {
+    let uniqueId
 
-    for (let i = 0; i < obj.sections.length; i++) {
-      if (obj.sections[i].id === id) {
-        obj.sections.splice(i, 1)
+    do {
+      uniqueId = Math.floor(Math.random() * 1000000)
+    } while (existingIds.has(uniqueId))
+
+    return uniqueId
+  }
+
+  function remove() {
+    const type = findTypeById(selectedId, page.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.styles.sections)
+    const updatedPage = JSON.parse(JSON.stringify(page))
+
+    switch (type) {
+      case 'section':
+        updatedPage.styles.sections.splice(currentElement.sectionIndex, 1)
         break
-      }
-      if (obj.sections[i].rows) {
-        for (let j = 0; j < obj.sections[i].rows.length; j++) {
-          if (obj.sections[i].rows[j].id === id) {
-            obj.sections[i].rows.splice(j, 1)
-            break
-          }
-          if (obj.sections[i].rows[j].columns) {
-            for (let k = 0; k < obj.sections[i].rows[j].columns.length; k++) {
-              if (obj.sections[i].rows[j].columns[k].id === id) {
-                obj.sections[i].rows[j].columns.splice(k, 1)
-                break
-              }
-              if (obj.sections[i].rows[j].columns[k].elements) {
-                for (let l = 0; l < obj.sections[i].rows[j].columns[k].elements.length; l++) {
-                  if (obj.sections[i].rows[j].columns[k].elements[l].id === id) {
-                    obj.sections[i].rows[j].columns[k].elements.splice(l, 1)
-                    break
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+
+      case 'row':
+        updatedPage.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 1)
+        break
+
+      case 'column':
+        updatedPage.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+          currentElement.columnIndex,
+          1
+        )
+        break
+
+      case 'element':
+        updatedPage.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements.splice(currentElement.elementIndex, 1)
+
+        break
     }
 
-    updatePage(page)
+    updatePage(_.cloneDeep(updatedPage))
   }
 
   function duplicate() {
@@ -158,7 +163,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
         break
     }
 
-    updatePage(page)
+    updatePage(_.cloneDeep(page))
   }
 
   return (
@@ -204,11 +209,7 @@ export default function HoverBar({ position, page, updatePage, selectedId, curre
               </div>
 
               <div className="flex hoverBarRight rounded-bl">
-                <div
-                  className="p-2 text-white"
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content={`Edit ${hoverType}`}
-                >
+                <div className="p-2 text-white" data-tooltip-id="tooltip" data-tooltip-content="Edit">
                   <FaCog />
                 </div>
                 <button

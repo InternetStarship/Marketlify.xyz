@@ -174,7 +174,7 @@ export default function Canvas({
                 <div
                   className="row"
                   id={'marketlify-' + row.id}
-                  key={rowIndex}
+                  key={`${sectionIndex}-${rowIndex}`}
                   style={row.style}
                   onClick={e => {
                     e.stopPropagation()
@@ -187,7 +187,7 @@ export default function Canvas({
                 >
                   {row.columns?.map((column, colIndex) => (
                     <div
-                      key={colIndex}
+                      key={`${sectionIndex}-${rowIndex}-${colIndex}`}
                       className="column"
                       style={column.style}
                       id={'marketlify-' + column.id}
@@ -212,7 +212,7 @@ export default function Canvas({
                         <div
                           className="element"
                           id={'marketlify-' + element.id}
-                          key={elementIndex}
+                          key={element.id}
                           style={element.style}
                           onClick={e => {
                             e.stopPropagation()
