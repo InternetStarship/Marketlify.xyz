@@ -4,7 +4,18 @@
  */
 import findContentById from '@/utils/findContentById'
 import { useState } from 'react'
-import { FaBold, FaItalic, FaStrikethrough, FaUndoAlt, FaRedoAlt, FaEdit, FaTimes } from 'react-icons/fa'
+import {
+  FaBold,
+  FaItalic,
+  FaStrikethrough,
+  FaUndoAlt,
+  FaRedoAlt,
+  FaEdit,
+  FaTimes,
+  FaAlignLeft,
+  FaAlignRight,
+  FaAlignCenter,
+} from 'react-icons/fa'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 
@@ -27,13 +38,13 @@ export default function TextEditor({ updateContent, element, data, style, closeE
           id="textEditorToolbar"
           className="fixed top-0 left-0 z-50 shadow-lg text-lg flex items-center justify-between bg-white text-slate-900 py-2 px-3 w-full cursor-default"
           style={{
-            width: 'calc(100% - 318px)',
+            width: 'calc(100% - 293px)',
             top: '53px',
-            left: '318px',
+            left: '293px',
           }}
         >
           <div
-            style={{ width: '400px', maxWidth: '100&%' }}
+            style={{ width: '550px', maxWidth: '100&%' }}
             className="space-x-3 text-lg flex items-items justify-evenly"
           >
             <div className="flex">
@@ -63,6 +74,28 @@ export default function TextEditor({ updateContent, element, data, style, closeE
                   className={editor.isActive('strike') ? 'is-active' : ''}
                 >
                   <FaStrikethrough />
+                </button>
+
+                <button
+                // onClick={() => editor.chain().focus().toggleStrike().run()}
+                // disabled={!editor.can().chain().focus().toggleStrike().run()}
+                // className={editor.isActive('strike') ? 'is-active' : ''}
+                >
+                  <FaAlignLeft />
+                </button>
+                <button
+                // onClick={() => editor.chain().focus().toggleStrike().run()}
+                // disabled={!editor.can().chain().focus().toggleStrike().run()}
+                // className={editor.isActive('strike') ? 'is-active' : ''}
+                >
+                  <FaAlignCenter />
+                </button>
+                <button
+                // onClick={() => editor.chain().focus().toggleStrike().run()}
+                // disabled={!editor.can().chain().focus().toggleStrike().run()}
+                // className={editor.isActive('strike') ? 'is-active' : ''}
+                >
+                  <FaAlignRight />
                 </button>
               </div>
 

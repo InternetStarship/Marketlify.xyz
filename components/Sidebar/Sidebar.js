@@ -5,6 +5,7 @@
 
 import Panel from './Panel'
 import Settings from './Settings'
+import Layers from './Layers'
 import { useState, useEffect } from 'react'
 
 export default function Sidebar({ current, page, close, selectedId, updatePage, updateCurrent }) {
@@ -22,6 +23,7 @@ export default function Sidebar({ current, page, close, selectedId, updatePage, 
       {selected === 'settings' && (
         <Settings updateCurrent={updateCurrent} page={page} updatePage={updatePage} />
       )}
+      {selected === 'layers' && <Layers updateCurrent={updateCurrent} page={page} updatePage={updatePage} />}
       {selected === '' && (
         <div className="text-lg font-medium text-center p-12 text-slate-600">
           Welcome to Marketlify Builder! A free offline page builder.

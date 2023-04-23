@@ -10,15 +10,14 @@
 ## Page Building
 
 - [ ] Searchable CSS Properties
-- [ ] Drag and drop 
+- [ ] Drag and drop
 - [ ] Custom inputs for Gradient colors, filter, shadows, unit type, etc
 - [ ] Ability to edit columns in Row settings
-- [ ] Text Align 
+- [ ] Text Align
 
 ## Extra Features
 
 - [ ] Undo
-- [ ] Layers View
 - [ ] Selected element Breadcrumb
 - [ ] Google Fonts
 - [ ] Light & Dark Mode (ui)
@@ -50,6 +49,7 @@
 
 ## Bugs
 
+- [ ] Layers Move Rows, Columns, Elements issue
 - [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
 - [ ] Add coyote time to dropdown
@@ -84,3 +84,4 @@
 - [x] No sections add section area
 - [x] Page Styles (`<Panel />`)
 - [x] Text Editing basics
+- [x] Layers View

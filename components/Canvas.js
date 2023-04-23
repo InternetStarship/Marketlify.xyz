@@ -9,6 +9,7 @@ import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
 import { FaCog } from 'react-icons/fa'
+import { FiLayers } from 'react-icons/fi'
 import TextEditor from './PageBuilder/TextEditor'
 
 export default function Canvas({
@@ -127,15 +128,26 @@ export default function Canvas({
               className="w-full"
             />
           </div>
-          <button
-            data-tooltip-id="tooltip"
-            data-tooltip-content="Page Settings"
-            onClick={() => {
-              updateCurrent('settings')
-            }}
-          >
-            <FaCog />
-          </button>
+          <div className="flex space-x-3">
+            <button
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Page Layers"
+              onClick={() => {
+                updateCurrent('layers')
+              }}
+            >
+              <FiLayers />
+            </button>
+            <button
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Page Settings"
+              onClick={() => {
+                updateCurrent('settings')
+              }}
+            >
+              <FaCog />
+            </button>
+          </div>
         </div>
 
         <div
