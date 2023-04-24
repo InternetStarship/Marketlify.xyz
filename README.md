@@ -16,15 +16,16 @@
 
 - [ ] Searchable CSS Properties
 - [ ] Google Fonts
-- [ ] Unit Type
+- [ ] Unit Type Select
 - [ ] Color Picker
 - [ ] CSS editor
 
 ## Extra Features
 
 - [ ] Container Element
-- [ ] Undo
+- [ ] Undo button
 - [ ] Selected element Breadcrumb
+- [ ] Custom code head, footer code & css
 
 ## Mobile
 
@@ -33,19 +34,15 @@
 
 ## Storage
 
-- [ ] Funnels (sorting, edit name, etc)
-- [ ] Pages CRUD (save button)
+- [ ] Funnels (sorting, edit name, search, scrolling)
+- [ ] Save Button
 
 ## Export
 
+- [ ] Export popup
 - [ ] Optimize and Format Exported HTML
 - [ ] Export multiple pages as zip
-- [ ] Export to ClickFunnels 2.0
-
-## Onboarding / UX
-
-- [ ] Intro popup
-- [ ] Export popup
+- [ ] Export to ClickFunnels 2.0 (chrome extension)
 
 ## Content
 
@@ -91,3 +88,4 @@
 - [x] Text Editing basics
 - [x] Layers View
 - [x] Text Align
+- [x] Intro popup
