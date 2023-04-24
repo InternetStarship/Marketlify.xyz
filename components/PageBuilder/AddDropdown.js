@@ -26,13 +26,13 @@ export default function AddDropdown({
 }) {
   function addElement(type) {
     const newId = generateUniqueId(existingIds)
-    const currentElement = getIndexesById(selectedId, page.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
 
     const newItem = _.cloneDeep(defaults.elements[type])
     newItem.id = newId
     newItem.type = type
 
-    page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+    page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
       currentElement.columnIndex
     ].elements.push(newItem)
 
@@ -70,7 +70,7 @@ export default function AddDropdown({
 
     data = { ...data, id: newId, type: type }
 
-    page.content.push(data)
+    page.data.content.push(data)
 
     setPopup(false)
     updatePage(_.cloneDeep(page))
@@ -90,7 +90,7 @@ export default function AddDropdown({
       },
     }
 
-    page.styles.sections.push(newItem)
+    page.data.styles.sections.push(newItem)
     setPopup(false)
     updatePage(_.cloneDeep(page))
     updateHovering(false)
@@ -110,8 +110,8 @@ export default function AddDropdown({
       columns: columns,
     }
 
-    const { sectionIndex } = getIndexesById(selectedId, page.styles.sections)
-    page.styles.sections[sectionIndex].rows.push(newItem)
+    const { sectionIndex } = getIndexesById(selectedId, page.data.styles.sections)
+    page.data.styles.sections[sectionIndex].rows.push(newItem)
     setPopup(false)
     updatePage(_.cloneDeep(page))
     updateHovering(false)

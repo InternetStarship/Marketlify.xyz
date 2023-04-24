@@ -45,6 +45,7 @@ export default function Builder() {
 
   function updatePage(updated) {
     setPage(updated)
+    setPageName(updated.name)
     setUpdated(Date.now())
   }
 
@@ -81,6 +82,7 @@ export default function Builder() {
           updateCurrent={value => {
             setCurrent(value)
           }}
+          updateFunnel={setFunnel}
         />
         <div className="w-full">
           {!funnel && (

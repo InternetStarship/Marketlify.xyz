@@ -26,7 +26,7 @@ export default function HoverBar({
   const [popup, setPopup] = useState(false)
 
   useEffect(() => {
-    page.styles.sections?.forEach(section => {
+    page.data.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -46,21 +46,25 @@ export default function HoverBar({
   }, [position])
 
   function move(direction) {
-    const type = findTypeById(selectedId, page.styles.sections)
-    const currentElement = getIndexesById(selectedId, page.styles.sections)
+    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
 
     switch (type) {
       case 'section':
-        moveItem(page.styles.sections, currentElement.sectionIndex, direction)
+        moveItem(page.data.styles.sections, currentElement.sectionIndex, direction)
         break
 
       case 'row':
-        moveItem(page.styles.sections[currentElement.sectionIndex].rows, currentElement.rowIndex, direction)
+        moveItem(
+          page.data.styles.sections[currentElement.sectionIndex].rows,
+          currentElement.rowIndex,
+          direction
+        )
         break
 
       case 'column':
         moveItem(
-          page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns,
+          page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns,
           currentElement.columnIndex,
           direction
         )
@@ -68,7 +72,7 @@ export default function HoverBar({
 
       case 'element':
         moveItem(
-          page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
             currentElement.columnIndex
           ].elements,
           currentElement.elementIndex,
@@ -90,28 +94,27 @@ export default function HoverBar({
   }
 
   function remove() {
-    const type = findTypeById(selectedId, page.styles.sections)
-    const currentElement = getIndexesById(selectedId, page.styles.sections)
+    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
     const updatedPage = JSON.parse(JSON.stringify(page))
 
     switch (type) {
       case 'section':
-        updatedPage.styles.sections.splice(currentElement.sectionIndex, 1)
+        updatedPage.data.styles.sections.splice(currentElement.sectionIndex, 1)
         break
 
       case 'row':
-        updatedPage.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 1)
+        updatedPage.data.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 1)
         break
 
       case 'column':
-        updatedPage.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
-          currentElement.columnIndex,
-          1
-        )
+        updatedPage.data.styles.sections[currentElement.sectionIndex].rows[
+          currentElement.rowIndex
+        ].columns.splice(currentElement.columnIndex, 1)
         break
 
       case 'element':
-        updatedPage.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        updatedPage.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex, 1)
 
@@ -123,9 +126,9 @@ export default function HoverBar({
   }
 
   function duplicate() {
-    const element = findById(selectedId, page.styles.sections)
-    const type = findTypeById(selectedId, page.styles.sections)
-    const currentElement = getIndexesById(selectedId, page.styles.sections)
+    const element = findById(selectedId, page.data.styles.sections)
+    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
 
     let newItem
     const newId = generateUniqueId(existingIds)
@@ -133,17 +136,21 @@ export default function HoverBar({
     switch (type) {
       case 'section':
         newItem = { ...element, id: newId }
-        page.styles.sections.splice(currentElement.sectionIndex, 0, newItem)
+        page.data.styles.sections.splice(currentElement.sectionIndex, 0, newItem)
         break
 
       case 'row':
         newItem = { ...element, id: newId }
-        page.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 0, newItem)
+        page.data.styles.sections[currentElement.sectionIndex].rows.splice(
+          currentElement.rowIndex,
+          0,
+          newItem
+        )
         break
 
       case 'column':
         newItem = { ...element, id: newId }
-        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
           currentElement.columnIndex,
           0,
           newItem
@@ -152,12 +159,12 @@ export default function HoverBar({
 
       case 'element':
         newItem = { ...element, id: newId }
-        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements.splice(currentElement.elementIndex, 0, newItem)
 
-        const previousContent = page.content.find(content => content.id === selectedId)
-        page.content.push({
+        const previousContent = page.data.content.find(content => content.id === selectedId)
+        page.data.content.push({
           id: newId,
           content: previousContent.content,
           type: previousContent.type,

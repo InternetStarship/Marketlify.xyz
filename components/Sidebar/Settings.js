@@ -19,7 +19,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
   })
 
   useEffect(() => {
-    setSeo(page.seo)
+    setSeo(page.data.seo)
   }, [])
 
   return (
@@ -73,7 +73,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.title}
               onChange={e => {
                 setSeo({ ...seo, title: e.target.value })
-                page.seo = seo
+                page.data.seo = seo
                 updatePage(_.cloneDeep(page))
               }}
             />
@@ -98,7 +98,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.image}
               onChange={e => {
                 setSeo({ ...seo, image: e.target.value })
-                page.seo = seo
+                page.data.seo = seo
                 updatePage(_.cloneDeep(page))
               }}
             />
@@ -111,7 +111,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.favicon}
               onChange={e => {
                 setSeo({ ...seo, favicon: e.target.value })
-                page.seo = seo
+                page.data.seo = seo
                 updatePage(_.cloneDeep(page))
               }}
             />
@@ -124,7 +124,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.url}
               onChange={e => {
                 setSeo({ ...seo, url: e.target.value })
-                page.seo = seo
+                page.data.seo = seo
                 updatePage(_.cloneDeep(page))
               }}
             />

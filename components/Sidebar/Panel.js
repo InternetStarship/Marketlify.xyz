@@ -152,8 +152,8 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   ])
 
   useEffect(() => {
-    const currentElement = findById(selectedId, page.styles.sections)
-    const type = findTypeById(selectedId, page.styles.sections)
+    const currentElement = findById(selectedId, page.data.styles.sections)
+    const type = findTypeById(selectedId, page.data.styles.sections)
     if (currentElement) {
       setStyles(currentElement.style)
       setSelectedType(type)
@@ -162,7 +162,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
 
   useEffect(() => {
     if (!selectedId) {
-      setStyles(page.styles.body)
+      setStyles(page.data.styles.body)
       setSelectedType('body')
     }
   }, [])
@@ -198,24 +198,24 @@ export default function Panel({ page, close, selectedId, updatePage }) {
 
   const handleSave = newStyles => {
     if (selectedId) {
-      const currentElement = getIndexesById(selectedId, page.styles.sections)
-      const type = findTypeById(selectedId, page.styles.sections)
+      const currentElement = getIndexesById(selectedId, page.data.styles.sections)
+      const type = findTypeById(selectedId, page.data.styles.sections)
 
       if (type === 'section') {
-        page.styles.sections[currentElement.sectionIndex].style = newStyles
+        page.data.styles.sections[currentElement.sectionIndex].style = newStyles
       } else if (type === 'row') {
-        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
       } else if (type === 'column') {
-        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].style = newStyles
       } else if (type === 'element') {
-        page.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements[currentElement.elementIndex].style = newStyles
       }
     } else {
-      page.styles.body = newStyles
+      page.data.styles.body = newStyles
     }
 
     updatePage(_.cloneDeep(page))

@@ -81,7 +81,7 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
     const firstPage = JSON.parse(localStorage.getItem(`marketlify_v3_page_${funnelData.pages[0]}`))
 
     updateFunnel(funnelData)
-    load(firstPage.data)
+    load(firstPage)
     toast('New funnel created.')
     closeModal()
   }

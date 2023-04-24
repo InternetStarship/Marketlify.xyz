@@ -7,7 +7,7 @@ import findContentById from '@/utils/findContentById'
 import { useState } from 'react'
 
 export default function Elements({ element, data, style }) {
-  const [elementData, setElementData] = useState(findContentById(element.id, data.content))
+  const [elementData, setElementData] = useState(findContentById(element.id, data.data.content))
 
   return (
     <>

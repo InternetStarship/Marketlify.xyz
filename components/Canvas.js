@@ -35,7 +35,7 @@ export default function Canvas({
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
-    page.styles.sections?.forEach(section => {
+    page.data.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -57,7 +57,7 @@ export default function Canvas({
   function hover(elementId, isEmpty = false, type = '') {
     let element = document.getElementById(elementId)
     if (type === '') {
-      type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.styles.sections)
+      type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.data.styles.sections)
     }
 
     if (element) {
@@ -156,7 +156,7 @@ export default function Canvas({
             e.stopPropagation()
             setHovering(false)
           }}
-          style={data.styles.body}
+          style={data.data.styles.body}
         >
           {current !== '' && (
             <div
@@ -184,7 +184,7 @@ export default function Canvas({
             />
           )}
 
-          {data.styles.sections.length == 0 && (
+          {data.data.styles.sections.length == 0 && (
             <div
               className="element"
               id={'marketlify-' + 'empty-000'}
@@ -197,7 +197,7 @@ export default function Canvas({
             </div>
           )}
 
-          {data.styles.sections?.map((section, sectionIndex) => (
+          {data.data.styles.sections?.map((section, sectionIndex) => (
             <div
               className="section"
               id={'marketlify-' + section.id}
@@ -297,8 +297,9 @@ export default function Canvas({
                                   data={data}
                                   style={element.style}
                                   updateContent={value => {
-                                    data.content.filter(content => content.id === element.id)[0].content =
-                                      value
+                                    data.data.content.filter(
+                                      content => content.id === element.id
+                                    )[0].content = value
                                     updatePage(data)
                                   }}
                                   closeEditor={() => {

@@ -21,13 +21,14 @@ export default function Layers({ page, updatePage, updateCurrent }) {
       arr.splice(toIndex, 0, item)
     }
 
-    const findSection = sectionId => updatedPage.styles.sections.find(section => section.id === sectionId)
+    const findSection = sectionId =>
+      updatedpage.data.styles.sections.find(section => section.id === sectionId)
     const findRow = (section, rowId) => section.rows.find(row => row.id === rowId)
     const findColumn = (row, columnId) => row.columns.find(column => column.id === columnId)
 
     switch (type) {
       case 'section':
-        moveArrayItem(updatedPage.styles.sections, dragIndex, hoverIndex)
+        moveArrayItem(updatedpage.data.styles.sections, dragIndex, hoverIndex)
         break
 
       case 'row':
@@ -111,7 +112,7 @@ export default function Layers({ page, updatePage, updateCurrent }) {
       </div>
       <div className="p-3">
         <DndProvider backend={HTML5Backend}>
-          {page.styles.sections.map((section, sectionIndex) => (
+          {page.data.styles.sections.map((section, sectionIndex) => (
             <DraggableLayer
               key={section.id}
               index={sectionIndex}

@@ -34,7 +34,7 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
     if (page) {
       closeModal()
       updateFunnel(funnel)
-      load(page.data)
+      load(page)
       toast('Funnel has been loaded.')
     } else {
       toast(`Error: Funnel with ID "${id}" not found.`)
