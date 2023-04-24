@@ -9,16 +9,12 @@ function exportHTML(data) {
       .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`)
       .join(' ')
 
-  // console.log(data.styles.sections)
-
   const pageStyle = objectToCSS(data.styles.body)
 
   const renderSections = () =>
     data.styles.sections
       .map(({ style, rows }) => {
         const sectionStyle = objectToCSS(style)
-
-        console.log({ style, rows })
 
         const renderRows = () =>
           rows
@@ -73,7 +69,6 @@ function exportHTML(data) {
 </body>
 </html>
 `
-  console.log(output)
   return output
 }
 

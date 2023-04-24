@@ -7,10 +7,6 @@
 
 ---
 
-## Page Building
-
-- [ ] Drag and drop
-
 ## Panel
 
 - [ ] Searchable CSS Properties
@@ -20,26 +16,25 @@
 - [ ] CSS editor
 - [ ] Edit Column Gap in Row settings
 
-## Extra Features
+## Features
 
+- [ ] Elements (video, input, textarea, icon, etc)
 - [ ] Container Element
 - [ ] Undo button
 - [ ] Selected element Breadcrumb
 - [ ] Custom code head, footer code & css
-- [ ] Format Exported HTML
-
-## Mobile
-
-- [ ] Make it work on Mobile
 - [ ] Mobile Only Settings
+- [ ] Drag and drop on canvas
+- [ ] Make it work on mobile
 
 ## Content
 
 - [ ] Starter templates (very basic)
 - [ ] Starter blocks (sections)
 
-## Bugs
+## Bugs / Todos
 
+- [ ] Format exported HTML for each element
 - [ ] Rows columns on mobile
 - [ ] Layers issues
 - [ ] Text Editor double up
