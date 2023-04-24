@@ -8,7 +8,7 @@
   transition: width height 0.5s ease;
 }
 
-#canvasContainer::-webkit-scrollbar {
+/* #canvasContainer::-webkit-scrollbar {
   height: 12px;
   width: 12px;
   background: none;
@@ -22,7 +22,7 @@
 
 #canvasContainer::-webkit-scrollbar-corner {
   background: none;
-}
+} */
 
 #mainCanvas {
   @apply mx-auto border border-slate-300 shadow bg-white;

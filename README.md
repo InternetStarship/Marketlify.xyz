@@ -34,8 +34,7 @@
 
 ## Storage
 
-- [ ] Funnels (sorting, edit name, search, scrolling)
-- [ ] Save Button
+- [ ] Funnel edit name
 
 ## Export
 
@@ -89,3 +88,4 @@
 - [x] Layers View
 - [x] Text Align
 - [x] Intro popup
+- [x] Funnels (search, scrolling)

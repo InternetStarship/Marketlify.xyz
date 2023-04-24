@@ -6,7 +6,8 @@
 import { IoFunnel } from 'react-icons/io5'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { FaTrashAlt, FaCopy } from 'react-icons/fa'
+import { FaRegTrashAlt } from 'react-icons/fa'
+import { AiOutlineCopy } from 'react-icons/ai'
 import generateUUID from '@/utils/generateUUID'
 
 function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
@@ -63,6 +64,7 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
         }
       }
     }
+
     return funnels
   }
 
@@ -139,7 +141,7 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
       {isModalOpen && (
         <div className="page-modal-overlay">
           <div className="page-modal">
-            <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
+            <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-4">
               <h2 className="page-modal-title">Funnels</h2>
               <div>
                 <button onClick={closeModal} className="page-modal-close-button">
@@ -147,7 +149,34 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
                 </button>
               </div>
             </div>
-            <ul className="page-list">
+            {funnels.length > 0 && (
+              <>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Search funnels..."
+                    className="w-full p-2 active:outline-none border rounded shadow-xs mb-2"
+                    defaultValue={''}
+                    onChange={event => {
+                      const value = event.target.value
+                      if (value) {
+                        document.querySelectorAll('.funnel').forEach(funnel => {
+                          const name = funnel.getAttribute('data-name')
+                          if (!name.includes(value)) {
+                            funnel.classList.add('hidden')
+                          }
+                        })
+                      } else {
+                        document.querySelectorAll('.funnel').forEach(funnel => {
+                          funnel.classList.remove('hidden')
+                        })
+                      }
+                    }}
+                  />
+                </div>
+              </>
+            )}
+            <div className="page-list">
               {funnels.length === 0 && (
                 <div className="px-12 py-3">
                   <h3 className="mb-6 text-lg">
@@ -163,14 +192,15 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
                   </h3>
                 </div>
               )}
+
               {funnels.map(funnel => (
-                <li key={funnel.id}>
+                <div key={funnel.id} className="funnel" data-name={funnel.name}>
                   <div className="page-item" onClick={() => loadFunnel(funnel, funnel.pages[0])}>
                     <div>
                       <h3 className="font-medium">{funnel.name}</h3>
                       <h4 className="text-xs text-slate-400">{funnel.pages.length} pages</h4>
                     </div>
-                    <div className="space-x-2">
+                    <div className="space-x-2 pt-2">
                       <button
                         onClick={e => {
                           e.stopPropagation()
@@ -179,8 +209,10 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
                           toast('Page has been duplicated.')
                         }}
                         className="page-item-button"
+                        data-tooltip-id="tooltip"
+                        data-tooltip-content="Duplicate Funnel"
                       >
-                        <FaCopy />
+                        <AiOutlineCopy />
                       </button>
                       <button
                         onClick={e => {
@@ -190,14 +222,16 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
                           toast('Page has been deleted.')
                         }}
                         className="page-item-button"
+                        data-tooltip-id="tooltip"
+                        data-tooltip-content="Delete Funnel"
                       >
-                        <FaTrashAlt />
+                        <FaRegTrashAlt />
                       </button>
                     </div>
                   </div>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       )}

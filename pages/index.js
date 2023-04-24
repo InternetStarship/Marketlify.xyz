@@ -174,10 +174,11 @@ export default function Builder() {
 
       <ToastContainer
         position="bottom-center"
-        autoClose={5000}
+        autoClose={300}
         hideProgressBar={true}
         newestOnTop={true}
         theme="dark"
+        limit={4}
       />
 
       <Tooltip id="tooltip" />

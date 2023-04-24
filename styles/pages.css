@@ -33,9 +33,14 @@
 
 .page-list {
   list-style: none;
-  padding: 0;
   margin: 10px 0;
+  height: auto;
+  max-height: 300px;
+  padding-right: 10px;
   @apply space-y-3;
+  clear: both;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .page-list .page-item {
@@ -45,6 +50,17 @@
 .page-list .page-item:hover,
 .page-list .page-item:focus {
   @apply shadow-xl;
+}
+
+.page-item-button {
+  opacity: 0.2;
+  transition: opacity 0.2s ease-in-out;
+  font-size: 21px;
+}
+
+.page-item-button:hover,
+.page-item-button:focus {
+  opacity: 1;
 }
 
 .page-modal-close-button {

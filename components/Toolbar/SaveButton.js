@@ -9,31 +9,18 @@ import prettySize from '@/utils/prettySize'
 
 function SaveButton({ page, name }) {
   function save() {
-    const uuid = generateUUID()
-    const savedData = {
-      name: name,
-      size: prettySize(JSON.stringify(page)),
-      date: new Date().toISOString(),
-      page,
-    }
-    const dataSize = new Blob([savedData], { type: 'application/json' }).size
+    page.size = prettySize(JSON.stringify(page))
+    page.name = name
+    const dataSize = new Blob([page], { type: 'application/json' }).size
 
     if (checkLocalStorageSize(dataSize)) {
-      localStorage.setItem(`marketlify_v3_${uuid}`, JSON.stringify(savedData))
-      toast('Page has been saved to your web browser. (local storage)')
-      return uuid
+      localStorage.setItem(`marketlify_v3_page_${page.id}`, JSON.stringify(page))
+      toast('Page has been saved.')
+      return true
     } else {
       toast('Your page is too large to save to your browser. Please try again with a smaller page.')
       return null
     }
-  }
-
-  function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      const r = (Math.random() * 16) | 0,
-        v = c === 'x' ? r : (r & 0x3) | 0x8
-      return v.toString(16)
-    })
   }
 
   function checkLocalStorageSize(dataSize) {
