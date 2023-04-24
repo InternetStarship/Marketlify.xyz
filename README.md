@@ -16,17 +16,23 @@
 - [ ] CSS editor
 - [ ] Edit Column Gap in Row settings
 
-## Page Builder
+## Elements
 
-- [ ] Elements (video, input, textarea, icon, etc)
-- [ ] Container Element
-- [ ] Drag and drop on canvas
+- [ ] Container
+- [ ] Form (input, textarea, select, checkbox)
+- [ ] Video
+- [ ] Icon
 
 ## Features
 
+- [ ] Drag and drop on canvas
 - [ ] Undo button
-- [ ] Mobile Only Settings
+
+## Mobile
+
+- [ ] Mobile Only Styles
 - [ ] Make it work on mobile
+- [ ] Rows columns on mobile
 
 ## Content
 
@@ -36,7 +42,6 @@
 ## Bugs / Todos
 
 - [ ] Format exported HTML for each element
-- [ ] Rows columns on mobile
 - [ ] Layers issues
 - [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
