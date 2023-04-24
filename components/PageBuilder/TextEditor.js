@@ -22,7 +22,7 @@ import StarterKit from '@tiptap/starter-kit'
 import _ from 'lodash'
 
 export default function TextEditor({ updateContent, element, data, style, closeEditor, edit, updateStyle }) {
-  const [elementData, setElementData] = useState(findContentById(element.id, data.content))
+  const [elementData, setElementData] = useState(findContentById(element.id, data.data.content))
 
   const editor = useEditor({
     extensions: [StarterKit],

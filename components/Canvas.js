@@ -8,11 +8,13 @@ import Empty from './PageBuilder/Empty'
 import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
-import { FaCog } from 'react-icons/fa'
+import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { FiLayers } from 'react-icons/fi'
 import TextEditor from './PageBuilder/TextEditor'
+import _ from 'lodash'
 
 export default function Canvas({
+  funnel,
   page,
   edit,
   viewport,
@@ -26,6 +28,7 @@ export default function Canvas({
   name,
   updateName,
   updateCurrent,
+  updateFunnel,
 }) {
   const [data, setData] = useState(page)
   const [hovering, setHovering] = useState(false)
@@ -113,11 +116,11 @@ export default function Canvas({
 
       <div id="mainCanvas" className={viewport}>
         <div className="top-bar">
-          {/* <div className="traffic-lights hidden md:flex mr-3">
+          <div className="traffic-lights hidden md:flex mr-3">
             <div className="traffic-light traffic-light-close"></div>
             <div className="traffic-light traffic-light-minimize"></div>
             <div className="traffic-light traffic-light-maximize"></div>
-          </div> */}
+          </div>
           <div className="url-bar">
             <input
               type="text"
@@ -146,6 +149,31 @@ export default function Canvas({
               }}
             >
               <FaCog />
+            </button>
+            <button
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Page Settings"
+              onClick={() => {
+                // confirm delete
+                const confirm = window.confirm('Are you sure you want to delete this page?')
+                if (confirm) {
+                  const id = page.id
+                  const key = `marketlify_v3_page_${id}`
+
+                  localStorage.removeItem(key)
+
+                  const funnelKey = `marketlify_v3_funnel_${funnel.id}`
+                  const updatedPages = funnel.pages.filter(pageId => pageId !== id)
+                  funnel.pages = updatedPages
+
+                  localStorage.setItem(funnelKey, JSON.stringify(funnel))
+
+                  updateFunnel(_.cloneDeep(funnel))
+                  updatePage(null)
+                }
+              }}
+            >
+              <FaTrashAlt />
             </button>
           </div>
         </div>

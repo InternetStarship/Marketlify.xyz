@@ -107,12 +107,12 @@ export default function Sidebar({
                   toast('Page has been loaded.')
                 }}
                 className={`font-medium text-slate-600 truncate p-2 cursor-pointer hover:bg-slate-100 hover:text-slate-900 ${
-                  id === page.id
+                  page && id === page.id
                     ? 'bg-orange-100 text-orange-900 hover:bg-orange-100 hover:text-orange-900'
                     : ''
                 }`}
               >
-                {getPageName(id) || 'Untitled Page'}
+                {getPageName(id)}
               </div>
             ))}
           </div>

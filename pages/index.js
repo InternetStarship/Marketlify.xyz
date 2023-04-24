@@ -16,7 +16,6 @@ import Popup from '@/components/Popup'
 export default function Builder() {
   const [funnel, setFunnel] = useState(null)
   const [page, setPage] = useState(null)
-  const [page2, setPage2] = useState(null)
   const [pageName, setPageName] = useState('Untitled Page')
 
   const [modalOpenBrowse, setModalOpenBrowse] = useState(false)
@@ -44,9 +43,13 @@ export default function Builder() {
   }
 
   function updatePage(updated) {
-    setPage(updated)
-    setPageName(updated.name)
-    setUpdated(Date.now())
+    if (updated === null) {
+      setPage(null)
+    } else {
+      setPage(updated)
+      setPageName(updated.name)
+      setUpdated(Date.now())
+    }
   }
 
   return (
@@ -131,11 +134,17 @@ export default function Builder() {
           )}
           {funnel && !page && (
             <>
-              <h3>You have no pages for this funnel. Create one here.</h3>
+              <div className="text-center text-slate-500 font-medium text-xs p-12">
+                <h3 className="text-xl mb-1">
+                  <strong>No page loaded.</strong>
+                </h3>{' '}
+                Please create a page or load a page from local storage.
+              </div>
             </>
           )}
           {funnel && page && (
             <Canvas
+              funnel={funnel}
               page={page}
               edit={edit}
               current={current}
@@ -157,6 +166,7 @@ export default function Builder() {
               updateCurrent={value => {
                 setCurrent(value)
               }}
+              updateFunnel={setFunnel}
             />
           )}
         </div>
