@@ -37,6 +37,7 @@
   height: auto;
   max-height: 300px;
   padding-right: 10px;
+  padding-bottom: 15px;
   @apply space-y-3;
   clear: both;
   overflow-y: scroll;
@@ -45,11 +46,12 @@
 
 .page-list .page-item {
   @apply text-lg border rounded shadow-sm p-3 cursor-pointer flex items-center justify-between;
+  transition: all 0.2s ease-in-out;
 }
 
 .page-list .page-item:hover,
 .page-list .page-item:focus {
-  @apply shadow-xl;
+  @apply shadow-lg bg-orange-50 text-orange-800 border-orange-200;
 }
 
 .page-item-button {

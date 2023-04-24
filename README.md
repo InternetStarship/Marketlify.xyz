@@ -32,10 +32,6 @@
 - [ ] Make it work on Mobile
 - [ ] Mobile Only Settings
 
-## Storage
-
-- [ ] Funnel edit name
-
 ## Export
 
 - [ ] Export popup
@@ -88,4 +84,4 @@
 - [x] Layers View
 - [x] Text Align
 - [x] Intro popup
-- [x] Funnels (search, scrolling)
+- [x] Funnels (search, scrolling, edit name)

@@ -86,6 +86,13 @@ export default function Sidebar({
     toast('Page has been added to funnel.')
   }
 
+  function updateFunnelName() {
+    const funnelKey = `marketlify_v3_funnel_${funnel.id}`
+    funnel.name = document.querySelector('#sidebar h2').innerText.trim()
+    localStorage.setItem(funnelKey, JSON.stringify(funnel))
+    toast('Funnel name has been updated.')
+  }
+
   return (
     <main id="sidebar">
       {selected === 'editing' && (
@@ -97,8 +104,16 @@ export default function Sidebar({
       {selected === 'layers' && <Layers updateCurrent={updateCurrent} page={page} updatePage={updatePage} />}
       {selected === '' && funnel && (
         <div className="p-6">
-          <h2 className="text-xl font-bold pb-3 text-slate-900 pr-12">{funnel.name}</h2>
-          <div className="border border-slate-200 rounded overflow-hidden shadow-sm">
+          <h2
+            className="text-xl font-bold pb-3 text-slate-900 pr-12"
+            onBlur={() => {
+              updateFunnelName()
+            }}
+            contentEditable
+          >
+            {funnel.name}
+          </h2>
+          <div className="border border-slate-300 rounded overflow-hidden shadow">
             {funnel.pages.map((id, index) => (
               <div
                 key={index}

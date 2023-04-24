@@ -198,7 +198,7 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
                   <div className="page-item" onClick={() => loadFunnel(funnel, funnel.pages[0])}>
                     <div>
                       <h3 className="font-medium">{funnel.name}</h3>
-                      <h4 className="text-xs text-slate-400">{funnel.pages.length} pages</h4>
+                      <h4 className="text-xs opacity-50">{funnel.pages.length} pages</h4>
                     </div>
                     <div className="space-x-2 pt-2">
                       <button
@@ -217,9 +217,14 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
                       <button
                         onClick={e => {
                           e.stopPropagation()
-                          removeFunnel(funnel.id)
-                          setFunnels(getFunnels())
-                          toast('Page has been deleted.')
+                          const confirm = window.confirm(
+                            'Are you sure you want to delete this funnel and all of its pages?'
+                          )
+                          if (confirm) {
+                            removeFunnel(funnel.id)
+                            setFunnels(getFunnels())
+                            toast('Page has been deleted.')
+                          }
                         }}
                         className="page-item-button"
                         data-tooltip-id="tooltip"
