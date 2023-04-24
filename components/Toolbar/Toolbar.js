@@ -10,9 +10,11 @@ import { FaDownload, FaTabletAlt } from 'react-icons/fa'
 import SaveButton from './SaveButton'
 import FunnelsButton from './FunnelsButton'
 import NewFunnelButton from './NewFunnelButton'
-import exportHTML from '@/utils/exportHTML'
+import Export from './Export'
+import { useState } from 'react'
 
 export default function Toolbar({
+  funnel,
   page,
   viewport,
   updateViewport,
@@ -23,6 +25,8 @@ export default function Toolbar({
   modalOpenNew,
   updateFunnel,
 }) {
+  const [exportPopup, setExportPopup] = useState(false)
+
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
@@ -77,7 +81,7 @@ export default function Toolbar({
 
             <button
               onClick={() => {
-                exportHTML(page)
+                setExportPopup(true)
               }}
               className="flex items-center toolbar-button"
               data-tooltip-id="tooltip"
@@ -89,6 +93,8 @@ export default function Toolbar({
           </div>
         </>
       )}
+
+      {exportPopup && <Export funnel={funnel} close={() => setExportPopup(false)} />}
     </main>
   )
 }

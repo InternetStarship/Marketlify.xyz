@@ -57,6 +57,7 @@ export default function Builder() {
       <Head />
 
       <Toolbar
+        funnel={funnel}
         page={page}
         viewport={viewport}
         updateViewport={value => {

@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react'
 
-export default function Empty({ title, children, close = true, open = false }) {
+export default function Empty({ title, children, close = true, open = false, closeOverride }) {
   const [modal, setModal] = useState(open)
 
   useEffect(() => {
@@ -23,7 +23,11 @@ export default function Empty({ title, children, close = true, open = false }) {
                 <div>
                   <button
                     onClick={() => {
-                      setModal(false)
+                      if (closeOverride) {
+                        closeOverride()
+                      } else {
+                        setModal(false)
+                      }
                     }}
                     className="page-modal-close-button"
                   >

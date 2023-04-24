@@ -10,7 +10,6 @@
 ## Page Building
 
 - [ ] Drag and drop
-- [ ] Edit Column Gap in Row settings
 
 ## Panel
 
@@ -19,6 +18,7 @@
 - [ ] Unit Type Select
 - [ ] Color Picker
 - [ ] CSS editor
+- [ ] Edit Column Gap in Row settings
 
 ## Extra Features
 
@@ -34,10 +34,8 @@
 
 ## Export
 
-- [ ] Export popup
-- [ ] Optimize and Format Exported HTML
 - [ ] Export multiple pages as zip
-- [ ] Export to ClickFunnels 2.0 (chrome extension)
+- [ ] Format Exported HTML
 
 ## Content
 
@@ -85,3 +83,4 @@
 - [x] Text Align
 - [x] Intro popup
 - [x] Funnels (search, scrolling, edit name)
+- [x] Export popup

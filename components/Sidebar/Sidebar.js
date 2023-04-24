@@ -109,7 +109,8 @@ export default function Sidebar({
             onBlur={() => {
               updateFunnelName()
             }}
-            contentEditable
+            contentEditable="true"
+            suppressContentEditableWarning={true}
           >
             {funnel.name}
           </h2>
