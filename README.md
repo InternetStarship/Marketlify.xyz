@@ -34,7 +34,6 @@
 
 ## Export
 
-- [ ] Export multiple pages as zip
 - [ ] Format Exported HTML
 
 ## Content
@@ -84,3 +83,4 @@
 - [x] Intro popup
 - [x] Funnels (search, scrolling, edit name)
 - [x] Export popup
+- [x] Export multiple pages as zip

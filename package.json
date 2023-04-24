@@ -13,6 +13,8 @@
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
     "autoprefixer": "10.4.14",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "13.3.0",

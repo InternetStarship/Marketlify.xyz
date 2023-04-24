@@ -3,11 +3,19 @@
  *   All rights reserved.
  */
 
-import { useState } from 'react'
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
 import Popup from '@/components/Popup'
 import exportHTML from '@/utils/exportHTML'
 
 export default function Export({ funnel, close }) {
+  function sanitizeFileName(name) {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+  }
+
   function exportFunnel() {
     const pages = []
     funnel.pages.map(pageId => {
@@ -18,6 +26,16 @@ export default function Export({ funnel, close }) {
         name: page.name,
         html: html,
       })
+    })
+
+    const zip = new JSZip()
+
+    pages.forEach(page => {
+      zip.file(`${sanitizeFileName(page.name)}.html`, page.html)
+    })
+
+    zip.generateAsync({ type: 'blob' }).then(blob => {
+      saveAs(blob, `${sanitizeFileName(funnel.name)}.zip`)
     })
   }
 
