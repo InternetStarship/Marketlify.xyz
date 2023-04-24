@@ -5,8 +5,9 @@
 
 #sidebar {
   @apply bg-white shadow-sm hidden md:block;
-  width: 380px;
-  height: calc(100vh - 58px);
+  max-width: 340px;
+  width: 100%;
+  height: calc(100vh - 54px);
   overflow-x: hidden;
 }
 .sidebar-fieldset {
