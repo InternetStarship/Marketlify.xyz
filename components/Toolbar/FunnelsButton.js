@@ -9,13 +9,17 @@ import { toast } from 'react-toastify'
 import { FaTrashAlt, FaCopy } from 'react-icons/fa'
 import generateUUID from '@/utils/generateUUID'
 
-function FunnelsButton({ load }) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
+  const [isModalOpen, setIsModalOpen] = useState(modalOpen)
   const [funnels, setFunnels] = useState([])
 
   useEffect(() => {
     setFunnels(getFunnels())
-  })
+  }, [])
+
+  useEffect(() => {
+    setIsModalOpen(modalOpen)
+  }, [modalOpen])
 
   function openModal() {
     setIsModalOpen(true)
@@ -25,10 +29,11 @@ function FunnelsButton({ load }) {
     setIsModalOpen(false)
   }
 
-  function loadFunnel(id) {
+  function loadFunnel(funnel, id) {
     const page = getPage(id)
     if (page) {
       closeModal()
+      updateFunnel(funnel)
       load(page.data)
       toast('Funnel has been loaded.')
     } else {
@@ -160,7 +165,7 @@ function FunnelsButton({ load }) {
               )}
               {funnels.map(funnel => (
                 <li key={funnel.id}>
-                  <div className="page-item" onClick={() => loadFunnel(funnel.pages[0])}>
+                  <div className="page-item" onClick={() => loadFunnel(funnel, funnel.pages[0])}>
                     <div>
                       <h3 className="font-medium">{funnel.name}</h3>
                       <h4 className="text-xs text-slate-400">{funnel.pages.length} pages</h4>

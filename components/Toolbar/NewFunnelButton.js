@@ -4,15 +4,19 @@
  */
 
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import moment from 'moment'
 import generateUUID from '@/utils/generateUUID'
 
-function NewFunnelButton({ load }) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
+  const [isModalOpen, setIsModalOpen] = useState(modalOpenNew)
   const [name, setName] = useState('')
   const [numberOfPages, setNumberOfPages] = useState(1)
+
+  useEffect(() => {
+    setIsModalOpen(modalOpenNew)
+  }, [modalOpenNew])
 
   function openModal() {
     setIsModalOpen(true)
@@ -39,17 +43,17 @@ function NewFunnelButton({ load }) {
     for (let i = 0; i < numberOfPagesInt; i++) {
       const pageId = generateUUID()
       const pageKey = `marketlify_v3_page_${pageId}`
-
+      const pageName = `Page ${i + 1}`
       funnelData.pages.push(pageId)
 
       const pageData = {
         id: pageId,
-        name: name,
+        name: pageName,
         size: 0,
         created_at: moment().format('MMMM Do YYYY, h:mm:ss a'),
         data: {
           seo: {
-            title: name,
+            title: pageName,
             description: '',
             url: '',
             image: '',
@@ -76,6 +80,7 @@ function NewFunnelButton({ load }) {
 
     const firstPage = JSON.parse(localStorage.getItem(`marketlify_v3_page_${funnelData.pages[0]}`))
 
+    updateFunnel(funnelData)
     load(firstPage.data)
     toast('New funnel created.')
     closeModal()

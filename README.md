@@ -10,7 +10,7 @@
 ## Page Building
 
 - [ ] Drag and drop
-- [ ] Ability to edit columns in Row settings
+- [ ] Edit Column Gap in Row settings
 
 ## Panel
 
@@ -25,7 +25,6 @@
 - [ ] Container Element
 - [ ] Undo
 - [ ] Selected element Breadcrumb
-- [ ] Light & Dark Mode (ui)
 
 ## Mobile
 
@@ -34,12 +33,13 @@
 
 ## Storage
 
-- [ ] Update, sorting, etc
-- [ ] Funnels + Add Pages
+- [ ] Funnels (sorting, edit name, etc)
+- [ ] Pages CRUD (save button)
 
 ## Export
 
 - [ ] Optimize and Format Exported HTML
+- [ ] Export multiple pages as zip
 - [ ] Export to ClickFunnels 2.0
 
 ## Onboarding / UX
@@ -54,13 +54,14 @@
 
 ## Bugs
 
+- [ ] Rows columns on mobile
 - [ ] Layers issues
 - [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
 - [ ] Add coyote time to dropdown
 - [ ] Hover bar optimizations (losing focus, etc)
 - [ ] Export: Set max width for sections via page settings
-- [ ] Adding new doesnt add to correct position
+- [ ] Adding new doesn't add to correct position
 - [ ] Dropdown menu position
 
 ---
