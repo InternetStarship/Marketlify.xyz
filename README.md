@@ -21,7 +21,6 @@
 - [ ] Elements (video, input, textarea, icon, etc)
 - [ ] Container Element
 - [ ] Undo button
-- [ ] Selected element Breadcrumb
 - [ ] Custom code head, footer code & css
 - [ ] Mobile Only Settings
 - [ ] Drag and drop on canvas
@@ -76,3 +75,4 @@
 - [x] Funnels (search, scrolling, edit name)
 - [x] Export popup
 - [x] Export multiple pages as zip
+- [x] Selected element Breadcrumb
