@@ -26,15 +26,12 @@
 - [ ] Undo button
 - [ ] Selected element Breadcrumb
 - [ ] Custom code head, footer code & css
+- [ ] Format Exported HTML
 
 ## Mobile
 
 - [ ] Make it work on Mobile
 - [ ] Mobile Only Settings
-
-## Export
-
-- [ ] Format Exported HTML
 
 ## Content
 
