@@ -7,7 +7,7 @@ import Canvas from '@/components/Canvas'
 import Toolbar from '@/components/Toolbar/Toolbar'
 import Sidebar from '@/components/Sidebar/Sidebar'
 import Head from '@/components/Head'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import _ from 'lodash'
 import { ToastContainer } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
@@ -26,11 +26,36 @@ export default function Builder() {
   const [modalOpenNew, setModalOpenNew] = useState(false)
   const [welcomePopup, setWelcomePopup] = useState(true)
 
+  const prevPageRef = useRef()
+  const [undoHistory, setUndoHistory] = useState([])
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
   const [updated, setUpdated] = useState(null)
   const [fullscreen, setFullscreen] = useState(false)
+
+  useEffect(() => {
+    prevPageRef.current = page
+  }, [page])
+
+  useEffect(() => {
+    if (prevPageRef.current) {
+      setUndoHistory(prevHistory => {
+        const newHistory = [...prevHistory, prevPageRef.current]
+        const startIndex = Math.max(newHistory.length - 4, 0)
+        return newHistory.slice(startIndex)
+      })
+    }
+  }, [page])
+
+  function undo() {
+    console.log('undo', undoHistory)
+    if (undoHistory.length > 0) {
+      setPage(undoHistory[undoHistory.length - 1])
+      setUpdated(Date.now())
+      setUndoHistory(prevHistory => prevHistory.slice(0, -1))
+    }
+  }
 
   function edit(element) {
     if (element) {
@@ -124,6 +149,8 @@ export default function Builder() {
         name={pageName}
         modalOpen={modalOpenBrowse}
         modalOpenNew={modalOpenNew}
+        undo={undo}
+        undoHistory={undoHistory}
       />
       <div className="flex flex-row">
         <Sidebar

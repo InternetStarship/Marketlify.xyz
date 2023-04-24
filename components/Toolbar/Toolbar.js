@@ -6,7 +6,7 @@
 import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
-import { FaDownload, FaTabletAlt } from 'react-icons/fa'
+import { FaDownload, FaTabletAlt, FaUndo } from 'react-icons/fa'
 import SaveButton from './SaveButton'
 import FunnelsButton from './FunnelsButton'
 import NewFunnelButton from './NewFunnelButton'
@@ -24,6 +24,8 @@ export default function Toolbar({
   modalOpen,
   modalOpenNew,
   updateFunnel,
+  undo,
+  undoHistory,
 }) {
   const [exportPopup, setExportPopup] = useState(false)
 
@@ -77,6 +79,16 @@ export default function Toolbar({
             </button>
           </div>
           <div className="flex space-x-2">
+            <button
+              onClick={() => {
+                undo()
+              }}
+              className="flex items-center toolbar-button"
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Undo Last Change"
+            >
+              <FaUndo />
+            </button>
             <SaveButton page={page} name={name} />
 
             <button
