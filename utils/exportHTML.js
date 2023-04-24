@@ -9,12 +9,16 @@ function exportHTML(data) {
       .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`)
       .join(' ')
 
-  const pageStyle = objectToCSS(data.styles)
+  // console.log(data.styles.sections)
+
+  const pageStyle = objectToCSS(data.styles.body)
 
   const renderSections = () =>
     data.styles.sections
       .map(({ style, rows }) => {
         const sectionStyle = objectToCSS(style)
+
+        console.log({ style, rows })
 
         const renderRows = () =>
           rows
@@ -24,10 +28,10 @@ function exportHTML(data) {
                   .map(({ elements }) => {
                     const renderElements = () =>
                       elements
-                        .map(({ type, content, style }) => {
+                        .map(({ type, style }) => {
                           if (type === 'text') {
                             const elementStyle = objectToCSS(style)
-                            return `<div class="element" style="${elementStyle}">${content}</div>`
+                            return `<div class="element" style="${elementStyle}">add actual elelement - ${type}</div>`
                           }
                           return ''
                         })
@@ -42,7 +46,7 @@ function exportHTML(data) {
       })
       .join('')
 
-  return `
+  const output = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,10 +69,12 @@ function exportHTML(data) {
 </head>
 <body>
   ${renderSections()}
-  ${data.code.body}
+  ${data.code.footer}
 </body>
 </html>
 `
+  console.log(output)
+  return output
 }
 
 export default exportHTML
