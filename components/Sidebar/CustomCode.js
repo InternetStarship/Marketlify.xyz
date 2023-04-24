@@ -4,12 +4,27 @@
  */
 
 import Popup from '@/components/Popup'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+
+import CodeMirror from '@uiw/react-codemirror'
+import { html } from '@codemirror/lang-html'
+import { css } from '@codemirror/lang-css'
 
 export default function CustomCode({ page, updatePage }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [code, setCode] = useState('')
   const [type, setType] = useState('head')
+
+  const onChange = useCallback((value, viewUpdate) => {
+    if (type === 'head') {
+      page.data.code.head = value
+    } else if (type === 'body') {
+      page.data.code.body = value
+    } else if (type === 'css') {
+      page.data.code.css = value
+    }
+    setCode(value)
+  }, [])
 
   return (
     <div className="p-6">
@@ -63,21 +78,14 @@ export default function CustomCode({ page, updatePage }) {
 
       {modalOpen && (
         <Popup title="Edit Head Code" closeOverride={() => setModalOpen(false)} open={modalOpen}>
-          <textarea
-            className="w-full border"
-            onChange={e => {
-              if (type === 'head') {
-                page.data.code.head = e.target.value
-              } else if (type === 'body') {
-                page.data.code.body = e.target.value
-              } else if (type === 'css') {
-                page.data.code.css = e.target.value
-              }
-              setCode(e.target.value)
-            }}
-          >
-            {code}
-          </textarea>
+          <div className="border rounded shadow overflow-hidden">
+            <CodeMirror
+              value={code}
+              height="400px"
+              extensions={type === 'css' ? [css()] : [html()]}
+              onChange={onChange}
+            />
+          </div>
         </Popup>
       )}
     </div>

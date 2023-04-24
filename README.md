@@ -25,7 +25,6 @@
 ## Features
 
 - [ ] Undo button
-- [ ] Custom code head, footer code & css
 - [ ] Mobile Only Settings
 - [ ] Make it work on mobile
 
@@ -79,3 +78,4 @@
 - [x] Export popup
 - [x] Export multiple pages as zip
 - [x] Selected element Breadcrumb
+- [x] Custom code head, body & css

@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codemirror/lang-css": "^6.1.1",
+    "@codemirror/lang-html": "^6.4.3",
+    "@codemirror/lang-javascript": "^6.1.7",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
+    "@uiw/react-codemirror": "^4.19.16",
     "autoprefixer": "10.4.14",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
