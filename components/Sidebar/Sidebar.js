@@ -103,7 +103,7 @@ export default function Sidebar({
       {selected === 'settings' && (
         <Settings updateCurrent={updateCurrent} page={page} updatePage={updatePage} />
       )}
-      {selected === 'custom-code' && <CustomCode page={page} updatePage={updatePage} />}
+      {selected === 'custom-code' && <CustomCode page={page} updateCurrent={updateCurrent} />}
       {selected === 'layers' && <Layers updateCurrent={updateCurrent} page={page} updatePage={updatePage} />}
       {selected === '' && funnel && (
         <div className="p-6">
