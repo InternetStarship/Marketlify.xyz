@@ -13,8 +13,11 @@ import { ToastContainer } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
 
 export default function Builder() {
+  const [funnel, setFunnel] = useState(null)
   const [page, setPage] = useState(null)
+  const [page2, setPage2] = useState(null)
   const [pageName, setPageName] = useState('Untitled Page')
+
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
@@ -22,11 +25,13 @@ export default function Builder() {
   const [fullscreen, setFullscreen] = useState(false)
 
   useEffect(() => {
-    fetch('/api/testdata', {
+    fetch('/api/start-data', {
       method: 'GET',
     }).then(response => {
       response.json().then(data => {
-        setPage(data)
+        setFunnel(data.funnel)
+        setPage(data.pages[0])
+        setPage2(data.pages[1])
       })
     })
   }, [])
@@ -54,11 +59,6 @@ export default function Builder() {
     setUpdated(Date.now())
   }
 
-  function load(data) {
-    setPage(data)
-    setUpdated(Date.now())
-  }
-
   return (
     <main className="w-full h-screen overflow-hidden mainBG">
       <Head />
@@ -69,7 +69,7 @@ export default function Builder() {
         updateViewport={value => {
           setViewport(value)
         }}
-        load={load}
+        load={updatePage}
         updateFullscreen={() => {
           setFullscreen(true)
         }}

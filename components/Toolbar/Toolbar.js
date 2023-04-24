@@ -3,23 +3,21 @@
  *   All rights reserved.
  */
 
-import { HiOutlineCog } from 'react-icons/hi'
-import { BsLayers } from 'react-icons/bs'
 import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
 import { FaDownload, FaTabletAlt } from 'react-icons/fa'
 import SaveButton from './SaveButton'
-import PagesButton from './PagesButton'
-import NewPageButton from './NewPage'
+import FunnelsButton from './FunnelsButton'
+import NewFunnelButton from './NewFunnelButton'
 import exportHTML from '@/utils/exportHTML'
 
 export default function Toolbar({ page, viewport, updateViewport, load, updateFullscreen, name }) {
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
-        <PagesButton load={load} />
-        <NewPageButton load={load} />
+        <FunnelsButton load={load} />
+        <NewFunnelButton load={load} />
       </div>
       <div className="items-center space-x-2 hidden md:flex">
         <button
@@ -60,16 +58,6 @@ export default function Toolbar({ page, viewport, updateViewport, load, updateFu
         >
           <SlSizeFullscreen />
         </button>
-        {/* <button
-          onClick={() => {
-            toggleLayers()
-          }}
-          className="toolbar-button"
-          data-tooltip-id="tooltip"
-          data-tooltip-content="Layout"
-        >
-          <BsLayers />
-        </button> */}
       </div>
       <div className="flex space-x-2">
         <SaveButton page={page} name={name} />

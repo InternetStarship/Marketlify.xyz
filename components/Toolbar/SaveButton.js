@@ -19,7 +19,7 @@ function SaveButton({ page, name }) {
     const dataSize = new Blob([savedData], { type: 'application/json' }).size
 
     if (checkLocalStorageSize(dataSize)) {
-      localStorage.setItem(`marketlify_v2_${uuid}`, JSON.stringify(savedData))
+      localStorage.setItem(`marketlify_v3_${uuid}`, JSON.stringify(savedData))
       toast('Page has been saved to your web browser. (local storage)')
       return uuid
     } else {
