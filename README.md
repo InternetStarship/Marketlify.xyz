@@ -16,14 +16,17 @@
 - [ ] CSS editor
 - [ ] Edit Column Gap in Row settings
 
-## Features
+## Page Builder
 
 - [ ] Elements (video, input, textarea, icon, etc)
 - [ ] Container Element
+- [ ] Drag and drop on canvas
+
+## Features
+
 - [ ] Undo button
 - [ ] Custom code head, footer code & css
 - [ ] Mobile Only Settings
-- [ ] Drag and drop on canvas
 - [ ] Make it work on mobile
 
 ## Content

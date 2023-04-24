@@ -6,6 +6,7 @@
 import Panel from './Panel'
 import Settings from './Settings'
 import Layers from './Layers'
+import CustomCode from './CustomCode'
 import { useState, useEffect } from 'react'
 import { RiFileAddLine } from 'react-icons/ri'
 import { toast } from 'react-toastify'
@@ -63,7 +64,8 @@ export default function Sidebar({
         },
         code: {
           head: '',
-          footer: '',
+          body: '',
+          css: '',
         },
         styles: {
           body: {
@@ -101,6 +103,7 @@ export default function Sidebar({
       {selected === 'settings' && (
         <Settings updateCurrent={updateCurrent} page={page} updatePage={updatePage} />
       )}
+      {selected === 'custom-code' && <CustomCode page={page} updatePage={updatePage} />}
       {selected === 'layers' && <Layers updateCurrent={updateCurrent} page={page} updatePage={updatePage} />}
       {selected === '' && funnel && (
         <div className="p-6">

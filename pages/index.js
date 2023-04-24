@@ -223,7 +223,7 @@ export default function Builder() {
         </div>
       </div>
 
-      {current && (
+      {current && selectedId && (
         <div
           className="fixed bottom-0 left-0 flex space-x-4 bg-white rounded-tr-md py-2 px-3"
           style={{ left: 340 }}

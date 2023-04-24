@@ -61,7 +61,8 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
           },
           code: {
             head: '',
-            footer: '',
+            body: '',
+            css: '',
           },
           styles: {
             body: {

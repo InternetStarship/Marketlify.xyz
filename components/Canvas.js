@@ -9,6 +9,7 @@ import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
+import { BiCodeAlt } from 'react-icons/bi'
 import { FiLayers } from 'react-icons/fi'
 import TextEditor from './PageBuilder/TextEditor'
 import _ from 'lodash'
@@ -137,6 +138,7 @@ export default function Canvas({
               data-tooltip-content="Page Layers"
               onClick={() => {
                 updateCurrent('layers')
+                updateSelectedId(null)
               }}
             >
               <FiLayers />
@@ -146,9 +148,20 @@ export default function Canvas({
               data-tooltip-content="Page Settings"
               onClick={() => {
                 updateCurrent('settings')
+                updateSelectedId(null)
               }}
             >
               <FaCog />
+            </button>
+            <button
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Custom Code"
+              onClick={() => {
+                updateCurrent('custom-code')
+                updateSelectedId(null)
+              }}
+            >
+              <BiCodeAlt />
             </button>
             <button
               data-tooltip-id="tooltip"
