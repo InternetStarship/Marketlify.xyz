@@ -10,9 +10,8 @@
 
 ## Panel
 
-- [ ] CSS Edit Box
-- [ ] Google Fonts
 - [ ] Color Picker
+- [ ] Google Fonts
 - [ ] Box Shadow
 
 ## Elements
@@ -85,3 +84,4 @@
 - [x] Searchable CSS Properties
 - [x] Unit Type default px for Integers
 - [x] Edit element properties (id, class, etc)
+- [x] CSS Edit Box

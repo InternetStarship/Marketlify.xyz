@@ -24,17 +24,17 @@
 }
 input.sidebar-input {
   @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
-  max-width: 110px;
+  max-width: 125px;
   width: 100%;
 }
 textarea.sidebar-input {
   @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
-  max-width: 110px;
+  max-width: 125px;
   width: 100%;
 }
 select.sidebar-input {
   @apply border border-slate-300 font-medium  text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
-  max-width: 110px;
+  max-width: 125px;
   width: 100%;
 }
 
@@ -50,14 +50,14 @@ select.sidebar-input {
 }
 
 #sidebar::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
+  height: 7px;
+  width: 7px;
   background: none;
   padding: 2px;
 }
 
 #sidebar::-webkit-scrollbar-thumb {
-  background: #d3dbe4;
+  background: #f1f5f9;
   border-radius: 10px;
 }
 

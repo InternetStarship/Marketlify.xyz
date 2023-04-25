@@ -115,9 +115,9 @@ export default function Sidebar({
       {selected === 'layers' && <Layers updateCurrent={updateCurrent} page={page} updatePage={updatePage} />}
       {selected === '' && funnel && (
         <div className="p-6">
-          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-1">Funnel</h4>
+          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-2">Funnel</h4>
           <h2
-            className="text-xl font-bold pb-6 text-slate-900 pr-12"
+            className="text-2xl font-bold pb-4 text-slate-900 pr-12"
             onBlur={() => {
               updateFunnelName()
             }}
@@ -127,7 +127,7 @@ export default function Sidebar({
             {funnel.name}
           </h2>
 
-          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-1">Pages</h4>
+          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-3">Pages</h4>
           <div className="overflow-hidden">
             {funnel.pages.map((id, index) => (
               <div
