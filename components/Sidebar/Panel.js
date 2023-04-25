@@ -143,10 +143,23 @@ export default function Panel({ page, close, selectedId, updatePage }) {
 
   function addStyle(selectedStyle) {
     const newStyles = _.cloneDeep(styles)
-    newStyles[selectedStyle] = ''
+    if (!newStyles[selectedStyle]) {
+      newStyles[selectedStyle] = ''
+    }
     setStyles(newStyles)
     handleSave(newStyles)
     setSelectedStyle('')
+    setTimeout(() => {
+      document.querySelector('.clear-icon').click()
+      document.querySelectorAll('#sidebar .sidebar-fieldset').forEach(el => {
+        const name = camelCaseToTitleCase(selectedStyle)
+        const text = el.innerText.toLowerCase()
+        if (text.includes(name.toLowerCase())) {
+          el.scrollIntoView({ behavior: 'smooth' })
+          el.querySelector('input').focus()
+        }
+      })
+    }, 100)
   }
 
   function removeStyle(key) {
@@ -190,21 +203,6 @@ export default function Panel({ page, close, selectedId, updatePage }) {
             addStyle(value)
           }}
         />
-        {/* <select
-          value={selectedStyle}
-          onChange={e => {
-            setSelectedStyle(e.target.value)
-            addStyle(e.target.value)
-          }}
-          className="w-full p-2 rounded border font-medium border-slate-300"
-        >
-          <option>Select &amp; Add a CSS Attribute</option>
-          {cssAttributes.map((attribute, index) => (
-            <option key={index} value={attribute}>
-              {camelCaseToTitleCase(attribute)}
-            </option>
-          ))}
-        </select> */}
       </div>
       <div>{renderInputs()}</div>
     </>

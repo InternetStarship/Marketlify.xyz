@@ -23,8 +23,8 @@
   @apply block;
 }
 .sidebar-input {
-  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm;
-  width: 100px;
+  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm text-center;
+  width: 110px;
 }
 
 .sidebar-fieldset-full {
