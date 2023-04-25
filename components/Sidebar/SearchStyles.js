@@ -4,9 +4,10 @@
  */
 
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { FaCode } from 'react-icons/fa'
 
-export default function SearchStyles({ onChange, items }) {
+export default function SearchStyles({ onChange, items, showCSS, setShowCSS }) {
   const [searchValue, setSearchValue] = useState('')
 
   const handleOnSelect = item => {
@@ -26,16 +27,32 @@ export default function SearchStyles({ onChange, items }) {
   }
 
   return (
-    <div className="relative w-full">
-      <ReactSearchAutocomplete
-        items={items}
-        onSelect={handleOnSelect}
-        autoFocus
-        formatResult={formatResult}
-        className="styleSearch"
-        placeholder="Search 280+ CSS styles..."
-        inputSearchString={searchValue}
-      />
+    <div className="relative w-full flex items-center space-x-2">
+      <div
+        className={`relative w-full ${showCSS ? 'pointer-events-none opacity-30 cursor-not-allowed' : ''}`}
+      >
+        <ReactSearchAutocomplete
+          items={items}
+          onSelect={handleOnSelect}
+          autoFocus
+          formatResult={formatResult}
+          className="styleSearch"
+          placeholder="Search to add style..."
+          inputSearchString={searchValue}
+        />
+      </div>
+      <div
+        onClick={() => {
+          setShowCSS(!showCSS)
+        }}
+        className={`text-xl p-3 pl-3 cursor-pointer ${
+          showCSS ? 'text-orange-700 rounded bg-orange-200' : ''
+        }`}
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Edit CSS"
+      >
+        <FaCode />
+      </div>
     </div>
   )
 }

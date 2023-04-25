@@ -43,8 +43,12 @@ body {
 .styleSearch .wrapper:first-child input {
   border-radius: 0;
   box-shadow: none;
+  border-color: #cbd5e1 !important;
 }
 
+.styleSearch .wrapper {
+  border-color: #cbd5e1 !important;
+}
 .styleSearch .wrapper:active,
 .styleSearch .wrapper:focus,
 .styleSearch .wrapper:hover {

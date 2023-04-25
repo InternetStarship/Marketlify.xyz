@@ -2,17 +2,15 @@
 
 ## Project Goals
 
-- Create a page builder that can be used to create a single web page.
+- Create a page builder that can be used to create a funnel or landing page.
 - All saving is local storage. Just export/download HTML.
+- Export to ClickFunnels 2.0
 
 ---
 
 ## Panel
 
-- [ ] Mobile Only Styles
-- [ ] State Only Styles (default, hover)
-
-- [ ] CSS Edit
+- [ ] CSS Edit Box
 - [ ] Google Fonts
 - [ ] Color Picker
 - [ ] Box Shadow
@@ -26,6 +24,8 @@
 
 ## Features
 
+- [ ] Mobile Only Styles
+- [ ] State Only Styles (default, hover)
 - [ ] Drag and drop on canvas
 - [ ] Make it work on mobile
 
@@ -36,6 +36,7 @@
 
 ## Bugs / Todos
 
+- [ ] Add action to button
 - [ ] Rows columns on mobile
 - [ ] Format exported HTML for each element
 - [ ] Layers issues

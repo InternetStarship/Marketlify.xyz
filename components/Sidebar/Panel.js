@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { FaTimes, FaRegTrashAlt, FaCopy } from 'react-icons/fa'
 import { BiCopyAlt } from 'react-icons/bi'
@@ -15,6 +15,9 @@ import generateUniqueId from '@/utils/generateUniqueId'
 import { ChromePicker } from 'react-color'
 import dynamic from 'next/dynamic'
 import SearchStyles from './SearchStyles'
+import CodeMirror from '@uiw/react-codemirror'
+import { html } from '@codemirror/lang-html'
+import { css } from '@codemirror/lang-css'
 
 export default function Panel({ page, close, selectedId, updatePage, updateCurrent }) {
   const [styles, setStyles] = useState({})
@@ -25,6 +28,8 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [mainTab, setMainTab] = useState('styles')
   const [secondaryTab, setSecondaryTab] = useState('default')
   const [existingIds] = useState(new Set())
+  const [showCSS, setShowCSS] = useState(false)
+  const [codeBox, setCodeBox] = useState('')
 
   useEffect(() => {
     page.data.styles.sections?.forEach(section => {
@@ -460,6 +465,62 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     updateCurrent('')
   }
 
+  const toKebabCase = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+
+  function buildCSS(type) {
+    const cssProps = []
+
+    Object.entries(styles).forEach(([key, value]) => {
+      const cssKey = toKebabCase(key)
+      cssProps.push(`${cssKey}: ${value};`)
+    })
+
+    let selector = ''
+    switch (type) {
+      case 'default':
+        selector = '#element'
+        break
+      case 'hover':
+        selector = '#element:hover'
+        break
+      case 'mobile':
+        selector = '@media (max-width: 480px) {\n  #element'
+        break
+      default:
+        return ''
+    }
+
+    return (
+      `${selector} {\n` +
+      cssProps.map(prop => `  ${prop}`).join('\n') +
+      (type === 'mobile' ? '\n}' : '') +
+      '\n}'
+    )
+  }
+
+  function updateCSS() {
+    const cssProps = codeBox
+      .match(/{([^}]*)}/)[1]
+      .trim()
+      .split(';')
+
+    const styleObj = {}
+    cssProps.forEach(prop => {
+      if (prop.trim() !== '') {
+        const [key, value] = prop.split(':').map(item => item.trim())
+        const camelCaseKey = key.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+        styleObj[camelCaseKey] = value
+      }
+    })
+
+    setStyles(styleObj)
+    handleSave(styleObj)
+  }
+
+  const updateCodeBox = useCallback((value, viewUpdate) => {
+    setCodeBox(value)
+  }, [])
+
   return (
     <>
       {selectedId && (
@@ -541,9 +602,30 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                 addStyle(value)
               }}
               items={items}
+              showCSS={showCSS}
+              setShowCSS={() => {
+                if (showCSS) {
+                  updateCSS()
+                }
+                setShowCSS(!showCSS)
+              }}
             />
           </div>
-          <div className="pb-8">{renderInputs()}</div>
+          {!showCSS && <div className="pb-8">{renderInputs()}</div>}
+          {showCSS && (
+            <>
+              <div className="pb-8 px-3 pt-3">
+                <div className="border rounded shadow overflow-hidden">
+                  <CodeMirror
+                    value={buildCSS(secondaryTab)}
+                    height="250px"
+                    extensions={[css()]}
+                    onChange={updateCodeBox}
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </>
       )}
       {mainTab === 'properties' && (
