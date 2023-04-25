@@ -10,11 +10,14 @@
 ## Panel
 
 - [ ] Searchable CSS Properties
-- [ ] Google Fonts
 - [ ] Unit Type Select
+- [ ] Edit element properties (id, class, etc)
+- [ ] Edit Column Gap in Row settings
+- [ ] Mobile Only Styles
+
+- [ ] Google Fonts
 - [ ] Color Picker
 - [ ] CSS editor
-- [ ] Edit Column Gap in Row settings
 
 ## Elements
 
@@ -26,12 +29,7 @@
 ## Features
 
 - [ ] Drag and drop on canvas
-
-## Mobile
-
-- [ ] Mobile Only Styles
 - [ ] Make it work on mobile
-- [ ] Rows columns on mobile
 
 ## Content
 
@@ -40,6 +38,7 @@
 
 ## Bugs / Todos
 
+- [ ] Rows columns on mobile
 - [ ] Format exported HTML for each element
 - [ ] Layers issues
 - [ ] Text Editor double up

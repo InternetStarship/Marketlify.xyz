@@ -12,144 +12,12 @@ import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import { ChromePicker } from 'react-color'
 import dynamic from 'next/dynamic'
+import SearchStyles from './SearchStyles'
 
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
   const [selectedType, setSelectedType] = useState()
   const [selectedStyle, setSelectedStyle] = useState()
-  const [cssAttributes, setCssAttributes] = useState([
-    'alignContent',
-    'alignItems',
-    'alignSelf',
-    'backgroundColor',
-    'backgroundAttachment',
-    'backgroundBlendMode',
-    'backgroundClip',
-    'backgroundColor',
-    'backgroundImage',
-    'backgroundOrigin',
-    'backgroundPosition',
-    'backgroundRepeat',
-    'backgroundSize',
-    'borderBottomColor',
-    'borderBottomStyle',
-    'borderBottomWidth',
-    'borderColor',
-    'borderLeftColor',
-    'borderLeftStyle',
-    'borderLeftWidth',
-    'borderRadius',
-    'borderRightColor',
-    'borderRightStyle',
-    'borderRightWidth',
-    'borderTopColor',
-    'borderTopStyle',
-    'borderTopWidth',
-    'bottom',
-    'boxShadow',
-    'boxSizing',
-    'clear',
-    'color',
-    'columnGap',
-    'columnRuleColor',
-    'columnRuleStyle',
-    'columnRuleWidth',
-    'columnSpan',
-    'columnWidth',
-    'display',
-    'flex',
-    'flexBasis',
-    'flexDirection',
-    'flexFlow',
-    'flexGrow',
-    'flexShrink',
-    'flexWrap',
-    'float',
-    'fontFamily',
-    'fontFeatureSettings',
-    'fontKerning',
-    'fontSize',
-    'fontStretch',
-    'fontStyle',
-    'fontVariant',
-    'fontVariantCaps',
-    'fontWeight',
-    'gap',
-    'grid',
-    'gridArea',
-    'gridAutoColumns',
-    'gridAutoFlow',
-    'gridAutoRows',
-    'gridColumn',
-    'gridColumnEnd',
-    'gridColumnGap',
-    'gridColumnStart',
-    'gridGap',
-    'gridRow',
-    'gridRowEnd',
-    'gridRowGap',
-    'gridRowStart',
-    'gridTemplate',
-    'gridTemplateAreas',
-    'gridTemplateColumns',
-    'gridTemplateRows',
-    'height',
-    'justifyContent',
-    'justifyItems',
-    'justifySelf',
-    'left',
-    'letterSpacing',
-    'lineHeight',
-    'listStyleImage',
-    'listStylePosition',
-    'listStyleType',
-    'margin',
-    'marginBottom',
-    'marginLeft',
-    'marginRight',
-    'marginTop',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'objectFit',
-    'objectPosition',
-    'opacity',
-    'order',
-    'outlineColor',
-    'outlineOffset',
-    'outlineStyle',
-    'outlineWidth',
-    'overflow',
-    'overflowX',
-    'overflowY',
-    'padding',
-    'paddingBottom',
-    'paddingLeft',
-    'paddingRight',
-    'paddingTop',
-    'placeContent',
-    'placeItems',
-    'placeSelf',
-    'position',
-    'right',
-    'rowGap',
-    'textAlign',
-    'textDecorationColor',
-    'textDecorationLine',
-    'textDecorationStyle',
-    'textIndent',
-    'textShadow',
-    'textTransform',
-    'top',
-    'verticalAlign',
-    'visibility',
-    'whiteSpace',
-    'width',
-    'wordBreak',
-    'wordSpacing',
-    'zIndex',
-  ])
 
   useEffect(() => {
     const currentElement = findById(selectedId, page.data.styles.sections)
@@ -298,15 +166,31 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   return (
     <>
       {selectedId && (
-        <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
-          <h3 className="capitalize">Editing {selectedType}</h3>
+        <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
+          <h3 className="capitalize">{selectedType}</h3>
           <button onClick={close}>
             <AiOutlineCloseCircle />
           </button>
         </div>
       )}
-      <div className="text-sm p-3 border-b border-slate-300 text-slate-700 space-x-3 bg-slate-200 flex items-center justify-between font-bold">
-        <select
+      <div className="px-3">
+        <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
+          <div className="text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 bg-slate-100 border-r border-slate-300">
+            Styles
+          </div>
+          <div className="text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800">
+            Properties
+          </div>
+        </div>
+      </div>
+      <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
+        <SearchStyles
+          onChange={value => {
+            setSelectedStyle(value)
+            addStyle(value)
+          }}
+        />
+        {/* <select
           value={selectedStyle}
           onChange={e => {
             setSelectedStyle(e.target.value)
@@ -320,7 +204,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
               {camelCaseToTitleCase(attribute)}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
       <div>{renderInputs()}</div>
     </>

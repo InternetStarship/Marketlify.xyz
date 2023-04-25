@@ -39,3 +39,33 @@ body {
 .ProseMirror-focused {
   outline: none !important;
 }
+
+.styleSearch .wrapper:first-child input {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.styleSearch .wrapper:active,
+.styleSearch .wrapper:focus,
+.styleSearch .wrapper:hover {
+  box-shadow: none !important;
+}
+
+.styleSearch .wrapper:first-child {
+  @apply border border-slate-200 rounded;
+  box-shadow: none !important;
+}
+
+.styleSearch .wrapper div:nth-child(2) ul {
+  padding: 5px !important;
+}
+.styleSearch .wrapper div:nth-child(2) ul li {
+  padding: 4px 0 !important;
+  @apply cursor-pointer;
+}
+.styleSearch .wrapper div:nth-child(2) ul li.selected {
+  @apply bg-orange-100 text-orange-800 rounded;
+}
+.styleSearch .wrapper div:nth-child(2) svg {
+  display: none;
+}

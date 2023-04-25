@@ -11,7 +11,7 @@
   overflow-x: hidden;
 }
 .sidebar-fieldset {
-  @apply px-3 py-2 border-b border-slate-200 flex items-center justify-between relative;
+  @apply px-3 py-1 flex items-center justify-between relative;
 }
 .sidebar-label {
   @apply text-slate-500 font-medium text-sm w-full flex items-center justify-between pr-2;
