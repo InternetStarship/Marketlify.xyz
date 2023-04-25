@@ -55,15 +55,9 @@ export default function AddDropdown({
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         }
         break
-      case 'image':
-        data = {
-          src: 'https://placekitten.com/300/300',
-        }
-        break
       case 'button':
         data = {
           content: 'Example Content',
-          url: 'https://example.com',
         }
         break
     }

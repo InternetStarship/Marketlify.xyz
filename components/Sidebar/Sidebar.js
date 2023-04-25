@@ -109,8 +109,9 @@ export default function Sidebar({
       {selected === 'layers' && <Layers updateCurrent={updateCurrent} page={page} updatePage={updatePage} />}
       {selected === '' && funnel && (
         <div className="p-6">
+          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-1">Funnel</h4>
           <h2
-            className="text-xl font-bold pb-3 text-slate-900 pr-12"
+            className="text-xl font-bold pb-6 text-slate-900 pr-12"
             onBlur={() => {
               updateFunnelName()
             }}
@@ -119,7 +120,9 @@ export default function Sidebar({
           >
             {funnel.name}
           </h2>
-          <div className="border border-slate-300 rounded overflow-hidden shadow">
+
+          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-1">Pages</h4>
+          <div className="overflow-hidden">
             {funnel.pages.map((id, index) => (
               <div
                 key={index}
@@ -130,10 +133,10 @@ export default function Sidebar({
 
                   toast('Page has been loaded.')
                 }}
-                className={`font-medium text-slate-600 truncate p-2 cursor-pointer hover:bg-slate-100 hover:text-slate-900 ${
+                className={`font-medium rounded-md truncate p-2 cursor-pointer hover:bg-orange-100 hover:text-orange-900 ${
                   page && id === page.id
                     ? 'bg-orange-100 text-orange-900 hover:bg-orange-100 hover:text-orange-900'
-                    : ''
+                    : 'text-slate-900'
                 }`}
               >
                 {getPageName(id)}
@@ -144,9 +147,9 @@ export default function Sidebar({
             onClick={() => {
               createPage()
             }}
-            className="toolbar-button mt-2"
+            className="page-modal-close-button flex items-center text-sm mt-3"
           >
-            <RiFileAddLine /> <span>Add Page</span>
+            <RiFileAddLine className="mr-2" /> <span>Add Page</span>
           </button>
         </div>
       )}

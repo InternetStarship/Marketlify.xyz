@@ -17,9 +17,12 @@ import SearchStyles from './SearchStyles'
 
 export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
+  const [properties, setProperties] = useState({})
   const [selectedType, setSelectedType] = useState()
   const [selectedStyle, setSelectedStyle] = useState()
   const [items, setItems] = useState([])
+  const [mainTab, setMainTab] = useState('styles')
+  const [secondaryTab, setSecondaryTab] = useState('default')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +45,7 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     const type = findTypeById(selectedId, page.data.styles.sections)
     if (currentElement) {
       setStyles(currentElement.style)
+      setProperties(currentElement.properties)
       setSelectedType(type)
     }
   }, [selectedId])
@@ -49,9 +53,24 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   useEffect(() => {
     if (!selectedId) {
       setStyles(page.data.styles.body)
+      setProperties({})
       setSelectedType('body')
     }
   }, [])
+
+  const handlePropertyChange = event => {
+    const { name, value } = event.target
+    const newProperties = { ...properties, [name]: processCssProperty({ name, value }) }
+
+    if (shouldAppendPX({ name, value })) {
+      setTimeout(() => {
+        moveCaretBackTwoChars()
+      }, 0)
+    }
+
+    setProperties(newProperties)
+    handlePropertiesSave(newProperties)
+  }
 
   const handleChange = event => {
     const { name, value } = event.target
@@ -114,6 +133,30 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     updatePage(_.cloneDeep(page))
   }
 
+  const handlePropertiesSave = newProperties => {
+    if (selectedId) {
+      const currentElement = getIndexesById(selectedId, page.data.styles.sections)
+      const type = findTypeById(selectedId, page.data.styles.sections)
+
+      if (type === 'section') {
+        page.data.styles.sections[currentElement.sectionIndex].properties = newProperties
+      } else if (type === 'row') {
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].properties =
+          newProperties
+      } else if (type === 'column') {
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].properties = newProperties
+      } else if (type === 'element') {
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements[currentElement.elementIndex].properties = newProperties
+      }
+    }
+
+    updatePage(_.cloneDeep(page))
+  }
+
   const numericCSSProperties = [
     'animation-iteration-count',
     'border-image-slice',
@@ -137,18 +180,11 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   ]
 
   function moveCaretBackTwoChars() {
-    // Get the active element (the element that currently has focus)
     const activeElement = document.activeElement
 
-    // Check if the active element is an input element
     if (activeElement.tagName.toLowerCase() === 'input') {
-      // Get the current caret position
       const currentPosition = activeElement.selectionStart
-
-      // Calculate the new caret position
       const newPosition = Math.max(0, currentPosition - 2)
-
-      // Set the caret to the new position
       activeElement.setSelectionRange(newPosition, newPosition)
     }
   }
@@ -254,6 +290,40 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     }
   }
 
+  const renderPropertyInputs = () => {
+    const makeLabelPretty = key => {
+      return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
+    }
+
+    if (styles) {
+      return Object.entries(properties).map(([key, value]) => {
+        return (
+          <div key={key} className="sidebar-fieldset">
+            <label className="sidebar-label" htmlFor={key}>
+              {makeLabelPretty(key)}
+              <div
+                onClick={() => {
+                  removeStyle(key)
+                }}
+              >
+                <FaTimes />
+              </div>
+            </label>
+
+            <input
+              className="sidebar-input"
+              type="text"
+              id={key}
+              name={key}
+              value={value}
+              onChange={handlePropertyChange}
+            />
+          </div>
+        )
+      })
+    }
+  }
+
   function addStyle(selectedStyle) {
     const newStyles = _.cloneDeep(styles)
     if (!newStyles[selectedStyle]) {
@@ -311,38 +381,76 @@ export default function Panel({ page, close, selectedId, updatePage }) {
       )}
       <div className="px-3">
         <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
-          <div className="text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 bg-slate-100 border-r border-slate-300">
+          <div
+            onClick={() => {
+              setMainTab('styles')
+            }}
+            className={`text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 border-r border-slate-300 ${
+              mainTab === 'styles' ? 'bg-slate-100' : ''
+            }`}
+          >
             Styles
           </div>
-          <div className="text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800">
+          <div
+            onClick={() => {
+              setMainTab('properties')
+            }}
+            className={`text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 ${
+              mainTab === 'properties' ? 'bg-slate-100' : ''
+            }`}
+          >
             Properties
           </div>
         </div>
+      </div>
 
-        <div className="pt-3">
-          <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
-            <div className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 bg-slate-100 border-r border-slate-300">
-              Default
-            </div>
-            <div className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800">
-              Hover
-            </div>
-            <div className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800">
-              Mobile
+      {mainTab === 'styles' && (
+        <>
+          <div className="px-3 pt-3">
+            <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
+              <div
+                onClick={() => {
+                  setSecondaryTab('default')
+                }}
+                className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 bg-slate-100 border-r border-slate-300"
+              >
+                Default
+              </div>
+              <div
+                onClick={() => {
+                  setSecondaryTab('hover')
+                }}
+                className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800"
+              >
+                Hover
+              </div>
+              <div
+                onClick={() => {
+                  setSecondaryTab('mobile')
+                }}
+                className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800"
+              >
+                Mobile
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
-        <SearchStyles
-          onChange={value => {
-            setSelectedStyle(value)
-            addStyle(value)
-          }}
-          items={items}
-        />
-      </div>
-      <div className="pb-12">{renderInputs()}</div>
+          <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
+            <SearchStyles
+              onChange={value => {
+                setSelectedStyle(value)
+                addStyle(value)
+              }}
+              items={items}
+            />
+          </div>
+          <div className="pb-8">{renderInputs()}</div>
+        </>
+      )}
+      {mainTab === 'properties' && (
+        <>
+          <div className="pb-8 pt-3">{renderPropertyInputs()}</div>
+        </>
+      )}
     </>
   )
 }

@@ -12,7 +12,7 @@
 - [ ] Edit element properties (id, class, etc)
 - [ ] Edit Column Gap in Row properties
 
-- [ ] Add clone, delete
+- [ ] Add clone, delete actions
 - [ ] Mobile Only Styles
 - [ ] State Only Styles (default, hover)
 

@@ -6,19 +6,28 @@
 const defaults = {
   section: {
     id: null,
-    properties: {},
+    properties: {
+      id: '',
+      class: '',
+    },
     style: {},
     rows: [],
   },
   row: {
     id: null,
-    properties: {},
+    properties: {
+      id: '',
+      class: '',
+    },
     style: {},
     columns: [],
   },
   column: {
     id: null,
-    properties: {},
+    properties: {
+      id: '',
+      class: '',
+    },
     style: {
       padding: '10px',
     },
@@ -27,7 +36,10 @@ const defaults = {
   elements: {
     headline: {
       id: null,
-      properties: {},
+      properties: {
+        id: '',
+        class: '',
+      },
       style: {
         color: 'black',
         fontFamily: 'sans-serif',
@@ -37,7 +49,10 @@ const defaults = {
     },
     subheadline: {
       id: null,
-      properties: {},
+      properties: {
+        id: '',
+        class: '',
+      },
       style: {
         color: 'black',
         fontFamily: 'sans-serif',
@@ -47,7 +62,10 @@ const defaults = {
     },
     paragraph: {
       id: null,
-      properties: {},
+      properties: {
+        id: '',
+        class: '',
+      },
       style: {
         color: 'black',
         fontFamily: 'sans-serif',
@@ -57,7 +75,12 @@ const defaults = {
     },
     image: {
       id: null,
-      properties: {},
+      properties: {
+        id: '',
+        class: '',
+        src: 'https://placekitten.com/300/300',
+        alt: 'Placeholder Image',
+      },
       style: {
         width: '100%',
         borderRadius: '5px',
@@ -65,7 +88,12 @@ const defaults = {
     },
     button: {
       id: null,
-      properties: {},
+      properties: {
+        id: '',
+        class: '',
+        action: 'link',
+        target: '_blank',
+      },
       style: {
         color: 'white',
         backgroundColor: 'black',
@@ -74,7 +102,7 @@ const defaults = {
         fontWeight: 600,
         padding: '10px 20px',
         borderRadius: '5px',
-        display: 'block',
+        display: 'inline-block',
         textAlign: 'center',
       },
     },
