@@ -9,15 +9,17 @@
 
 ## Panel
 
-- [ ] Searchable CSS Properties
-- [ ] Unit Type Select
 - [ ] Edit element properties (id, class, etc)
-- [ ] Edit Column Gap in Row settings
-- [ ] Mobile Only Styles
+- [ ] Edit Column Gap in Row properties
 
+- [ ] Add clone, delete
+- [ ] Mobile Only Styles
+- [ ] State Only Styles (default, hover)
+
+- [ ] CSS Edit
 - [ ] Google Fonts
 - [ ] Color Picker
-- [ ] CSS editor
+- [ ] Box Shadow
 
 ## Elements
 
@@ -33,11 +35,12 @@
 
 ## Content
 
-- [ ] Starter templates (very basic)
-- [ ] Starter blocks (sections)
+- [ ] Starter templates (optin, thank you, etc)
+- [ ] Starter blocks (sections, rows, containers)
 
 ## Bugs / Todos
 
+- [ ] Pretty format css list in search
 - [ ] Rows columns on mobile
 - [ ] Format exported HTML for each element
 - [ ] Layers issues
@@ -83,3 +86,5 @@
 - [x] Export multiple pages as zip
 - [x] Selected element Breadcrumb
 - [x] Custom code head, body & css
+- [x] Searchable CSS Properties
+- [x] Unit Type default px for Integers

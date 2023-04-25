@@ -5,8 +5,9 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { FaTimes } from 'react-icons/fa'
-import _ from 'lodash'
+import { FaTimes, FaRegTrashAlt, FaCopy } from 'react-icons/fa'
+import { BiCopyAlt } from 'react-icons/bi'
+import _, { set } from 'lodash'
 import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
@@ -18,6 +19,23 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   const [styles, setStyles] = useState({})
   const [selectedType, setSelectedType] = useState()
   const [selectedStyle, setSelectedStyle] = useState()
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/css-properties')
+        if (!response.ok) {
+          console.error('Failed to fetch data')
+        }
+        const data = await response.json()
+        setItems(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const currentElement = findById(selectedId, page.data.styles.sections)
@@ -37,7 +55,14 @@ export default function Panel({ page, close, selectedId, updatePage }) {
 
   const handleChange = event => {
     const { name, value } = event.target
-    const newStyles = { ...styles, [name]: value }
+    const newStyles = { ...styles, [name]: processCssProperty({ name, value }) }
+
+    if (shouldAppendPX({ name, value })) {
+      setTimeout(() => {
+        moveCaretBackTwoChars()
+      }, 0)
+    }
+
     setStyles(newStyles)
     handleSave(newStyles)
   }
@@ -89,32 +114,117 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     updatePage(_.cloneDeep(page))
   }
 
+  const numericCSSProperties = [
+    'animation-iteration-count',
+    'border-image-slice',
+    'border-image-width',
+    'column-count',
+    'counter-increment',
+    'counter-reset',
+    'flex',
+    'flex-grow',
+    'flex-shrink',
+    'font-size-adjust',
+    'font-weight',
+    'line-height',
+    'nav-index',
+    'opacity',
+    'order',
+    'orphans',
+    'tab-size',
+    'widows',
+    'z-index',
+  ]
+
+  function moveCaretBackTwoChars() {
+    // Get the active element (the element that currently has focus)
+    const activeElement = document.activeElement
+
+    // Check if the active element is an input element
+    if (activeElement.tagName.toLowerCase() === 'input') {
+      // Get the current caret position
+      const currentPosition = activeElement.selectionStart
+
+      // Calculate the new caret position
+      const newPosition = Math.max(0, currentPosition - 2)
+
+      // Set the caret to the new position
+      activeElement.setSelectionRange(newPosition, newPosition)
+    }
+  }
+
+  function processCssProperty(obj) {
+    if (!obj || typeof obj.name !== 'string' || typeof obj.value === 'undefined') {
+      return null
+    }
+
+    if (numericCSSProperties.includes(obj.name)) {
+      return obj.value
+    }
+
+    const numericValue = parseFloat(obj.value)
+    if (!isNaN(numericValue) && numericValue.toString() === obj.value) {
+      return `${obj.value}px`
+    }
+
+    return obj.value
+  }
+
+  function shouldAppendPX(obj) {
+    if (numericCSSProperties.includes(obj.name)) {
+      return false
+    }
+
+    const numericValue = parseFloat(obj.value)
+    if (!isNaN(numericValue) && numericValue.toString() === obj.value) {
+      return true
+    }
+
+    return false
+  }
+
   const renderInputs = () => {
     const makeLabelPretty = key => {
       return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
     }
 
     if (styles) {
-      return Object.entries(styles).map(([key, value]) => (
-        <div key={key} className="sidebar-fieldset">
-          <label className="sidebar-label" htmlFor={key}>
-            {makeLabelPretty(key)}
-            <div
-              onClick={() => {
-                removeStyle(key)
-              }}
-            >
-              <FaTimes />
-            </div>
-          </label>
+      return Object.entries(styles).map(([key, value]) => {
+        const singleItem = items.filter(item => item.name === key)[0]
+        const options = singleItem?.options
+        let selectBox = null
+        if (options && options[0] !== 'value') {
+          selectBox = (
+            <select className="sidebar-input" name={key} id={key} value={value} onChange={handleChange}>
+              {options.map(option => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          )
+        }
 
-          {/* {(key.includes('color') || key.includes('Color')) && (
+        return (
+          <div key={key} className="sidebar-fieldset">
+            <label className="sidebar-label" htmlFor={key}>
+              {makeLabelPretty(key)}
+              <div
+                onClick={() => {
+                  removeStyle(key)
+                }}
+              >
+                <FaTimes />
+              </div>
+            </label>
+
+            {/* {(key.includes('color') || key.includes('Color')) && (
             <div className="absolute right-0 top-0" style={{ zIndex: 99999 }}>
               <ChromePicker color={value} onChange={handleColorChange} />
             </div>
           )} */}
 
-          {/* {key === 'fontFamily' && (
+            {/* {key === 'fontFamily' && (
             <Suspense fallback={`Loading...`}>
               <FontPicker
                 apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
@@ -126,18 +236,21 @@ export default function Panel({ page, close, selectedId, updatePage }) {
             </Suspense>
           )} */}
 
-          {key !== 'fontFamily' && (
-            <input
-              className="sidebar-input"
-              type="text"
-              id={key}
-              name={key}
-              value={value}
-              onChange={handleChange}
-            />
-          )}
-        </div>
-      ))
+            {selectBox && selectBox}
+
+            {!selectBox && (
+              <input
+                className="sidebar-input"
+                type="text"
+                id={key}
+                name={key}
+                value={value}
+                onChange={handleChange}
+              />
+            )}
+          </div>
+        )
+      })
     }
   }
 
@@ -155,8 +268,9 @@ export default function Panel({ page, close, selectedId, updatePage }) {
         const name = camelCaseToTitleCase(selectedStyle)
         const text = el.innerText.toLowerCase()
         if (text.includes(name.toLowerCase())) {
-          el.scrollIntoView({ behavior: 'smooth' })
-          el.querySelector('input').focus()
+          if (el.querySelector('input')) {
+            el.querySelector('input').focus()
+          }
         }
       })
     }, 100)
@@ -181,9 +295,18 @@ export default function Panel({ page, close, selectedId, updatePage }) {
       {selectedId && (
         <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
           <h3 className="capitalize">{selectedType}</h3>
-          <button onClick={close}>
-            <AiOutlineCloseCircle />
-          </button>
+
+          <div className="space-x-3 flex items-center">
+            <button onClick={close} data-tooltip-id="tooltip" data-tooltip-content="Duplicate">
+              <BiCopyAlt />
+            </button>
+            <button onClick={close} data-tooltip-id="tooltip" data-tooltip-content="Delete">
+              <FaRegTrashAlt />
+            </button>
+            <button onClick={close}>
+              <AiOutlineCloseCircle />
+            </button>
+          </div>
         </div>
       )}
       <div className="px-3">
@@ -195,6 +318,20 @@ export default function Panel({ page, close, selectedId, updatePage }) {
             Properties
           </div>
         </div>
+
+        <div className="pt-3">
+          <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
+            <div className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 bg-slate-100 border-r border-slate-300">
+              Default
+            </div>
+            <div className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800">
+              Hover
+            </div>
+            <div className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800">
+              Mobile
+            </div>
+          </div>
+        </div>
       </div>
       <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
         <SearchStyles
@@ -202,9 +339,10 @@ export default function Panel({ page, close, selectedId, updatePage }) {
             setSelectedStyle(value)
             addStyle(value)
           }}
+          items={items}
         />
       </div>
-      <div>{renderInputs()}</div>
+      <div className="pb-12">{renderInputs()}</div>
     </>
   )
 }

@@ -6,25 +6,8 @@
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useState, useEffect } from 'react'
 
-export default function SearchStyles({ onChange }) {
-  const [items, setItems] = useState([])
+export default function SearchStyles({ onChange, items }) {
   const [searchValue, setSearchValue] = useState('')
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/css-properties')
-        if (!response.ok) {
-          console.error('Failed to fetch data')
-        }
-        const data = await response.json()
-        setItems(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchData()
-  }, [])
 
   const handleOnSearch = (string, results) => {}
   const handleOnFocus = () => {}

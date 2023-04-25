@@ -14,7 +14,7 @@
   @apply px-3 py-1 flex items-center justify-between relative;
 }
 .sidebar-label {
-  @apply text-slate-500 font-medium text-sm w-full flex items-center justify-between pr-2;
+  @apply text-slate-700 font-medium text-sm w-full flex items-center justify-between pr-2;
 }
 .sidebar-label div {
   @apply cursor-pointer hidden;
@@ -22,9 +22,20 @@
 .sidebar-label:hover div {
   @apply block;
 }
-.sidebar-input {
-  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm text-center;
-  width: 110px;
+input.sidebar-input {
+  @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
+  max-width: 110px;
+  width: 100%;
+}
+textarea.sidebar-input {
+  @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
+  max-width: 110px;
+  width: 100%;
+}
+select.sidebar-input {
+  @apply border border-slate-300 font-medium  text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
+  max-width: 110px;
+  width: 100%;
 }
 
 .sidebar-fieldset-full {
