@@ -26,13 +26,19 @@ export default function Toolbar({
   updateFunnel,
   undo,
   undoHistory,
+  updateUndoHistory,
 }) {
   const [exportPopup, setExportPopup] = useState(false)
 
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
-        <FunnelsButton load={load} modalOpen={modalOpen} updateFunnel={updateFunnel} />
+        <FunnelsButton
+          load={load}
+          modalOpen={modalOpen}
+          updateFunnel={updateFunnel}
+          updateUndoHistory={updateUndoHistory}
+        />
         <NewFunnelButton load={load} modalOpenNew={modalOpenNew} updateFunnel={updateFunnel} />
       </div>
 

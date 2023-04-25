@@ -23,6 +23,7 @@ export default function Sidebar({
   updatePage,
   updateCurrent,
   updateFunnel,
+  updateUndoHistory,
 }) {
   const [selected, setSelected] = useState(current)
 
@@ -86,6 +87,7 @@ export default function Sidebar({
     localStorage.setItem(funnelKey, JSON.stringify(funnel))
     updateFunnel(_.cloneDeep(funnel))
     toast('Page has been added to funnel.')
+    updateUndoHistory([pageData])
   }
 
   function updateFunnelName() {
@@ -122,7 +124,10 @@ export default function Sidebar({
               <div
                 key={index}
                 onClick={() => {
-                  updatePage(getPage(id))
+                  const thepage = getPage(id)
+                  updatePage(thepage)
+                  updateUndoHistory([_.cloneDeep(thepage)])
+
                   toast('Page has been loaded.')
                 }}
                 className={`font-medium text-slate-600 truncate p-2 cursor-pointer hover:bg-slate-100 hover:text-slate-900 ${

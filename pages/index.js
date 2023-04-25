@@ -28,6 +28,8 @@ export default function Builder() {
 
   const prevPageRef = useRef()
   const [undoHistory, setUndoHistory] = useState([])
+  const [isUndoAction, setIsUndoAction] = useState(false)
+
   const [current, setCurrent] = useState('')
   const [selectedId, setSelectedId] = useState('')
   const [viewport, setViewport] = useState('desktop')
@@ -39,21 +41,22 @@ export default function Builder() {
   }, [page])
 
   useEffect(() => {
-    if (prevPageRef.current) {
+    if (!isUndoAction && prevPageRef.current) {
       setUndoHistory(prevHistory => {
         const newHistory = [...prevHistory, prevPageRef.current]
         const startIndex = Math.max(newHistory.length - 4, 0)
-        return newHistory.slice(startIndex)
+        return _.cloneDeep(newHistory.slice(startIndex))
       })
     }
+    setIsUndoAction(false)
   }, [page])
 
   function undo() {
-    console.log('undo', undoHistory)
     if (undoHistory.length > 0) {
+      setIsUndoAction(true)
       setPage(undoHistory[undoHistory.length - 1])
-      setUpdated(Date.now())
       setUndoHistory(prevHistory => prevHistory.slice(0, -1))
+      setUpdated(Date.now())
     }
   }
 
@@ -151,6 +154,7 @@ export default function Builder() {
         modalOpenNew={modalOpenNew}
         undo={undo}
         undoHistory={undoHistory}
+        updateUndoHistory={setUndoHistory}
       />
       <div className="flex flex-row">
         <Sidebar
@@ -164,6 +168,7 @@ export default function Builder() {
             setCurrent(value)
           }}
           updateFunnel={setFunnel}
+          updateUndoHistory={setUndoHistory}
         />
         <div className="w-full">
           {!funnel && (

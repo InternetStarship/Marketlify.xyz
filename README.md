@@ -26,7 +26,6 @@
 ## Features
 
 - [ ] Drag and drop on canvas
-- [ ] Undo button
 
 ## Mobile
 
@@ -50,6 +49,7 @@
 - [ ] Export: Set max width for sections via page settings
 - [ ] Adding new doesn't add to correct position
 - [ ] Dropdown menu position
+- [ ] Undo button not working perfectly
 
 ---
 

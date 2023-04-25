@@ -9,8 +9,9 @@ import { toast } from 'react-toastify'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiOutlineCopy } from 'react-icons/ai'
 import generateUUID from '@/utils/generateUUID'
+import _ from 'lodash'
 
-function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
+function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistory }) {
   const [isModalOpen, setIsModalOpen] = useState(modalOpen)
   const [funnels, setFunnels] = useState([])
 
@@ -36,6 +37,7 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel }) {
       closeModal()
       updateFunnel(funnel)
       load(page)
+      updateUndoHistory([_.cloneDeep(page)])
       toast('Funnel has been loaded.')
     } else {
       toast(`Error: Funnel with ID "${id}" not found.`)
