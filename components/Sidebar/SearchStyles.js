@@ -15,7 +15,7 @@ export default function SearchStyles({ onChange }) {
       try {
         const response = await fetch('/api/css-properties')
         if (!response.ok) {
-          throw new Error('Failed to fetch data')
+          console.error('Failed to fetch data')
         }
         const data = await response.json()
         setItems(data)
@@ -26,30 +26,17 @@ export default function SearchStyles({ onChange }) {
     fetchData()
   }, [])
 
-  const handleOnSearch = (string, results) => {
-    console.log(string, results)
-  }
-
-  const handleOnHover = result => {
-    console.log(result)
-  }
+  const handleOnSearch = (string, results) => {}
+  const handleOnFocus = () => {}
+  const handleOnHover = result => {}
 
   const handleOnSelect = item => {
-    console.log(item)
     onChange(item.name)
     setSearchValue('')
   }
 
-  const handleOnFocus = () => {
-    console.log('Focused')
-  }
-
   const formatResult = item => {
-    return (
-      <>
-        <span>{item.name}</span>
-      </>
-    )
+    return <span>{item.name}</span>
   }
   return (
     <div className="relative w-full">
