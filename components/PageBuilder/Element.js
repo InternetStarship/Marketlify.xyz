@@ -12,22 +12,53 @@ export default function Elements({ element, data, style }) {
   return (
     <>
       {elementData.type === 'headline' && (
-        <h1 style={style} dangerouslySetInnerHTML={{ __html: elementData.content }}></h1>
+        <h1
+          id={element.properties.id}
+          className={element.properties.class}
+          style={style}
+          dangerouslySetInnerHTML={{ __html: elementData.content }}
+        ></h1>
       )}
       {elementData.type === 'subheadline' && (
-        <h2 style={style} dangerouslySetInnerHTML={{ __html: elementData.content }}></h2>
+        <h2
+          id={element.properties.id}
+          className={element.properties.class}
+          style={style}
+          dangerouslySetInnerHTML={{ __html: elementData.content }}
+        ></h2>
       )}
       {elementData.type === 'paragraph' && (
-        <p style={style} dangerouslySetInnerHTML={{ __html: elementData.content }}></p>
+        <p
+          id={element.properties.id}
+          className={element.properties.class}
+          style={style}
+          dangerouslySetInnerHTML={{ __html: elementData.content }}
+        ></p>
       )}
       {elementData.type === 'button' && (
-        <a href={element.properties.url} target={element.properties.target} style={style}>
+        <a
+          id={element.properties.id}
+          className={element.properties.class}
+          href={element.properties.url}
+          target={element.properties.target}
+          style={style}
+        >
           {elementData.content}
         </a>
       )}
-      {elementData.type === 'list' && <li style={style}>{elementData.content}</li>}
+      {elementData.type === 'list' && (
+        <li id={element.properties.id} className={element.properties.class} style={style}>
+          {elementData.content}
+        </li>
+      )}
       {elementData.type === 'image' && (
-        <img style={style} src={element.properties.src} alt={element.properties.alt} />
+        <img
+          id={element.properties.id}
+          className={element.properties.class}
+          style={style}
+          src={element.properties.src}
+          alt={element.properties.alt}
+        />
       )}
     </>
   )

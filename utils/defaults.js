@@ -19,7 +19,9 @@ const defaults = {
       id: '',
       class: '',
     },
-    style: {},
+    style: {
+      columnGap: '20px',
+    },
     columns: [],
   },
   column: {
@@ -28,9 +30,7 @@ const defaults = {
       id: '',
       class: '',
     },
-    style: {
-      padding: '10px',
-    },
+    style: {},
     elements: [],
   },
   elements: {

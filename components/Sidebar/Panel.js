@@ -11,11 +11,12 @@ import _, { set } from 'lodash'
 import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
+import generateUniqueId from '@/utils/generateUniqueId'
 import { ChromePicker } from 'react-color'
 import dynamic from 'next/dynamic'
 import SearchStyles from './SearchStyles'
 
-export default function Panel({ page, close, selectedId, updatePage }) {
+export default function Panel({ page, close, selectedId, updatePage, updateCurrent }) {
   const [styles, setStyles] = useState({})
   const [properties, setProperties] = useState({})
   const [selectedType, setSelectedType] = useState()
@@ -23,6 +24,22 @@ export default function Panel({ page, close, selectedId, updatePage }) {
   const [items, setItems] = useState([])
   const [mainTab, setMainTab] = useState('styles')
   const [secondaryTab, setSecondaryTab] = useState('default')
+  const [existingIds] = useState(new Set())
+
+  useEffect(() => {
+    page.data.styles.sections?.forEach(section => {
+      existingIds.add(section.id)
+      section.rows.forEach(row => {
+        existingIds.add(row.id)
+        row.columns.forEach(column => {
+          existingIds.add(column.id)
+          column.elements.forEach(element => {
+            existingIds.add(element.id)
+          })
+        })
+      })
+    })
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -360,6 +377,89 @@ export default function Panel({ page, close, selectedId, updatePage }) {
     return titleCaseStr
   }
 
+  function remove() {
+    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
+    const updatedPage = JSON.parse(JSON.stringify(page))
+
+    switch (type) {
+      case 'section':
+        updatedPage.data.styles.sections.splice(currentElement.sectionIndex, 1)
+        break
+
+      case 'row':
+        updatedPage.data.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 1)
+        break
+
+      case 'column':
+        updatedPage.data.styles.sections[currentElement.sectionIndex].rows[
+          currentElement.rowIndex
+        ].columns.splice(currentElement.columnIndex, 1)
+        break
+
+      case 'element':
+        updatedPage.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements.splice(currentElement.elementIndex, 1)
+
+        break
+    }
+
+    updatePage(_.cloneDeep(updatedPage))
+    updateCurrent('')
+  }
+
+  function duplicate() {
+    const element = findById(selectedId, page.data.styles.sections)
+    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
+
+    let newItem
+    const newId = generateUniqueId(existingIds)
+
+    switch (type) {
+      case 'section':
+        newItem = { ...element, id: newId }
+        page.data.styles.sections.splice(currentElement.sectionIndex, 0, newItem)
+        break
+
+      case 'row':
+        newItem = { ...element, id: newId }
+        page.data.styles.sections[currentElement.sectionIndex].rows.splice(
+          currentElement.rowIndex,
+          0,
+          newItem
+        )
+        break
+
+      case 'column':
+        newItem = { ...element, id: newId }
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
+          currentElement.columnIndex,
+          0,
+          newItem
+        )
+        break
+
+      case 'element':
+        newItem = { ...element, id: newId }
+        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements.splice(currentElement.elementIndex, 0, newItem)
+
+        const previousContent = page.data.content.find(content => content.id === selectedId)
+        page.data.content.push({
+          id: newId,
+          content: previousContent.content,
+          type: previousContent.type,
+        })
+        break
+    }
+
+    updatePage(_.cloneDeep(page))
+    updateCurrent('')
+  }
+
   return (
     <>
       {selectedId && (
@@ -367,10 +467,10 @@ export default function Panel({ page, close, selectedId, updatePage }) {
           <h3 className="capitalize">{selectedType}</h3>
 
           <div className="space-x-3 flex items-center">
-            <button onClick={close} data-tooltip-id="tooltip" data-tooltip-content="Duplicate">
+            <button onClick={duplicate} data-tooltip-id="tooltip" data-tooltip-content="Duplicate">
               <BiCopyAlt />
             </button>
-            <button onClick={close} data-tooltip-id="tooltip" data-tooltip-content="Delete">
+            <button onClick={remove} data-tooltip-id="tooltip" data-tooltip-content="Delete">
               <FaRegTrashAlt />
             </button>
             <button onClick={close}>

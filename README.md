@@ -9,10 +9,6 @@
 
 ## Panel
 
-- [ ] Edit element properties (id, class, etc)
-- [ ] Edit Column Gap in Row properties
-
-- [ ] Add clone, delete actions
 - [ ] Mobile Only Styles
 - [ ] State Only Styles (default, hover)
 
@@ -40,7 +36,6 @@
 
 ## Bugs / Todos
 
-- [ ] Pretty format css list in search
 - [ ] Rows columns on mobile
 - [ ] Format exported HTML for each element
 - [ ] Layers issues
@@ -88,3 +83,4 @@
 - [x] Custom code head, body & css
 - [x] Searchable CSS Properties
 - [x] Unit Type default px for Integers
+- [x] Edit element properties (id, class, etc)

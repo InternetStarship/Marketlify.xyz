@@ -100,7 +100,13 @@ export default function Sidebar({
   return (
     <main id="sidebar">
       {selected === 'editing' && (
-        <Panel page={page} close={close} selectedId={selectedId} updatePage={updatePage} />
+        <Panel
+          page={page}
+          close={close}
+          selectedId={selectedId}
+          updatePage={updatePage}
+          updateCurrent={updateCurrent}
+        />
       )}
       {selected === 'settings' && (
         <Settings updateCurrent={updateCurrent} page={page} updatePage={updatePage} />
