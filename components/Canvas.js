@@ -13,6 +13,7 @@ import { BiCodeAlt } from 'react-icons/bi'
 import { FiLayers } from 'react-icons/fi'
 import TextEditor from './PageBuilder/TextEditor'
 import _ from 'lodash'
+import buildGoogleFonts from '@/utils/buildGoogleFonts'
 
 export default function Canvas({
   funnel,
@@ -52,6 +53,7 @@ export default function Canvas({
       })
     })
     setEditingText(false)
+    buildGoogleFonts(page)
   }, [])
 
   useEffect(() => {

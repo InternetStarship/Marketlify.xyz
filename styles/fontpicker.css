@@ -4,6 +4,7 @@ div[id^='font-picker'] {
   width: 125px;
   max-width: 125px;
   box-shadow: none !important;
+  text-align: center !important;
   @apply border rounded border-slate-300;
 }
 div[id^='font-picker'] * {
@@ -21,6 +22,7 @@ div[id^='font-picker'] button {
   outline: none;
   cursor: pointer;
   font-size: 14px !important;
+  text-align: center !important;
   @apply rounded truncate font-medium;
 }
 div[id^='font-picker'] .dropdown-button {

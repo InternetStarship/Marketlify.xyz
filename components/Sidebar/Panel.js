@@ -302,7 +302,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               <>
                 <div
                   className={`text-xl mr-2 ${
-                    showColorPicker === key ? 'text-blue-600' : 'text-slate-400'
+                    showColorPicker === key ? 'text-blue-600' : 'text-slate-300'
                   } hover:text-slate-800 cursor-pointer`}
                   onClick={() => {
                     if (showColorPicker === key) {
@@ -319,7 +319,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                   <div className="relative">
                     <div
                       className="absolute left-0 top-0"
-                      style={{ zIndex: 99999, left: '0', top: '-19px', width: 200 }}
+                      style={{ zIndex: 99999, left: '0', top: '-19px', width: 125 }}
                     >
                       <input
                         defaultValue=""
@@ -384,7 +384,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               <>
                 <div
                   className={`text-xl mr-2 ${
-                    showColorPicker === key ? 'text-blue-600' : 'text-slate-400'
+                    showColorPicker === key ? 'text-blue-600' : 'text-slate-300'
                   } hover:text-slate-800 cursor-pointer`}
                   onClick={() => {
                     if (showColorPicker === key) {
