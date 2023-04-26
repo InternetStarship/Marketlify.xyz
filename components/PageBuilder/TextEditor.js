@@ -38,7 +38,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
       {editor && (
         <div
           id="textEditorToolbar"
-          className="fixed top-0 left-0 z-50 shadow-lg text-lg flex items-center justify-between bg-white text-slate-900 py-2 px-3 w-full cursor-default"
+          className="fixed top-0 left-0 z-50 shadow-sm text-lg flex items-center justify-between bg-white text-slate-900 py-2 px-3 w-full cursor-default"
           style={{
             width: 'calc(100% - 340px)',
             top: '53px',

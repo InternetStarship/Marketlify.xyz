@@ -32,7 +32,7 @@
 }
 
 #canvasWrapper {
-  @apply relative;
+  @apply relative overflow-hidden;
 }
 
 #mainCanvas.mobile {

@@ -1,4 +1,3 @@
-// googleFontsLoader.js
 export default function buildGoogleFonts(page) {
   if (!page || !page.data || !page.data.styles || !page.data.styles.sections) {
     console.warn('Invalid page data provided to buildGoogleFonts.')
@@ -37,7 +36,5 @@ export default function buildGoogleFonts(page) {
       fontItalic ? 'i' : ''
     }&display=swap`
     document.head.appendChild(link)
-
-    console.log('added font link')
   }
 }
