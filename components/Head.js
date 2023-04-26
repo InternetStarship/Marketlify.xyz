@@ -8,7 +8,7 @@ import Head from 'next/head'
 export default function Header() {
   return (
     <Head>
-      <title>Marketlify - The Free Page Builder</title>
+      <title>Marketlify - The Free Funnel & Landing Page Builder</title>
       <link rel="icon" type="image/png" href="/images/icon.png" />
       <meta
         name="description"
