@@ -22,6 +22,7 @@ import { IoColorPaletteOutline } from 'react-icons/io5'
 import { getContrastColor } from '@/utils/getContrastColor.js'
 const FontPicker = dynamic(() => import('font-picker-react'), {
   suspense: true,
+  ssr: false,
 })
 
 export default function Panel({ page, close, selectedId, updatePage, updateCurrent }) {
@@ -286,7 +287,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               <Suspense fallback={`Loading...`}>
                 <FontPicker
                   apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
-                  activeFontFamily={'Roboto'}
+                  activeFontFamily={value}
                   onChange={nextFont => {
                     handleFontChange(nextFont.family)
                   }}
