@@ -318,14 +318,15 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                 {showColorPicker === key && (
                   <div className="relative">
                     <div
-                      className="absolute left-0 top-0 bg-white p-3 border border-slate-300 shadow-sm rounded"
-                      style={{ zIndex: 99999, left: '0', top: '-10px', width: 200 }}
+                      className="absolute left-0 top-0"
+                      style={{ zIndex: 99999, left: '0', top: '-19px', width: 200 }}
                     >
                       <input
                         defaultValue=""
                         type="text"
                         className="sidebar-input full"
                         placeholder="Search fonts..."
+                        style={{ width: 125 }}
                         onChange={e => {
                           const value = e.target.value
                           const filteredFonts = allFonts.filter(font => {
@@ -336,7 +337,10 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                         }}
                       />
                       {filteredFonts.length > 0 && (
-                        <div className="py-1 text-xs text-slate-500">
+                        <div
+                          className="p-1 text-xs text-slate-500 bg-white rounded shadow overflow-y-auto"
+                          style={{ maxHeight: 200 }}
+                        >
                           {filteredFonts.map(font => {
                             return (
                               <div
@@ -356,7 +360,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                     </div>
                   </div>
                 )}
-                <div style={{ width: 245 }}>
+                <div style={{ width: 245, height: 38 }}>
                   {showColorPicker !== key && (
                     <Suspense fallback={`Loading...`}>
                       <FontPicker
@@ -366,7 +370,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                           handleFontChange(nextFont.family)
                         }}
                         families={allFonts}
-                        limit={100}
+                        limit={50}
                       />
                     </Suspense>
                   )}

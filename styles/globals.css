@@ -16,6 +16,7 @@
 @import './toasty.css';
 @import './tooltips.css';
 @import './page.css';
+@import './fontpicker.css';
 
 * {
   -webkit-font-smoothing: antialiased;
