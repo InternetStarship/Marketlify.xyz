@@ -26,6 +26,10 @@ input.sidebar-input {
   max-width: 125px;
   width: 100%;
 }
+.sidebar-input.full {
+  width: 100%;
+  max-width: 100% !important;
+}
 textarea.sidebar-input {
   @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
   max-width: 125px;

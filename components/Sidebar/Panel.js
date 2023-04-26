@@ -19,6 +19,7 @@ import CodeMirror from '@uiw/react-codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import { IoColorPaletteOutline } from 'react-icons/io5'
+import { HiOutlineSearchCircle } from 'react-icons/hi'
 import { getContrastColor } from '@/utils/getContrastColor.js'
 const FontPicker = dynamic(() => import('font-picker-react'), {
   suspense: true,
@@ -37,6 +38,9 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [showCSS, setShowCSS] = useState(false)
   const [codeBox, setCodeBox] = useState('')
   const [showColorPicker, setShowColorPicker] = useState(false)
+  const [allFonts, setAllFonts] = useState([])
+  const [filteredFonts, setFilteredFonts] = useState([])
+  const [selectedFont, setSelectedFont] = useState('')
 
   useEffect(() => {
     page.data.styles.sections?.forEach(section => {
@@ -51,6 +55,8 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
         })
       })
     })
+
+    getFontFamilies()
   }, [])
 
   useEffect(() => {
@@ -248,6 +254,15 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     return false
   }
 
+  function getFontFamilies() {
+    fetch('/api/google-fonts')
+      .then(response => response.json())
+      .then(data => {
+        setAllFonts(data)
+      })
+      .catch(error => console.error('Error fetching data:', error))
+  }
+
   const renderInputs = () => {
     const makeLabelPretty = key => {
       return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
@@ -284,15 +299,79 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
             </label>
 
             {key === 'fontFamily' && (
-              <Suspense fallback={`Loading...`}>
-                <FontPicker
-                  apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
-                  activeFontFamily={value}
-                  onChange={nextFont => {
-                    handleFontChange(nextFont.family)
+              <>
+                <div
+                  className={`text-xl mr-2 ${
+                    showColorPicker === key ? 'text-blue-600' : 'text-slate-400'
+                  } hover:text-slate-800 cursor-pointer`}
+                  onClick={() => {
+                    if (showColorPicker === key) {
+                      setShowColorPicker(null)
+                    } else {
+                      setShowColorPicker(key)
+                    }
+                    setFilteredFonts([])
                   }}
-                />
-              </Suspense>
+                >
+                  <HiOutlineSearchCircle />
+                </div>
+                {showColorPicker === key && (
+                  <div className="relative">
+                    <div
+                      className="absolute left-0 top-0 bg-white p-3 border border-slate-300 shadow-sm rounded"
+                      style={{ zIndex: 99999, left: '0', top: '-10px', width: 200 }}
+                    >
+                      <input
+                        defaultValue=""
+                        type="text"
+                        className="sidebar-input full"
+                        placeholder="Search fonts..."
+                        onChange={e => {
+                          const value = e.target.value
+                          const filteredFonts = allFonts.filter(font => {
+                            return font.toLowerCase().includes(value.toLowerCase())
+                          })
+                          const uniqueFonts = [...new Set(filteredFonts)]
+                          setFilteredFonts(uniqueFonts)
+                        }}
+                      />
+                      {filteredFonts.length > 0 && (
+                        <div className="py-1 text-xs text-slate-500">
+                          {filteredFonts.map(font => {
+                            return (
+                              <div
+                                key={font}
+                                className="p-2 rounded cursor-pointer hover:text-orange-800 hover:bg-orange-100"
+                                onClick={() => {
+                                  handleFontChange(font)
+                                  setShowColorPicker(null)
+                                }}
+                              >
+                                {font}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+                <div style={{ width: 245 }}>
+                  {showColorPicker !== key && (
+                    <Suspense fallback={`Loading...`}>
+                      <FontPicker
+                        apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
+                        activeFontFamily={value}
+                        onChange={nextFont => {
+                          handleFontChange(nextFont.family)
+                        }}
+                        families={allFonts}
+                        limit={100}
+                      />
+                    </Suspense>
+                  )}
+                </div>
+              </>
             )}
 
             {selectBox && selectBox}
