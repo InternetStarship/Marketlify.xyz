@@ -8,11 +8,6 @@
 
 ---
 
-## Panel
-
-- [ ] Google Fonts
-- [ ] Box Shadow
-
 ## Elements
 
 - [ ] Container
@@ -27,6 +22,7 @@
 - [ ] State Only Styles (default, hover)
 - [ ] Drag and drop on canvas
 - [ ] Make it work on mobile
+- [ ] Creative tool popup
 
 ## Content
 
@@ -35,6 +31,7 @@
 
 ## Bugs / Todos
 
+- [ ] Edit css on complicated css error
 - [ ] Add action to button
 - [ ] Rows columns on mobile
 - [ ] Format exported HTML for each element
@@ -86,3 +83,4 @@
 - [x] Edit element properties (id, class, etc)
 - [x] CSS Edit Box
 - [x] Color Picker
+- [x] Google Fonts
