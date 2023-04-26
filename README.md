@@ -10,7 +10,6 @@
 
 ## Panel
 
-- [ ] Color Picker
 - [ ] Google Fonts
 - [ ] Box Shadow
 
@@ -85,3 +84,4 @@
 - [x] Unit Type default px for Integers
 - [x] Edit element properties (id, class, etc)
 - [x] CSS Edit Box
+- [x] Color Picker

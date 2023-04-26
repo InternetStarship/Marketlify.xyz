@@ -12,12 +12,14 @@ import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
 import generateUniqueId from '@/utils/generateUniqueId'
-import { ChromePicker } from 'react-color'
+import { SketchPicker } from 'react-color'
 import dynamic from 'next/dynamic'
 import SearchStyles from './SearchStyles'
 import CodeMirror from '@uiw/react-codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
+import { IoColorPaletteOutline } from 'react-icons/io5'
+import { getContrastColor } from '@/utils/getContrastColor.js'
 
 export default function Panel({ page, close, selectedId, updatePage, updateCurrent }) {
   const [styles, setStyles] = useState({})
@@ -30,6 +32,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [existingIds] = useState(new Set())
   const [showCSS, setShowCSS] = useState(false)
   const [codeBox, setCodeBox] = useState('')
+  const [showColorPicker, setShowColorPicker] = useState(false)
 
   useEffect(() => {
     page.data.styles.sections?.forEach(section => {
@@ -108,15 +111,15 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     handleSave(newStyles)
   }
 
-  const handleColorChange = color => {
+  const handleColorChange = (color, type) => {
     let newStyles = {
       ...styles,
-      color: color.hex,
+      [type]: color.hex,
     }
     if (color.rgb.a) {
       newStyles = {
         ...styles,
-        color: `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`,
+        [type]: `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`,
       }
     }
 
@@ -276,12 +279,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               </div>
             </label>
 
-            {/* {(key.includes('color') || key.includes('Color')) && (
-            <div className="absolute right-0 top-0" style={{ zIndex: 99999 }}>
-              <ChromePicker color={value} onChange={handleColorChange} />
-            </div>
-          )} */}
-
             {/* {key === 'fontFamily' && (
             <Suspense fallback={`Loading...`}>
               <FontPicker
@@ -296,9 +293,44 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
 
             {selectBox && selectBox}
 
+            {key.toLowerCase().includes('color') && (
+              <>
+                <div
+                  className={`text-xl mr-2 ${
+                    showColorPicker === key ? 'text-blue-600' : 'text-slate-400'
+                  } hover:text-slate-800 cursor-pointer`}
+                  onClick={() => {
+                    if (showColorPicker === key) {
+                      setShowColorPicker(null)
+                    } else {
+                      setShowColorPicker(key)
+                    }
+                  }}
+                >
+                  <IoColorPaletteOutline />
+                </div>
+                {showColorPicker === key && (
+                  <div className="relative">
+                    <div className="absolute left-0 top-0" style={{ zIndex: 99999, left: '0', top: '18px' }}>
+                      <SketchPicker
+                        color={value}
+                        onChange={value => {
+                          handleColorChange(value, key)
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
             {!selectBox && (
               <input
                 className="sidebar-input"
+                style={{
+                  background: key.toLowerCase().includes('color') ? value : '#fff',
+                  color: key.toLowerCase().includes('color') ? getContrastColor(value) : '#222',
+                  boxShadow: key.toLowerCase().includes('color') ? '0 0 0 1px #fff inset' : 'none',
+                }}
                 type="text"
                 id={key}
                 name={key}
