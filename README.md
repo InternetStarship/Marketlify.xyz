@@ -22,6 +22,7 @@
 
 ## Features
 
+- [ ] Popup
 - [ ] Mobile Only Styles
 - [ ] State Only Styles (default, hover)
 - [ ] Drag and drop on canvas

@@ -20,6 +20,9 @@ import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import { IoColorPaletteOutline } from 'react-icons/io5'
 import { getContrastColor } from '@/utils/getContrastColor.js'
+const FontPicker = dynamic(() => import('font-picker-react'), {
+  suspense: true,
+})
 
 export default function Panel({ page, close, selectedId, updatePage, updateCurrent }) {
   const [styles, setStyles] = useState({})
@@ -279,17 +282,17 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               </div>
             </label>
 
-            {/* {key === 'fontFamily' && (
-            <Suspense fallback={`Loading...`}>
-              <FontPicker
-                apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
-                activeFontFamily={'Roboto'}
-                onChange={nextFont => {
-                  handleFontChange(nextFont.family)
-                }}
-              />
-            </Suspense>
-          )} */}
+            {key === 'fontFamily' && (
+              <Suspense fallback={`Loading...`}>
+                <FontPicker
+                  apiKey="AIzaSyDmA_8khp5uXnodcvRmyyaNdmLnI_2gvQk"
+                  activeFontFamily={'Roboto'}
+                  onChange={nextFont => {
+                    handleFontChange(nextFont.family)
+                  }}
+                />
+              </Suspense>
+            )}
 
             {selectBox && selectBox}
 
@@ -323,7 +326,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                 )}
               </>
             )}
-            {!selectBox && (
+            {!selectBox && key !== 'fontFamily' && (
               <input
                 className="sidebar-input"
                 style={{
