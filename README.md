@@ -8,6 +8,8 @@
 
 ---
 
+# Phase 1
+
 ## Elements
 
 - [ ] Container
@@ -22,12 +24,6 @@
 - [ ] State Only Styles (default, hover)
 - [ ] Drag and drop on canvas
 - [ ] Make it work on mobile
-- [ ] Creative tool popup
-
-## Content
-
-- [ ] Starter templates (optin, thank you, etc)
-- [ ] Starter blocks (sections, rows, containers)
 
 ## Bugs / Todos
 
@@ -44,6 +40,33 @@
 - [ ] Adding new doesn't add to correct position
 - [ ] Dropdown menu position
 - [ ] Undo button not working perfectly
+
+---
+
+# Phase 2
+
+## Content
+
+- [ ] Starter templates (optin, thank you, etc)
+- [ ] Starter blocks (sections, rows, containers)
+- [ ] Connect to ChatGPT for content + auto build + copywriting
+
+## Extra
+
+- [ ] Creative tool popup
+- [ ] Connect to Auto Responder (redirect to url)
+- [ ] Connect to Stripe checkout.js
+- [ ] Connect to Netlify
+
+
+---
+
+# Phase 3
+
+- [ ] Connect to ClickFunnels 2.0 (for lead gen)
+- [ ] Write email campaign
+- [ ] Run Facebook, Google, etc ads
+- [ ] Get 100,000 leads
 
 ---
 
