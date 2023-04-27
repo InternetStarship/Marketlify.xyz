@@ -280,12 +280,30 @@ export default function AddDropdown({
               </div>
               <div
                 onClick={() => {
+                  addElement('icon')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Icon</span>
+              </div>
+              <div
+                onClick={() => {
                   addElement('list')
                 }}
                 className="block"
               >
                 <AiOutlineUnorderedList />
                 <span>List</span>
+              </div>
+              <div
+                onClick={() => {
+                  addElement('divider')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Divider</span>
               </div>
               <div
                 onClick={() => {
@@ -296,6 +314,17 @@ export default function AddDropdown({
                 <IoImageOutline />
                 <span>Image</span>
               </div>
+
+              <div
+                onClick={() => {
+                  addElement('video')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Video</span>
+              </div>
+
               <div
                 onClick={() => {
                   addElement('button')
@@ -304,6 +333,52 @@ export default function AddDropdown({
               >
                 <RxButton />
                 <span>Button</span>
+              </div>
+
+              <div
+                onClick={() => {
+                  addElement('label')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Label</span>
+              </div>
+              <div
+                onClick={() => {
+                  addElement('input')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Input</span>
+              </div>
+              <div
+                onClick={() => {
+                  addElement('textarea')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Textarea</span>
+              </div>
+              <div
+                onClick={() => {
+                  addElement('select')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Select</span>
+              </div>
+              <div
+                onClick={() => {
+                  addElement('checkbox')
+                }}
+                className="block"
+              >
+                <RxButton />
+                <span>Checkbox</span>
               </div>
             </>
           )}

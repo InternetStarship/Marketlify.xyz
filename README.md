@@ -12,20 +12,19 @@
 
 ## Elements
 
-- [ ] Container
 - [ ] Form (input, textarea, select, checkbox)
 - [ ] Video
 - [ ] Icon
+- [ ] Container
 
 ## Features
 
 - [ ] Popup
-- [ ] Mobile Only Styles
-- [ ] State Only Styles (default, hover)
+- [ ] States: default, hover, mobile
 - [ ] Drag and drop on canvas
-- [ ] Make it work on mobile
+- [ ] Make it work on mobile (limited functionality)
 
-## Bugs / Todos
+## Bugs
 
 - [ ] Edit css on complicated css error
 - [ ] Add action to button
@@ -58,6 +57,9 @@
 - [ ] Connect to Stripe checkout.js
 - [ ] Connect to Netlify
 
+## User Experience
+
+- [ ] Make it stand out (product hunt worthy)
 
 ---
 
