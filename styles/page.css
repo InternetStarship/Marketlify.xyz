@@ -1,17 +1,23 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 .row {
-  @apply flex flex-row justify-evenly items-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }
+
+@media (max-width: 420px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
 .column {
-  @apply w-full;
+  width: 100%;
 }
+
 .responsive-video {
   position: relative;
-  padding-bottom: 56.25%; /* For 16:9 aspect ratio */
+  padding-bottom: 56.25%;
   height: 0;
 }
 

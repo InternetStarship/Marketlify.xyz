@@ -644,15 +644,11 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   }
 
   const updateCodeBox = useCallback((value, viewUpdate) => {
-    console.log('value', value)
     setCodeBox(value)
     updateCSS(value)
-    // setTimeout(() => {
-    //   updateCSS()
-    // }, 10)
   }, [])
 
-  const debouncedUpdateCodeBox = _.debounce(updateCodeBox, 1000)
+  const debouncedUpdateCodeBox = _.debounce(updateCodeBox, 1300)
 
   return (
     <>

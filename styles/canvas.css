@@ -28,7 +28,7 @@
   @apply mx-auto border border-slate-300 shadow bg-white;
   width: 100%;
   max-width: 1200px;
-  transition: max-width 0.5s ease;
+  transition: max-width 0.48s ease;
 }
 
 #canvasWrapper {

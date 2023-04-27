@@ -13,27 +13,26 @@
 
 # Phase 1
 
-## Get Started
+## Features
 
 - [ ] Container Element
 - [ ] States: hover, mobile
-
-## Bugs / Todos
-
 - [ ] Add action to button
-- [ ] Rows columns on mobile
-- [ ] Drag and drop on canvas and move layers fix issue
-- [ ] Text Editor double up
-- [ ] Duplicate section / row with new ids on inner elements
-- [ ] Adding new doesn't add to correct position
-- [ ] Dropdown menu position
-- [ ] Undo button not working perfectly
-- [ ] Hover on divider issue
-- [ ] Make it work on mobile (limited functionality)
-- [ ] Export google fonts, base css, etc
 - [ ] Icon Element
 - [ ] Popup Element
 - [ ] Custom HTML Element
+- [ ] Make it work on mobile (limited functionality)
+
+## Bugs / Todos
+
+- [ ] Export google fonts
+- [ ] Duplicate section / row with new ids on inner elements
+- [ ] Adding new doesn't add to correct position
+- [ ] Dropdown menu position
+- [ ] Hover on divider issue
+- [ ] Text Editor double up
+- [ ] Undo button not working perfectly
+- [ ] Drag and drop on canvas and move layers fix issue
 
 ---
 

@@ -6,6 +6,41 @@
 import findContentById from '@/utils/findContentById'
 import extractInlineStyles from '@/utils/extractInlineStyles'
 
+const defaultStyles = `
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+@media (max-width: 420px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.column {
+  width: 100%;
+}
+
+.responsive-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.responsive-video iframe,
+.responsive-video object,
+.responsive-video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+`
+
 function exportHTML(data) {
   const objectToCSS = obj =>
     Object.entries(obj)
@@ -89,6 +124,7 @@ function exportHTML(data) {
     body {
       ${pageStyle}
     }
+    ${defaultStyles}
   </style>
   ${data.code.head}
 </head>

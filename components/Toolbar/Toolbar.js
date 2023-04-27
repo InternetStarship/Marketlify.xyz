@@ -30,6 +30,22 @@ export default function Toolbar({
 }) {
   const [exportPopup, setExportPopup] = useState(false)
 
+  function updateRowLayout() {
+    setTimeout(() => {
+      const canvasWrapper = document.getElementById('mainCanvas')
+      const rows = document.querySelectorAll('.row')
+      const isSingleColumn = canvasWrapper.clientWidth <= 320
+
+      rows.forEach(row => {
+        if (isSingleColumn) {
+          row.classList.add('singleColumn')
+        } else {
+          row.classList.remove('singleColumn')
+        }
+      })
+    }, 500)
+  }
+
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
@@ -48,6 +64,7 @@ export default function Toolbar({
             <button
               onClick={() => {
                 updateViewport('desktop')
+                updateRowLayout()
               }}
               className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
               data-tooltip-id="tooltip"
@@ -58,6 +75,7 @@ export default function Toolbar({
             <button
               onClick={() => {
                 updateViewport('tablet')
+                updateRowLayout()
               }}
               className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
               data-tooltip-id="tooltip"
@@ -68,6 +86,7 @@ export default function Toolbar({
             <button
               onClick={() => {
                 updateViewport('mobile')
+                updateRowLayout()
               }}
               className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
               data-tooltip-id="tooltip"
