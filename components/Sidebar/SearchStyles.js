@@ -49,7 +49,7 @@ export default function SearchStyles({ onChange, items, showCSS, setShowCSS }) {
           showCSS ? 'text-orange-700 rounded bg-orange-200' : ''
         }`}
         data-tooltip-id="tooltip"
-        data-tooltip-content="Edit CSS"
+        data-tooltip-content="Toggle CSS"
       >
         <FaCode />
       </div>
