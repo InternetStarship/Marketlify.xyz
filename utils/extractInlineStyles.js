@@ -41,9 +41,14 @@ const extractInlineStyles = htmlString => {
 const removeMetaClosingTag = htmlString => {
   const metaTagRegex = /(<meta[^>]*?)\s*\/>/gi
   const sanitizedHtmlString = htmlString.replace(metaTagRegex, '$1>')
-  return sanitizedHtmlString
+  return removeLinkClosingTag(sanitizedHtmlString)
 }
 
+const removeLinkClosingTag = htmlString => {
+  const linkTagRegex = /(<link[^>]*?)\s*\/>/gi
+  const sanitizedHtmlString = htmlString.replace(linkTagRegex, '$1>')
+  return sanitizedHtmlString
+}
 function minifyHTML(html) {
   html = html.replaceAll(`style=""`, '')
   html = html.replace(/[\s]+/g, ' ')

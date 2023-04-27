@@ -53,7 +53,7 @@ export default function Canvas({
       })
     })
     setEditingText(false)
-    buildGoogleFonts(page)
+    buildGoogleFonts(page.data)
   }, [])
 
   useEffect(() => {

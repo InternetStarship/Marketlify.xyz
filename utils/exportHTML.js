@@ -5,6 +5,7 @@
 
 import findContentById from '@/utils/findContentById'
 import extractInlineStyles from '@/utils/extractInlineStyles'
+import buildGoogleFonts from '@/utils/buildGoogleFonts'
 
 const defaultStyles = `
 .row {
@@ -126,6 +127,7 @@ function exportHTML(data) {
     }
     ${defaultStyles}
   </style>
+  ${buildGoogleFonts(data, true)}
   ${data.code.head}
 </head>
 <body>

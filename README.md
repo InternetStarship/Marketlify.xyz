@@ -25,7 +25,6 @@
 
 ## Bugs / Todos
 
-- [ ] Export google fonts
 - [ ] Duplicate section / row with new ids on inner elements
 - [ ] Adding new doesn't add to correct position
 - [ ] Dropdown menu position
