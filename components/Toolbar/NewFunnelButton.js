@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'

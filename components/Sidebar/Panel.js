@@ -1,26 +1,23 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { useState, useEffect, Suspense, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { FaTimes, FaRegTrashAlt, FaCopy } from 'react-icons/fa'
+import { FaTimes, FaRegTrashAlt } from 'react-icons/fa'
 import { BiCopyAlt } from 'react-icons/bi'
-import _, { set } from 'lodash'
+import _ from 'lodash'
 import findById from '@/utils/findById'
 import findTypeById from '@/utils/findTypeById'
 import getIndexesById from '@/utils/getIndexesById'
-import generateUniqueId from '@/utils/generateUniqueId'
 import { SketchPicker } from 'react-color'
 import dynamic from 'next/dynamic'
 import SearchStyles from './SearchStyles'
 import CodeMirror from '@uiw/react-codemirror'
-import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import { IoColorPaletteOutline } from 'react-icons/io5'
 import { HiOutlineSearchCircle } from 'react-icons/hi'
 import { getContrastColor } from '@/utils/getContrastColor.js'
+import { duplicate } from '@/utils/duplicate'
+import { remove } from '@/utils/remove'
+import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
+
 const FontPicker = dynamic(() => import('font-picker-react'), {
   suspense: true,
   ssr: false,
@@ -494,96 +491,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     handleSave(newStyles)
   }
 
-  function camelCaseToTitleCase(camelCaseStr) {
-    let titleCaseStr = camelCaseStr.replace(/([A-Z])/g, ' $1').toLowerCase()
-    titleCaseStr = titleCaseStr.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
-
-    return titleCaseStr
-  }
-
-  function remove() {
-    const type = findTypeById(selectedId, page.data.styles.sections)
-    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
-    const updatedPage = JSON.parse(JSON.stringify(page))
-
-    switch (type) {
-      case 'section':
-        updatedPage.data.styles.sections.splice(currentElement.sectionIndex, 1)
-        break
-
-      case 'row':
-        updatedPage.data.styles.sections[currentElement.sectionIndex].rows.splice(currentElement.rowIndex, 1)
-        break
-
-      case 'column':
-        updatedPage.data.styles.sections[currentElement.sectionIndex].rows[
-          currentElement.rowIndex
-        ].columns.splice(currentElement.columnIndex, 1)
-        break
-
-      case 'element':
-        updatedPage.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-          currentElement.columnIndex
-        ].elements.splice(currentElement.elementIndex, 1)
-
-        break
-    }
-
-    updatePage(_.cloneDeep(updatedPage))
-    updateCurrent('')
-  }
-
-  function duplicate() {
-    const element = findById(selectedId, page.data.styles.sections)
-    const type = findTypeById(selectedId, page.data.styles.sections)
-    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
-
-    let newItem
-    const newId = generateUniqueId(existingIds)
-
-    switch (type) {
-      case 'section':
-        newItem = { ...element, id: newId }
-        page.data.styles.sections.splice(currentElement.sectionIndex, 0, newItem)
-        break
-
-      case 'row':
-        newItem = { ...element, id: newId }
-        page.data.styles.sections[currentElement.sectionIndex].rows.splice(
-          currentElement.rowIndex,
-          0,
-          newItem
-        )
-        break
-
-      case 'column':
-        newItem = { ...element, id: newId }
-        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns.splice(
-          currentElement.columnIndex,
-          0,
-          newItem
-        )
-        break
-
-      case 'element':
-        newItem = { ...element, id: newId }
-        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-          currentElement.columnIndex
-        ].elements.splice(currentElement.elementIndex, 0, newItem)
-
-        const previousContent = page.data.content.find(content => content.id === selectedId)
-        page.data.content.push({
-          id: newId,
-          content: previousContent.content,
-          type: previousContent.type,
-        })
-        break
-    }
-
-    updatePage(_.cloneDeep(page))
-    updateCurrent('')
-  }
-
   const toKebabCase = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 
   function buildCSS(type) {
@@ -657,17 +564,33 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
           <h3 className="capitalize">{selectedType}</h3>
 
           <div className="space-x-3 flex items-center">
-            <button onClick={duplicate} data-tooltip-id="tooltip" data-tooltip-content="Duplicate">
+            <button
+              onClick={() => {
+                duplicate(
+                  page => {
+                    updatePage(page)
+                    updateCurrent('')
+                  },
+                  page,
+                  selectedId,
+                  existingIds
+                )
+              }}
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Duplicate"
+            >
               <BiCopyAlt />
             </button>
             <button
               onClick={() => {
-                {
-                  const confirm = window.confirm(`Are you sure you want to delete this ${selectedType}?`)
-                  if (confirm) {
-                    remove()
-                  }
-                }
+                remove(
+                  page => {
+                    updatePage(page)
+                    updateCurrent('')
+                  },
+                  page,
+                  selectedId
+                )
               }}
               data-tooltip-id="tooltip"
               data-tooltip-content="Delete"

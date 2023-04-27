@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import findContentById from '@/utils/findContentById'

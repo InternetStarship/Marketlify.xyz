@@ -1,7 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
 import findContentById from '@/utils/findContentById'
 import { useState } from 'react'
 import {

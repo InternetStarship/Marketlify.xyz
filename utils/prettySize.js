@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 function prettySize(text) {
   const bytes = Buffer.byteLength(text, 'utf8')
 

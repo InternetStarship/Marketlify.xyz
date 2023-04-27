@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import findContentById from '@/utils/findContentById'
 import extractInlineStyles from '@/utils/extractInlineStyles'
 import buildGoogleFonts from '@/utils/buildGoogleFonts'

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import Popup from '@/components/ui/Popup'
 import { useState, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'

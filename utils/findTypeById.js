@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 function findTypeById(id, sections) {
   for (const section of sections) {
     if (section.id === id) {

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { IoText, IoImageOutline } from 'react-icons/io5'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { RxButton } from 'react-icons/rx'

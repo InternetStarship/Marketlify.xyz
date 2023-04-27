@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { FaSave } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import prettySize from '@/utils/prettySize'

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 #sidebar {
   @apply bg-white shadow-sm hidden md:block;
   max-width: 340px;

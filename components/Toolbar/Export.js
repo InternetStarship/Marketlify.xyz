@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import Popup from '@/components/ui/Popup'

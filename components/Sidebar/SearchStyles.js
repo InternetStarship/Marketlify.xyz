@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useState } from 'react'
 import { FaCode } from 'react-icons/fa'

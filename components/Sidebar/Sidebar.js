@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import Panel from './Panel'
 import Settings from './Settings'
 import Layers from './Layers'

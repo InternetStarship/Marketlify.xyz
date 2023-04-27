@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { IoFunnel } from 'react-icons/io5'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { useState, useEffect } from 'react'
 
 export default function Empty({ title, children, close = true, open = false, closeOverride }) {

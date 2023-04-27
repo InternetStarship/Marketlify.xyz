@@ -1,14 +1,9 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import findContentById from '@/utils/findContentById'
 import getVideoId from '@/utils/getVideoId'
 import { useState } from 'react'
 
 export default function Elements({ element, data, style }) {
-  const [elementData, setElementData] = useState(findContentById(element.id, data.data.content))
+  const [elementData] = useState(findContentById(element.id, data.data.content))
 
   return (
     <>

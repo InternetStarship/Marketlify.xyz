@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 function findContentById(id, content = []) {
   if (Array.isArray(content)) {
     for (const item of content) {

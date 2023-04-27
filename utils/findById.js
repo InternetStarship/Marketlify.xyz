@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 function findById(id, obj = sections) {
   if (Array.isArray(obj)) {
     for (const item of obj) {

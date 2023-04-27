@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2023 Wynter Jones
- *   All rights reserved.
- */
-
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
