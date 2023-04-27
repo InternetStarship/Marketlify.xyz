@@ -3,6 +3,9 @@
  *   All rights reserved.
  */
 
+import findContentById from '@/utils/findContentById'
+import extractInlineStyles from '@/utils/extractInlineStyles'
+
 function exportHTML(data) {
   const objectToCSS = obj =>
     Object.entries(obj)
@@ -18,31 +21,57 @@ function exportHTML(data) {
 
         const renderRows = () =>
           rows
-            .map(({ columns }) => {
+            .map(({ columns, style }) => {
+              const rowStyle = objectToCSS(style)
               const renderColumns = () =>
                 columns
-                  .map(({ elements }) => {
+                  .map(({ elements, style }) => {
+                    const columnStyle = objectToCSS(style)
                     const renderElements = () =>
                       elements
-                        .map(({ type, style }) => {
-                          if (type === 'text') {
-                            const elementStyle = objectToCSS(style)
-                            return `<div class="element" style="${elementStyle}">add actual elelement - ${type}</div>`
+                        .map(({ type, style, id }) => {
+                          const elementStyle = objectToCSS(style)
+                          let elementBody = ''
+                          const content = findContentById(id, data.content)
+
+                          switch (type) {
+                            case 'headline':
+                              elementBody = `<h1>${content.content}</h1>`
+                              break
+                            case 'subheadline':
+                              elementBody = `<h2>${content.content}</h2>`
+                              break
+                            case 'paragraph':
+                              elementBody = `<p>${content.content}</p>`
+                              break
+                            case 'image':
+                              elementBody = `<img src="${content.content}" alt="${content.alt}">`
+                              break
+                            case 'button':
+                              elementBody = `<a href="${content.href}">${content.content}</a>`
+                              break
+                            default:
+                              break
                           }
+
+                          if (elementBody !== '') {
+                            return `<div class="element" style="${elementStyle}">${elementBody}</div>`
+                          }
+
                           return ''
                         })
                         .join('')
-                    return `<div class="column">${renderElements()}</div>`
+                    return `<div class="column" style="${columnStyle}">${renderElements()}</div>`
                   })
                   .join('')
-              return `<div class="row">${renderColumns()}</div>`
+              return `<div class="row" style="${rowStyle}">${renderColumns()}</div>`
             })
             .join('')
         return `<section class="section" style="${sectionStyle}">${renderRows()}</section>`
       })
       .join('')
 
-  const output = `
+  let output = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +83,7 @@ function exportHTML(data) {
   <meta property="og:description" content="${data.seo.description}">
   <meta property="og:url" content="${data.seo.url}">
   <meta property="og:image" content="${data.seo.image}">
-  <link rel="icon" href="${data.seo.favicon}">
+  ${data.seo.favicon ? ` <link rel="icon" href="${data.seo.favicon}">` : ''}
   <title>${data.seo.title}</title>
   <style>
     body {
@@ -65,10 +94,12 @@ function exportHTML(data) {
 </head>
 <body>
   ${renderSections()}
-  ${data.code.footer}
+  ${data.code.body}
 </body>
 </html>
 `
+
+  output = extractInlineStyles(output)
   return output
 }
 

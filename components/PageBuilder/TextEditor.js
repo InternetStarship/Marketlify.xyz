@@ -29,7 +29,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
     content: elementData.content,
     autofocus: 'all',
     onUpdate({ editor }) {
-      updateContent(editor.getHTML())
+      updateContent(editor.getText())
     },
   })
 
