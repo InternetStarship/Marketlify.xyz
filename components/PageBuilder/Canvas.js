@@ -167,7 +167,7 @@ export default function Canvas({
             </button>
             <button
               data-tooltip-id="tooltip"
-              data-tooltip-content="Page Settings"
+              data-tooltip-content="Delete Page"
               onClick={() => {
                 const confirm = window.confirm('Are you sure you want to delete this page?')
                 if (confirm) {
