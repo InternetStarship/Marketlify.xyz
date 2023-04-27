@@ -5,9 +5,11 @@ import CustomCode from './CustomCode'
 import { useState, useEffect } from 'react'
 import { RiFileAddLine } from 'react-icons/ri'
 import { toast } from 'react-toastify'
-import generateUUID from '@/utils/generateUUID'
-import moment from 'moment'
 import _ from 'lodash'
+import { getPage } from '@/utils/getPage'
+import { getPageName } from '@/utils/getPageName'
+import { updateFunnelName } from '@/utils/updateFunnelName'
+import { createPage } from '@/utils/createPage'
 
 export default function Sidebar({
   current,
@@ -25,72 +27,6 @@ export default function Sidebar({
   useEffect(() => {
     setSelected(current)
   }, [current])
-
-  function getPageName(id) {
-    const key = `marketlify_v3_page_${id}`
-    const data = localStorage.getItem(key)
-    if (data === null) return null
-    let output = JSON.parse(data)
-    return output.name
-  }
-
-  function getPage(id) {
-    const key = `marketlify_v3_page_${id}`
-    const data = localStorage.getItem(key)
-    if (data === null) return null
-    let output = JSON.parse(data)
-    return output
-  }
-
-  function createPage() {
-    const id = generateUUID()
-    const pageName = `Page ${funnel.pages.length + 1}`
-    const pageData = {
-      id: id,
-      name: pageName,
-      size: 0,
-      created_at: moment().format('MMMM Do YYYY, h:mm:ss a'),
-      data: {
-        seo: {
-          title: pageName,
-          description: '',
-          url: '',
-          image: '',
-          favicon: '',
-        },
-        code: {
-          head: '',
-          body: '',
-          css: '',
-        },
-        styles: {
-          body: {
-            backgroundColor: '#ffffff',
-          },
-          sections: [],
-        },
-        content: [],
-      },
-    }
-
-    const key = `marketlify_v3_page_${id}`
-    localStorage.setItem(key, JSON.stringify(pageData))
-    updatePage(pageData)
-
-    funnel.pages.push(id)
-    const funnelKey = `marketlify_v3_funnel_${funnel.id}`
-    localStorage.setItem(funnelKey, JSON.stringify(funnel))
-    updateFunnel(_.cloneDeep(funnel))
-    toast('Page has been added to funnel.')
-    updateUndoHistory([pageData])
-  }
-
-  function updateFunnelName() {
-    const funnelKey = `marketlify_v3_funnel_${funnel.id}`
-    funnel.name = document.querySelector('#sidebar h2').innerText.trim()
-    localStorage.setItem(funnelKey, JSON.stringify(funnel))
-    toast('Funnel name has been updated.')
-  }
 
   return (
     <main id="sidebar">
@@ -114,7 +50,7 @@ export default function Sidebar({
           <h2
             className="text-2xl font-bold pb-4 text-slate-900 pr-12"
             onBlur={() => {
-              updateFunnelName()
+              updateFunnelName(funnel, toast('Funnel name has been updated.'))
             }}
             contentEditable="true"
             suppressContentEditableWarning={true}
@@ -131,7 +67,6 @@ export default function Sidebar({
                   const thepage = getPage(id)
                   updatePage(thepage)
                   updateUndoHistory([_.cloneDeep(thepage)])
-
                   toast('Page has been loaded.')
                 }}
                 className={`font-medium rounded-md truncate p-2 cursor-pointer hover:bg-orange-100 hover:text-orange-900 ${
@@ -146,7 +81,12 @@ export default function Sidebar({
           </div>
           <button
             onClick={() => {
-              createPage()
+              createPage(pageData => {
+                updatePage(pageData)
+                updateFunnel(_.cloneDeep(funnel))
+                toast('Page has been added to funnel.')
+                updateUndoHistory([pageData])
+              }, funnel)
             }}
             className="page-modal-close-button flex items-center text-sm mt-3"
           >

@@ -1,6 +1,7 @@
 import { FaSave } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-import prettySize from '@/utils/prettySize'
+import { prettySize } from '@/utils/prettySize'
+import { checkLocalStorageSize } from '@/utils/checkLocalStorageSize'
 
 function SaveButton({ page, name }) {
   function save() {
@@ -16,19 +17,6 @@ function SaveButton({ page, name }) {
       toast('Your page is too large to save to your browser. Please try again with a smaller page.')
       return null
     }
-  }
-
-  function checkLocalStorageSize(dataSize) {
-    const maxSize = 5 * 1024 * 1024 // 5 MB
-    let currentSize = 0
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i)
-      const value = localStorage.getItem(key)
-      currentSize += new Blob([key + value], { type: 'text/plain' }).size
-    }
-
-    return currentSize + dataSize <= maxSize
   }
 
   return (

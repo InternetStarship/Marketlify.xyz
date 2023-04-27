@@ -21,15 +21,15 @@ export default function CustomCode({ page, updateCurrent }) {
     setCode(value)
   }, [])
 
-  function close() {
-    updateCurrent('')
-  }
-
   return (
     <>
-      <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
+      <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
         <h3 className="capitalize">Custom Code</h3>
-        <button onClick={close}>
+        <button
+          onClick={() => {
+            updateCurrent('')
+          }}
+        >
           <AiOutlineCloseCircle />
         </button>
       </div>

@@ -1,4 +1,4 @@
-function prettySize(text) {
+export function prettySize(text) {
   const bytes = Buffer.byteLength(text, 'utf8')
 
   const units = [
@@ -12,5 +12,3 @@ function prettySize(text) {
 
   return `${prettyValue} ${appropriateUnit.unit}`
 }
-
-export default prettySize

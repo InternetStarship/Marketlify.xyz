@@ -27,7 +27,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [styles, setStyles] = useState({})
   const [properties, setProperties] = useState({})
   const [selectedType, setSelectedType] = useState()
-  const [selectedStyle, setSelectedStyle] = useState()
   const [items, setItems] = useState([])
   const [mainTab, setMainTab] = useState('styles')
   const [secondaryTab, setSecondaryTab] = useState('default')
@@ -37,7 +36,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [allFonts, setAllFonts] = useState([])
   const [filteredFonts, setFilteredFonts] = useState([])
-  const [selectedFont, setSelectedFont] = useState('')
 
   useEffect(() => {
     page.data.styles.sections?.forEach(section => {
@@ -469,7 +467,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     }
     setStyles(newStyles)
     handleSave(newStyles)
-    setSelectedStyle('')
     setTimeout(() => {
       document.querySelector('.clear-icon').click()
       document.querySelectorAll('#sidebar .sidebar-fieldset').forEach(el => {
@@ -661,7 +658,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
           <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
             <SearchStyles
               onChange={value => {
-                setSelectedStyle(value)
                 addStyle(value)
               }}
               items={items}

@@ -19,7 +19,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
 
   return (
     <>
-      <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
+      <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
         <h3 className="capitalize">Page Settings</h3>
         <button
           onClick={() => {

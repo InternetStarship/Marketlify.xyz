@@ -18,14 +18,6 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
     setIsModalOpen(modalOpen)
   }, [modalOpen])
 
-  function openModal() {
-    setIsModalOpen(true)
-  }
-
-  function closeModal() {
-    setIsModalOpen(false)
-  }
-
   function loadFunnel(funnel, id) {
     const page = getPage(id)
     if (page) {
@@ -127,7 +119,9 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
   return (
     <>
       <button
-        onClick={openModal}
+        onClick={() => {
+          setIsModalOpen(true)
+        }}
         className="flex items-center toolbar-button"
         data-tooltip-id="tooltip"
         data-tooltip-content="Saved Funnels"
@@ -141,7 +135,12 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-4">
               <h2 className="page-modal-title">Funnels</h2>
               <div>
-                <button onClick={closeModal} className="page-modal-close-button">
+                <button
+                  onClick={() => {
+                    setIsModalOpen(false)
+                  }}
+                  className="page-modal-close-button"
+                >
                   Close
                 </button>
               </div>

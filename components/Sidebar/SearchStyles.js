@@ -1,25 +1,10 @@
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useState } from 'react'
 import { FaCode } from 'react-icons/fa'
+import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
 
 export default function SearchStyles({ onChange, items, showCSS, setShowCSS }) {
   const [searchValue, setSearchValue] = useState('')
-
-  const handleOnSelect = item => {
-    onChange(item.name)
-    setSearchValue('')
-  }
-
-  const formatResult = item => {
-    return <span>{camelCaseToTitleCase(item.name)}</span>
-  }
-
-  function camelCaseToTitleCase(camelCaseStr) {
-    let titleCaseStr = camelCaseStr.replace(/([A-Z])/g, ' $1').toLowerCase()
-    titleCaseStr = titleCaseStr.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
-
-    return titleCaseStr
-  }
 
   return (
     <div className="relative w-full flex items-center space-x-2">
@@ -28,9 +13,14 @@ export default function SearchStyles({ onChange, items, showCSS, setShowCSS }) {
       >
         <ReactSearchAutocomplete
           items={items}
-          onSelect={handleOnSelect}
+          onSelect={item => {
+            onChange(item.name)
+            setSearchValue('')
+          }}
           autoFocus
-          formatResult={formatResult}
+          formatResult={item => {
+            return <span>{camelCaseToTitleCase(item.name)}</span>
+          }}
           className="styleSearch"
           placeholder="Search to add style..."
           inputSearchString={searchValue}

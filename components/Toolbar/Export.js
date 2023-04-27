@@ -1,39 +1,7 @@
-import JSZip from 'jszip'
-import { saveAs } from 'file-saver'
 import Popup from '@/components/ui/Popup'
-import exportHTML from '@/utils/exportHTML'
+import { exportFunnel } from '@/utils/exportFunnel'
 
 export default function Export({ funnel, close }) {
-  function sanitizeFileName(name) {
-    return name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-  }
-
-  function exportFunnel() {
-    const pages = []
-    funnel.pages.map(pageId => {
-      const key = `marketlify_v3_page_${pageId}`
-      const page = JSON.parse(localStorage.getItem(key))
-      const html = exportHTML(page.data)
-      pages.push({
-        name: page.name,
-        html: html,
-      })
-    })
-
-    const zip = new JSZip()
-
-    pages.forEach(page => {
-      zip.file(`${sanitizeFileName(page.name)}.html`, page.html)
-    })
-
-    zip.generateAsync({ type: 'blob' }).then(blob => {
-      saveAs(blob, `${sanitizeFileName(funnel.name)}.zip`)
-    })
-  }
-
   return (
     <Popup title="Export Funnel" open={true} closeOverride={close}>
       <div className="p-6 rounded">
@@ -46,7 +14,7 @@ export default function Export({ funnel, close }) {
         <div className="flex space-x-2">
           <button
             onClick={() => {
-              exportFunnel()
+              exportFunnel(funnel)
             }}
             className="page-modal-close-button mt-2"
           >

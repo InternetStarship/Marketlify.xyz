@@ -7,6 +7,7 @@ import FunnelsButton from './FunnelsButton'
 import NewFunnelButton from './NewFunnelButton'
 import Export from './Export'
 import { useState } from 'react'
+import { updateRowLayout } from '@/utils/updateRowLayout'
 
 export default function Toolbar({
   funnel,
@@ -20,26 +21,9 @@ export default function Toolbar({
   modalOpenNew,
   updateFunnel,
   undo,
-  undoHistory,
   updateUndoHistory,
 }) {
   const [exportPopup, setExportPopup] = useState(false)
-
-  function updateRowLayout() {
-    setTimeout(() => {
-      const canvasWrapper = document.getElementById('mainCanvas')
-      const rows = document.querySelectorAll('.row')
-      const isSingleColumn = canvasWrapper.clientWidth <= 320
-
-      rows.forEach(row => {
-        if (isSingleColumn) {
-          row.classList.add('singleColumn')
-        } else {
-          row.classList.remove('singleColumn')
-        }
-      })
-    }, 500)
-  }
 
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">

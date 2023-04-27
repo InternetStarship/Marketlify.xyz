@@ -13,14 +13,6 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
     setIsModalOpen(modalOpenNew)
   }, [modalOpenNew])
 
-  function openModal() {
-    setIsModalOpen(true)
-  }
-
-  function closeModal() {
-    setIsModalOpen(false)
-  }
-
   function createFromBlank() {
     const funnelId = generateUUID()
     const numberOfPagesInt = parseInt(numberOfPages)
@@ -79,13 +71,15 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
     updateFunnel(funnelData)
     load(firstPage)
     toast('New funnel created.')
-    closeModal()
+    setIsModalOpen(false)
   }
 
   return (
     <>
       <button
-        onClick={openModal}
+        onClick={() => {
+          setIsModalOpen(true)
+        }}
         className="flex items-center toolbar-button"
         data-tooltip-id="tooltip"
         data-tooltip-content="Create New Funnel"
