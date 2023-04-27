@@ -68,56 +68,78 @@ export default function Elements({ element, data, style }) {
       )}
 
       {elementData.type === 'video' && element.properties.type === 'html5' && (
-        <video
+        <div
           id={element.properties.id}
-          className={element.properties.class}
+          className={element.properties.class + ' responsive-video'}
           style={style}
-          src={element.properties.src}
-          controls={element.properties.controls}
-        />
+        >
+          <div className="absolute top-0 left-0 w-full h-full cursor-pointer" style={{ zIndex: 999 }}></div>
+          <video src={element.properties.src} controls={element.properties.controls} />
+        </div>
       )}
 
       {elementData.type === 'video' && element.properties.type === 'youtube' && (
-        <iframe
+        <div
           id={element.properties.id}
-          className={element.properties.class}
+          className={element.properties.class + ' responsive-video'}
           style={style}
-          src={`https://www.youtube.com/embed/${getVideoId(element.properties.videoId)}`}
-          allowFullScreen
-        />
+        >
+          <div
+            className="absolute top-0 left-0 w-full h-full cursor-pointer"
+            style={{ ...style, zIndex: 999 }}
+          ></div>
+          <iframe
+            src={`https://www.youtube.com/embed/${getVideoId(element.properties.url)}`}
+            allowFullScreen
+          />
+        </div>
       )}
 
       {elementData.type === 'video' && element.properties.type === 'vimeo' && (
-        <iframe
+        <div
           id={element.properties.id}
-          className={element.properties.class}
+          className={element.properties.class + ' responsive-video'}
           style={style}
-          src={`https://player.vimeo.com/video/${getVideoId(element.properties.videoId)}`}
-          frameBorder="0"
-          allowFullScreen
-        />
+        >
+          <div className="absolute top-0 left-0 w-full h-full cursor-pointer" style={{ zIndex: 99 }}></div>
+          <iframe
+            src={`https://player.vimeo.com/video/${getVideoId(element.properties.url)}`}
+            frameBorder="0"
+            allowFullScreen
+          />
+        </div>
       )}
 
       {elementData.type === 'video' && element.properties.type === 'wistia' && (
-        <>
+        <div className="responsive-video">
+          <div className="absolute top-0 left-0 w-full h-full cursor-pointer" style={{ zIndex: 99 }}></div>
           <script
-            src={`https://fast.wistia.com/embed/medias/${getVideoId(element.properties.videoId)}.jsonp`}
+            src={`https://fast.wistia.com/embed/medias/${getVideoId(element.properties.url)}.jsonp`}
             async
           ></script>
           <script src={`https://fast.wistia.com/assets/external/E-v1.js`} async></script>
           <div
-            class={`wistia_embed wistia_async_${element.properties.videoId}`}
+            class={`wistia_embed wistia_async_${getVideoId(element.properties.url)}`}
             videoFoam={true}
             playerColor="#51a3ff"
             style={style}
           >
             &nbsp;
           </div>
-        </>
+        </div>
       )}
 
       {elementData.type === 'icon' && (
         <i id={element.properties.id} className={`fa fa-${element.properties.icon}`} style={style} />
+      )}
+
+      {elementData.type === 'label' && (
+        <label
+          id={element.properties.id}
+          className={element.properties.class}
+          style={style}
+          dangerouslySetInnerHTML={{ __html: elementData.content }}
+        ></label>
       )}
 
       {elementData.type === 'input' && (
@@ -162,8 +184,12 @@ export default function Elements({ element, data, style }) {
             checked={element.properties.checked}
             onChange={element.properties.onChange}
           />
-          {elementData.label}
+          {elementData.content}
         </label>
+      )}
+
+      {elementData.type === 'divider' && (
+        <hr id={element.properties.id} className={element.properties.class} style={style} />
       )}
     </>
   )

@@ -9,8 +9,8 @@ import HoverBar from './PageBuilder/HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
-import { BiCodeAlt } from 'react-icons/bi'
-import { FiLayers } from 'react-icons/fi'
+import { BiCodeAlt, BiPopsicle } from 'react-icons/bi'
+import { BsLayoutTextWindowReverse } from 'react-icons/bs'
 import TextEditor from './PageBuilder/TextEditor'
 import _ from 'lodash'
 import buildGoogleFonts from '@/utils/buildGoogleFonts'
@@ -137,13 +137,13 @@ export default function Canvas({
           <div className="flex space-x-3">
             <button
               data-tooltip-id="tooltip"
-              data-tooltip-content="Page Layers"
+              data-tooltip-content="Page Structure"
               onClick={() => {
                 updateCurrent('layers')
                 updateSelectedId(null)
               }}
             >
-              <FiLayers />
+              <BsLayoutTextWindowReverse />
             </button>
             <button
               data-tooltip-id="tooltip"

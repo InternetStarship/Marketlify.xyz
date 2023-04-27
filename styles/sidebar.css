@@ -13,7 +13,7 @@
   @apply px-3 py-1 flex items-center justify-between relative;
 }
 .sidebar-label {
-  @apply text-slate-700 font-medium text-sm w-full flex items-center justify-between pr-2;
+  @apply text-slate-700 font-medium text-sm w-full flex items-center justify-between pr-2 lowercase;
 }
 .sidebar-label div {
   @apply cursor-pointer hidden;

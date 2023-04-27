@@ -10,7 +10,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import DraggableLayer from './DraggableLayer'
 
 export default function Layers({ page, updatePage, updateCurrent }) {
-  const debouncedUpdatePage = debounce(updatePage, 200)
+  const debouncedUpdatePage = debounce(updatePage, 100)
 
   const moveLayer = (dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
     const updatedPage = { ...page }
@@ -22,13 +22,13 @@ export default function Layers({ page, updatePage, updateCurrent }) {
     }
 
     const findSection = sectionId =>
-      updatedpage.data.styles.sections.find(section => section.id === sectionId)
+      updatedPage.data.styles.sections.find(section => section.id === sectionId)
     const findRow = (section, rowId) => section.rows.find(row => row.id === rowId)
     const findColumn = (row, columnId) => row.columns.find(column => column.id === columnId)
 
     switch (type) {
       case 'section':
-        moveArrayItem(updatedpage.data.styles.sections, dragIndex, hoverIndex)
+        moveArrayItem(updatedPage.data.styles.sections, dragIndex, hoverIndex)
         break
 
       case 'row':
@@ -100,8 +100,8 @@ export default function Layers({ page, updatePage, updateCurrent }) {
 
   return (
     <div>
-      <div className="text-xl p-3 text-white bg-slate-800 flex items-center justify-between font-bold">
-        <h3 className="capitalize">Page Layers</h3>
+      <div className="text-xl pt-4 pb-2 px-3 text-slate-800 flex items-center justify-between font-bold">
+        <h3 className="capitalize">Page Structure</h3>
         <button
           onClick={() => {
             updateCurrent('')
@@ -110,52 +110,61 @@ export default function Layers({ page, updatePage, updateCurrent }) {
           <AiOutlineCloseCircle />
         </button>
       </div>
-      <div className="p-3">
+      <div className="p-3 overflow-x-hidden" style={{ height: `calc(100vh - 118px)` }}>
         <DndProvider backend={HTML5Backend}>
           {page.data.styles.sections.map((section, sectionIndex) => (
-            <DraggableLayer
-              key={section.id}
-              index={sectionIndex}
-              id={section.id}
-              type="section"
-              moveLayer={moveLayer}
-            >
-              {section.rows.map((row, rowIndex) => (
-                <DraggableLayer
-                  key={row.id}
-                  index={rowIndex}
-                  id={row.id}
-                  type="row"
-                  moveLayer={moveLayer}
-                  sectionId={section.id}
-                >
-                  {row.columns.map((column, columnIndex) => (
+            <div className="relative">
+              <DraggableLayer
+                key={section.id}
+                index={sectionIndex}
+                id={section.id}
+                type="section"
+                moveLayer={moveLayer}
+              >
+                {section.rows.map((row, rowIndex) => (
+                  <div className="relative">
                     <DraggableLayer
-                      key={column.id}
-                      index={columnIndex}
-                      id={column.id}
-                      type="column"
+                      key={row.id}
+                      index={rowIndex}
+                      id={row.id}
+                      type="row"
                       moveLayer={moveLayer}
                       sectionId={section.id}
-                      rowId={row.id}
                     >
-                      {column.elements.map((element, elementIndex) => (
-                        <DraggableLayer
-                          key={element.id}
-                          index={elementIndex}
-                          id={element.id}
-                          type="element"
-                          moveLayer={moveLayer}
-                          sectionId={section.id}
-                          rowId={row.id}
-                          columnId={column.id}
-                        />
+                      {row.columns.map((column, columnIndex) => (
+                        <div className="relative">
+                          <DraggableLayer
+                            key={column.id}
+                            index={columnIndex}
+                            id={column.id}
+                            type="column"
+                            moveLayer={moveLayer}
+                            sectionId={section.id}
+                            rowId={row.id}
+                          >
+                            {column.elements.map((element, elementIndex) => (
+                              <div className="relative">
+                                <DraggableLayer
+                                  key={element.id}
+                                  index={elementIndex}
+                                  id={element.id}
+                                  type="element"
+                                  content={page.data.content}
+                                  moveLayer={moveLayer}
+                                  sectionId={section.id}
+                                  rowId={row.id}
+                                  columnId={column.id}
+                                />
+                              </div>
+                            ))}
+                          </DraggableLayer>
+                        </div>
                       ))}
                     </DraggableLayer>
-                  ))}
-                </DraggableLayer>
-              ))}
-            </DraggableLayer>
+                  </div>
+                ))}
+              </DraggableLayer>
+            </div>
           ))}
         </DndProvider>
       </div>

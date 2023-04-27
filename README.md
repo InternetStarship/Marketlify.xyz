@@ -10,27 +10,21 @@
 
 # Phase 1
 
-## Elements
+## Get Started
 
-- [ ] Form (input, textarea, select, checkbox)
-- [ ] Video
-- [ ] Icon
-- [ ] Container
-
-## Features
-
-- [ ] Popup
+- [ ] Icon Element
+- [ ] Popup Element
+- [ ] Container Element
+- [ ] Format exported HTML for each element
 - [ ] States: default, hover, mobile
-- [ ] Drag and drop on canvas
-- [ ] Make it work on mobile (limited functionality)
 
-## Bugs
+## Bugs (finish)
 
+- [ ] Add dropdown show top if not enough space
 - [ ] Edit css on complicated css error
 - [ ] Add action to button
 - [ ] Rows columns on mobile
-- [ ] Format exported HTML for each element
-- [ ] Layers issues
+- [ ] Drag and drop on canvas and move layers fix issue
 - [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
 - [ ] Add coyote time to dropdown
@@ -39,6 +33,8 @@
 - [ ] Adding new doesn't add to correct position
 - [ ] Dropdown menu position
 - [ ] Undo button not working perfectly
+- [ ] Hover on divider issue
+- [ ] Make it work on mobile (limited functionality)
 
 ---
 
@@ -69,6 +65,12 @@
 - [ ] Write email campaign
 - [ ] Run Facebook, Google, etc ads
 - [ ] Get 100,000 leads
+
+---
+
+# Phase 4
+
+- [ ] Sell fancy elements and fancy features
 
 ---
 
@@ -109,3 +111,10 @@
 - [x] CSS Edit Box
 - [x] Color Picker
 - [x] Google Fonts
+- [x] Input
+- [x] Label
+- [x] Textarea
+- [x] Select
+- [x] Checkbox
+- [x] Video
+- [x] Divider

@@ -60,6 +60,26 @@ export default function AddDropdown({
           content: 'Example Content',
         }
         break
+      case 'list':
+        data = {
+          content: 'Example Content',
+        }
+        break
+      case 'label':
+        data = {
+          content: 'Label Name',
+        }
+        break
+      case 'checkbox':
+        data = {
+          content: 'Accept terms of service',
+        }
+        break
+      case 'select':
+        data = {
+          options: ['Option 1', 'Option 2'],
+        }
+        break
     }
 
     data = { ...data, id: newId, type: type }

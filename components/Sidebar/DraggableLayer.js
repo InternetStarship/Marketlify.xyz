@@ -5,6 +5,8 @@
 
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
+import findContentById from '@/utils/findContentById'
+import { MdOutlineDragIndicator } from 'react-icons/md'
 
 const layerTypes = {
   section: 'section',
@@ -13,7 +15,17 @@ const layerTypes = {
   element: 'element',
 }
 
-export default function DraggableLayer({ id, index, type, moveLayer, children, sectionId, rowId, columnId }) {
+export default function DraggableLayer({
+  id,
+  index,
+  type,
+  moveLayer,
+  children,
+  sectionId,
+  rowId,
+  columnId,
+  content,
+}) {
   const ref = useRef(null)
   const layer = { id, index, type, sectionId, rowId, columnId }
 
@@ -47,16 +59,31 @@ export default function DraggableLayer({ id, index, type, moveLayer, children, s
   drag(drop(ref))
 
   return (
-    <div ref={ref} style={{ opacity }}>
+    <div ref={ref} style={{ opacity }} className="cursor-move">
       <div
-        className={`bg-slate-200 border p-2 mb-2 border-slate-400 w-full flex justify-between items-center pl-${
-          type === 'row' ? 4 : 2
-        }`}
+        className={`${type === 'section' ? 'ml-4' : ''} ${type === 'row' ? 'ml-6' : ''} ${
+          type === 'column' ? 'ml-8' : ''
+        } ${type === 'element' ? 'ml-10' : ''}`}
       >
-        <span>{`${type}`}</span>
-        <span className="text-xs text-slate-500">{`#${id}`}</span>
+        <div
+          className={`absolute top-4 left-0 w-full border  h-3 rounded shadow-sm z-0 ${
+            type === 'section' ? 'bg-green-50  border-green-200' : ''
+          } ${type === 'row' ? 'bg-blue-50  border-blue-200' : ''}  ${
+            type === 'element' ? 'bg-orange-50 border-orange-200' : ''
+          }
+          ${type !== 'element' && type !== 'row' ? 'bg-slate-50 border-slate-200' : ''}
+          `}
+        ></div>
+        <div
+          className={`bg-slate-50 border p-2 mb-2 border-slate-300 rounded shadow-sm w-full flex justify-between items-center z-10 relative`}
+        >
+          <span className="font-medium text-sm">{`${findContentById(id, content)?.type || type}`}</span>
+          <span className="text-sm font-bold text-slate-400">
+            <MdOutlineDragIndicator />
+          </span>
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   )
 }
