@@ -5,7 +5,7 @@
 
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
-import Popup from '@/components/Popup'
+import Popup from '@/components/ui/Popup'
 import exportHTML from '@/utils/exportHTML'
 
 export default function Export({ funnel, close }) {

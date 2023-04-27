@@ -3,15 +3,15 @@
  *   All rights reserved.
  */
 
-import Element from './PageBuilder/Element'
-import Empty from './PageBuilder/Empty'
-import HoverBar from './PageBuilder/HoverBar'
+import Element from './Element'
+import Empty from './Empty'
+import HoverBar from './HoverBar'
 import { useState, useEffect } from 'react'
 import findTypeById from '@/utils/findTypeById'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { BiCodeAlt, BiPopsicle } from 'react-icons/bi'
 import { BsLayoutTextWindowReverse } from 'react-icons/bs'
-import TextEditor from './PageBuilder/TextEditor'
+import TextEditor from './TextEditor'
 import _ from 'lodash'
 import buildGoogleFonts from '@/utils/buildGoogleFonts'
 

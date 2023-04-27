@@ -3,15 +3,15 @@
  *   All rights reserved.
  */
 
-import Canvas from '@/components/Canvas'
+import Canvas from '@/components/PageBuilder/Canvas'
 import Toolbar from '@/components/Toolbar/Toolbar'
 import Sidebar from '@/components/Sidebar/Sidebar'
-import Head from '@/components/Head'
+import Head from '@/components/ui/Head'
 import { useState, useEffect, useRef } from 'react'
 import _ from 'lodash'
 import { ToastContainer } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
-import Popup from '@/components/Popup'
+import Popup from '@/components/ui/Popup'
 import getIndexesById from '@/utils/getIndexesById'
 import { TbSection, TbColumns1 } from 'react-icons/tb'
 import { AiOutlineInsertRowAbove } from 'react-icons/ai'

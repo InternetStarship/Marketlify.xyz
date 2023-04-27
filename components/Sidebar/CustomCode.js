@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 
-import Popup from '@/components/Popup'
+import Popup from '@/components/ui/Popup'
 import { useState, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import CodeMirror from '@uiw/react-codemirror'
