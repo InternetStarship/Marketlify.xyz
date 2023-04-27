@@ -15,23 +15,23 @@
 
 ## Features
 
-- [ ] Container Element
 - [ ] States: hover, mobile
-- [ ] Add action to button
+- [ ] Container Element
 - [ ] Icon Element
 - [ ] Popup Element
 - [ ] Custom HTML Element
-- [ ] Make it work on mobile (limited functionality)
+- [ ] Mobile Ready
 
 ## Bugs / Todos
 
-- [ ] Duplicate section / row with new ids on inner elements
-- [ ] Adding new doesn't add to correct position
-- [ ] Dropdown menu position
-- [ ] Hover on divider issue
+- [x] Duplicate section / row with new ids on inner elements
+- [x] Adding new doesn't add to correct position
+- [x] Dropdown menu position (check top/bottom)
+- [ ] Hover on divider issue (add hover padding on divider only)
 - [ ] Text Editor double up
 - [ ] Undo button not working perfectly
 - [ ] Drag and drop on canvas and move layers fix issue
+- [ ] Add action to button, select and video properties, etc
 
 ---
 

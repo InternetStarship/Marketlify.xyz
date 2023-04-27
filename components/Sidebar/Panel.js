@@ -660,7 +660,18 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
             <button onClick={duplicate} data-tooltip-id="tooltip" data-tooltip-content="Duplicate">
               <BiCopyAlt />
             </button>
-            <button onClick={remove} data-tooltip-id="tooltip" data-tooltip-content="Delete">
+            <button
+              onClick={() => {
+                {
+                  const confirm = window.confirm(`Are you sure you want to delete this ${selectedType}?`)
+                  if (confirm) {
+                    remove()
+                  }
+                }
+              }}
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Delete"
+            >
               <FaRegTrashAlt />
             </button>
             <button onClick={close}>
