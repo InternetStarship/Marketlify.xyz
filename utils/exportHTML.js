@@ -1,6 +1,6 @@
-import findContentById from '@/utils/findContentById'
-import extractInlineStyles from '@/utils/extractInlineStyles'
-import buildGoogleFonts from '@/utils/buildGoogleFonts'
+import { findContentById } from '@/utils/findContentById'
+import { extractInlineStyles } from '@/utils/extractInlineStyles'
+import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
 
 const defaultStyles = `
 .row {

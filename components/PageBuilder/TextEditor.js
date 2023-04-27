@@ -1,4 +1,3 @@
-import findContentById from '@/utils/findContentById'
 import { useState } from 'react'
 import {
   FaBold,
@@ -15,10 +14,11 @@ import {
 } from 'react-icons/fa'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import _ from 'lodash'
+import { cloneDeep } from 'lodash'
+import { findContentById } from '@/utils/findContentById'
 
 export default function TextEditor({ updateContent, element, data, style, closeEditor, edit, updateStyle }) {
-  const [elementData, setElementData] = useState(findContentById(element.id, data.data.content))
+  const [elementData] = useState(findContentById(element.id, data.data.content))
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -76,7 +76,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
 
                 <button
                   onClick={() => {
-                    const newStyle = _.cloneDeep(style)
+                    const newStyle = cloneDeep(style)
                     newStyle.textAlign = 'left'
                     updateStyle(newStyle)
                   }}
@@ -86,7 +86,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
                 </button>
                 <button
                   onClick={() => {
-                    const newStyle = _.cloneDeep(style)
+                    const newStyle = cloneDeep(style)
                     newStyle.textAlign = 'center'
                     updateStyle(newStyle)
                   }}
@@ -96,7 +96,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
                 </button>
                 <button
                   onClick={() => {
-                    const newStyle = _.cloneDeep(style)
+                    const newStyle = cloneDeep(style)
                     newStyle.textAlign = 'right'
                     updateStyle(newStyle)
                   }}
@@ -106,7 +106,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
                 </button>
                 <button
                   onClick={() => {
-                    const newStyle = _.cloneDeep(style)
+                    const newStyle = cloneDeep(style)
                     newStyle.textAlign = 'justify'
                     updateStyle(newStyle)
                   }}

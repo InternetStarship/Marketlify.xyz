@@ -1,10 +1,13 @@
-import { IoFunnel } from 'react-icons/io5'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiOutlineCopy } from 'react-icons/ai'
-import generateUUID from '@/utils/generateUUID'
-import _ from 'lodash'
+import { IoFunnel } from 'react-icons/io5'
+import { cloneDeep } from 'lodash'
+import { getFunnels } from '@/utils/getFunnels'
+import { removeFunnel } from '@/utils/removeFunnel'
+import { cloneFunnel } from '@/utils/cloneFunnel'
+import { loadFunnel } from '@/utils/loadFunnel'
 
 function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistory }) {
   const [isModalOpen, setIsModalOpen] = useState(modalOpen)
@@ -17,104 +20,6 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
   useEffect(() => {
     setIsModalOpen(modalOpen)
   }, [modalOpen])
-
-  function loadFunnel(funnel, id) {
-    const page = getPage(id)
-    if (page) {
-      closeModal()
-      updateFunnel(funnel)
-      load(page)
-      updateUndoHistory([_.cloneDeep(page)])
-      toast('Funnel has been loaded.')
-    } else {
-      toast(`Error: Funnel with ID "${id}" not found.`)
-    }
-  }
-
-  function getPage(id) {
-    if (typeof localStorage !== 'undefined') {
-      const key = `marketlify_v3_page_${id}`
-      const data = localStorage.getItem(key)
-      if (data !== null) {
-        return JSON.parse(data)
-      }
-    }
-    return null
-  }
-
-  function getFunnels() {
-    const funnels = []
-    if (typeof localStorage !== 'undefined') {
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i)
-        const data = JSON.parse(localStorage.getItem(key))
-        if (key.startsWith('marketlify_v3_funnel_')) {
-          funnels.push(data)
-        }
-      }
-    }
-
-    return funnels
-  }
-
-  function removeFunnel(id) {
-    if (typeof localStorage !== 'undefined') {
-      const funnelKey = `marketlify_v3_funnel_${id}`
-      const funnelDataString = localStorage.getItem(funnelKey)
-      const funnelData = JSON.parse(funnelDataString)
-
-      if (funnelData && Array.isArray(funnelData.pages)) {
-        funnelData.pages.forEach(pageId => {
-          const pageKey = `marketlify_v3_page_${pageId}`
-          localStorage.removeItem(pageKey)
-        })
-      }
-
-      localStorage.removeItem(funnelKey)
-    }
-    return null
-  }
-
-  function cloneFunnel(id) {
-    if (typeof localStorage !== 'undefined') {
-      const originalFunnelKey = `marketlify_v3_funnel_${id}`
-      const originalFunnelDataString = localStorage.getItem(originalFunnelKey)
-      const originalFunnelData = JSON.parse(originalFunnelDataString)
-
-      if (originalFunnelData) {
-        const duplicatedFunnelId = generateUUID()
-        const duplicatedFunnelKey = `marketlify_v3_funnel_${duplicatedFunnelId}`
-        const duplicatedFunnelData = JSON.parse(JSON.stringify(originalFunnelData))
-
-        duplicatedFunnelData.id = duplicatedFunnelId
-
-        duplicatedFunnelData.pages = []
-
-        if (Array.isArray(originalFunnelData.pages)) {
-          originalFunnelData.pages.forEach(pageId => {
-            const originalPageKey = `marketlify_v3_page_${pageId}`
-            const originalPageDataString = localStorage.getItem(originalPageKey)
-            const originalPageData = JSON.parse(originalPageDataString)
-
-            if (originalPageData) {
-              const duplicatedPageId = generateUUID()
-              const duplicatedPageKey = `marketlify_v3_page_${duplicatedPageId}`
-              const duplicatedPageData = JSON.parse(JSON.stringify(originalPageData))
-
-              duplicatedPageData.id = duplicatedPageId
-              localStorage.setItem(duplicatedPageKey, JSON.stringify(duplicatedPageData))
-              duplicatedFunnelData.pages.push(duplicatedPageId)
-            }
-          })
-        }
-
-        localStorage.setItem(duplicatedFunnelKey, JSON.stringify(duplicatedFunnelData))
-
-        return duplicatedFunnelId
-      }
-    }
-    return null
-  }
 
   return (
     <>
@@ -191,7 +96,21 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
 
               {funnels.map(funnel => (
                 <div key={funnel.id} className="funnel" data-name={funnel.name}>
-                  <div className="page-item" onClick={() => loadFunnel(funnel, funnel.pages[0])}>
+                  <div
+                    className="page-item"
+                    onClick={() =>
+                      loadFunnel(
+                        (funnel, page) => {
+                          setIsModalOpen(false)
+                          updateFunnel(funnel)
+                          load(page)
+                          updateUndoHistory([cloneDeep(page)])
+                        },
+                        funnel,
+                        funnel.pages[0]
+                      )
+                    }
+                  >
                     <div>
                       <h3 className="font-medium">{funnel.name}</h3>
                       <h4 className="text-xs opacity-50">{funnel.pages.length} pages</h4>

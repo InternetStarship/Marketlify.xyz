@@ -1,6 +1,6 @@
-import generateUUID from './generateUUID'
+import { generateUUID } from './generateUUID'
 import moment from 'moment'
-import _ from 'lodash'
+import { cloneDeep } from 'lodash'
 
 export function createPage(callback, funnel) {
   const id = generateUUID()
@@ -40,5 +40,5 @@ export function createPage(callback, funnel) {
   const funnelKey = `marketlify_v3_funnel_${funnel.id}`
   localStorage.setItem(funnelKey, JSON.stringify(funnel))
 
-  return callback(_.cloneDeep(pageData))
+  return callback(cloneDeep(pageData))
 }

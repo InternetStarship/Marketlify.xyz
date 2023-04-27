@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import findContentById from '@/utils/findContentById'
+import { findContentById } from '@/utils/findContentById'
 import { MdOutlineDragIndicator } from 'react-icons/md'
 
 const layerTypes = {

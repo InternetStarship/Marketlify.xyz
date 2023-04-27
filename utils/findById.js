@@ -1,4 +1,4 @@
-function findById(id, obj = sections) {
+export function findById(id, obj = sections) {
   if (Array.isArray(obj)) {
     for (const item of obj) {
       const result = findById(id, item)
@@ -15,5 +15,3 @@ function findById(id, obj = sections) {
 
   return null
 }
-
-export default findById

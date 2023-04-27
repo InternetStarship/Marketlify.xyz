@@ -1,13 +1,13 @@
+import { useState } from 'react'
 import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
 import { FaDownload, FaTabletAlt, FaUndo } from 'react-icons/fa'
+import { updateRowLayout } from '@/utils/updateRowLayout'
 import SaveButton from './SaveButton'
 import FunnelsButton from './FunnelsButton'
 import NewFunnelButton from './NewFunnelButton'
 import Export from './Export'
-import { useState } from 'react'
-import { updateRowLayout } from '@/utils/updateRowLayout'
 
 export default function Toolbar({
   funnel,

@@ -1,4 +1,4 @@
-function getIndexesById(id, sections) {
+export function getIndexesById(id, sections) {
   for (let sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
     const section = sections[sectionIndex]
     if (section.id === id) {
@@ -32,5 +32,3 @@ function getIndexesById(id, sections) {
 
   return null
 }
-
-export default getIndexesById

@@ -1,5 +1,5 @@
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useState } from 'react'
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { FaCode } from 'react-icons/fa'
 import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
 

@@ -1,14 +1,14 @@
-import Element from './Element'
-import Empty from './Empty'
-import HoverBar from './HoverBar'
 import { useState, useEffect } from 'react'
-import findTypeById from '@/utils/findTypeById'
+import { findTypeById } from '@/utils/findTypeById'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { BiCodeAlt } from 'react-icons/bi'
 import { BsLayoutTextWindowReverse } from 'react-icons/bs'
+import { cloneDeep } from 'lodash'
+import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
 import TextEditor from './TextEditor'
-import _ from 'lodash'
-import buildGoogleFonts from '@/utils/buildGoogleFonts'
+import Element from './Element'
+import Empty from './Empty'
+import HoverBar from './HoverBar'
 
 export default function Canvas({
   funnel,
@@ -177,7 +177,7 @@ export default function Canvas({
 
                   localStorage.setItem(funnelKey, JSON.stringify(funnel))
 
-                  updateFunnel(_.cloneDeep(funnel))
+                  updateFunnel(cloneDeep(funnel))
                   updatePage(null)
                 }
               }}

@@ -1,16 +1,16 @@
+import { useState, useEffect, useRef } from 'react'
+import { cloneDeep } from 'lodash'
+import { ToastContainer } from 'react-toastify'
+import { Tooltip } from 'react-tooltip'
+import { getIndexesById } from '@/utils/getIndexesById'
+import { TbSection, TbColumns1 } from 'react-icons/tb'
+import { AiOutlineInsertRowAbove } from 'react-icons/ai'
+import { RxDot } from 'react-icons/rx'
+import Popup from '@/components/ui/Popup'
 import Canvas from '@/components/PageBuilder/Canvas'
 import Toolbar from '@/components/Toolbar/Toolbar'
 import Sidebar from '@/components/Sidebar/Sidebar'
 import Head from '@/components/ui/Head'
-import { useState, useEffect, useRef } from 'react'
-import _ from 'lodash'
-import { ToastContainer } from 'react-toastify'
-import { Tooltip } from 'react-tooltip'
-import Popup from '@/components/ui/Popup'
-import getIndexesById from '@/utils/getIndexesById'
-import { TbSection, TbColumns1 } from 'react-icons/tb'
-import { AiOutlineInsertRowAbove } from 'react-icons/ai'
-import { RxDot } from 'react-icons/rx'
 
 export default function Builder() {
   const [funnel, setFunnel] = useState(null)
@@ -40,7 +40,7 @@ export default function Builder() {
       setUndoHistory(prevHistory => {
         const newHistory = [...prevHistory, prevPageRef.current]
         const startIndex = Math.max(newHistory.length - 4, 0)
-        return _.cloneDeep(newHistory.slice(startIndex))
+        return cloneDeep(newHistory.slice(startIndex))
       })
     }
     setIsUndoAction(false)

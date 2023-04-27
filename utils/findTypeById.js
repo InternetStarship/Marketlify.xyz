@@ -1,4 +1,4 @@
-function findTypeById(id, sections) {
+export function findTypeById(id, sections) {
   for (const section of sections) {
     if (section.id === id) {
       return 'section'
@@ -28,5 +28,3 @@ function findTypeById(id, sections) {
 
   return null
 }
-
-export default findTypeById

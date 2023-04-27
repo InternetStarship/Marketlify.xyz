@@ -1,9 +1,9 @@
-import Popup from '@/components/ui/Popup'
 import { useState, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import CodeMirror from '@uiw/react-codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
+import Popup from '@/components/ui/Popup'
 
 export default function CustomCode({ page, updateCurrent }) {
   const [modalOpen, setModalOpen] = useState(false)

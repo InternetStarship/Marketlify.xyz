@@ -1,8 +1,8 @@
-import _ from 'lodash'
-import findById from './findById'
-import findTypeById from './findTypeById'
-import getIndexesById from './getIndexesById'
-import generateUniqueId from './generateUniqueId'
+import { cloneDeep } from 'lodash'
+import { findById } from './findById'
+import { findTypeById } from './findTypeById'
+import { getIndexesById } from './getIndexesById'
+import { generateUniqueId } from './generateUniqueId'
 
 export function duplicate(callback, page, selectedId, existingIds) {
   const element = findById(selectedId, page.data.styles.sections)
@@ -47,5 +47,5 @@ export function duplicate(callback, page, selectedId, existingIds) {
       break
   }
 
-  return callback(_.cloneDeep(page))
+  return callback(cloneDeep(page))
 }

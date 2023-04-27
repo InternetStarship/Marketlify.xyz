@@ -1,4 +1,4 @@
-const getVideoId = url => {
+export function getVideoId(url) {
   if (typeof url !== 'string') return null
 
   let videoId
@@ -16,5 +16,3 @@ const getVideoId = url => {
 
   return null
 }
-
-export default getVideoId

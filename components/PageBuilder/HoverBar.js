@@ -1,10 +1,9 @@
-import { FaArrowUp, FaArrowDown, FaPlus, FaCopy, FaTrash } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
-import AddDropdown from './AddDropdown'
-import _ from 'lodash'
+import { FaArrowUp, FaArrowDown, FaPlus, FaCopy, FaTrash } from 'react-icons/fa'
 import { duplicate } from '@/utils/duplicate'
 import { remove } from '@/utils/remove'
 import { move } from '@/utils/move'
+import AddDropdown from './AddDropdown'
 
 export default function HoverBar({
   position,

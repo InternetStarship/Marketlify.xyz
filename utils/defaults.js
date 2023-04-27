@@ -1,4 +1,4 @@
-const defaults = {
+const master = {
   section: {
     id: null,
     properties: {
@@ -228,4 +228,6 @@ const defaults = {
   },
 }
 
-export default defaults
+export function defaults() {
+  return master
+}

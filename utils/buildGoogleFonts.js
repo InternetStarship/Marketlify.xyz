@@ -1,4 +1,4 @@
-export default function buildGoogleFonts(data, render = false) {
+export function buildGoogleFonts(data, render = false) {
   if (!data || !data.styles || !data.styles.sections) {
     console.warn('Invalid page data provided to buildGoogleFonts.')
     return

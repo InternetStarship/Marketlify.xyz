@@ -1,11 +1,19 @@
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-
 import DraggableLayer from './DraggableLayer'
 
 export default function Layers({ page, updatePage, updateCurrent }) {
   const debouncedUpdatePage = debounce(updatePage, 100)
+
+  function debounce(func, wait) {
+    let timeout
+    return function (...args) {
+      const context = this
+      clearTimeout(timeout)
+      timeout = setTimeout(() => func.apply(context, args), wait)
+    }
+  }
 
   const moveLayer = (dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
     const updatedPage = { ...page }
@@ -82,15 +90,6 @@ export default function Layers({ page, updatePage, updateCurrent }) {
     }
 
     debouncedUpdatePage(updatedPage)
-  }
-
-  function debounce(func, wait) {
-    let timeout
-    return function (...args) {
-      const context = this
-      clearTimeout(timeout)
-      timeout = setTimeout(() => func.apply(context, args), wait)
-    }
   }
 
   return (

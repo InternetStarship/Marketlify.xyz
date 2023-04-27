@@ -1,4 +1,4 @@
-const extractInlineStyles = htmlString => {
+export function htmlString(htmlString) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(htmlString, 'text/html')
   const elementsWithStyle = doc.querySelectorAll('[style]')
@@ -60,5 +60,3 @@ function minifyHTML(html) {
 
   return '<!DOCTYPE html>' + html.trim()
 }
-
-export default extractInlineStyles

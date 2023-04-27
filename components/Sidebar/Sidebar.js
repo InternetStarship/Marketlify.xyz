@@ -1,15 +1,15 @@
-import Panel from './Panel'
-import Settings from './Settings'
-import Layers from './Layers'
-import CustomCode from './CustomCode'
 import { useState, useEffect } from 'react'
 import { RiFileAddLine } from 'react-icons/ri'
 import { toast } from 'react-toastify'
-import _ from 'lodash'
+import { cloneDeep } from 'lodash'
 import { getPage } from '@/utils/getPage'
 import { getPageName } from '@/utils/getPageName'
 import { updateFunnelName } from '@/utils/updateFunnelName'
 import { createPage } from '@/utils/createPage'
+import Panel from './Panel'
+import Settings from './Settings'
+import Layers from './Layers'
+import CustomCode from './CustomCode'
 
 export default function Sidebar({
   current,
@@ -66,7 +66,7 @@ export default function Sidebar({
                 onClick={() => {
                   const thepage = getPage(id)
                   updatePage(thepage)
-                  updateUndoHistory([_.cloneDeep(thepage)])
+                  updateUndoHistory([cloneDeep(thepage)])
                   toast('Page has been loaded.')
                 }}
                 className={`font-medium rounded-md truncate p-2 cursor-pointer hover:bg-orange-100 hover:text-orange-900 ${
@@ -83,7 +83,7 @@ export default function Sidebar({
             onClick={() => {
               createPage(pageData => {
                 updatePage(pageData)
-                updateFunnel(_.cloneDeep(funnel))
+                updateFunnel(cloneDeep(funnel))
                 toast('Page has been added to funnel.')
                 updateUndoHistory([pageData])
               }, funnel)

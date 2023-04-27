@@ -1,14 +1,13 @@
+import dynamic from 'next/dynamic'
 import { useState, useEffect, Suspense, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { FaTimes, FaRegTrashAlt } from 'react-icons/fa'
 import { BiCopyAlt } from 'react-icons/bi'
-import _ from 'lodash'
-import findById from '@/utils/findById'
-import findTypeById from '@/utils/findTypeById'
-import getIndexesById from '@/utils/getIndexesById'
+import { cloneDeep, debounce } from 'lodash'
+import { findById } from '@/utils/findById'
+import { findTypeById } from '@/utils/findTypeById'
+import { getIndexesById } from '@/utils/getIndexesById'
 import { SketchPicker } from 'react-color'
-import dynamic from 'next/dynamic'
-import SearchStyles from './SearchStyles'
 import CodeMirror from '@uiw/react-codemirror'
 import { css } from '@codemirror/lang-css'
 import { IoColorPaletteOutline } from 'react-icons/io5'
@@ -17,6 +16,7 @@ import { getContrastColor } from '@/utils/getContrastColor.js'
 import { duplicate } from '@/utils/duplicate'
 import { remove } from '@/utils/remove'
 import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
+import SearchStyles from './SearchStyles'
 
 const FontPicker = dynamic(() => import('font-picker-react'), {
   suspense: true,
@@ -160,7 +160,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
       page.data.styles.body = newStyles
     }
 
-    updatePage(_.cloneDeep(page))
+    updatePage(cloneDeep(page))
   }
 
   const handlePropertiesSave = newProperties => {
@@ -184,7 +184,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
       }
     }
 
-    updatePage(_.cloneDeep(page))
+    updatePage(cloneDeep(page))
   }
 
   const numericCSSProperties = [
@@ -461,7 +461,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   }
 
   function addStyle(selectedStyle) {
-    const newStyles = _.cloneDeep(styles)
+    const newStyles = cloneDeep(styles)
     if (!newStyles[selectedStyle]) {
       newStyles[selectedStyle] = ''
     }
@@ -482,7 +482,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   }
 
   function removeStyle(key) {
-    const newStyles = _.cloneDeep(styles)
+    const newStyles = cloneDeep(styles)
     delete newStyles[key]
     setStyles(newStyles)
     handleSave(newStyles)
@@ -552,7 +552,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     updateCSS(value)
   }, [])
 
-  const debouncedUpdateCodeBox = _.debounce(updateCodeBox, 1300)
+  const debouncedUpdateCodeBox = debounce(updateCodeBox, 1300)
 
   return (
     <>

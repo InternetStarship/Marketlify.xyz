@@ -1,4 +1,4 @@
-export default function generateUniqueId(existingIds) {
+export function generateUniqueId(existingIds) {
   let uniqueId
 
   do {

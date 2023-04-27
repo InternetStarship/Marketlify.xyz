@@ -1,4 +1,4 @@
-function findContentById(id, content = []) {
+export function findContentById(id, content = []) {
   if (Array.isArray(content)) {
     for (const item of content) {
       if (item.id === id) return item
@@ -7,5 +7,3 @@ function findContentById(id, content = []) {
 
   return null
 }
-
-export default findContentById

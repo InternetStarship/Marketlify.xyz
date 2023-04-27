@@ -2,10 +2,10 @@ import { IoText, IoImageOutline } from 'react-icons/io5'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { RxButton } from 'react-icons/rx'
 import { TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
-import getIndexesById from '@/utils/getIndexesById'
-import defaults from '@/utils/defaults'
-import _ from 'lodash'
-import generateUniqueId from '@/utils/generateUniqueId'
+import { getIndexesById } from '@/utils/getIndexesById'
+import { defaults } from '@/utils/defaults'
+import { cloneDeep } from 'lodash'
+import { generateUniqueId } from '@/utils/generateUniqueId'
 
 export default function AddDropdown({
   children,
@@ -23,7 +23,7 @@ export default function AddDropdown({
     const newId = generateUniqueId(existingIds)
     const currentElement = getIndexesById(selectedId, page.data.styles.sections)
 
-    const newItem = _.cloneDeep(defaults.elements[type])
+    const newItem = cloneDeep(defaults.elements[type])
     newItem.id = newId
     newItem.type = type
 
@@ -82,7 +82,7 @@ export default function AddDropdown({
     page.data.content.push(data)
 
     setPopup(false)
-    updatePage(_.cloneDeep(page))
+    updatePage(cloneDeep(page))
     updateHovering(false)
   }
 
@@ -101,14 +101,14 @@ export default function AddDropdown({
 
     page.data.styles.sections.push(newItem)
     setPopup(false)
-    updatePage(_.cloneDeep(page))
+    updatePage(cloneDeep(page))
     updateHovering(false)
   }
 
   function addRow(totalColumns) {
     const newId = generateUniqueId(existingIds)
     const columns = Array.from({ length: totalColumns }, () => {
-      const newColumn = _.cloneDeep(defaults.column)
+      const newColumn = cloneDeep(defaults.column)
       newColumn.id = generateUniqueId(existingIds)
       return newColumn
     })
@@ -122,7 +122,7 @@ export default function AddDropdown({
     const { sectionIndex } = getIndexesById(selectedId, page.data.styles.sections)
     page.data.styles.sections[sectionIndex].rows.push(newItem)
     setPopup(false)
-    updatePage(_.cloneDeep(page))
+    updatePage(cloneDeep(page))
     updateHovering(false)
   }
 
