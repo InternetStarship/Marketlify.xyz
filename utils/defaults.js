@@ -13,6 +13,7 @@ const defaults = {
     style: {},
     rows: [],
   },
+
   row: {
     id: null,
     properties: {
@@ -24,6 +25,7 @@ const defaults = {
     },
     columns: [],
   },
+
   column: {
     id: null,
     properties: {
@@ -33,6 +35,7 @@ const defaults = {
     style: {},
     elements: [],
   },
+
   elements: {
     headline: {
       id: null,
@@ -45,6 +48,7 @@ const defaults = {
         fontWeight: 800,
       },
     },
+
     subheadline: {
       id: null,
       properties: {
@@ -56,6 +60,7 @@ const defaults = {
         fontWeight: 600,
       },
     },
+
     paragraph: {
       id: null,
       properties: {
@@ -67,6 +72,7 @@ const defaults = {
         fontWeight: 400,
       },
     },
+
     image: {
       id: null,
       properties: {
@@ -80,6 +86,7 @@ const defaults = {
         borderRadius: '5px',
       },
     },
+
     button: {
       id: null,
       properties: {
@@ -99,6 +106,7 @@ const defaults = {
         textAlign: 'center',
       },
     },
+
     list: {
       id: null,
       properties: {
@@ -110,6 +118,7 @@ const defaults = {
         fontWeight: 400,
       },
     },
+
     video: {
       id: null,
       properties: {
@@ -120,6 +129,7 @@ const defaults = {
       },
       style: {},
     },
+
     icon: {
       id: null,
       properties: {
@@ -128,6 +138,7 @@ const defaults = {
       },
       style: {},
     },
+
     divider: {
       id: null,
       properties: {
@@ -138,6 +149,7 @@ const defaults = {
         margin: '10px 0',
       },
     },
+
     label: {
       id: null,
       properties: {
@@ -149,6 +161,7 @@ const defaults = {
         fontWeight: 500,
       },
     },
+
     input: {
       id: null,
       properties: {
@@ -163,6 +176,7 @@ const defaults = {
         boxShadow: 'inset 0 1px 2px rgba(0,0,0,.1)',
       },
     },
+
     textarea: {
       id: null,
       properties: {
@@ -177,6 +191,7 @@ const defaults = {
         boxShadow: 'inset 0 1px 2px rgba(0,0,0,.1)',
       },
     },
+
     select: {
       id: null,
       properties: {
@@ -191,7 +206,20 @@ const defaults = {
         boxShadow: 'inset 0 1px 2px rgba(0,0,0,.1)',
       },
     },
+
     checkbox: {
+      id: null,
+      properties: {
+        id: '',
+        class: '',
+      },
+      style: {
+        fontSize: '15px',
+        fontWeight: 500,
+      },
+    },
+
+    radio: {
       id: null,
       properties: {
         id: '',
