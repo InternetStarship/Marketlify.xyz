@@ -71,13 +71,20 @@
 }
 
 .blocks-popup {
-  @apply absolute z-10 bg-white p-6 shadow-2xl rounded-md grid grid-cols-3 gap-3 border-2 border-slate-200 overflow-x-hidden;
-  top: 35px;
-  left: 50%;
-  margin-left: -275px;
+  @apply bg-white  w-full p-6 shadow-2xl rounded-md grid grid-cols-3 gap-3 border-2 border-slate-200 overflow-x-hidden;
   width: 550px;
-
   max-height: 365px;
+}
+
+.blocks-coyote-time {
+  @apply absolute z-10;
+  background: rgba(0, 0, 0, 0);
+  top: 0px;
+  left: 50%;
+  margin-left: -340px;
+  width: 680px;
+  padding: 35px 65px;
+  padding-bottom: 55px;
 }
 
 .blocks-popup.elementTheme {

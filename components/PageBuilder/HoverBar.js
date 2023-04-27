@@ -198,8 +198,6 @@ export default function HoverBar({
                     move(-1)
                   }}
                   className="p-2 text-white"
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content="Move Up"
                 >
                   <FaArrowUp />
                 </button>
@@ -208,8 +206,6 @@ export default function HoverBar({
                     move(1)
                   }}
                   className="p-2 text-white"
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content="Move Down"
                 >
                   <FaArrowDown />
                 </button>
@@ -225,8 +221,6 @@ export default function HoverBar({
                     duplicate()
                   }}
                   className="p-2 text-white"
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content="Duplicate"
                 >
                   <FaCopy />
                 </button>
@@ -235,8 +229,6 @@ export default function HoverBar({
                     remove()
                   }}
                   className="p-2 text-white"
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content="Remove"
                 >
                   <FaTrash />
                 </button>

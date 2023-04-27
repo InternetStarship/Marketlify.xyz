@@ -2,9 +2,12 @@
 
 ## Project Goals
 
-- Create a page builder that can be used to create a funnel or landing page.
-- All saving is local storage. Just export/download HTML.
-- Export to ClickFunnels 2.0
+- Create a funnel & page builder that works right away. (speed)
+- Use local storage as default for speed. (offline)
+- Collect email leads on sign up. (100k leads)
+- Export to optimized HTML. (.zip)
+- Promote ClickFunnels 2.0. (affiliate)
+- Pro plans. $20/m (AI, fancy elements, integrations, saving to cloud, etc)
 
 ---
 
@@ -12,29 +15,26 @@
 
 ## Get Started
 
-- [ ] Icon Element
-- [ ] Popup Element
 - [ ] Container Element
-- [ ] Format exported HTML for each element
-- [ ] States: default, hover, mobile
+- [ ] States: hover, mobile
 
-## Bugs (finish)
+## Bugs / Todos
 
-- [ ] Add dropdown show top if not enough space
 - [ ] Edit css on complicated css error
 - [ ] Add action to button
 - [ ] Rows columns on mobile
 - [ ] Drag and drop on canvas and move layers fix issue
 - [ ] Text Editor double up
 - [ ] Duplicate section / row with new ids on inner elements
-- [ ] Add coyote time to dropdown
-- [ ] Hover bar optimizations (losing focus, etc)
-- [ ] Export: Set max width for sections via page settings
 - [ ] Adding new doesn't add to correct position
 - [ ] Dropdown menu position
 - [ ] Undo button not working perfectly
 - [ ] Hover on divider issue
 - [ ] Make it work on mobile (limited functionality)
+- [ ] Export google fonts, base css, etc
+- [ ] Icon Element
+- [ ] Popup Element
+- [ ] Custom HTML Element
 
 ---
 
@@ -108,6 +108,7 @@
 - [x] Searchable CSS Properties
 - [x] Unit Type default px for Integers
 - [x] Edit element properties (id, class, etc)
+- [x] Add coyote time to dropdown
 - [x] CSS Edit Box
 - [x] Color Picker
 - [x] Google Fonts
