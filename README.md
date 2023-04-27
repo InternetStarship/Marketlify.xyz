@@ -20,14 +20,14 @@
 - [ ] Icon Element
 - [ ] Popup Element
 - [ ] Custom HTML Element
-- [ ] Mobile Ready
 
 ## Bugs / Todos
 
 - [x] Duplicate section / row with new ids on inner elements
 - [x] Adding new doesn't add to correct position
 - [x] Dropdown menu position (check top/bottom)
-- [ ] Hover on divider issue (add hover padding on divider only)
+- [x] Hover on divider issue (add hover padding on divider only)
+
 - [ ] Text Editor double up
 - [ ] Undo button not working perfectly
 - [ ] Drag and drop on canvas and move layers fix issue
@@ -39,9 +39,10 @@
 
 ## Content
 
-- [ ] Starter templates (optin, thank you, etc)
+- [ ] Starter templates
 - [ ] Starter blocks (sections, rows, containers)
 - [ ] Connect to ChatGPT for content + auto build + copywriting
+- [ ] Mobile Ready
 
 ## Extra
 
