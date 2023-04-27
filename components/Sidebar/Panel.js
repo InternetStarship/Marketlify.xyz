@@ -617,8 +617,15 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     )
   }
 
-  function updateCSS() {
-    const cssProps = codeBox
+  function updateCSS(value = null) {
+    let codes = codeBox
+    if (!codes) {
+      codes = buildCSS(secondaryTab)
+    }
+    if (value) {
+      codes = value
+    }
+    const cssProps = codes
       .match(/{([^}]*)}/)[1]
       .trim()
       .split(';')
@@ -637,8 +644,15 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   }
 
   const updateCodeBox = useCallback((value, viewUpdate) => {
+    console.log('value', value)
     setCodeBox(value)
+    updateCSS(value)
+    // setTimeout(() => {
+    //   updateCSS()
+    // }, 10)
   }, [])
+
+  const debouncedUpdateCodeBox = _.debounce(updateCodeBox, 1000)
 
   return (
     <>
@@ -723,10 +737,10 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               items={items}
               showCSS={showCSS}
               setShowCSS={() => {
+                setShowCSS(!showCSS)
                 if (showCSS) {
                   updateCSS()
                 }
-                setShowCSS(!showCSS)
               }}
             />
           </div>
@@ -737,9 +751,9 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                 <div className="border rounded shadow overflow-hidden">
                   <CodeMirror
                     value={buildCSS(secondaryTab)}
-                    height="250px"
+                    height="450px"
                     extensions={[css()]}
-                    onChange={updateCodeBox}
+                    onChange={debouncedUpdateCodeBox}
                   />
                 </div>
               </div>

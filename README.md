@@ -20,7 +20,6 @@
 
 ## Bugs / Todos
 
-- [ ] Edit css on complicated css error
 - [ ] Add action to button
 - [ ] Rows columns on mobile
 - [ ] Drag and drop on canvas and move layers fix issue
