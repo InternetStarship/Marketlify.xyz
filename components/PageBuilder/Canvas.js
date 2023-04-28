@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { findTypeById } from '@/utils/findTypeById'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { BiCodeAlt } from 'react-icons/bi'
 import { BsLayoutTextWindowReverse } from 'react-icons/bs'
 import { cloneDeep } from 'lodash'
 import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
+import { hover } from '@/utils/hover'
 import TextEditor from './TextEditor'
 import Element from './Element'
 import Empty from './Empty'
@@ -55,53 +55,15 @@ export default function Canvas({
     setData(page)
   }, [updated])
 
-  function hover(elementId, isEmpty = false, type = '') {
-    let element = document.getElementById(elementId)
-    if (type === '') {
-      type = findTypeById(parseInt(elementId.replace('marketlify-', '')), data.data.styles.sections)
-    }
-
-    if (element) {
-      setHoverType(type)
+  const updateOnHover = data => {
+    if (data.element) {
+      setHoverType(data.type)
       setHovering(true)
-
-      setPosition({
-        top: `${element.offsetTop}px`,
-        left: `${element.offsetLeft}px`,
-        width: `${element.offsetWidth}px`,
-        height: `${element.offsetHeight}px`,
-      })
-
-      const elementRect = element.getBoundingClientRect()
-      const width = elementRect.width
-
-      if (width < 280) {
-        document.querySelectorAll('.hoverSmallHidden').forEach(element => {
-          element.style.display = 'none'
-        })
-      } else {
-        document.querySelectorAll('.hoverSmallHidden').forEach(element => {
-          element.style.display = 'flex'
-        })
-      }
-
-      if (document.querySelector('.hoverBarRight')) {
-        if (isEmpty) {
-          document.querySelector('.hoverBarRight').style.display = 'none'
-          document.querySelector('.hoverBarLeft').style.display = 'none'
-        } else {
-          document.querySelector('.hoverBarRight').style.display = 'flex'
-          document.querySelector('.hoverBarLeft').style.display = 'flex'
-        }
-      }
-
-      if (isEmpty) {
-        const selected_id = parseInt(element.id.replace('marketlify-empty-', ''))
-        updateSelectedId(selected_id)
-      } else {
-        updateSelectedId(parseInt(elementId.replace('marketlify-', '')))
-      }
     }
+    if (data.positions) {
+      setPosition(data.positions)
+    }
+    updateSelectedId(data.id)
   }
 
   return (
@@ -246,7 +208,15 @@ export default function Canvas({
               }}
               onMouseOver={e => {
                 e.stopPropagation()
-                hover('marketlify-' + section.id)
+                hover(
+                  data => {
+                    updateOnHover(data)
+                  },
+                  'marketlify-' + section.id,
+                  false,
+                  'section',
+                  data.data.styles.sections
+                )
               }}
             >
               {section.rows.length === 0 && (
@@ -256,7 +226,15 @@ export default function Canvas({
                     id={'marketlify-' + 'empty-' + section.id}
                     onMouseOver={e => {
                       e.stopPropagation()
-                      hover('marketlify-' + 'empty-' + section.id, true, 'row')
+                      hover(
+                        data => {
+                          updateOnHover(data)
+                        },
+                        'marketlify-' + 'empty-' + section.id,
+                        true,
+                        'row',
+                        data.data.styles.sections
+                      )
                     }}
                   >
                     <Empty message="Add Row" />
@@ -275,7 +253,15 @@ export default function Canvas({
                   }}
                   onMouseOver={e => {
                     e.stopPropagation()
-                    hover('marketlify-' + row.id)
+                    hover(
+                      data => {
+                        updateOnHover(data)
+                      },
+                      'marketlify-' + row.id,
+                      false,
+                      'row',
+                      data.data.styles.sections
+                    )
                   }}
                 >
                   {row.columns?.map((column, colIndex) => (
@@ -293,7 +279,15 @@ export default function Canvas({
                             onMouseOver={e => {
                               e.stopPropagation()
                               e.preventDefault()
-                              hover('marketlify-' + 'empty-' + column.id, true, 'element')
+                              hover(
+                                data => {
+                                  updateOnHover(data)
+                                },
+                                'marketlify-' + 'empty-' + column.id,
+                                true,
+                                'element',
+                                data.data.styles.sections
+                              )
                             }}
                           >
                             <Empty message="Add Element" className="element" />
@@ -321,7 +315,15 @@ export default function Canvas({
                           }}
                           onMouseOver={e => {
                             e.stopPropagation()
-                            hover('marketlify-' + element.id)
+                            hover(
+                              data => {
+                                updateOnHover(data)
+                              },
+                              'marketlify-' + element.id,
+                              false,
+                              'element',
+                              data.data.styles.sections
+                            )
                           }}
                         >
                           {editingText && (

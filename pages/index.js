@@ -46,6 +46,16 @@ export default function Builder() {
     setIsUndoAction(false)
   }, [page])
 
+  const updatePage = updated => {
+    if (updated === null) {
+      setPage(null)
+    } else {
+      setPage(updated)
+      setPageName(updated.name)
+      setUpdated(Date.now())
+    }
+  }
+
   function undo() {
     if (undoHistory.length > 0) {
       setIsUndoAction(true)
@@ -62,20 +72,6 @@ export default function Builder() {
     } else {
       setSelectedId(null)
       setCurrent(null)
-    }
-  }
-
-  function closeSidebar() {
-    setCurrent('')
-  }
-
-  function updatePage(updated) {
-    if (updated === null) {
-      setPage(null)
-    } else {
-      setPage(updated)
-      setPageName(updated.name)
-      setUpdated(Date.now())
     }
   }
 
@@ -151,13 +147,16 @@ export default function Builder() {
         undoHistory={undoHistory}
         updateUndoHistory={setUndoHistory}
       />
+
       <div className="flex flex-row">
         <Sidebar
           current={current}
           selectedId={selectedId}
           funnel={funnel}
           page={page}
-          close={closeSidebar}
+          close={() => {
+            setCurrent('')
+          }}
           updatePage={updatePage}
           updateCurrent={value => {
             setCurrent(value)
@@ -165,6 +164,7 @@ export default function Builder() {
           updateFunnel={setFunnel}
           updateUndoHistory={setUndoHistory}
         />
+
         <div className="w-full">
           {!funnel && (
             <>
@@ -174,6 +174,7 @@ export default function Builder() {
                 </h3>{' '}
                 Please create a funnel or load a funnel from local storage.
               </div>
+
               <Popup title="Welcome" close={false} open={welcomePopup}>
                 <p className="text-lg">
                   Welcome to Marketlify the free funnel builder. You can build your pages for free and export
@@ -210,6 +211,7 @@ export default function Builder() {
               </Popup>
             </>
           )}
+
           {funnel && !page && (
             <>
               <div className="text-center text-slate-500 font-medium text-xs p-12">
@@ -220,6 +222,7 @@ export default function Builder() {
               </div>
             </>
           )}
+
           {funnel && page && (
             <Canvas
               funnel={funnel}
