@@ -173,7 +173,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
             </div>
           </div>
           <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
-            {/* <SearchStyles
+            <SearchStyles
               onChange={value => {
                 addStyle(value, styles, setStyles, selectedId, page, updatePage)
               }}
@@ -185,7 +185,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                   updateCSS(null, codeBox, secondaryTab, selectedId, page, updatePage, setStyles)
                 }
               }}
-            /> */}
+            />
           </div>
           {!showCSS && (
             <div className="pb-8">
