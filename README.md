@@ -23,7 +23,6 @@
 
 ## Bugs / Todos
 
-- [ ] Undo button not working perfectly
 - [ ] Drag and drop on canvas and move layers fix issue
 - [ ] Add action to button, select and video properties, etc
 
@@ -47,6 +46,7 @@
 ## User Experience
 
 - [ ] Make it stand out (product hunt worthy)
+- [ ] Add framer motion to stuff
 - [ ] Creative tool popup
 
 ---
