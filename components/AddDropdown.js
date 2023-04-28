@@ -2,10 +2,10 @@ import { IoText, IoImageOutline } from 'react-icons/io5'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { RxButton } from 'react-icons/rx'
 import { TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
-import { getIndexesById } from '@/utils/getIndexesById'
-import { defaults } from '@/utils/defaults'
-import { cloneDeep } from 'lodash'
-import { generateUniqueId } from '@/utils/generateUniqueId'
+
+import { addRow } from '@/utils/addRow'
+import { addSection } from '@/utils/addSection'
+import { addElement } from '@/utils/addElement'
 
 export default function AddDropdown({
   children,
@@ -19,113 +19,6 @@ export default function AddDropdown({
   id,
   updateHovering,
 }) {
-  function addElement(type) {
-    const newId = generateUniqueId(existingIds)
-    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
-
-    const newItem = cloneDeep(defaults.elements[type])
-    newItem.id = newId
-    newItem.type = type
-
-    page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-      currentElement.columnIndex
-    ].elements.push(newItem)
-
-    let data = {}
-
-    switch (type) {
-      case 'headline':
-        data = {
-          content: 'Main Headline Content',
-        }
-        break
-      case 'subheadline':
-        data = {
-          content: 'Sub Headline Example',
-        }
-        break
-      case 'paragraph':
-        data = {
-          content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
-        }
-        break
-      case 'button':
-        data = {
-          content: 'Example Content',
-        }
-        break
-      case 'list':
-        data = {
-          content: 'Example Content',
-        }
-        break
-      case 'label':
-        data = {
-          content: 'Label Name',
-        }
-        break
-      case 'checkbox':
-        data = {
-          content: 'Accept terms of service',
-        }
-        break
-      case 'select':
-        data = {
-          options: ['Option 1', 'Option 2'],
-        }
-        break
-    }
-
-    data = { ...data, id: newId, type: type }
-
-    page.data.content.push(data)
-
-    setPopup(false)
-    updatePage(cloneDeep(page))
-    updateHovering(false)
-  }
-
-  function addSection(width) {
-    const newId = generateUniqueId(existingIds)
-
-    const newItem = {
-      ...defaults.section,
-      id: newId,
-      style: {
-        maxWidth: width,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
-    }
-
-    page.data.styles.sections.push(newItem)
-    setPopup(false)
-    updatePage(cloneDeep(page))
-    updateHovering(false)
-  }
-
-  function addRow(totalColumns) {
-    const newId = generateUniqueId(existingIds)
-    const columns = Array.from({ length: totalColumns }, () => {
-      const newColumn = cloneDeep(defaults.column)
-      newColumn.id = generateUniqueId(existingIds)
-      return newColumn
-    })
-
-    const newItem = {
-      ...defaults.row,
-      id: newId,
-      columns: columns,
-    }
-
-    const { sectionIndex } = getIndexesById(selectedId, page.data.styles.sections)
-    page.data.styles.sections[sectionIndex].rows.push(newItem)
-    setPopup(false)
-    updatePage(cloneDeep(page))
-    updateHovering(false)
-  }
-
   return (
     <div
       className="relative"
@@ -143,7 +36,16 @@ export default function AddDropdown({
               <>
                 <div
                   onClick={() => {
-                    addSection('1650px')
+                    addSection(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      '1650px',
+                      existingIds,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -152,7 +54,16 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addSection('1280px')
+                    addSection(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      '1280px',
+                      existingIds,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -161,7 +72,16 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addSection('1080px')
+                    addSection(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      '1080px',
+                      existingIds,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -170,7 +90,16 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addSection('960px')
+                    addSection(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      '960px',
+                      existingIds,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -179,7 +108,16 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addSection('760px')
+                    addSection(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      '760px',
+                      existingIds,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -188,7 +126,16 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addSection('480px')
+                    addSection(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      '480px',
+                      existingIds,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -201,7 +148,17 @@ export default function AddDropdown({
               <>
                 <div
                   onClick={() => {
-                    addRow(1)
+                    addRow(
+                      () => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      1,
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -210,7 +167,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addRow(2)
+                    addRow(
+                      () => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      2,
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -219,7 +186,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addRow(3)
+                    addRow(
+                      () => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      3,
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -228,7 +205,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addRow(4)
+                    addRow(
+                      () => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      4,
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -237,7 +224,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addRow(5)
+                    addRow(
+                      () => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      5,
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -246,7 +243,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addRow(6)
+                    addRow(
+                      () => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      6,
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -255,6 +262,7 @@ export default function AddDropdown({
                 </div>
               </>
             )}
+
             {hoverType === 'column' && (
               <>
                 <div className="block">
@@ -263,11 +271,22 @@ export default function AddDropdown({
                 </div>
               </>
             )}
+
             {hoverType === 'element' && (
               <>
                 <div
                   onClick={() => {
-                    addElement('headline')
+                    addElement(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      'headline',
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -276,7 +295,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addElement('subheadline')
+                    addElement(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      'subheadline',
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -285,7 +314,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addElement('paragraph')
+                    addElement(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      'paragraph',
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >
@@ -294,7 +333,17 @@ export default function AddDropdown({
                 </div>
                 <div
                   onClick={() => {
-                    addElement('icon')
+                    addElement(
+                      page => {
+                        setPopup(false)
+                        updatePage(page)
+                        updateHovering(false)
+                      },
+                      'icon',
+                      existingIds,
+                      selectedId,
+                      page
+                    )
                   }}
                   className="block"
                 >

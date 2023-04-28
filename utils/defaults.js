@@ -228,6 +228,4 @@ const master = {
   },
 }
 
-export function defaults() {
-  return master
-}
+export default master
