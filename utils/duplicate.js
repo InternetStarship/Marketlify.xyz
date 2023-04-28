@@ -4,28 +4,47 @@ import { findTypeById } from './findTypeById'
 import { getIndexesById } from './getIndexesById'
 import { generateUniqueId } from './generateUniqueId'
 
-function updateContent(item, selectedId, pageContent) {
-  const previousContent = pageContent.find(content => content.id === selectedId)
+const duplicatedIds = new Set()
+
+function duplicateContent(id, previousId, pageContent) {
+  const previousContent = pageContent.find(content => content.id === previousId)
   if (previousContent) {
     pageContent.push({
-      id: item.id,
-      content: previousContent.content,
-      type: previousContent.type,
+      ...previousContent,
+      id: id,
     })
   }
+
+  return pageContent
 }
 
-function updateNestedIds(item, existingIds, pageContent) {
+function duplicateInnerContent(pageContent) {
+  duplicatedIds.forEach(content => {
+    const id = content.newId
+    if (pageContent) {
+      pageContent.push({
+        ...content,
+        id: id,
+      })
+    }
+  })
+}
+
+function updateNestedIds(item, existingIds, pageContent = []) {
   if (item.hasOwnProperty('id')) {
-    const oldId = item.id
     const newId = generateUniqueId(existingIds)
     existingIds.add(item)
-    item.id = newId
 
-    if (item.hasOwnProperty('elements')) {
-      console.log('hey', pageContent)
-      updateContent(item, oldId, pageContent)
+    if (item?.type) {
+      const content = pageContent.find(content => content.id === item.id)
+      if (content)
+        duplicatedIds.add({
+          ...content,
+          newId: newId,
+        })
     }
+
+    item.id = newId
   }
 
   if (item.hasOwnProperty('rows')) {
@@ -37,7 +56,9 @@ function updateNestedIds(item, existingIds, pageContent) {
   }
 
   if (item.hasOwnProperty('elements')) {
-    item.elements.forEach(element => updateNestedIds(element, existingIds, pageContent))
+    item.elements.forEach(element => {
+      updateNestedIds(element, existingIds, pageContent)
+    })
   }
 }
 
@@ -81,11 +102,11 @@ export function duplicate(callback, page, selectedId, baseExistingIds) {
         currentElement.columnIndex
       ].elements.splice(currentElement.elementIndex, 0, newItem)
 
-      updateContent(newItem, selectedId, page.data.content)
-
+      duplicateContent(newItem, selectedId, page.data.content)
       break
   }
 
-  console.log(page)
+  duplicateInnerContent(page.data.content)
+
   return callback(cloneDeep(page))
 }
