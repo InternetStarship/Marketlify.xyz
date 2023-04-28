@@ -10,15 +10,17 @@ export function addRow(callback, totalColumns, existingIds, selectedId, page) {
     newColumn.id = generateUniqueId(existingIds)
     return newColumn
   })
+  const { sectionIndex } = getIndexesById(selectedId, page.data.styles.sections)
 
-  const newItem = {
+  const position = page.data.styles.sections[sectionIndex].rows.findIndex(row => row.id === selectedId)
+
+  const rowSchema = {
     ...defaults.row,
     id: newId,
     columns: columns,
   }
 
-  const { sectionIndex } = getIndexesById(selectedId, page.data.styles.sections)
-  page.data.styles.sections[sectionIndex].rows.push(newItem)
+  page.data.styles.sections[sectionIndex].rows.splice(position + 1, 0, rowSchema)
 
   callback(cloneDeep(page))
 }

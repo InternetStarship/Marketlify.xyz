@@ -2,10 +2,11 @@ import { generateUniqueId } from './generateUniqueId'
 import { cloneDeep } from 'lodash'
 import defaults from '@/utils/defaults'
 
-export function addSection(callback, width, existingIds, page) {
+export function addSection(callback, width, existingIds, page, selectedId) {
   const newId = generateUniqueId(existingIds)
+  const position = page.data.styles.sections.findIndex(section => section.id === selectedId)
 
-  const newItem = {
+  const sectionSchema = {
     ...defaults.section,
     id: newId,
     style: {
@@ -15,7 +16,7 @@ export function addSection(callback, width, existingIds, page) {
     },
   }
 
-  page.data.styles.sections.push(newItem)
+  page.data.styles.sections.splice(position + 1, 0, sectionSchema)
 
   return callback(cloneDeep(page))
 }

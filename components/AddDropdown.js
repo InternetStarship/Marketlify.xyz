@@ -83,7 +83,8 @@ export default function AddDropdown({
         },
         width,
         existingIds,
-        page
+        page,
+        selectedId
       ),
     row: ({ columns }) =>
       addRow(

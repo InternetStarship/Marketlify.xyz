@@ -7,13 +7,19 @@ export function addElement(callback, type, existingIds, selectedId, page) {
   const newId = generateUniqueId(existingIds)
   const currentElement = getIndexesById(selectedId, page.data.styles.sections)
 
-  const newItem = cloneDeep(defaults.elements[type])
-  newItem.id = newId
-  newItem.type = type
+  const elementSchema = {
+    ...defaults.elements[type],
+    id: newId,
+    type: type,
+  }
+
+  const position = page.data.styles.sections[currentElement.sectionIndex].rows[
+    currentElement.rowIndex
+  ].columns[currentElement.columnIndex].elements.findIndex(element => element.id === selectedId)
 
   page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
     currentElement.columnIndex
-  ].elements.push(newItem)
+  ].elements.splice(position + 1, 0, elementSchema)
 
   let data = {}
 

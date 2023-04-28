@@ -189,7 +189,14 @@ export default function Canvas({
               id={'marketlify-' + 'empty-000'}
               onMouseOver={e => {
                 e.stopPropagation()
-                hover('marketlify-' + 'empty-000', true, 'section')
+                hover(
+                  data => {
+                    updateOnHover(data)
+                  },
+                  'marketlify-' + 'empty-000',
+                  true,
+                  'section'
+                )
               }}
             >
               <Empty message="Add Section" />
