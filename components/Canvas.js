@@ -31,7 +31,7 @@ export default function Canvas({
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
-  const [editingText, setEditingText] = useState(false)
+  const [editingText, setEditingText] = useState(null)
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Canvas({
         })
       })
     })
-    setEditingText(false)
+    setEditingText(null)
     buildGoogleFonts(page.data)
   }, [])
 
@@ -314,9 +314,27 @@ export default function Canvas({
                               element.type === 'subheadline' ||
                               element.type === 'paragraph'
                             ) {
-                              setEditingText(true)
+                              setEditingText(element.id)
+                              // setTimeout(() => {
+                              //   let element2 = document.getElementById('textEditorPlaceholder')
+                              //   element2.style.display = 'none'
+                              // }, 100)
+                              let element2 = document.getElementById(`marketlify-${element.id}`)
+                              let positions = {
+                                width: `${element2.offsetWidth}px`,
+                                height: `${element2.offsetHeight}px`,
+                              }
+                              setTimeout(() => {
+                                element2.style.width = positions.width
+                                element2.style.height = positions.height
+
+                                setTimeout(() => {
+                                  element2.style.width = positions.width
+                                  element2.style.height = 'auto'
+                                }, 500)
+                              }, 1)
                             } else {
-                              setEditingText(false)
+                              setEditingText(null)
                               edit(element)
                             }
                           }}
@@ -333,46 +351,37 @@ export default function Canvas({
                             )
                           }}
                         >
-                          {editingText && (
-                            <>
-                              {(element.type === 'headline' ||
-                                element.type === 'subheadline' ||
-                                element.type === 'paragraph') && (
-                                <TextEditor
-                                  element={element}
-                                  data={data}
-                                  style={element.style}
-                                  updateContent={value => {
-                                    data.data.content.filter(
-                                      content => content.id === element.id
-                                    )[0].content = value
-                                    updatePage(data)
-                                  }}
-                                  closeEditor={() => {
-                                    setTimeout(() => {
-                                      setEditingText(false)
-                                    }, 50)
-                                  }}
-                                  edit={() => {
-                                    edit(element)
-                                    setTimeout(() => {
-                                      setEditingText(false)
-                                    }, 50)
-                                  }}
-                                  updateStyle={style => {
-                                    element.style = style
-                                    updatePage(data)
-                                  }}
-                                />
-                              )}
-
-                              {element.type !== 'headline' &&
-                                element.type !== 'subheadline' &&
-                                element.type !== 'paragraph' && (
-                                  <Element element={element} data={data} style={element.style} />
-                                )}
-                            </>
+                          {editingText === element.id && (
+                            <TextEditor
+                              element={element}
+                              data={data}
+                              style={element.style}
+                              updateContent={value => {
+                                data.data.content.filter(content => content.id === element.id)[0].content =
+                                  value
+                                updatePage(data)
+                              }}
+                              closeEditor={() => {
+                                setTimeout(() => {
+                                  setEditingText(null)
+                                }, 50)
+                              }}
+                              edit={() => {
+                                edit(element)
+                                setTimeout(() => {
+                                  setEditingText(null)
+                                }, 50)
+                              }}
+                              updateStyle={style => {
+                                element.style = style
+                                updatePage(data)
+                              }}
+                            />
                           )}
+                          {editingText && editingText !== element.id && (
+                            <Element element={element} data={data} style={element.style} />
+                          )}
+
                           {!editingText && <Element element={element} data={data} style={element.style} />}
                         </div>
                       ))}
