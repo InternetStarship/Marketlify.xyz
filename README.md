@@ -23,7 +23,6 @@
 
 ## Bugs / Todos
 
-- [ ] Text Editor double up
 - [ ] Undo button not working perfectly
 - [ ] Drag and drop on canvas and move layers fix issue
 - [ ] Add action to button, select and video properties, etc

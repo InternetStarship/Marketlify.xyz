@@ -319,20 +319,21 @@ export default function Canvas({
                               //   let element2 = document.getElementById('textEditorPlaceholder')
                               //   element2.style.display = 'none'
                               // }, 100)
-                              let element2 = document.getElementById(`marketlify-${element.id}`)
-                              let positions = {
-                                width: `${element2.offsetWidth}px`,
-                                height: `${element2.offsetHeight}px`,
-                              }
-                              setTimeout(() => {
-                                element2.style.width = positions.width
-                                element2.style.height = positions.height
 
-                                setTimeout(() => {
-                                  element2.style.width = positions.width
-                                  element2.style.height = 'auto'
-                                }, 500)
-                              }, 1)
+                              // setTimeout(() => {
+                              //   let element2 = document.getElementById(`textEditor`)
+                              //   let positions = {
+                              //     width: `${element2.offsetWidth}px`,
+                              //     height: `${element2.offsetHeight}px`,
+                              //   }
+                              //   element2.style.width = positions.width
+                              //   element2.style.height = positions.height
+
+                              //   setTimeout(() => {
+                              //     element2.style.width = positions.width
+                              //     element2.style.height = 'auto'
+                              //   }, 500)
+                              // }, 50)
                             } else {
                               setEditingText(null)
                               edit(element)

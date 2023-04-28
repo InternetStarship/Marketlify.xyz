@@ -16,8 +16,19 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { cloneDeep } from 'lodash'
 import { findContentById } from '@/utils/findContentById'
+import { motion } from 'framer-motion'
 
-export default function TextEditor({ updateContent, element, data, style, closeEditor, edit, updateStyle }) {
+export default function TextEditor({
+  updateContent,
+  element,
+  data,
+  style,
+  closeEditor,
+  edit,
+  updateStyle,
+  width,
+  height,
+}) {
   const [elementData] = useState(findContentById(element.id, data.data.content))
 
   const editor = useEditor({
@@ -31,7 +42,7 @@ export default function TextEditor({ updateContent, element, data, style, closeE
 
   return (
     <>
-      {editor && elementData && (
+      {editor && (
         <div
           id="textEditorToolbar"
           className="fixed top-0 left-0 z-50 shadow-sm text-lg flex items-center justify-between bg-white text-slate-900 py-2 px-3 w-full cursor-default"
@@ -139,9 +150,16 @@ export default function TextEditor({ updateContent, element, data, style, closeE
           </div>
         </div>
       )}
-      <div style={style}>
-        <EditorContent editor={editor} />
-      </div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: editor ? 1 : 0, scale: 1 }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
+      >
+        <div style={style}>
+          <EditorContent editor={editor} />
+        </div>
+      </motion.div>
     </>
   )
 }
