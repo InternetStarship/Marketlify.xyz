@@ -226,12 +226,11 @@ const master = {
       },
     },
 
-    'custom-html': {
+    customHTML: {
       id: null,
       properties: {
         id: '',
         class: '',
-        html: '',
       },
       style: {},
     },

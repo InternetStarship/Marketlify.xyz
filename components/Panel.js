@@ -28,6 +28,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [showCSS, setShowCSS] = useState(false)
   const [codeBox, setCodeBox] = useState('')
   const [showColorPicker, setShowColorPicker] = useState(false)
+  const [filteredFonts, setFilteredFonts] = useState([])
 
   useEffect(() => {
     page.data.styles.sections?.forEach(section => {
@@ -61,6 +62,14 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
       setSelectedType('body')
     }
   }, [])
+
+  const debouncedUpdateCSS = useCallback(
+    debounce(value => {
+      setCodeBox(value)
+      updateCSS(value, codeBox, secondaryTab, selectedId, page, updatePage, setStyles)
+    }, 1300),
+    [codeBox, secondaryTab, selectedId, page, updatePage, setStyles]
+  )
 
   return (
     <>
@@ -164,7 +173,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
             </div>
           </div>
           <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
-            <SearchStyles
+            {/* <SearchStyles
               onChange={value => {
                 addStyle(value, styles, setStyles, selectedId, page, updatePage)
               }}
@@ -176,7 +185,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                   updateCSS(null, codeBox, secondaryTab, selectedId, page, updatePage, setStyles)
                 }
               }}
-            />
+            /> */}
           </div>
           {!showCSS && (
             <div className="pb-8">
@@ -187,7 +196,9 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                 page,
                 selectedId,
                 showColorPicker,
-                setShowColorPicker
+                setShowColorPicker,
+                filteredFonts,
+                setFilteredFonts
               )}
             </div>
           )}
@@ -199,15 +210,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
                     value={buildCSS(secondaryTab, styles)}
                     height="450px"
                     extensions={[css()]}
-                    onChange={() => {
-                      debounce(
-                        useCallback((value, viewUpdate) => {
-                          setCodeBox(value)
-                          updateCSS(value, codeBox, secondaryTab, selectedId, page, updatePage, setStyles)
-                        }, []),
-                        1300
-                      )
-                    }}
+                    onChange={debouncedUpdateCSS}
                   />
                 </div>
               </div>

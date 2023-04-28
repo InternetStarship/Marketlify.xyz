@@ -5,7 +5,6 @@ import { getVideoId } from '@/utils/getVideoId'
 export default function Element({ element, data, style }) {
   const [elementData] = useState(findContentById(element.id, data.data.content))
 
-  if (!elementData) return false
   return (
     <>
       {elementData.type === 'headline' && (
@@ -200,7 +199,7 @@ export default function Element({ element, data, style }) {
         <hr id={element.properties.id} className={element.properties.class} style={style} />
       )}
 
-      {elementData.type === 'custom-html' && (
+      {elementData.type === 'customHTML' && (
         <div className="bg-orange-100 p-3 text-center font-medium border border-orange-300 text-orange-800 rounded">
           Custom HTML
         </div>

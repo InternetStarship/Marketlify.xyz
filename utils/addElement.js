@@ -70,6 +70,11 @@ export function addElement(callback, type, existingIds, selectedId, page) {
         options: ['Option 1', 'Option 2'],
       }
       break
+    case 'customHTML':
+      data = {
+        html: '<p>Example HTML</p>',
+      }
+      break
   }
 
   data = { ...data, id: newId, type: type }

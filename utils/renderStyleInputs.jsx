@@ -26,10 +26,10 @@ export function renderStyleInputs(
   page,
   selectedId,
   showColorPicker,
-  setShowColorPicker
+  setShowColorPicker,
+  filteredFonts,
+  setFilteredFonts
 ) {
-  const [filteredFonts, setFilteredFonts] = useState([])
-
   if (styles) {
     return Object.entries(styles).map(([key, value]) => {
       const singleItem = cssProperties.filter(item => item.name === key)[0]
@@ -101,10 +101,10 @@ export function renderStyleInputs(
                       style={{ width: 125 }}
                       onChange={e => {
                         const value = e.target.value
-                        const filteredFonts = googleFonts.filter(font => {
+                        const filteredFontsNew = googleFonts.filter(font => {
                           return font.toLowerCase().includes(value.toLowerCase())
                         })
-                        const uniqueFonts = [...new Set(filteredFonts)]
+                        const uniqueFonts = [...new Set(filteredFontsNew)]
                         setFilteredFonts(uniqueFonts)
                       }}
                     />

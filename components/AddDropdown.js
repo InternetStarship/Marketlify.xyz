@@ -44,7 +44,7 @@ const hoverTypeConfig = {
     { type: 'select', label: 'Select', Icon: TbSelect },
     { type: 'checkbox', label: 'Checkbox', Icon: RxCheckbox },
     { type: 'radio', label: 'Radio', Icon: RxRadiobutton },
-    { type: 'custom-html', label: 'Custom HTML', Icon: RxCode },
+    { type: 'customHTML', label: 'Custom HTML', Icon: RxCode },
   ],
 }
 
