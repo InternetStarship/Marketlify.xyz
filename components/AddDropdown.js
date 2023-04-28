@@ -46,7 +46,7 @@ const hoverTypeConfig = {
   ],
 }
 
-function generateBlocks(config, onClick, existingIds, page, selectedId) {
+const generateBlocks = (config, onClick, existingIds, page, selectedId) => {
   return config.map(({ Icon, label, ...rest }) => (
     <div
       key={label}
@@ -59,6 +59,17 @@ function generateBlocks(config, onClick, existingIds, page, selectedId) {
       <span>{label}</span>
     </div>
   ))
+}
+
+const isCloseToBottom = selectedId => {
+  const dom = document.querySelector(`#marketlify-${selectedId}`)
+  if (dom) {
+    const heightOfPopup = 365
+    const bottom = dom.getBoundingClientRect().bottom + heightOfPopup
+    const windowHeight = window.innerHeight
+    return bottom > windowHeight
+  }
+  return false
 }
 
 export default function AddDropdown({
@@ -123,7 +134,7 @@ export default function AddDropdown({
       {children}
 
       {popup && (
-        <div className="blocks-coyote-time">
+        <div className={`blocks-coyote-time ${isCloseToBottom(selectedId) ? 'position-top' : ''}`}>
           <div className={`blocks-popup ${hoverType}Theme`}>
             {generateBlocks(
               hoverTypeConfig[hoverType],

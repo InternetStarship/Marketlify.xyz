@@ -82,6 +82,10 @@
   padding-bottom: 55px;
 }
 
+.blocks-coyote-time.position-top {
+  top: -398px;
+}
+
 .blocks-popup.elementTheme {
   @apply border-orange-500;
 }

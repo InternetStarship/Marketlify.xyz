@@ -23,10 +23,7 @@
 
 ## Bugs / Todos
 
-- [x] Duplicate section / row with new ids on inner elements
-- [x] Dropdown menu position (check top/bottom)
-- [x] Hover on divider issue (add hover padding on divider only)
-
+- [ ] Hover on divider issue (add hover padding on divider only)
 - [ ] Text Editor double up
 - [ ] Undo button not working perfectly
 - [ ] Drag and drop on canvas and move layers fix issue
@@ -45,7 +42,6 @@
 
 ## Extra
 
-- [ ] Creative tool popup
 - [ ] Connect to Auto Responder (redirect to url)
 - [ ] Connect to Stripe checkout.js
 - [ ] Connect to Netlify
@@ -53,6 +49,7 @@
 ## User Experience
 
 - [ ] Make it stand out (product hunt worthy)
+- [ ] Creative tool popup
 
 ---
 
