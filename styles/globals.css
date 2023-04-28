@@ -20,16 +20,17 @@
 
 body {
   font-family: 'Inter', helvetica, arial, sans-serif;
+  background: #e5e5e5;
+}
+
+.page-builder-by-wynter-jones {
+  @apply w-full h-screen overflow-hidden;
 }
 
 .section:hover,
 .row:hover,
 .element:hover {
   @apply cursor-pointer;
-}
-
-.mainBG {
-  background: #e5e5e5;
 }
 
 .ProseMirror-focused {
