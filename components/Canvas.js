@@ -304,7 +304,7 @@ export default function Canvas({
 
                       {column.elements?.map((element, elementIndex) => (
                         <div
-                          className="element"
+                          className={`element ${element.type === 'divider' ? 'dividerFix' : ''}`}
                           id={'marketlify-' + element.id}
                           key={element.id}
                           onClick={e => {
