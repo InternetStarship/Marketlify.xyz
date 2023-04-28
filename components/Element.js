@@ -5,6 +5,7 @@ import { getVideoId } from '@/utils/getVideoId'
 export default function Elements({ element, data, style }) {
   const [elementData] = useState(findContentById(element.id, data.data.content))
 
+  if (!elementData) return false
   return (
     <>
       {elementData.type === 'headline' && (

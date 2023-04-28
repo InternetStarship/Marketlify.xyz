@@ -24,7 +24,6 @@
 ## Bugs / Todos
 
 - [x] Duplicate section / row with new ids on inner elements
-- [x] Adding new doesn't add to correct position
 - [x] Dropdown menu position (check top/bottom)
 - [x] Hover on divider issue (add hover padding on divider only)
 
