@@ -1,5 +1,5 @@
 import { exportFunnel } from '@/utils/exportFunnel'
-import Popup from '@/components/ui/Popup'
+import Popup from '@/components/Popup'
 
 export default function Export({ funnel, close }) {
   return (

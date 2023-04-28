@@ -6,11 +6,11 @@ import { getIndexesById } from '@/utils/getIndexesById'
 import { TbSection, TbColumns1 } from 'react-icons/tb'
 import { AiOutlineInsertRowAbove } from 'react-icons/ai'
 import { RxDot } from 'react-icons/rx'
-import Popup from '@/components/ui/Popup'
-import Canvas from '@/components/PageBuilder/Canvas'
-import Toolbar from '@/components/Toolbar/Toolbar'
-import Sidebar from '@/components/Sidebar/Sidebar'
-import Head from '@/components/ui/Head'
+import Popup from '@/components/Popup'
+import Canvas from '@/components/Canvas'
+import Toolbar from '@/components/Toolbar'
+import Sidebar from '@/components/Sidebar'
+import Head from '@/components/Head'
 
 export default function Builder() {
   const [funnel, setFunnel] = useState(null)
