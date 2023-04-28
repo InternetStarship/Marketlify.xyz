@@ -15,6 +15,8 @@ import { getContrastColor } from '@/utils/getContrastColor.js'
 import { duplicate } from '@/utils/duplicate'
 import { remove } from '@/utils/remove'
 import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
+import cssProperties from '@/utils/cssProperties'
+import googleFonts from '@/utils/googleFonts'
 import CodeMirror from '@uiw/react-codemirror'
 import SearchStyles from './SearchStyles'
 
@@ -27,14 +29,14 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [styles, setStyles] = useState({})
   const [properties, setProperties] = useState({})
   const [selectedType, setSelectedType] = useState()
-  const [items, setItems] = useState([])
+  const [allCSSProperties] = useState(cssProperties)
+  const [allFonts] = useState(googleFonts)
   const [mainTab, setMainTab] = useState('styles')
   const [secondaryTab, setSecondaryTab] = useState('default')
   const [existingIds] = useState(new Set())
   const [showCSS, setShowCSS] = useState(false)
   const [codeBox, setCodeBox] = useState('')
   const [showColorPicker, setShowColorPicker] = useState(false)
-  const [allFonts, setAllFonts] = useState([])
   const [filteredFonts, setFilteredFonts] = useState([])
 
   useEffect(() => {
@@ -50,24 +52,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
         })
       })
     })
-
-    getFontFamilies()
-  }, [])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/css-properties')
-        if (!response.ok) {
-          console.error('Failed to fetch data')
-        }
-        const data = await response.json()
-        setItems(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchData()
   }, [])
 
   useEffect(() => {
@@ -249,15 +233,6 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
     return false
   }
 
-  function getFontFamilies() {
-    fetch('/api/google-fonts')
-      .then(response => response.json())
-      .then(data => {
-        setAllFonts(data)
-      })
-      .catch(error => console.error('Error fetching data:', error))
-  }
-
   const renderInputs = () => {
     const makeLabelPretty = key => {
       return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
@@ -265,7 +240,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
 
     if (styles) {
       return Object.entries(styles).map(([key, value]) => {
-        const singleItem = items.filter(item => item.name === key)[0]
+        const singleItem = allCSSProperties.filter(item => item.name === key)[0]
         const options = singleItem?.options
         let selectBox = null
         if (options && options[0] !== 'value') {
@@ -660,7 +635,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               onChange={value => {
                 addStyle(value)
               }}
-              items={items}
+              allCSSProperties={allCSSProperties}
               showCSS={showCSS}
               setShowCSS={() => {
                 setShowCSS(!showCSS)

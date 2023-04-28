@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { FaCode } from 'react-icons/fa'
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
 
-export default function SearchStyles({ onChange, items, showCSS, setShowCSS }) {
+export default function SearchStyles({ onChange, allCSSProperties, showCSS, setShowCSS }) {
   const [searchValue, setSearchValue] = useState('')
 
   return (
@@ -12,7 +12,7 @@ export default function SearchStyles({ onChange, items, showCSS, setShowCSS }) {
         className={`relative w-full ${showCSS ? 'pointer-events-none opacity-30 cursor-not-allowed' : ''}`}
       >
         <ReactSearchAutocomplete
-          items={items}
+          items={allCSSProperties}
           onSelect={item => {
             onChange(item.name)
             setSearchValue('')

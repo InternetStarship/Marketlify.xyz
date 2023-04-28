@@ -6,7 +6,6 @@ import defaults from '@/utils/defaults'
 export function addRow(callback, totalColumns, existingIds, selectedId, page) {
   const newId = generateUniqueId(existingIds)
   const columns = Array.from({ length: totalColumns }, () => {
-    console.log(defaults)
     const newColumn = cloneDeep(defaults.column)
     newColumn.id = generateUniqueId(existingIds)
     return newColumn
