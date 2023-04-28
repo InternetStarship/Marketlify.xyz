@@ -1,7 +1,9 @@
 import { IoText, IoImageOutline } from 'react-icons/io5'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
-import { RxButton } from 'react-icons/rx'
-import { TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
+import { RxButton, RxDividerHorizontal, RxCheckbox, RxRadiobutton, RxInput, RxCode } from 'react-icons/rx'
+import { TbSelect, TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
+import { MdOutlineOndemandVideo, MdLabelOutline } from 'react-icons/md'
+import { BsTextareaResize } from 'react-icons/bs'
 import { addRow } from '@/utils/addRow'
 import { addSection } from '@/utils/addSection'
 import { addElement } from '@/utils/addElement'
@@ -33,16 +35,16 @@ const hoverTypeConfig = {
     { type: 'icon', label: 'Icon', Icon: RxButton },
     { type: 'list', label: 'List', Icon: AiOutlineUnorderedList },
     { type: 'image', label: 'Image', Icon: IoImageOutline },
-    { type: 'video', label: 'Video', Icon: IoImageOutline },
-    { type: 'divider', label: 'Divider', Icon: IoImageOutline },
+    { type: 'video', label: 'Video', Icon: MdOutlineOndemandVideo },
+    { type: 'divider', label: 'Divider', Icon: RxDividerHorizontal },
     { type: 'button', label: 'Button', Icon: RxButton },
-    { type: 'label', label: 'Label', Icon: IoImageOutline },
-    { type: 'input', label: 'Input', Icon: IoImageOutline },
-    { type: 'textarea', label: 'Textarea', Icon: IoImageOutline },
-    { type: 'select', label: 'Select', Icon: IoImageOutline },
-    { type: 'checkbox', label: 'Checkbox', Icon: IoImageOutline },
-    { type: 'radio', label: 'Radio', Icon: IoImageOutline },
-    { type: 'custom-html', label: 'Custom HTML', Icon: IoImageOutline },
+    { type: 'label', label: 'Label', Icon: MdLabelOutline },
+    { type: 'input', label: 'Input', Icon: RxInput },
+    { type: 'textarea', label: 'Textarea', Icon: BsTextareaResize },
+    { type: 'select', label: 'Select', Icon: TbSelect },
+    { type: 'checkbox', label: 'Checkbox', Icon: RxCheckbox },
+    { type: 'radio', label: 'Radio', Icon: RxRadiobutton },
+    { type: 'custom-html', label: 'Custom HTML', Icon: RxCode },
   ],
 }
 
@@ -61,10 +63,15 @@ const generateBlocks = (config, onClick, existingIds, page, selectedId) => {
   ))
 }
 
-const isCloseToBottom = selectedId => {
+const isCloseToBottom = (type, selectedId) => {
   const dom = document.querySelector(`#marketlify-${selectedId}`)
   if (dom) {
-    const heightOfPopup = 365
+    let heightOfPopup = 365
+    if (type === 'section') {
+      heightOfPopup = 300
+    } else if (type === 'row') {
+      heightOfPopup = 300
+    }
     const bottom = dom.getBoundingClientRect().bottom + heightOfPopup
     const windowHeight = window.innerHeight
     return bottom > windowHeight
@@ -134,7 +141,11 @@ export default function AddDropdown({
       {children}
 
       {popup && (
-        <div className={`blocks-coyote-time ${isCloseToBottom(selectedId) ? 'position-top' : ''}`}>
+        <div
+          className={`blocks-coyote-time ${hoverType}Theme ${
+            isCloseToBottom(hoverType, selectedId) ? 'position-top' : ''
+          }`}
+        >
           <div className={`blocks-popup ${hoverType}Theme`}>
             {generateBlocks(
               hoverTypeConfig[hoverType],

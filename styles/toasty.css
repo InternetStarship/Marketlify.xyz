@@ -15,7 +15,7 @@
   --toastify-toast-min-height: 64px;
   --toastify-toast-max-height: 800px;
   --toastify-font-family: sans-serif;
-  --toastify-z-index: 9999;
+  --toastify-z-index: 99999999999;
   --toastify-text-color-light: #757575;
   --toastify-text-color-dark: #fff;
   --toastify-text-color-info: #fff;
@@ -106,7 +106,7 @@
   box-sizing: border-box;
   margin-bottom: 1rem;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 7px;
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
   display: -ms-flexbox;
   display: flex;
@@ -114,8 +114,10 @@
   justify-content: space-between;
   max-height: var(--toastify-toast-max-height);
   overflow: hidden;
-  font-family: var(--toastify-font-family);
+  font-size: 17px;
   cursor: default;
+  text-align: center;
+  font-weight: 600;
   direction: ltr;
   /* webkit only issue #791 */
   z-index: 0;
@@ -232,6 +234,7 @@
   transition: 0.3s ease;
   -ms-flex-item-align: start;
   align-self: flex-start;
+  display: none;
 }
 .Toastify__close-button--light {
   color: #000;

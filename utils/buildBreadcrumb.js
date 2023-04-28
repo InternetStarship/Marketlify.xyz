@@ -10,6 +10,7 @@ export function buildBreadcrumb(selectedId, page, edit) {
       .filter(([key, value]) => value !== -1)
       .map(([key, value]) => (
         <span
+          key={key}
           className="cursor-pointer flex text-xs uppercase font-medium items-center hover:text-blue-700 hover:underline"
           data-type={key.replace('Index', '')}
           data-index={value}

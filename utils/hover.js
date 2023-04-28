@@ -20,7 +20,7 @@ export function hover(callback, elementId, isEmpty = false, type = '', sections 
     const elementRect = element.getBoundingClientRect()
     const width = elementRect.width
 
-    if (width < 280) {
+    if (width < 180) {
       document.querySelectorAll('.hoverSmallHidden').forEach(element => {
         element.style.display = 'none'
       })

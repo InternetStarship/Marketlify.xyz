@@ -184,8 +184,26 @@ export default function Element({ element, data, style }) {
         </label>
       )}
 
+      {elementData.type === 'radio' && (
+        <label htmlFor={element.properties.id} className={element.properties.class}>
+          <input
+            id={element.properties.id}
+            type="radio"
+            checked={element.properties.checked}
+            onChange={element.properties.onChange}
+          />
+          {elementData.content}
+        </label>
+      )}
+
       {elementData.type === 'divider' && (
         <hr id={element.properties.id} className={element.properties.class} style={style} />
+      )}
+
+      {elementData.type === 'custom-html' && (
+        <div className="bg-orange-100 p-3 text-center font-medium border border-orange-300 text-orange-800 rounded">
+          Custom HTML
+        </div>
       )}
     </>
   )

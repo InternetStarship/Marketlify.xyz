@@ -20,11 +20,9 @@
 - [ ] Icon Element
 - [ ] Popup Element
 - [ ] Custom HTML Element
-
-## Bugs / Todos
-
-- [ ] Drag and drop on canvas and move layers fix issue
 - [ ] Add action to button, select and video properties, etc
+- [ ] Drag and drop on canvas and move layers fix issue
+- [ ] Perfect HTML export
 
 ---
 
@@ -32,7 +30,7 @@
 
 ## Content
 
-- [ ] Starter templates
+- [ ] Starter templates (library view, search, etc)
 - [ ] Starter blocks (sections, rows, containers)
 - [ ] Connect to ChatGPT for content + auto build + copywriting
 - [ ] Mobile Ready

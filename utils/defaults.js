@@ -225,6 +225,16 @@ const master = {
         fontWeight: 500,
       },
     },
+
+    'custom-html': {
+      id: null,
+      properties: {
+        id: '',
+        class: '',
+        html: '',
+      },
+      style: {},
+    },
   },
 }
 
