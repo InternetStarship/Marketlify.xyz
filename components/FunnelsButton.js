@@ -80,17 +80,15 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
             <div className="page-list">
               {funnels.length === 0 && (
                 <div className="px-12 py-3">
-                  <h3 className="mb-6 text-lg">
-                    It looks like you haven't created any funnels yet. This is where all of your saved funnels
-                    will be stored for easy access, even when you're offline.
-                  </h3>
-                  <h3 className="mb-6 text-lg">
-                    To get started, simply create a new funnel using our intuitive page builder, and save your
-                    changes to your local browser for safekeeping.
-                  </h3>
-                  <h3 className="text-lg">
-                    Your funnels & pages are always private and accessible only to you.
-                  </h3>
+                  <h3 className="mb-6 text-xl font-bold">Oops! No funnels here...yet! 🤔</h3>
+                  <p className="mb-6 text-lg">
+                    This is where all your crafted funnels will reside, ready for easy access - even when
+                    you're offline.
+                  </p>
+                  <p className="mb-6 text-lg">
+                    To begin your funnel-making adventure, dive into our user-friendly page builder and hit
+                    'save' to store your masterpiece safely in your local browser.
+                  </p>
                 </div>
               )}
 

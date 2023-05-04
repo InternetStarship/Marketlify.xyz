@@ -42,28 +42,30 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
               </div>
             </div>
             <div className="page-modal-content">
-              <div className="mb-2">
-                <label>Name</label>
-                <input
-                  type="text"
-                  className="sidebar-input block w-full"
-                  value={name}
-                  onChange={e => {
-                    setName(e.target.value)
-                  }}
-                />
-              </div>
+              <div className="flex mb-4 space-x-4">
+                <div className="w-3/4">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    className="sidebar-input-full block w-full"
+                    value={name}
+                    onChange={e => {
+                      setName(e.target.value)
+                    }}
+                  />
+                </div>
 
-              <div className="mb-2">
-                <label>Number of Pages</label>
-                <input
-                  type="text"
-                  className="sidebar-input block w-full"
-                  value={numberOfPages}
-                  onChange={e => {
-                    setNumberOfPages(e.target.value)
-                  }}
-                />
+                <div className="w-1/4">
+                  <label>Number of Pages</label>
+                  <input
+                    type="text"
+                    className="sidebar-input-full block w-full"
+                    value={numberOfPages}
+                    onChange={e => {
+                      setNumberOfPages(e.target.value)
+                    }}
+                  />
+                </div>
               </div>
 
               <button
