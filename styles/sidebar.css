@@ -1,8 +1,12 @@
 #sidebar {
-  @apply bg-white shadow-sm hidden md:block;
+  @apply bg-white shadow-sm hidden md:block relative;
   max-width: 340px;
   width: 100%;
   height: calc(100vh - 54px);
+}
+#sidebar.closed {
+  left: -340px;
+  position: fixed;
 }
 .sidebar-fieldset {
   @apply px-3 py-1 flex items-center justify-between relative;
@@ -61,4 +65,10 @@ select.sidebar-input {
 
 #sidebar::-webkit-scrollbar-corner {
   background: none;
+}
+
+#expander {
+  @apply text-lg p-2 bg-white rounded-br-md cursor-pointer absolute;
+  top: 0;
+  right: -32px;
 }

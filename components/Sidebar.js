@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { RiFileAddLine } from 'react-icons/ri'
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 import { cloneDeep } from 'lodash'
 import { getPage } from '@/utils/getPage'
@@ -23,13 +24,22 @@ export default function Sidebar({
   updateUndoHistory,
 }) {
   const [selected, setSelected] = useState(current)
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     setSelected(current)
   }, [current])
 
   return (
-    <main id="sidebar">
+    <main id="sidebar" className={expanded ? 'closed' : ''}>
+      <div
+        id="expander"
+        onClick={() => {
+          setExpanded(!expanded)
+        }}
+      >
+        {expanded ? <BsArrowRight /> : <BsArrowLeft />}
+      </div>
       {selected === 'editing' && (
         <Panel
           page={page}
