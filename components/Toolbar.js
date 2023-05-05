@@ -4,14 +4,25 @@ import { BiDesktop } from 'react-icons/bi'
 import { FaDownload, FaTabletAlt, FaUndo } from 'react-icons/fa'
 import { updateRowLayout } from '@/utils/updateRowLayout'
 import SaveButton from './SaveButton'
-import FunnelsButton from './FunnelsButton'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { IoFunnel } from 'react-icons/io5'
 
 export default function Toolbar({ state }) {
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
-        <FunnelsButton state={state} />
+        <button
+          onClick={() => {
+            state.popup.open.set(true)
+            state.popup.type.set('funnels')
+          }}
+          className="flex items-center toolbar-button"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Saved Funnels"
+        >
+          <IoFunnel />
+          <span className="hidden xl:inline-block">Funnels</span>
+        </button>
 
         <button
           onClick={() => {

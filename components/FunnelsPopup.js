@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiOutlineCopy } from 'react-icons/ai'
-import { IoFunnel } from 'react-icons/io5'
 import { cloneDeep } from 'lodash'
 import { getFunnels } from '@/utils/getFunnels'
 import { removeFunnel } from '@/utils/removeFunnel'
@@ -18,19 +17,6 @@ function FunnelsButton({ state }) {
 
   return (
     <>
-      <button
-        onClick={() => {
-          state.popup.open.set(true)
-          state.popup.type.set('funnels')
-        }}
-        className="flex items-center toolbar-button"
-        data-tooltip-id="tooltip"
-        data-tooltip-content="Saved Funnels"
-      >
-        <IoFunnel />
-        <span className="hidden xl:inline-block">Funnels</span>
-      </button>
-
       {state.popup.open.get() && state.popup.type.get() === 'funnels' && (
         <div className="page-modal-overlay">
           <div className="page-modal">

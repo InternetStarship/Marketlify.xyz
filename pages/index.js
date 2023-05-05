@@ -11,6 +11,7 @@ import NoFunnel from '@/components/NoFunnel'
 import WelcomePopup from '@/components/WelcomePopup'
 import ExportPopup from '@/components/ExportPopup'
 import NewFunnelPopup from '@/components/NewFunnelPopup'
+import FunnelsPopup from '@/components/FunnelsPopup'
 import stateBlueprint from '@/utils/stateBlueprint'
 import { useUndo } from '@/utils/useUndo'
 
@@ -31,13 +32,14 @@ export default function Builder() {
       <WelcomePopup state={state} />
       <ExportPopup state={state} />
       <NewFunnelPopup state={state} />
+      <FunnelsPopup state={state} />
 
-      <div id="page-builder">
+      <div id="marketlify">
         <Sidebar state={state} />
 
         {!state.funnel.pages.get() && <NoFunnel state={state} />}
-        {state.funnel.pages.get() && !state.page.content.get()?.name && <NoPage state={state} />}
-        {state.funnel.pages.get() && state.page.content.get()?.name && <Canvas state={state} />}
+        {state.funnel.pages.get() && !state.page.content.get()?.data && <NoPage state={state} />}
+        {state.funnel.pages.get() && state.page.content.get()?.data && <Canvas state={state} />}
       </div>
 
       <ToastContainer

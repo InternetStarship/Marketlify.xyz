@@ -27,7 +27,7 @@ body {
   @apply w-full h-screen overflow-hidden;
 }
 
-#page-builder {
+#marketlify {
   @apply flex w-full flex-row;
 }
 
