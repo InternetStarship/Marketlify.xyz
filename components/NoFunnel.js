@@ -1,6 +1,6 @@
 export default function NoFunnel() {
   return (
-    <div className="text-center text-slate-500 font-medium text-xs p-12">
+    <div className="w-full text-center text-slate-500 font-medium text-xs p-12">
       <h3 className="text-xl mb-1">
         <strong>No funnel loaded.</strong>
       </h3>

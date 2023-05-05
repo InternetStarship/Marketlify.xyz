@@ -27,6 +27,10 @@ body {
   @apply w-full h-screen overflow-hidden;
 }
 
+#page-builder {
+  @apply flex w-full flex-row;
+}
+
 .section:hover,
 .row:hover,
 .element:hover {

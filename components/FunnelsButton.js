@@ -9,23 +9,19 @@ import { removeFunnel } from '@/utils/removeFunnel'
 import { cloneFunnel } from '@/utils/cloneFunnel'
 import { loadFunnel } from '@/utils/loadFunnel'
 
-function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistory }) {
-  const [isModalOpen, setIsModalOpen] = useState(modalOpen)
+function FunnelsButton({ state }) {
   const [funnels, setFunnels] = useState([])
 
   useEffect(() => {
     setFunnels(getFunnels())
   }, [])
 
-  useEffect(() => {
-    setIsModalOpen(modalOpen)
-  }, [modalOpen])
-
   return (
     <>
       <button
         onClick={() => {
-          setIsModalOpen(true)
+          state.popup.open.set(true)
+          state.popup.type.set('funnels')
         }}
         className="flex items-center toolbar-button"
         data-tooltip-id="tooltip"
@@ -34,7 +30,8 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
         <IoFunnel />
         <span className="hidden xl:inline-block">Funnels</span>
       </button>
-      {isModalOpen && (
+
+      {state.popup.open.get() && state.popup.type.get() === 'funnels' && (
         <div className="page-modal-overlay">
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-4">
@@ -42,7 +39,8 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
               <div>
                 <button
                   onClick={() => {
-                    setIsModalOpen(false)
+                    state.popup.open.set(false)
+                    state.popup.type.set('')
                   }}
                   className="page-modal-close-button"
                 >
@@ -99,10 +97,12 @@ function FunnelsButton({ load, modalOpen = false, updateFunnel, updateUndoHistor
                     onClick={() =>
                       loadFunnel(
                         (funnel, page) => {
-                          setIsModalOpen(false)
-                          updateFunnel(funnel)
-                          load(page)
-                          updateUndoHistory([cloneDeep(page)])
+                          state.popup.open.set(false)
+                          state.popup.type.set('')
+                          state.funnel.set(funnel)
+                          state.page.content.set(page)
+                          state.page.name.set(page.name)
+                          state.undo.history.set([cloneDeep(page)])
                         },
                         funnel,
                         funnel.pages[0]

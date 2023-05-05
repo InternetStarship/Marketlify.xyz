@@ -3,12 +3,12 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { cloneDeep } from 'lodash'
 import Panel from './Panel'
 
-export default function Settings({ updateCurrent, page, updatePage }) {
+export default function Settings({ state }) {
   const [tab, setTab] = useState('seo')
   const [seo, setSeo] = useState({})
 
   useEffect(() => {
-    setSeo(page.data.seo)
+    setSeo(state.page.content.get().data.seo)
   }, [])
 
   return (
@@ -17,7 +17,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
         <h3 className="capitalize">Page Settings</h3>
         <button
           onClick={() => {
-            updateCurrent('')
+            state.active.current.set('')
           }}
         >
           <AiOutlineCloseCircle />
@@ -46,11 +46,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
         </div>
       </div>
 
-      {tab === 'styles' && (
-        <>
-          <Panel page={page} close={close} updatePage={updatePage} />
-        </>
-      )}
+      {tab === 'styles' && <Panel state={state} />}
 
       {tab === 'seo' && (
         <div className="text-sm p-3 px-0">
@@ -62,8 +58,8 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.title}
               onChange={e => {
                 setSeo({ ...seo, title: e.target.value })
-                page.data.seo = seo
-                updatePage(cloneDeep(page))
+                state.page.content.get().data.seo = seo
+                state.page.content.set(cloneDeep(state.page.content.get()))
               }}
             />
           </div>
@@ -75,7 +71,7 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.description}
               onChange={e => {
                 setSeo({ ...seo, description: e.target.value })
-                updatePage(cloneDeep(page))
+                state.page.content.set(cloneDeep(state.page.content.get()))
               }}
             ></textarea>
           </div>
@@ -87,8 +83,8 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.image}
               onChange={e => {
                 setSeo({ ...seo, image: e.target.value })
-                page.data.seo = seo
-                updatePage(cloneDeep(page))
+                state.page.content.get().data.seo = seo
+                state.page.content.set(cloneDeep(state.page.content.get()))
               }}
             />
           </div>
@@ -100,8 +96,8 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.favicon}
               onChange={e => {
                 setSeo({ ...seo, favicon: e.target.value })
-                page.data.seo = seo
-                updatePage(cloneDeep(page))
+                state.page.content.get().data.seo = seo
+                state.page.content.set(cloneDeep(state.page.content.get()))
               }}
             />
           </div>
@@ -113,8 +109,8 @@ export default function Settings({ updateCurrent, page, updatePage }) {
               value={seo.url}
               onChange={e => {
                 setSeo({ ...seo, url: e.target.value })
-                page.data.seo = seo
-                updatePage(cloneDeep(page))
+                state.page.content.get().data.seo = seo
+                state.page.content.set(cloneDeep(state.page.content.get()))
               }}
             />
           </div>

@@ -1,11 +1,11 @@
 import { FaSave } from 'react-icons/fa'
 import { save } from '@/utils/save'
 
-function SaveButton({ page, name }) {
+function SaveButton({ state }) {
   return (
     <button
       onClick={() => {
-        save(page, name)
+        save(state.page.content.get(), state.page.name.get())
       }}
       className="flex items-center toolbar-button-primary"
       data-tooltip-id="tooltip"

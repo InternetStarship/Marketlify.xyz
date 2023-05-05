@@ -10,24 +10,8 @@ import Element from './Element'
 import Empty from './Empty'
 import HoverBar from './HoverBar'
 
-export default function Canvas({
-  funnel,
-  page,
-  edit,
-  viewport,
-  updated,
-  updatePage,
-  selectedId,
-  updateSelectedId,
-  current,
-  fullscreen,
-  updateFullscreen,
-  name,
-  updateName,
-  updateCurrent,
-  updateFunnel,
-}) {
-  const [data, setData] = useState(page)
+export default function Canvas({ state }) {
+  const [data] = useState(state.page.content.get())
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
@@ -35,7 +19,7 @@ export default function Canvas({
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
-    page.data.styles.sections?.forEach(section => {
+    state.page.content.get().data.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -48,12 +32,8 @@ export default function Canvas({
       })
     })
     setEditingText(null)
-    buildGoogleFonts(page.data)
+    buildGoogleFonts(state.page.content.get().data)
   }, [])
-
-  useEffect(() => {
-    setData(page)
-  }, [updated])
 
   const updateOnHover = data => {
     if (data.element) {
@@ -63,30 +43,30 @@ export default function Canvas({
     if (data.positions) {
       setPosition(data.positions)
     }
-    updateSelectedId(data.id)
+    state.active.selectedId.set(data.id)
   }
 
   return (
-    <main id="canvasContainer" className={fullscreen ? 'fullscreen' : ''}>
-      {fullscreen && (
-        <div id="fullscreenClose" onClick={updateFullscreen}>
+    <main id="canvasContainer" className={`${state.active.fullscreen ? 'fullscreen' : ''} w-full`}>
+      {state.active.fullscreen && (
+        <div
+          id="fullscreenClose"
+          onClick={() => {
+            state.active.fullscreen.set(false)
+          }}
+        >
           Close Fullscreen
         </div>
       )}
 
-      <div id="mainCanvas" className={viewport}>
+      <div id="mainCanvas" className={state.active.viewport.get()}>
         <div className="top-bar">
-          {/* <div className="traffic-lights hidden md:flex mr-3">
-            <div className="traffic-light traffic-light-close"></div>
-            <div className="traffic-light traffic-light-minimize"></div>
-            <div className="traffic-light traffic-light-maximize"></div>
-          </div> */}
           <div className="url-bar">
             <input
               type="text"
-              value={name}
+              value={state.page.name.get()}
               onChange={e => {
-                updateName(e.target.value)
+                state.page.name.set(e.target.value)
               }}
               className="w-full"
             />
@@ -96,8 +76,8 @@ export default function Canvas({
               data-tooltip-id="tooltip"
               data-tooltip-content="Page Structure"
               onClick={() => {
-                updateCurrent('layers')
-                updateSelectedId(null)
+                state.active.current.set('layers')
+                state.active.selectedId.set(null)
               }}
             >
               <BsLayoutTextWindowReverse />
@@ -106,8 +86,8 @@ export default function Canvas({
               data-tooltip-id="tooltip"
               data-tooltip-content="Page Settings"
               onClick={() => {
-                updateCurrent('settings')
-                updateSelectedId(null)
+                state.active.current.set('settings')
+                state.active.selectedId.set(null)
               }}
             >
               <FaCog />
@@ -116,8 +96,8 @@ export default function Canvas({
               data-tooltip-id="tooltip"
               data-tooltip-content="Custom Code"
               onClick={() => {
-                updateCurrent('custom-code')
-                updateSelectedId(null)
+                state.active.current.set('custom-code')
+                state.active.selectedId.set(null)
               }}
             >
               <BiCodeAlt />
@@ -128,19 +108,19 @@ export default function Canvas({
               onClick={() => {
                 const confirm = window.confirm('Are you sure you want to delete this page?')
                 if (confirm) {
-                  const id = page.id
+                  const id = state.page.content.get().id
                   const key = `marketlify_v3_page_${id}`
 
                   localStorage.removeItem(key)
 
-                  const funnelKey = `marketlify_v3_funnel_${funnel.id}`
-                  const updatedPages = funnel.pages.filter(pageId => pageId !== id)
-                  funnel.pages = updatedPages
+                  const funnelKey = `marketlify_v3_funnel_${state.funnel.get().id}`
+                  const updatedPages = state.funnel.get().pages.filter(pageId => pageId !== id)
+                  state.funnel.get().pages = updatedPages
 
-                  localStorage.setItem(funnelKey, JSON.stringify(funnel))
+                  localStorage.setItem(funnelKey, JSON.stringify(state.funnel.get()))
 
-                  updateFunnel(cloneDeep(funnel))
-                  updatePage(null)
+                  state.funnel.set(cloneDeep(state.funnel.get()))
+                  state.page.content.set(null)
                 }
               }}
             >
@@ -157,7 +137,7 @@ export default function Canvas({
           }}
           style={data.data.styles.body}
         >
-          {current !== '' && (
+          {state.active.current.get() !== '' && (
             <div
               className="w-full h-full hover:bg-slate-900 opacity-25 absolute z-20"
               onMouseOver={e => {
@@ -165,8 +145,8 @@ export default function Canvas({
                 e.stopPropagation()
               }}
               onClick={e => {
-                edit(null)
-                updateCurrent('')
+                state.active.selectedId.set(null)
+                state.active.current.set('')
               }}
             ></div>
           )}
@@ -174,10 +154,10 @@ export default function Canvas({
           {hovering && !editingText && (
             <HoverBar
               position={position}
-              page={page}
-              updatePage={updatePage}
-              selectedId={selectedId}
-              current={current}
+              page={state.page.content.get()}
+              updatePage={state.page.content.set}
+              selectedId={state.active.selectedId.get()}
+              current={state.active.current.get()}
               hoverType={hoverType}
               updateHovering={setHovering}
             />
@@ -211,7 +191,8 @@ export default function Canvas({
               style={section.style}
               onClick={e => {
                 e.stopPropagation()
-                edit(section)
+                state.active.selectedId.set(section.id)
+                state.active.current.set('editing')
               }}
               onMouseOver={e => {
                 e.stopPropagation()
@@ -256,7 +237,8 @@ export default function Canvas({
                   style={row.style}
                   onClick={e => {
                     e.stopPropagation()
-                    edit(row)
+                    state.active.selectedId.set(row.id)
+                    state.active.current.set('editing')
                   }}
                   onMouseOver={e => {
                     e.stopPropagation()
@@ -315,28 +297,10 @@ export default function Canvas({
                               element.type === 'paragraph'
                             ) {
                               setEditingText(element.id)
-                              // setTimeout(() => {
-                              //   let element2 = document.getElementById('textEditorPlaceholder')
-                              //   element2.style.display = 'none'
-                              // }, 100)
-
-                              // setTimeout(() => {
-                              //   let element2 = document.getElementById(`textEditor`)
-                              //   let positions = {
-                              //     width: `${element2.offsetWidth}px`,
-                              //     height: `${element2.offsetHeight}px`,
-                              //   }
-                              //   element2.style.width = positions.width
-                              //   element2.style.height = positions.height
-
-                              //   setTimeout(() => {
-                              //     element2.style.width = positions.width
-                              //     element2.style.height = 'auto'
-                              //   }, 500)
-                              // }, 50)
                             } else {
                               setEditingText(null)
-                              edit(element)
+                              state.active.selectedId.set(element.id)
+                              state.active.current.set('editing')
                             }
                           }}
                           onMouseOver={e => {
@@ -360,7 +324,7 @@ export default function Canvas({
                               updateContent={value => {
                                 data.data.content.filter(content => content.id === element.id)[0].content =
                                   value
-                                updatePage(data)
+                                state.page.content.set(data)
                               }}
                               closeEditor={() => {
                                 setTimeout(() => {
@@ -368,14 +332,15 @@ export default function Canvas({
                                 }, 50)
                               }}
                               edit={() => {
-                                edit(element)
+                                state.active.selectedId.set(element.id)
+                                state.active.current.set('editing')
                                 setTimeout(() => {
                                   setEditingText(null)
                                 }, 50)
                               }}
                               updateStyle={style => {
                                 element.style = style
-                                updatePage(data)
+                                state.page.content.set(data)
                               }}
                             />
                           )}

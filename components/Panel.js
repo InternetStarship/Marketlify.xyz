@@ -17,7 +17,7 @@ import cssProperties from '@/utils/cssProperties'
 import CodeMirror from '@uiw/react-codemirror'
 import SearchStyles from './SearchStyles'
 
-export default function Panel({ page, close, selectedId, updatePage, updateCurrent }) {
+export default function Panel({ state }) {
   const [styles, setStyles] = useState({})
   const [properties, setProperties] = useState({})
   const [selectedType, setSelectedType] = useState()
@@ -31,7 +31,7 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const [filteredFonts, setFilteredFonts] = useState([])
 
   useEffect(() => {
-    page.data.styles.sections?.forEach(section => {
+    state.page.content.get().data.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -46,18 +46,21 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   }, [])
 
   useEffect(() => {
-    const currentElement = findById(selectedId, page.data.styles.sections)
-    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = findById(
+      state.active.selectedId.get(),
+      state.page.content.get().data.styles.sections
+    )
+    const type = findTypeById(state.active.selectedId.get(), state.page.content.get().data.styles.sections)
     if (currentElement) {
       setStyles(currentElement.style)
       setProperties(currentElement.properties)
       setSelectedType(type)
     }
-  }, [selectedId])
+  }, [state.active.selectedId.get()])
 
   useEffect(() => {
-    if (!selectedId) {
-      setStyles(page.data.styles.body)
+    if (!state.active.selectedId.get()) {
+      setStyles(state.page.content.get().data.styles.body)
       setProperties({})
       setSelectedType('body')
     }
@@ -66,14 +69,29 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
   const debouncedUpdateCSS = useCallback(
     debounce(value => {
       setCodeBox(value)
-      updateCSS(value, codeBox, secondaryTab, selectedId, page, updatePage, setStyles)
+      updateCSS(
+        value,
+        codeBox,
+        secondaryTab,
+        state.active.selectedId.get(),
+        state.page.content.get(),
+        state.page.content.set,
+        setStyles
+      )
     }, 1300),
-    [codeBox, secondaryTab, selectedId, page, updatePage, setStyles]
+    [
+      codeBox,
+      secondaryTab,
+      state.active.selectedId.get(),
+      state.page.content.get(),
+      state.page.content.set,
+      setStyles,
+    ]
   )
 
   return (
     <>
-      {selectedId && (
+      {state.active.selectedId.get() && (
         <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
           <h3 className="capitalize">{selectedType}</h3>
 
@@ -82,11 +100,11 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               onClick={() => {
                 duplicate(
                   page => {
-                    updatePage(page)
-                    updateCurrent('')
+                    state.page.content.set(page)
+                    state.active.current.set('')
                   },
-                  page,
-                  selectedId,
+                  state.page.content.get(),
+                  state.active.selectedId.get(),
                   existingIds
                 )
               }}
@@ -99,11 +117,11 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               onClick={() => {
                 remove(
                   page => {
-                    updatePage(page)
-                    updateCurrent('')
+                    state.page.content.set(page)
+                    state.active.current.set('')
                   },
-                  page,
-                  selectedId
+                  state.page.content.get(),
+                  state.active.selectedId.get()
                 )
               }}
               data-tooltip-id="tooltip"
@@ -111,7 +129,11 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
             >
               <FaRegTrashAlt />
             </button>
-            <button onClick={close}>
+            <button
+              onClick={() => {
+                state.active.current.set('')
+              }}
+            >
               <AiOutlineCloseCircle />
             </button>
           </div>
@@ -175,14 +197,29 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
           <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
             <SearchStyles
               onChange={value => {
-                addStyle(value, styles, setStyles, selectedId, page, updatePage)
+                addStyle(
+                  value,
+                  styles,
+                  setStyles,
+                  state.active.selectedId.get(),
+                  state.page.content.get(),
+                  state.page.content.set
+                )
               }}
               allCSSProperties={allCSSProperties}
               showCSS={showCSS}
               setShowCSS={() => {
                 setShowCSS(!showCSS)
                 if (showCSS) {
-                  updateCSS(null, codeBox, secondaryTab, selectedId, page, updatePage, setStyles)
+                  updateCSS(
+                    null,
+                    codeBox,
+                    secondaryTab,
+                    state.active.selectedId.get(),
+                    state.page.content.get(),
+                    state.page.content.set,
+                    setStyles
+                  )
                 }
               }}
             />
@@ -192,9 +229,9 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
               {renderStyleInputs(
                 styles,
                 setStyles,
-                updatePage,
-                page,
-                selectedId,
+                state.page.content.set,
+                state.page.content.get(),
+                state.active.selectedId.get(),
                 showColorPicker,
                 setShowColorPicker,
                 filteredFonts,
@@ -221,7 +258,14 @@ export default function Panel({ page, close, selectedId, updatePage, updateCurre
       {mainTab === 'properties' && (
         <>
           <div className="pb-8 pt-3">
-            {renderPropertyInputs(styles, properties, setProperties, updatePage, page, selectedId)}
+            {renderPropertyInputs(
+              styles,
+              properties,
+              setProperties,
+              state.page.content.set,
+              state.page.content.get(),
+              state.active.selectedId.get()
+            )}
           </div>
         </>
       )}

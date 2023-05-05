@@ -4,14 +4,14 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { moveLayer } from '@/utils/moveLayer'
 import DraggableLayer from './DraggableLayer'
 
-export default function Layers({ page, updatePage, updateCurrent }) {
+export default function Layers({ state }) {
   return (
     <div>
       <div className="text-xl pt-4 pb-2 px-3 text-slate-800 flex items-center justify-between font-bold">
         <h3 className="capitalize">Page Structure</h3>
         <button
           onClick={() => {
-            updateCurrent('')
+            state.active.current.set('')
           }}
         >
           <AiOutlineCloseCircle />
@@ -19,7 +19,7 @@ export default function Layers({ page, updatePage, updateCurrent }) {
       </div>
       <div className="p-3 overflow-x-hidden" style={{ height: `calc(100vh - 118px)` }}>
         <DndProvider backend={HTML5Backend}>
-          {page.data.styles.sections.map((section, sectionIndex) => (
+          {state.page.content.get().data.styles.sections.map((section, sectionIndex) => (
             <div className="relative">
               <DraggableLayer
                 key={section.id}
@@ -28,10 +28,10 @@ export default function Layers({ page, updatePage, updateCurrent }) {
                 type="section"
                 moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
                   moveLayer(
-                    updatedPage => {
-                      updatePage(updatedPage)
+                    value => {
+                      state.page.content.set(value)
                     },
-                    page,
+                    state.page.content.get(),
                     dragLayer,
                     hoverLayer,
                     dragIndex,
@@ -49,10 +49,10 @@ export default function Layers({ page, updatePage, updateCurrent }) {
                       type="row"
                       moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
                         moveLayer(
-                          updatedPage => {
-                            updatePage(updatedPage)
+                          value => {
+                            state.page.content.set(value)
                           },
-                          page,
+                          state.page.content.get(),
                           dragLayer,
                           hoverLayer,
                           dragIndex,
@@ -71,10 +71,10 @@ export default function Layers({ page, updatePage, updateCurrent }) {
                             type="column"
                             moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
                               moveLayer(
-                                updatedPage => {
-                                  updatePage(updatedPage)
+                                value => {
+                                  state.page.content.set(value)
                                 },
-                                page,
+                                state.page.content.get(),
                                 dragLayer,
                                 hoverLayer,
                                 dragIndex,
@@ -92,13 +92,13 @@ export default function Layers({ page, updatePage, updateCurrent }) {
                                   index={elementIndex}
                                   id={element.id}
                                   type="element"
-                                  content={page.data.content}
+                                  content={tate.page.content.get().data.content}
                                   moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
                                     moveLayer(
-                                      updatedPage => {
-                                        updatePage(updatedPage)
+                                      value => {
+                                        state.page.content.set(value)
                                       },
-                                      page,
+                                      state.page.content.get(),
                                       dragLayer,
                                       hoverLayer,
                                       dragIndex,

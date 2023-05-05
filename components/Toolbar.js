@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { SlSizeFullscreen } from 'react-icons/sl'
 import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
@@ -6,46 +5,37 @@ import { FaDownload, FaTabletAlt, FaUndo } from 'react-icons/fa'
 import { updateRowLayout } from '@/utils/updateRowLayout'
 import SaveButton from './SaveButton'
 import FunnelsButton from './FunnelsButton'
-import NewFunnelButton from './NewFunnelButton'
-import Export from './Export'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 
-export default function Toolbar({
-  funnel,
-  page,
-  viewport,
-  updateViewport,
-  load,
-  updateFullscreen,
-  name,
-  modalOpen,
-  modalOpenNew,
-  updateFunnel,
-  undo,
-  updateUndoHistory,
-}) {
-  const [exportPopup, setExportPopup] = useState(false)
-
+export default function Toolbar({ state }) {
   return (
     <main className="w-full bg-white border-b border-slate-300 shadow-sm p-2 flex justify-between items-center">
       <div className="flex space-x-2">
-        <FunnelsButton
-          load={load}
-          modalOpen={modalOpen}
-          updateFunnel={updateFunnel}
-          updateUndoHistory={updateUndoHistory}
-        />
-        <NewFunnelButton load={load} modalOpenNew={modalOpenNew} updateFunnel={updateFunnel} />
+        <FunnelsButton state={state} />
+
+        <button
+          onClick={() => {
+            state.popup.open.set(true)
+            state.popup.type.set('new-funnel')
+          }}
+          className="flex items-center toolbar-button"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Create New Funnel"
+        >
+          <AiOutlinePlusCircle />
+          <span className="hidden xl:inline-block">New Funnel</span>
+        </button>
       </div>
 
-      {page && (
+      {state.page.content.get() && (
         <>
           <div className="items-center space-x-2 hidden md:flex">
             <button
               onClick={() => {
-                updateViewport('desktop')
+                state.active.viewport.set('desktop')
                 updateRowLayout()
               }}
-              className={'toolbar-button' + (viewport === 'desktop' ? ' active' : '')}
+              className={'toolbar-button' + (state.active.viewport.get() === 'desktop' ? ' active' : '')}
               data-tooltip-id="tooltip"
               data-tooltip-content="Desktop"
             >
@@ -53,10 +43,10 @@ export default function Toolbar({
             </button>
             <button
               onClick={() => {
-                updateViewport('tablet')
+                state.active.viewport.set('tablet')
                 updateRowLayout()
               }}
-              className={'toolbar-button' + (viewport === 'tablet' ? ' active' : '')}
+              className={'toolbar-button' + (state.active.viewport.get() === 'tablet' ? ' active' : '')}
               data-tooltip-id="tooltip"
               data-tooltip-content="Tablet"
             >
@@ -64,17 +54,19 @@ export default function Toolbar({
             </button>
             <button
               onClick={() => {
-                updateViewport('mobile')
+                state.active.viewport.set('mobile')
                 updateRowLayout()
               }}
-              className={'toolbar-button' + (viewport === 'mobile' ? ' active' : '')}
+              className={'toolbar-button' + (state.active.viewport.get() === 'mobile' ? ' active' : '')}
               data-tooltip-id="tooltip"
               data-tooltip-content="Mobile"
             >
               <AiOutlineMobile />
             </button>
             <button
-              onClick={updateFullscreen}
+              onClick={() => {
+                state.active.fullscreen.set(true)
+              }}
               className="toolbar-button"
               data-tooltip-id="tooltip"
               data-tooltip-content="Fullscreen"
@@ -85,7 +77,11 @@ export default function Toolbar({
           <div className="flex space-x-2">
             <button
               onClick={() => {
-                undo()
+                if (state.undo.history.get().length > 0) {
+                  state.undo.isAction.set(true)
+                  state.page.content.set(undoHistory[undoHistory.length - 1])
+                  state.undo.history.set(prevHistory => prevHistory.slice(0, -1))
+                }
               }}
               className="flex items-center toolbar-button"
               data-tooltip-id="tooltip"
@@ -93,11 +89,13 @@ export default function Toolbar({
             >
               <FaUndo />
             </button>
-            <SaveButton page={page} name={name} />
+
+            <SaveButton state={state} />
 
             <button
               onClick={() => {
-                setExportPopup(true)
+                state.popup.open.set(true)
+                state.popup.type.set('export')
               }}
               className="flex items-center toolbar-button"
               data-tooltip-id="tooltip"
@@ -109,8 +107,6 @@ export default function Toolbar({
           </div>
         </>
       )}
-
-      {exportPopup && <Export funnel={funnel} close={() => setExportPopup(false)} />}
     </main>
   )
 }

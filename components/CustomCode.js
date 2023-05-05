@@ -5,18 +5,18 @@ import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import Popup from '@/components/Popup'
 
-export default function CustomCode({ page, updateCurrent }) {
+export default function CustomCode({ state }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [code, setCode] = useState('')
   const [type, setType] = useState('head')
 
-  const onChange = useCallback((value, viewUpdate) => {
+  const onChange = useCallback(value => {
     if (type === 'head') {
-      page.data.code.head = value
+      state.page.content.get().data.code.head = value
     } else if (type === 'body') {
-      page.data.code.body = value
+      state.page.content.get().data.code.body = value
     } else if (type === 'css') {
-      page.data.code.css = value
+      state.page.content.get().data.code.css = value
     }
     setCode(value)
   }, [])
@@ -27,7 +27,7 @@ export default function CustomCode({ page, updateCurrent }) {
         <h3 className="capitalize">Custom Code</h3>
         <button
           onClick={() => {
-            updateCurrent('')
+            state.active.current.set('')
           }}
         >
           <AiOutlineCloseCircle />
@@ -43,7 +43,7 @@ export default function CustomCode({ page, updateCurrent }) {
           onClick={() => {
             setModalOpen(true)
             setType('head')
-            setCode(page.data.code.head)
+            setCode(state.page.content.get().data.code.head)
           }}
           className="page-modal-close-button"
         >
@@ -59,7 +59,7 @@ export default function CustomCode({ page, updateCurrent }) {
           onClick={() => {
             setModalOpen(true)
             setType('body')
-            setCode(page.data.code.body)
+            setCode(state.page.content.get().data.code.body)
           }}
           className="page-modal-close-button"
         >
@@ -75,7 +75,7 @@ export default function CustomCode({ page, updateCurrent }) {
           onClick={() => {
             setModalOpen(true)
             setType('css')
-            setCode(page.data.code.css)
+            setCode(state.page.content.get().data.code.css)
           }}
           className="page-modal-close-button"
         >

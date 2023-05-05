@@ -12,6 +12,8 @@
     "@codemirror/lang-css": "^6.1.1",
     "@codemirror/lang-html": "^6.4.3",
     "@codemirror/lang-javascript": "^6.1.7",
+    "@hookstate/core": "^4.0.1",
+    "@hookstate/localstored": "^4.0.2",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",

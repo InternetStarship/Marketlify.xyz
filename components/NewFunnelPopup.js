@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { createFromBlank } from '@/utils/createFromBlank'
 
-function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
-  const [isModalOpen, setIsModalOpen] = useState(modalOpenNew)
+function NewFunnelPopup({ state }) {
   const [name, setName] = useState('')
   const [numberOfPages, setNumberOfPages] = useState(1)
 
-  useEffect(() => {
-    setIsModalOpen(modalOpenNew)
-  }, [modalOpenNew])
-
   return (
     <>
-      <button
-        onClick={() => {
-          setIsModalOpen(true)
-        }}
-        className="flex items-center toolbar-button"
-        data-tooltip-id="tooltip"
-        data-tooltip-content="Create New Funnel"
-      >
-        <AiOutlinePlusCircle />
-        <span className="hidden xl:inline-block">New Funnel</span>
-      </button>
-      {isModalOpen && (
+      {state.popup.open.get() && state.popup.type.get() === 'new-funnel' && (
         <div className="page-modal-overlay">
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
@@ -33,7 +16,7 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
               <div>
                 <button
                   onClick={() => {
-                    setIsModalOpen(false)
+                    state.popup.open.set(false)
                   }}
                   className="page-modal-close-button"
                 >
@@ -73,10 +56,11 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
                 onClick={() => {
                   createFromBlank(
                     (firstPage, funnelData) => {
-                      updateFunnel(funnelData)
-                      load(firstPage)
+                      state.funnel.set(funnelData)
+                      state.page.content.set(firstPage)
+                      state.page.name.set(firstPage.name)
                       toast('New funnel created.')
-                      setIsModalOpen(false)
+                      state.popup.open.set(false)
                     },
                     name,
                     numberOfPages
@@ -93,4 +77,4 @@ function NewFunnelButton({ load, modalOpenNew = false, updateFunnel }) {
   )
 }
 
-export default NewFunnelButton
+export default NewFunnelPopup
