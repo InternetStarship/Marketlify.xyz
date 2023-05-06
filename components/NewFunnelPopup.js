@@ -57,8 +57,10 @@ function NewFunnelPopup({ state }) {
                   createFromBlank(
                     (firstPage, funnelData) => {
                       state.funnel.set(funnelData)
-                      state.page.content.set(firstPage)
-                      state.page.name.set(firstPage.name)
+                      state.page.data.set(firstPage.data)
+                      state.page.id.set(firstPage.id)
+                      state.page.size.set(firstPage.size)
+                      state.page.created_at.set(firstPage.created_at)
                       toast('New funnel created.')
                       state.popup.open.set(false)
                     },

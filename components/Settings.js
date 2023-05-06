@@ -8,7 +8,7 @@ export default function Settings({ state }) {
   const [seo, setSeo] = useState({})
 
   useEffect(() => {
-    setSeo(state.page.content.get().data.seo)
+    setSeo(state.page.data.get().data.seo)
   }, [])
 
   return (
@@ -58,8 +58,8 @@ export default function Settings({ state }) {
               value={seo.title}
               onChange={e => {
                 setSeo({ ...seo, title: e.target.value })
-                state.page.content.get().data.seo = seo
-                state.page.content.set(cloneDeep(state.page.content.get()))
+                state.page.data.get().data.seo = seo
+                state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
           </div>
@@ -71,7 +71,7 @@ export default function Settings({ state }) {
               value={seo.description}
               onChange={e => {
                 setSeo({ ...seo, description: e.target.value })
-                state.page.content.set(cloneDeep(state.page.content.get()))
+                state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             ></textarea>
           </div>
@@ -83,8 +83,8 @@ export default function Settings({ state }) {
               value={seo.image}
               onChange={e => {
                 setSeo({ ...seo, image: e.target.value })
-                state.page.content.get().data.seo = seo
-                state.page.content.set(cloneDeep(state.page.content.get()))
+                state.page.data.get().data.seo = seo
+                state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
           </div>
@@ -96,8 +96,8 @@ export default function Settings({ state }) {
               value={seo.favicon}
               onChange={e => {
                 setSeo({ ...seo, favicon: e.target.value })
-                state.page.content.get().data.seo = seo
-                state.page.content.set(cloneDeep(state.page.content.get()))
+                state.page.data.get().data.seo = seo
+                state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
           </div>
@@ -109,8 +109,8 @@ export default function Settings({ state }) {
               value={seo.url}
               onChange={e => {
                 setSeo({ ...seo, url: e.target.value })
-                state.page.content.get().data.seo = seo
-                state.page.content.set(cloneDeep(state.page.content.get()))
+                state.page.data.get().data.seo = seo
+                state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
           </div>

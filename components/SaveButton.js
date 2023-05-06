@@ -5,7 +5,7 @@ function SaveButton({ state }) {
   return (
     <button
       onClick={() => {
-        save(state.page.content.get(), state.page.name.get())
+        save(state.page.data.get(), state.page.name.get())
       }}
       className="flex items-center toolbar-button-primary"
       data-tooltip-id="tooltip"

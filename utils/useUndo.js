@@ -5,7 +5,7 @@ export function useUndo(state) {
   const prevPageRef = useRef()
 
   useEffect(() => {
-    const currentPage = state.page.content.get()
+    const currentPage = state.page.data.get()
     prevPageRef.current = currentPage
 
     if (!state.undo.isAction.get() && prevPageRef.current) {

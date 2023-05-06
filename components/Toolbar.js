@@ -38,7 +38,7 @@ export default function Toolbar({ state }) {
         </button>
       </div>
 
-      {state.page.content.get() && (
+      {state.page.data.get() && (
         <>
           <div className="items-center space-x-2 hidden md:flex">
             <button
@@ -90,7 +90,7 @@ export default function Toolbar({ state }) {
               onClick={() => {
                 if (state.undo.history.get().length > 0) {
                   state.undo.isAction.set(true)
-                  state.page.content.set(undoHistory[undoHistory.length - 1])
+                  state.page.data.set(undoHistory[undoHistory.length - 1])
                   state.undo.history.set(prevHistory => prevHistory.slice(0, -1))
                 }
               }}

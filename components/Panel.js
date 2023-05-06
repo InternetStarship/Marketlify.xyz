@@ -31,7 +31,7 @@ export default function Panel({ state }) {
   const [filteredFonts, setFilteredFonts] = useState([])
 
   useEffect(() => {
-    state.page.content.get().data.styles.sections?.forEach(section => {
+    state.page.data.get().data.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -46,11 +46,8 @@ export default function Panel({ state }) {
   }, [])
 
   useEffect(() => {
-    const currentElement = findById(
-      state.active.selectedId.get(),
-      state.page.content.get().data.styles.sections
-    )
-    const type = findTypeById(state.active.selectedId.get(), state.page.content.get().data.styles.sections)
+    const currentElement = findById(state.active.selectedId.get(), state.page.data.get().data.styles.sections)
+    const type = findTypeById(state.active.selectedId.get(), state.page.data.get().data.styles.sections)
     if (currentElement) {
       setStyles(currentElement.style)
       setProperties(currentElement.properties)
@@ -60,7 +57,7 @@ export default function Panel({ state }) {
 
   useEffect(() => {
     if (!state.active.selectedId.get()) {
-      setStyles(state.page.content.get().data.styles.body)
+      setStyles(state.page.data.get().data.styles.body)
       setProperties({})
       setSelectedType('body')
     }
@@ -74,8 +71,8 @@ export default function Panel({ state }) {
         codeBox,
         secondaryTab,
         state.active.selectedId.get(),
-        state.page.content.get(),
-        state.page.content.set,
+        state.page.data.get(),
+        state.page.data.set,
         setStyles
       )
     }, 1300),
@@ -83,8 +80,8 @@ export default function Panel({ state }) {
       codeBox,
       secondaryTab,
       state.active.selectedId.get(),
-      state.page.content.get(),
-      state.page.content.set,
+      state.page.data.get(),
+      state.page.data.set,
       setStyles,
     ]
   )
@@ -100,10 +97,10 @@ export default function Panel({ state }) {
               onClick={() => {
                 duplicate(
                   page => {
-                    state.page.content.set(page)
+                    state.page.data.set(page)
                     state.active.current.set('')
                   },
-                  state.page.content.get(),
+                  state.page.data.get(),
                   state.active.selectedId.get(),
                   existingIds
                 )
@@ -117,10 +114,10 @@ export default function Panel({ state }) {
               onClick={() => {
                 remove(
                   page => {
-                    state.page.content.set(page)
+                    state.page.data.set(page)
                     state.active.current.set('')
                   },
-                  state.page.content.get(),
+                  state.page.data.get(),
                   state.active.selectedId.get()
                 )
               }}
@@ -202,8 +199,8 @@ export default function Panel({ state }) {
                   styles,
                   setStyles,
                   state.active.selectedId.get(),
-                  state.page.content.get(),
-                  state.page.content.set
+                  state.page.data.get(),
+                  state.page.data.set
                 )
               }}
               allCSSProperties={allCSSProperties}
@@ -216,8 +213,8 @@ export default function Panel({ state }) {
                     codeBox,
                     secondaryTab,
                     state.active.selectedId.get(),
-                    state.page.content.get(),
-                    state.page.content.set,
+                    state.page.data.get(),
+                    state.page.data.set,
                     setStyles
                   )
                 }
@@ -229,8 +226,8 @@ export default function Panel({ state }) {
               {renderStyleInputs(
                 styles,
                 setStyles,
-                state.page.content.set,
-                state.page.content.get(),
+                state.page.data.set,
+                state.page.data.get(),
                 state.active.selectedId.get(),
                 showColorPicker,
                 setShowColorPicker,
@@ -262,8 +259,8 @@ export default function Panel({ state }) {
               styles,
               properties,
               setProperties,
-              state.page.content.set,
-              state.page.content.get(),
+              state.page.data.set,
+              state.page.data.get(),
               state.active.selectedId.get()
             )}
           </div>

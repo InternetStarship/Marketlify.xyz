@@ -28,12 +28,12 @@ export default function FunnelView({ state }) {
               key={index}
               onClick={() => {
                 const thepage = getPage(id)
-                state.page.content.set(thepage)
+                state.page.data.set(thepage)
                 state.undo.history.set([cloneDeep(thepage)])
                 toast('Page has been loaded.')
               }}
               className={`font-medium rounded-md truncate p-2 cursor-pointer hover:bg-orange-100 hover:text-orange-900 ${
-                state.page.content.get() && id === state.page.content.get().id
+                state.page.data.get() && id === state.page.data.get().id
                   ? 'bg-orange-100 text-orange-900 hover:bg-orange-100 hover:text-orange-900'
                   : 'text-slate-900'
               }`}
@@ -45,7 +45,7 @@ export default function FunnelView({ state }) {
       <button
         onClick={() => {
           createPage(pageData => {
-            state.page.content.set(pageData)
+            state.page.data.set(pageData)
             state.funnel.set(cloneDeep(state.funnel.get()))
             toast('Page has been added to funnel.')
             state.undo.history.set([pageData])

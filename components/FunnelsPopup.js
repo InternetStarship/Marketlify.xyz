@@ -86,8 +86,11 @@ function FunnelsButton({ state }) {
                           state.popup.open.set(false)
                           state.popup.type.set('')
                           state.funnel.set(funnel)
-                          state.page.content.set(page)
+                          state.page.data.set(page.data)
                           state.page.name.set(page.name)
+                          state.page.id.set(page.id)
+                          state.page.size.set(page.size)
+                          state.page.created_at.set(page.created_at)
                           state.undo.history.set([cloneDeep(page)])
                         },
                         funnel,

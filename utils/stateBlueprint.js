@@ -1,11 +1,14 @@
 const stateBlueprint = {
   funnel: {
     name: 'Untitled Funnel',
-    pages: null,
+    pages: [],
   },
   page: {
-    name: 'Untitled Page',
-    content: null,
+    id: '',
+    name: '',
+    size: 0,
+    created_at: '',
+    data: {},
   },
   sidebar: {
     expanded: true,
@@ -15,13 +18,13 @@ const stateBlueprint = {
     type: 'welcome',
   },
   active: {
-    current: null,
-    selectedId: null,
+    current: '',
+    selectedId: '',
     viewport: 'desktop',
     fullscreen: false,
   },
   undo: {
-    history: null,
+    history: [],
     isAction: false,
   },
 }

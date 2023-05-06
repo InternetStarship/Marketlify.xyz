@@ -11,7 +11,7 @@ import Empty from './Empty'
 import HoverBar from './HoverBar'
 
 export default function Canvas({ state }) {
-  const [data] = useState(state.page.content.get())
+  const [data] = useState(state.page.data.get())
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
@@ -19,7 +19,7 @@ export default function Canvas({ state }) {
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
-    state.page.content.get().data.styles.sections?.forEach(section => {
+    state.page.data.get().data.styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -32,7 +32,7 @@ export default function Canvas({ state }) {
       })
     })
     setEditingText(null)
-    buildGoogleFonts(state.page.content.get().data)
+    buildGoogleFonts(state.page.data.get().data)
   }, [])
 
   const updateOnHover = data => {
@@ -108,7 +108,7 @@ export default function Canvas({ state }) {
               onClick={() => {
                 const confirm = window.confirm('Are you sure you want to delete this page?')
                 if (confirm) {
-                  const id = state.page.content.get().id
+                  const id = state.page.data.get().id
                   const key = `marketlify_v3_page_${id}`
 
                   localStorage.removeItem(key)
@@ -120,7 +120,7 @@ export default function Canvas({ state }) {
                   localStorage.setItem(funnelKey, JSON.stringify(state.funnel.get()))
 
                   state.funnel.set(cloneDeep(state.funnel.get()))
-                  state.page.content.set(null)
+                  state.page.data.set(null)
                 }
               }}
             >
@@ -154,8 +154,8 @@ export default function Canvas({ state }) {
           {hovering && !editingText && (
             <HoverBar
               position={position}
-              page={state.page.content.get()}
-              updatePage={state.page.content.set}
+              page={state.page.data.get()}
+              updatePage={state.page.data.set}
               selectedId={state.active.selectedId.get()}
               current={state.active.current.get()}
               hoverType={hoverType}
@@ -324,7 +324,7 @@ export default function Canvas({ state }) {
                               updateContent={value => {
                                 data.data.content.filter(content => content.id === element.id)[0].content =
                                   value
-                                state.page.content.set(data)
+                                state.page.data.set(data)
                               }}
                               closeEditor={() => {
                                 setTimeout(() => {
@@ -340,7 +340,7 @@ export default function Canvas({ state }) {
                               }}
                               updateStyle={style => {
                                 element.style = style
-                                state.page.content.set(data)
+                                state.page.data.set(data)
                               }}
                             />
                           )}
