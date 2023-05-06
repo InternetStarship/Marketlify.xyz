@@ -1,5 +1,6 @@
-const stateBlueprint = {
+const state = {
   funnel: {
+    id: '',
     name: 'Untitled Funnel',
     pages: [],
   },
@@ -29,4 +30,4 @@ const stateBlueprint = {
   },
 }
 
-export default stateBlueprint
+export default state

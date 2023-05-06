@@ -12,11 +12,11 @@ export default function CustomCode({ state }) {
 
   const onChange = useCallback(value => {
     if (type === 'head') {
-      state.page.data.get().data.code.head = value
+      state.page.data.get().code.head = value
     } else if (type === 'body') {
-      state.page.data.get().data.code.body = value
+      state.page.data.get().code.body = value
     } else if (type === 'css') {
-      state.page.data.get().data.code.css = value
+      state.page.data.get().code.css = value
     }
     setCode(value)
   }, [])
@@ -43,7 +43,7 @@ export default function CustomCode({ state }) {
           onClick={() => {
             setModalOpen(true)
             setType('head')
-            setCode(state.page.data.get().data.code.head)
+            setCode(state.page.data.get().code.head)
           }}
           className="page-modal-close-button"
         >
@@ -59,7 +59,7 @@ export default function CustomCode({ state }) {
           onClick={() => {
             setModalOpen(true)
             setType('body')
-            setCode(state.page.data.get().data.code.body)
+            setCode(state.page.data.get().code.body)
           }}
           className="page-modal-close-button"
         >
@@ -75,7 +75,7 @@ export default function CustomCode({ state }) {
           onClick={() => {
             setModalOpen(true)
             setType('css')
-            setCode(state.page.data.get().data.code.css)
+            setCode(state.page.data.get().code.css)
           }}
           className="page-modal-close-button"
         >

@@ -19,7 +19,7 @@ export default function Canvas({ state }) {
   const [existingIds] = useState(new Set())
 
   useEffect(() => {
-    state.page.data.get().data.styles.sections?.forEach(section => {
+    state.page.data.get().styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -32,7 +32,7 @@ export default function Canvas({ state }) {
       })
     })
     setEditingText(null)
-    buildGoogleFonts(state.page.data.get().data)
+    buildGoogleFonts(state.page.data.get())
   }, [])
 
   const updateOnHover = data => {

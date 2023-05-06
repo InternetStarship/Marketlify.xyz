@@ -31,7 +31,7 @@ export default function Panel({ state }) {
   const [filteredFonts, setFilteredFonts] = useState([])
 
   useEffect(() => {
-    state.page.data.get().data.styles.sections?.forEach(section => {
+    state.page.data.get().styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -46,8 +46,8 @@ export default function Panel({ state }) {
   }, [])
 
   useEffect(() => {
-    const currentElement = findById(state.active.selectedId.get(), state.page.data.get().data.styles.sections)
-    const type = findTypeById(state.active.selectedId.get(), state.page.data.get().data.styles.sections)
+    const currentElement = findById(state.active.selectedId.get(), state.page.data.get().styles.sections)
+    const type = findTypeById(state.active.selectedId.get(), state.page.data.get().styles.sections)
     if (currentElement) {
       setStyles(currentElement.style)
       setProperties(currentElement.properties)
@@ -57,7 +57,7 @@ export default function Panel({ state }) {
 
   useEffect(() => {
     if (!state.active.selectedId.get()) {
-      setStyles(state.page.data.get().data.styles.body)
+      setStyles(state.page.data.get().styles.body)
       setProperties({})
       setSelectedType('body')
     }

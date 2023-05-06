@@ -1,10 +1,8 @@
 import { RiFileAddLine } from 'react-icons/ri'
-import { toast } from 'react-toastify'
-import { cloneDeep } from 'lodash'
-import { getPage } from '@/utils/getPage'
 import { getPageName } from '@/utils/getPageName'
 import { updateFunnelName } from '@/utils/updateFunnelName'
 import { createPage } from '@/utils/createPage'
+import { loadPage } from '@/utils/loadPage'
 
 export default function FunnelView({ state }) {
   return (
@@ -13,7 +11,7 @@ export default function FunnelView({ state }) {
       <h2
         className="text-2xl font-bold pb-4 text-slate-900 pr-12"
         onBlur={() => {
-          updateFunnelName(state.funnel.get(), toast('Funnel name has been updated.'))
+          updateFunnelName(state)
         }}
         contentEditable="true"
         suppressContentEditableWarning={true}
@@ -27,10 +25,7 @@ export default function FunnelView({ state }) {
             <div
               key={index}
               onClick={() => {
-                const thepage = getPage(id)
-                state.page.data.set(thepage)
-                state.undo.history.set([cloneDeep(thepage)])
-                toast('Page has been loaded.')
+                loadPage(state, id)
               }}
               className={`font-medium rounded-md truncate p-2 cursor-pointer hover:bg-orange-100 hover:text-orange-900 ${
                 state.page.data.get() && id === state.page.data.get().id
@@ -44,12 +39,7 @@ export default function FunnelView({ state }) {
       </div>
       <button
         onClick={() => {
-          createPage(pageData => {
-            state.page.data.set(pageData)
-            state.funnel.set(cloneDeep(state.funnel.get()))
-            toast('Page has been added to funnel.')
-            state.undo.history.set([pageData])
-          }, state.funnel.get())
+          createPage(state)
         }}
         className="page-modal-close-button flex items-center text-sm mt-3"
       >

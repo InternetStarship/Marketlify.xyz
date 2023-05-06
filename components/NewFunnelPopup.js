@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 import { createFromBlank } from '@/utils/createFromBlank'
 
 function NewFunnelPopup({ state }) {
   const [name, setName] = useState('')
   const [numberOfPages, setNumberOfPages] = useState(1)
+
+  const close = () => {
+    state.popup.open.set(false)
+    state.popup.type.set('')
+  }
 
   return (
     <>
@@ -14,12 +18,7 @@ function NewFunnelPopup({ state }) {
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
               <h2 className="page-modal-title">New Funnel</h2>
               <div>
-                <button
-                  onClick={() => {
-                    state.popup.open.set(false)
-                  }}
-                  className="page-modal-close-button"
-                >
+                <button onClick={close} className="page-modal-close-button">
                   Close
                 </button>
               </div>
@@ -54,19 +53,7 @@ function NewFunnelPopup({ state }) {
               <button
                 className="page-modal-close-button"
                 onClick={() => {
-                  createFromBlank(
-                    (firstPage, funnelData) => {
-                      state.funnel.set(funnelData)
-                      state.page.data.set(firstPage.data)
-                      state.page.id.set(firstPage.id)
-                      state.page.size.set(firstPage.size)
-                      state.page.created_at.set(firstPage.created_at)
-                      toast('New funnel created.')
-                      state.popup.open.set(false)
-                    },
-                    name,
-                    numberOfPages
-                  )
+                  createFromBlank(state, name, numberOfPages)
                 }}
               >
                 Create

@@ -1,12 +1,15 @@
 import { generateUUID } from './generateUUID'
-import moment from 'moment'
 import { cloneDeep } from 'lodash'
+import { toast } from 'react-toastify'
+import moment from 'moment'
 
-export function createPage(callback, funnel) {
-  const id = generateUUID()
-  const pageName = `Page ${funnel.pages.length + 1}`
-  const pageData = {
-    id: id,
+function getPageName(pages) {
+  return `Page ${pages.length + 1}`
+}
+
+function createPageData(id, pageName) {
+  return {
+    id,
     name: pageName,
     size: 0,
     created_at: moment().format('MMMM Do YYYY, h:mm:ss a'),
@@ -32,13 +35,29 @@ export function createPage(callback, funnel) {
       content: [],
     },
   }
+}
+
+function updateLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
+export function createPage(state) {
+  const id = generateUUID()
+  const pageName = getPageName(state.funnel.pages.get())
+  const pageData = createPageData(id, pageName)
 
   const key = `marketlify_v3_page_${id}`
-  localStorage.setItem(key, JSON.stringify(pageData))
+  const funnelKey = `marketlify_v3_funnel_${state.funnel.get().id}`
+  updateLocalStorage(key, pageData)
+  updateLocalStorage(funnelKey, state.funnel.get())
 
-  funnel.pages.push(id)
-  const funnelKey = `marketlify_v3_funnel_${funnel.id}`
-  localStorage.setItem(funnelKey, JSON.stringify(funnel))
+  state.funnel.pages.set([...state.funnel.pages.get(), id])
+  state.page.data.set(pageData.data)
+  state.page.id.set(pageData.id)
+  state.page.size.set(pageData.size)
+  state.page.created_at.set(pageData.created_at)
+  state.funnel.set(cloneDeep(state.funnel.get()))
+  state.undo.history.set([pageData])
 
-  return callback(cloneDeep(pageData))
+  toast('Page has been added to funnel.')
 }

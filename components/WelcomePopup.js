@@ -29,7 +29,7 @@ export default function WelcomePopup({ state }) {
           <button
             onClick={() => {
               state.popup.open.set(true)
-              state.popup.type.set('browse-funnels')
+              state.popup.type.set('funnels')
             }}
             className="page-modal-close-button mt-2"
           >

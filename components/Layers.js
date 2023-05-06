@@ -19,7 +19,7 @@ export default function Layers({ state }) {
       </div>
       <div className="p-3 overflow-x-hidden" style={{ height: `calc(100vh - 118px)` }}>
         <DndProvider backend={HTML5Backend}>
-          {state.page.data.get().data.styles.sections.map((section, sectionIndex) => (
+          {state.page.data.get().styles.sections.map((section, sectionIndex) => (
             <div className="relative">
               <DraggableLayer
                 key={section.id}

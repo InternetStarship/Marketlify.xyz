@@ -8,7 +8,7 @@ export default function Settings({ state }) {
   const [seo, setSeo] = useState({})
 
   useEffect(() => {
-    setSeo(state.page.data.get().data.seo)
+    setSeo(state.page.data.get().seo)
   }, [])
 
   return (
@@ -58,7 +58,7 @@ export default function Settings({ state }) {
               value={seo.title}
               onChange={e => {
                 setSeo({ ...seo, title: e.target.value })
-                state.page.data.get().data.seo = seo
+                state.page.data.get().seo = seo
                 state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
@@ -83,7 +83,7 @@ export default function Settings({ state }) {
               value={seo.image}
               onChange={e => {
                 setSeo({ ...seo, image: e.target.value })
-                state.page.data.get().data.seo = seo
+                state.page.data.get().seo = seo
                 state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
@@ -96,7 +96,7 @@ export default function Settings({ state }) {
               value={seo.favicon}
               onChange={e => {
                 setSeo({ ...seo, favicon: e.target.value })
-                state.page.data.get().data.seo = seo
+                state.page.data.get().seo = seo
                 state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />
@@ -109,7 +109,7 @@ export default function Settings({ state }) {
               value={seo.url}
               onChange={e => {
                 setSeo({ ...seo, url: e.target.value })
-                state.page.data.get().data.seo = seo
+                state.page.data.get().seo = seo
                 state.page.data.set(cloneDeep(state.page.data.get()))
               }}
             />

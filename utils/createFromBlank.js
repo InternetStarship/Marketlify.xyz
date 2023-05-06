@@ -1,7 +1,8 @@
+import { toast } from 'react-toastify'
 import { generateUUID } from './generateUUID'
 import moment from 'moment'
 
-export function createFromBlank(callback, name, numberOfPages) {
+export function createFromBlank(state, name, numberOfPages) {
   const funnelId = generateUUID()
   const numberOfPagesInt = parseInt(numberOfPages)
 
@@ -56,5 +57,13 @@ export function createFromBlank(callback, name, numberOfPages) {
 
   const firstPage = JSON.parse(localStorage.getItem(`marketlify_v3_page_${funnelData.pages[0]}`))
 
-  return callback(firstPage, funnelData)
+  state.funnel.name.set(funnelData.name)
+  state.funnel.pages.set(funnelData.pages)
+  state.page.data.set(firstPage.data)
+  state.page.id.set(firstPage.id)
+  state.page.size.set(firstPage.size)
+  state.page.created_at.set(firstPage.created_at)
+  state.popup.open.set(false)
+
+  toast('New funnel created.')
 }

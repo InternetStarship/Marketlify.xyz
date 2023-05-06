@@ -12,13 +12,13 @@ import WelcomePopup from '@/components/WelcomePopup'
 import ExportPopup from '@/components/ExportPopup'
 import NewFunnelPopup from '@/components/NewFunnelPopup'
 import FunnelsPopup from '@/components/FunnelsPopup'
-import stateBlueprint from '@/utils/stateBlueprint'
+import state from '@/utils/state'
 import { useUndo } from '@/utils/useUndo'
 
-const blueprint = hookstate(stateBlueprint)
+const globalState = hookstate(state)
 
 export default function Builder() {
-  const state = useHookstate(blueprint)
+  const state = useHookstate(globalState)
 
   useUndo(state)
 
