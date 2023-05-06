@@ -25,7 +25,7 @@ function useActiveComponent(current, state) {
 
 export default function Sidebar({ state }) {
   const { expanded, current } = state.sidebar
-  const mainClassName = expanded.get() ? 'closed' : ''
+  const mainClassName = !expanded.get() ? 'closed' : ''
 
   const ActiveComponent = useActiveComponent(current, state)
 

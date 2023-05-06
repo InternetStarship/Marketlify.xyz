@@ -10,5 +10,6 @@ export function loadPage(state, id) {
   state.page.size.set(page.size)
   state.page.created_at.set(page.created_at)
   state.undo.history.set([cloneDeep(page)])
+
   toast('Page has been loaded.')
 }

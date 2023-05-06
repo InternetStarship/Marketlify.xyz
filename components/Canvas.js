@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { BiCodeAlt } from 'react-icons/bi'
 import { BsLayoutTextWindowReverse } from 'react-icons/bs'
-import { cloneDeep } from 'lodash'
+import { clone, cloneDeep } from 'lodash'
 import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
 import { hover } from '@/utils/hover'
 import TextEditor from './TextEditor'
@@ -11,7 +11,6 @@ import Empty from './Empty'
 import HoverBar from './HoverBar'
 
 export default function Canvas({ state }) {
-  const [data] = useState(state.page.data.get())
   const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
   const [hoverType, setHoverType] = useState('')
@@ -47,8 +46,8 @@ export default function Canvas({ state }) {
   }
 
   return (
-    <main id="canvasContainer" className={`${state.active.fullscreen ? 'fullscreen' : ''} w-full`}>
-      {state.active.fullscreen && (
+    <main id="canvasContainer" className={`${state.active.fullscreen.get() ? 'fullscreen' : ''} w-full`}>
+      {state.active.fullscreen.get() && (
         <div
           id="fullscreenClose"
           onClick={() => {
@@ -135,7 +134,7 @@ export default function Canvas({ state }) {
             e.stopPropagation()
             setHovering(false)
           }}
-          style={data.data.styles.body}
+          style={cloneDeep(state.page.data.styles.body.get())}
         >
           {state.active.current.get() !== '' && (
             <div
@@ -153,6 +152,7 @@ export default function Canvas({ state }) {
 
           {hovering && !editingText && (
             <HoverBar
+              state={state}
               position={position}
               page={state.page.data.get()}
               updatePage={state.page.data.set}
@@ -163,7 +163,7 @@ export default function Canvas({ state }) {
             />
           )}
 
-          {data.data.styles.sections.length == 0 && (
+          {state.page.data.get().styles.sections.length == 0 && (
             <div
               className="element"
               id={'marketlify-' + 'empty-000'}
@@ -183,12 +183,12 @@ export default function Canvas({ state }) {
             </div>
           )}
 
-          {data.data.styles.sections?.map((section, sectionIndex) => (
+          {state.page.data.get().sections?.map((section, sectionIndex) => (
             <div
               className="section"
               id={'marketlify-' + section.id}
               key={section.id}
-              style={section.style}
+              style={cloneDeep(section.styles)}
               onClick={e => {
                 e.stopPropagation()
                 state.active.selectedId.set(section.id)
@@ -203,7 +203,7 @@ export default function Canvas({ state }) {
                   'marketlify-' + section.id,
                   false,
                   'section',
-                  data.data.styles.sections
+                  state.page.data.get().styles.sections
                 )
               }}
             >
@@ -221,7 +221,7 @@ export default function Canvas({ state }) {
                         'marketlify-' + 'empty-' + section.id,
                         true,
                         'row',
-                        data.data.styles.sections
+                        data.styles.sections
                       )
                     }}
                   >
@@ -234,7 +234,7 @@ export default function Canvas({ state }) {
                   className="row"
                   id={'marketlify-' + row.id}
                   key={`${sectionIndex}-${rowIndex}`}
-                  style={row.style}
+                  style={cloneDeep(row.style)}
                   onClick={e => {
                     e.stopPropagation()
                     state.active.selectedId.set(row.id)
@@ -249,7 +249,7 @@ export default function Canvas({ state }) {
                       'marketlify-' + row.id,
                       false,
                       'row',
-                      data.data.styles.sections
+                      state.page.data.get().styles.sections
                     )
                   }}
                 >
@@ -257,7 +257,7 @@ export default function Canvas({ state }) {
                     <div
                       key={`${sectionIndex}-${rowIndex}-${colIndex}`}
                       className="column"
-                      style={column.style}
+                      style={cloneDeep(column.style)}
                       id={'marketlify-' + column.id}
                     >
                       {column.elements.length === 0 && (
@@ -275,7 +275,7 @@ export default function Canvas({ state }) {
                                 'marketlify-' + 'empty-' + column.id,
                                 true,
                                 'element',
-                                data.data.styles.sections
+                                data.styles.sections
                               )
                             }}
                           >
@@ -312,7 +312,7 @@ export default function Canvas({ state }) {
                               'marketlify-' + element.id,
                               false,
                               'element',
-                              data.data.styles.sections
+                              data.styles.sections
                             )
                           }}
                         >
@@ -320,10 +320,9 @@ export default function Canvas({ state }) {
                             <TextEditor
                               element={element}
                               data={data}
-                              style={element.style}
+                              style={cloneDeep(element.style)}
                               updateContent={value => {
-                                data.data.content.filter(content => content.id === element.id)[0].content =
-                                  value
+                                data.content.filter(content => content.id === element.id)[0].content = value
                                 state.page.data.set(data)
                               }}
                               closeEditor={() => {
@@ -345,10 +344,12 @@ export default function Canvas({ state }) {
                             />
                           )}
                           {editingText && editingText !== element.id && (
-                            <Element element={element} data={data} style={element.style} />
+                            <Element element={element} data={state.page.data.get()} style={element.style} />
                           )}
 
-                          {!editingText && <Element element={element} data={data} style={element.style} />}
+                          {!editingText && (
+                            <Element element={element} data={state.page.data.get()} style={element.style} />
+                          )}
                         </div>
                       ))}
                     </div>

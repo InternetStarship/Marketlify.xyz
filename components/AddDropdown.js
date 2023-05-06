@@ -7,6 +7,7 @@ import { BsTextareaResize } from 'react-icons/bs'
 import { addRow } from '@/utils/addRow'
 import { addSection } from '@/utils/addSection'
 import { addElement } from '@/utils/addElement'
+import { FaPlus } from 'react-icons/fa'
 
 const hoverTypeConfig = {
   section: [
@@ -80,7 +81,7 @@ const isCloseToBottom = (type, selectedId) => {
 }
 
 export default function AddDropdown({
-  children,
+  state,
   existingIds,
   hoverType,
   popup,
@@ -92,18 +93,7 @@ export default function AddDropdown({
   updateHovering,
 }) {
   const onClickHandlers = {
-    section: ({ width }) =>
-      addSection(
-        page => {
-          setPopup(false)
-          updatePage(page)
-          updateHovering(false)
-        },
-        width,
-        existingIds,
-        page,
-        selectedId
-      ),
+    section: ({ width }) => addSection(state, width, existingIds),
     row: ({ columns }) =>
       addRow(
         () => {
@@ -133,12 +123,12 @@ export default function AddDropdown({
   return (
     <div
       className="relative"
-      id={id}
+      id="hoverBarBottom"
       onClick={() => {
         setPopup(true)
       }}
     >
-      {children}
+      <FaPlus />
 
       {popup && (
         <div
@@ -151,8 +141,8 @@ export default function AddDropdown({
               hoverTypeConfig[hoverType],
               onClickHandlers[hoverType],
               existingIds,
-              page,
-              selectedId
+              state.page.data.get(),
+              state.active.selectedId.get()
             )}
           </div>
         </div>

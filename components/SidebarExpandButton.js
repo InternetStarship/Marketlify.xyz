@@ -8,7 +8,7 @@ export default function SidebarExpandButton({ state }) {
         state.sidebar.expanded.set(!state.sidebar.expanded.get())
       }}
     >
-      {state.sidebar.expanded.get() ? <BsArrowRight /> : <BsArrowLeft />}
+      {!state.sidebar.expanded.get() ? <BsArrowRight /> : <BsArrowLeft />}
     </div>
   )
 }

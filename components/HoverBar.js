@@ -1,25 +1,17 @@
 import { useState, useEffect } from 'react'
-import { FaArrowUp, FaArrowDown, FaPlus, FaCopy, FaTrash } from 'react-icons/fa'
+import { FaArrowUp, FaArrowDown, FaCopy, FaTrash } from 'react-icons/fa'
 import { duplicate } from '@/utils/duplicate'
 import { remove } from '@/utils/remove'
 import { move } from '@/utils/move'
 import AddDropdown from './AddDropdown'
 
-export default function HoverBar({
-  position,
-  page,
-  updatePage,
-  selectedId,
-  current,
-  hoverType,
-  updateHovering,
-}) {
+export default function HoverBar({ state, position, page, updatePage, hoverType, updateHovering }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
   const [existingIds] = useState(new Set())
   const [popup, setPopup] = useState(false)
 
   useEffect(() => {
-    page.data.styles.sections?.forEach(section => {
+    state.page.data.get().styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
         existingIds.add(row.id)
@@ -40,7 +32,7 @@ export default function HoverBar({
 
   return (
     <>
-      {current === '' && (
+      {state.active.current.get() === '' && (
         <div className={'hoverTheme-' + hoverType}>
           <main
             id="hoverBar"
@@ -64,7 +56,7 @@ export default function HoverBar({
                       },
                       -1,
                       page,
-                      selectedId
+                      state.active.selectedId.get()
                     )
                   }}
                   className="p-2 text-white"
@@ -80,7 +72,7 @@ export default function HoverBar({
                       },
                       1,
                       page,
-                      selectedId
+                      state.active.selectedId.get()
                     )
                   }}
                   className="p-2 text-white"
@@ -102,7 +94,7 @@ export default function HoverBar({
                         updateHovering(false)
                       },
                       page,
-                      selectedId,
+                      state.active.selectedId.get(),
                       existingIds
                     )
                   }}
@@ -118,7 +110,7 @@ export default function HoverBar({
                         updateHovering(false)
                       },
                       page,
-                      selectedId
+                      state.active.selectedId.get()
                     )
                   }}
                   className="p-2 text-white"
@@ -129,18 +121,14 @@ export default function HoverBar({
             </div>
 
             <AddDropdown
+              state={state}
               popup={popup}
               hoverType={hoverType}
               setPopup={setPopup}
               updatePage={updatePage}
-              page={page}
-              selectedId={selectedId}
               existingIds={existingIds}
               updateHovering={updateHovering}
-              id="hoverBarBottom"
-            >
-              <FaPlus />
-            </AddDropdown>
+            />
           </main>
         </div>
       )}

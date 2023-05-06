@@ -38,8 +38,8 @@ export default function Builder() {
         <Sidebar state={state} />
 
         {!state.funnel.pages.get() && <NoFunnel state={state} />}
-        {state.funnel.pages.get() && !state.page.data.get()?.data && <NoPage state={state} />}
-        {state.funnel.pages.get() && state.page.data.get()?.data && <Canvas state={state} />}
+        {state.funnel.pages.get() && !state.page.data.get()?.seo && <NoPage state={state} />}
+        {state.funnel.pages.get() && state.page.data.get()?.seo && <Canvas state={state} />}
       </div>
 
       <ToastContainer
