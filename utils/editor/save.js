@@ -1,14 +1,15 @@
 import { toast } from 'react-toastify'
 import { prettySize } from '@/utils/utility/prettySize'
 import { checkLocalStorageSize } from '@/utils/utility/checkLocalStorageSize'
+import { cloneDeep } from 'lodash'
 
-export function save(page, name) {
-  page.size = prettySize(JSON.stringify(page))
-  page.name = name
+export function save(state) {
+  const page = JSON.stringify(cloneDeep(state.page.get()))
+  state.page.size.set(prettySize(page))
   const dataSize = new Blob([page], { type: 'application/json' }).size
 
   if (checkLocalStorageSize(dataSize)) {
-    localStorage.setItem(`marketlify_v3_page_${page.id}`, JSON.stringify(page))
+    localStorage.setItem(`marketlify_v3_page_${state.page.id.get()}`, page)
     toast('Page has been saved.')
     return true
   } else {
