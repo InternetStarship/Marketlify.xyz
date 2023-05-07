@@ -1,50 +1,54 @@
-import { cloneDeep } from 'lodash'
 import { findTypeById } from '../utility/findTypeById'
 import { getIndexesById } from '../utility/getIndexesById'
 
-export function move(callback, direction, page, selectedId) {
-  const type = findTypeById(selectedId, page.data.styles.sections)
-  const currentElement = getIndexesById(selectedId, page.data.styles.sections)
+export function move(state, directionText) {
+  const direction = directionText === 'up' ? -1 : 1
+  const type = findTypeById(state.active.selectedId.get(), state.page.data.get().styles.sections)
+  const currentElement = getIndexesById(state.active.selectedId.get(), state.page.data.get().styles.sections)
 
-  switch (type) {
-    case 'section':
-      moveItem(page.data.styles.sections, currentElement.sectionIndex, direction)
-      break
+  moveItem(state, type, currentElement.sectionIndex, direction, currentElement)
 
-    case 'row':
-      moveItem(
-        page.data.styles.sections[currentElement.sectionIndex].rows,
-        currentElement.rowIndex,
-        direction
-      )
-      break
-
-    case 'column':
-      moveItem(
-        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns,
-        currentElement.columnIndex,
-        direction
-      )
-      break
-
-    case 'element':
-      moveItem(
-        page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-          currentElement.columnIndex
-        ].elements,
-        currentElement.elementIndex,
-        direction
-      )
-      break
-  }
-
-  callback(cloneDeep(page))
+  state.active.hovering.set(false)
 }
 
-function moveItem(array, currentIndex, direction) {
+function moveItem(state, type, currentIndex, direction, currentElement) {
   const newIndex = currentIndex + direction
-  if (newIndex >= 0 && newIndex < array.length) {
-    const item = array.splice(currentIndex, 1)[0]
-    array.splice(newIndex, 0, item)
+  if (newIndex >= 0) {
+    switch (type) {
+      case 'section':
+        state.page.data.styles.sections.set(items => {
+          return item(items, currentIndex, newIndex)
+        })
+        break
+
+      case 'row':
+        state.page.data.styles.sections[currentElement.sectionIndex].rowsv
+        break
+
+      case 'column':
+        state.page.data.styles.sections[currentElement.sectionIndex].rows[
+          currentElement.rowIndex
+        ].columns.set(items => {
+          return item(items, currentIndex, newIndex)
+        })
+        break
+
+      case 'element':
+        state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+          currentElement.columnIndex
+        ].elements.set(items => {
+          return item(items, currentIndex, newIndex)
+        })
+
+        break
+    }
+  }
+}
+
+function item(items, currentIndex, newIndex) {
+  if (newIndex < items.length) {
+    const item = items.splice(currentIndex, 1)[0]
+    items.splice(newIndex, 0, item)
+    return items
   }
 }

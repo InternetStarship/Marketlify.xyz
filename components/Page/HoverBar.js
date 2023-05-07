@@ -45,15 +45,7 @@ export default function HoverBar({ state }) {
               <div className="flex items-center hoverBarLeft rounded-br">
                 <button
                   onClick={() => {
-                    move(
-                      page => {
-                        state.page.data.set(page)
-                        state.active.hovering.set(false)
-                      },
-                      -1,
-                      state.page.data.get(),
-                      state.active.selectedId.get()
-                    )
+                    move(state, 'up')
                   }}
                   className="p-2 text-white"
                 >
@@ -61,15 +53,7 @@ export default function HoverBar({ state }) {
                 </button>
                 <button
                   onClick={() => {
-                    move(
-                      page => {
-                        state.page.data.set(page)
-                        state.active.hovering.set(false)
-                      },
-                      1,
-                      state.page.data.get(),
-                      state.active.selectedId.get()
-                    )
+                    move(state, 'down')
                   }}
                   className="p-2 text-white"
                 >
@@ -86,15 +70,7 @@ export default function HoverBar({ state }) {
               <div className="flex hoverBarRight rounded-bl space-x-1">
                 <button
                   onClick={() => {
-                    duplicate(
-                      page => {
-                        state.page.data.set(page)
-                        state.active.hovering.set(false)
-                      },
-                      state.page.data.get(),
-                      state.active.selectedId.get(),
-                      existingIds
-                    )
+                    duplicate(state)
                   }}
                   className="p-2 text-white"
                 >
@@ -102,14 +78,7 @@ export default function HoverBar({ state }) {
                 </button>
                 <button
                   onClick={() => {
-                    remove(
-                      page => {
-                        state.page.data.set(page)
-                        state.active.hovering.set(false)
-                      },
-                      state.page.data.get(),
-                      state.active.selectedId.get()
-                    )
+                    remove(state)
                   }}
                   className="p-2 text-white"
                 >

@@ -62,7 +62,15 @@ function updateNestedIds(item, existingIds, pageContent = []) {
   }
 }
 
-export function duplicate(callback, page, selectedId, baseExistingIds) {
+export function duplicate(state) {
+  // page => {
+  //   state.page.data.set(page)
+  //   state.active.hovering.set(false)
+  // },
+  // state.page.data.get(),
+  // state.active.selectedId.get(),
+  // existingIds
+
   let existingIds = new Set(baseExistingIds)
 
   const element = findById(selectedId, page.data.styles.sections)
@@ -108,5 +116,5 @@ export function duplicate(callback, page, selectedId, baseExistingIds) {
 
   duplicateInnerContent(page.data.content)
 
-  return callback(cloneDeep(page))
+  // return callback(cloneDeep(page))
 }

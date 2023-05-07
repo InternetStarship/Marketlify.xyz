@@ -1,14 +1,13 @@
-import { cloneDeep } from 'lodash'
 import { findTypeById } from '../utility/findTypeById'
 import { getIndexesById } from '../utility/getIndexesById'
 
-export function remove(callback, page, selectedId) {
+export function remove(state) {
   const confirm = window.confirm('Are you sure you want to delete this?')
   if (!confirm) return
 
-  const type = findTypeById(selectedId, page.data.styles.sections)
-  const currentElement = getIndexesById(selectedId, page.data.styles.sections)
-  const updatedPage = JSON.parse(JSON.stringify(page))
+  const type = findTypeById(state.active.selectedId.get(), state.page.data.get().styles.sections)
+  const currentElement = getIndexesById(state.active.selectedId.get(), state.page.data.get().styles.sections)
+  const updatedPage = JSON.parse(JSON.stringify(state.page.data.get()))
 
   switch (type) {
     case 'section':
@@ -33,5 +32,6 @@ export function remove(callback, page, selectedId) {
       break
   }
 
-  return callback(cloneDeep(updatedPage))
+  state.page.data.set(page)
+  state.active.hovering.set(false)
 }
