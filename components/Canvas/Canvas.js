@@ -4,10 +4,10 @@ import CanvasTopBar from './CanvasTopBar'
 import CanvasDisabledOverlay from './CanvasDisabledOverlay'
 import { buildGoogleFonts } from '@/utils/googleFonts/buildGoogleFonts'
 import { hover } from '@/utils/utility/hover'
-import TextEditor from './TextEditor'
-import Element from './Element'
-import Empty from './Empty'
-import HoverBar from './HoverBar'
+import TextEditor from '../Editor/TextEditor'
+import Element from '../Page/Element'
+import Empty from '../Page/Empty'
+import HoverBar from '../Page/HoverBar'
 
 const CanvasSection = ({ state, section, sectionIndex }) => {
   return (

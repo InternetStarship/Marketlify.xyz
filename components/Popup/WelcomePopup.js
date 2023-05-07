@@ -1,4 +1,4 @@
-import Popup from '@/components/Popup'
+import Popup from '@/components/Popup/Popup'
 
 export default function WelcomePopup({ state }) {
   return (

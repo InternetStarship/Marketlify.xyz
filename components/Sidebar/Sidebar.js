@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
-import Panel from './Panel'
-import Settings from './Settings'
-import Layers from './Layers'
-import CustomCode from './CustomCode'
+import Panel from '../Panel/Panel'
+import Settings from '../Page/Settings'
+import Layers from '../Layer/Layers'
+import CustomCode from '../Editor/CustomCode'
 import SidebarExpandButton from './SidebarExpandButton'
-import FunnelView from './FunnelView'
+import FunnelView from '../Funnel/FunnelView'
 
 function useActiveComponent(current, state) {
   return useMemo(() => {

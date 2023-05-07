@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { cloneDeep } from 'lodash'
-import Panel from './Panel'
+import Panel from '../Panel/Panel'
 
 export default function Settings({ state }) {
   const [tab, setTab] = useState('seo')

@@ -3,7 +3,7 @@ import { FaArrowUp, FaArrowDown, FaCopy, FaTrash } from 'react-icons/fa'
 import { duplicate } from '@/utils/utility/duplicate'
 import { remove } from '@/utils/utility/remove'
 import { move } from '@/utils/utility/move'
-import AddDropdown from './AddDropdown'
+import AddDropdown from '../Dropdown/AddDropdown'
 import { cloneDeep } from 'lodash'
 
 export default function HoverBar({ state }) {
