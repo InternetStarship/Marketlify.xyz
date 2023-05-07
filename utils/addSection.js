@@ -20,6 +20,6 @@ export function addSection(state, width, existingIds) {
     },
   })
 
-  // setPopup(false)
-  // updateHovering(false)
+  state.active.addDropdown.set(false)
+  state.active.hovering.set(false)
 }

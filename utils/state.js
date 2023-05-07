@@ -23,6 +23,11 @@ const state = {
     selectedId: '',
     viewport: 'desktop',
     fullscreen: false,
+    hovering: false,
+    hoverType: '',
+    existingIds: [],
+    editingTextId: '',
+    addDropdown: false,
   },
   undo: {
     history: [],

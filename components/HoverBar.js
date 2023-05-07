@@ -5,7 +5,7 @@ import { remove } from '@/utils/remove'
 import { move } from '@/utils/move'
 import AddDropdown from './AddDropdown'
 
-export default function HoverBar({ state, position, page, updatePage, hoverType, updateHovering }) {
+export default function HoverBar({ state, position, page, updatePage }) {
   const [updatedPosition, setUpdatedPosition] = useState(position)
   const [existingIds] = useState(new Set())
   const [popup, setPopup] = useState(false)
@@ -33,7 +33,7 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
   return (
     <>
       {state.active.current.get() === '' && (
-        <div className={'hoverTheme-' + hoverType}>
+        <div className={'hoverTheme-' + state.active.hoverType.get()}>
           <main
             id="hoverBar"
             className="border-2 fixed"
@@ -52,7 +52,7 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
                     move(
                       page => {
                         updatePage(page)
-                        updateHovering(false)
+                        state.active.hovering.set(false)
                       },
                       -1,
                       page,
@@ -68,7 +68,7 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
                     move(
                       page => {
                         updatePage(page)
-                        updateHovering(false)
+                        state.active.hovering.set(false)
                       },
                       1,
                       page,
@@ -80,8 +80,10 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
                   <FaArrowDown />
                 </button>
 
-                {hoverType !== 'element' && (
-                  <div className="py-0 px-2.5 text-sm font-bold uppercase text-white">{hoverType}</div>
+                {state.active.hoverType.get() !== 'element' && (
+                  <div className="py-0 px-2.5 text-sm font-bold uppercase text-white">
+                    {state.active.hoverType.get()}
+                  </div>
                 )}
               </div>
 
@@ -91,7 +93,7 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
                     duplicate(
                       page => {
                         updatePage(page)
-                        updateHovering(false)
+                        state.active.hovering.set(false)
                       },
                       page,
                       state.active.selectedId.get(),
@@ -107,7 +109,7 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
                     remove(
                       page => {
                         updatePage(page)
-                        updateHovering(false)
+                        state.active.hovering.set(false)
                       },
                       page,
                       state.active.selectedId.get()
@@ -120,15 +122,7 @@ export default function HoverBar({ state, position, page, updatePage, hoverType,
               </div>
             </div>
 
-            <AddDropdown
-              state={state}
-              popup={popup}
-              hoverType={hoverType}
-              setPopup={setPopup}
-              updatePage={updatePage}
-              existingIds={existingIds}
-              updateHovering={updateHovering}
-            />
+            <AddDropdown state={state} popup={popup} setPopup={setPopup} existingIds={existingIds} />
           </main>
         </div>
       )}

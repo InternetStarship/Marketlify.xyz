@@ -27,6 +27,6 @@ export function addRow(state, totalColumns, existingIds) {
     },
   })
 
-  // setPopup(false)
-  // updateHovering(false)
+  state.active.addDropdown.set(false)
+  state.active.hovering.set(false)
 }

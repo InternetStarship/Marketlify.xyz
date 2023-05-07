@@ -80,17 +80,7 @@ const isCloseToBottom = (type, selectedId) => {
   return false
 }
 
-export default function AddDropdown({
-  state,
-  existingIds,
-  hoverType,
-  popup,
-  selectedId,
-  page,
-  updatePage,
-  setPopup,
-  updateHovering,
-}) {
+export default function AddDropdown({ state, existingIds, popup, selectedId, setPopup }) {
   const onClickHandlers = {
     section: ({ width }) => addSection(state, width, existingIds),
     row: ({ columns }) => addRow(state, columns, existingIds),
@@ -109,14 +99,14 @@ export default function AddDropdown({
 
       {popup && (
         <div
-          className={`blocks-coyote-time ${hoverType}Theme ${
-            isCloseToBottom(hoverType, selectedId) ? 'position-top' : ''
+          className={`blocks-coyote-time ${state.active.hoverType.get()}Theme ${
+            isCloseToBottom(state.active.hoverType.get(), selectedId) ? 'position-top' : ''
           }`}
         >
-          <div className={`blocks-popup ${hoverType}Theme`}>
+          <div className={`blocks-popup ${state.active.hoverType.get()}Theme`}>
             {generateBlocks(
-              hoverTypeConfig[hoverType],
-              onClickHandlers[hoverType],
+              hoverTypeConfig[state.active.hoverType.get()],
+              onClickHandlers[state.active.hoverType.get()],
               existingIds,
               state.page.data.get(),
               state.active.selectedId.get()

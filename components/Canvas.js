@@ -11,9 +11,7 @@ import Empty from './Empty'
 import HoverBar from './HoverBar'
 
 export default function Canvas({ state }) {
-  const [hovering, setHovering] = useState(false)
   const [position, setPosition] = useState({})
-  const [hoverType, setHoverType] = useState('')
   const [editingText, setEditingText] = useState(null)
   const [existingIds] = useState(new Set())
 
@@ -36,8 +34,8 @@ export default function Canvas({ state }) {
 
   const updateOnHover = data => {
     if (data.element) {
-      setHoverType(data.type)
-      setHovering(true)
+      state.active.hoverType.set(data.type)
+      state.active.hovering.set(true)
     }
     if (data.positions) {
       setPosition(data.positions)
@@ -132,7 +130,7 @@ export default function Canvas({ state }) {
           id="canvasWrapper"
           onMouseLeave={e => {
             e.stopPropagation()
-            setHovering(false)
+            state.active.hovering.set(false)
           }}
           style={cloneDeep(state.page.data.styles.body.get())}
         >
@@ -150,16 +148,12 @@ export default function Canvas({ state }) {
             ></div>
           )}
 
-          {hovering && !editingText && (
+          {state.active.hovering.get() && !editingText && (
             <HoverBar
               state={state}
               position={position}
               page={state.page.data.get()}
               updatePage={state.page.data.set}
-              selectedId={state.active.selectedId.get()}
-              current={state.active.current.get()}
-              hoverType={hoverType}
-              updateHovering={setHovering}
             />
           )}
 

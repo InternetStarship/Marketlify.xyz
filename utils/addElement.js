@@ -91,4 +91,7 @@ export function addElement(state, type, existingIds) {
   state.page.data.content.merge([data])
 
   console.log(state.page.data.content.get())
+
+  state.active.addDropdown.set(false)
+  state.active.hovering.set(false)
 }
