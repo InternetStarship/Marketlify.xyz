@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { BiCopyAlt } from 'react-icons/bi'
-import { css } from '@codemirror/lang-css'
 import { debounce } from 'lodash'
 import { findById } from '@/utils/utility/findById'
 import { findTypeById } from '@/utils/utility/findTypeById'
@@ -15,6 +14,7 @@ import { buildCSS } from '@/utils/css/buildCSS'
 import { addStyle } from '@/utils/style/addStyle'
 import cssProperties from '@/utils/css/cssProperties'
 import CodeMirror from '@uiw/react-codemirror'
+import { css } from '@codemirror/lang-css'
 import SearchStyles from './SearchStyles'
 
 export default function Panel({ state }) {
@@ -79,15 +79,7 @@ export default function Panel({ state }) {
           <div className="space-x-3 flex items-center">
             <button
               onClick={() => {
-                duplicate(
-                  page => {
-                    state.page.data.set(page)
-                    state.active.current.set('')
-                  },
-                  state.page.data.get(),
-                  state.active.selectedId.get(),
-                  state.active.existingIds.get()
-                )
+                duplicate(state)
               }}
               data-tooltip-id="tooltip"
               data-tooltip-content="Duplicate"
@@ -96,14 +88,7 @@ export default function Panel({ state }) {
             </button>
             <button
               onClick={() => {
-                remove(
-                  page => {
-                    state.page.data.set(page)
-                    state.active.current.set('')
-                  },
-                  state.page.data.get(),
-                  state.active.selectedId.get()
-                )
+                remove(state)
               }}
               data-tooltip-id="tooltip"
               data-tooltip-content="Delete"

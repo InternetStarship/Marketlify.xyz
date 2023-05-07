@@ -9,12 +9,11 @@ import Element from '../Page/Element'
 import Empty from '../Page/Empty'
 import HoverBar from '../Page/HoverBar'
 
-const CanvasSection = ({ state, section, sectionIndex }) => {
+const CanvasSection = ({ state, section }) => {
   return (
     <div
       className="section"
       id={'marketlify-' + section.id}
-      key={section.id}
       style={{ ...section.style }}
       onClick={e => {
         e.stopPropagation()
@@ -27,19 +26,18 @@ const CanvasSection = ({ state, section, sectionIndex }) => {
       }}
     >
       {section.rows.length === 0 && <Empty state={state} type="row" block={section} />}
-      {section.rows?.map((row, rowIndex) => (
-        <CanvasRow state={state} row={row} rowIndex={rowIndex} sectionIndex={sectionIndex} />
+      {section.rows?.map(row => (
+        <CanvasRow state={state} row={row} key={row.id} />
       ))}
     </div>
   )
 }
 
-const CanvasRow = ({ state, row, rowIndex, sectionIndex }) => {
+const CanvasRow = ({ state, row }) => {
   return (
     <div
       className="row"
       id={'marketlify-' + row.id}
-      key={`${sectionIndex}-${rowIndex}`}
       style={{ ...row.style }}
       onClick={e => {
         e.stopPropagation()
@@ -51,38 +49,20 @@ const CanvasRow = ({ state, row, rowIndex, sectionIndex }) => {
         hover(state, 'marketlify-' + row.id, false, 'row')
       }}
     >
-      {row.columns?.map((column, colIndex) => (
-        <CanvasColumn
-          state={state}
-          column={column}
-          colIndex={colIndex}
-          rowIndex={rowIndex}
-          sectionIndex={sectionIndex}
-        />
+      {row.columns?.map(column => (
+        <CanvasColumn state={state} column={column} key={column.id} />
       ))}
     </div>
   )
 }
 
-const CanvasColumn = ({ state, column, colIndex, rowIndex, sectionIndex }) => {
+const CanvasColumn = ({ state, column }) => {
   return (
-    <div
-      key={`${sectionIndex}-${rowIndex}-${colIndex}`}
-      className="column"
-      style={{ ...column.style }}
-      id={'marketlify-' + column.id}
-    >
+    <div className="column" style={{ ...column.style }} id={'marketlify-' + column.id}>
       {column.elements.length === 0 && <Empty state={state} type="element" block={column} />}
 
-      {column.elements?.map((element, elementIndex) => (
-        <CanvasElement
-          state={state}
-          element={element}
-          elementIndex={elementIndex}
-          colIndex={colIndex}
-          rowIndex={rowIndex}
-          sectionIndex={sectionIndex}
-        />
+      {column.elements?.map(element => (
+        <CanvasElement state={state} element={element} key={element.id} />
       ))}
     </div>
   )
@@ -93,7 +73,6 @@ const CanvasElement = ({ state, element }) => {
     <div
       className={`element ${element.type === 'divider' ? 'dividerFix' : ''}`}
       id={'marketlify-' + element.id}
-      key={element.id}
       onClick={e => {
         e.stopPropagation()
         if (element.type === 'headline' || element.type === 'subheadline' || element.type === 'paragraph') {
@@ -173,7 +152,7 @@ export default function Canvas({ state }) {
           {state.page.data.styles.sections.get().length == 0 && <Empty state={state} type="section" />}
 
           {state.page.data.styles.sections.get()?.map((section, sectionIndex) => (
-            <CanvasSection state={state} section={section} sectionIndex={sectionIndex} />
+            <CanvasSection state={state} section={section} key={sectionIndex} />
           ))}
         </div>
       </div>

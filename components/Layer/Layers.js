@@ -92,7 +92,7 @@ export default function Layers({ state }) {
                                   index={elementIndex}
                                   id={element.id}
                                   type="element"
-                                  content={tate.page.content.get().data.content}
+                                  content={state.page.content.get().data.content}
                                   moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
                                     moveLayer(
                                       value => {

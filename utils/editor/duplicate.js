@@ -118,5 +118,7 @@ export function duplicate(state) {
 
   duplicateInnerContent(state)
 
+  state.active.selectedId.set('')
+  state.active.current.set('')
   state.active.hovering.set(false)
 }
