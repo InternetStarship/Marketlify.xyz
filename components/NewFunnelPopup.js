@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFromBlank } from '@/utils/createFromBlank'
+import { createFromBlank } from '@/utils/funnel/createFromBlank'
 
 function NewFunnelPopup({ state }) {
   const [name, setName] = useState('')

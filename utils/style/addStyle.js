@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
-import { camelCaseToTitleCase } from './camelCaseToTitleCase'
-import { updateStyles } from '@/utils/updateStyles'
+import { camelCaseToTitleCase } from '../utility/camelCaseToTitleCase'
+import { updateStyles } from '@/utils/style/updateStyles'
 
 export function addStyle(selectedStyle, styles, setStyles, selectedId, page, updatePage) {
   const newStyles = cloneDeep(styles)

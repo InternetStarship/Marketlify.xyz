@@ -1,5 +1,5 @@
-import { generateUniqueId } from './generateUniqueId'
-import { getIndexesById } from './getIndexesById'
+import { generateUniqueId } from '../utility/generateUniqueId'
+import { getIndexesById } from '../utility/getIndexesById'
 import { cloneDeep } from 'lodash'
 import defaults from '@/utils/defaults'
 

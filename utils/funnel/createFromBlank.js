@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { generateUUID } from './generateUUID'
+import { generateUUID } from '../utility/generateUUID'
 import moment from 'moment'
 
 export function createFromBlank(state, name, numberOfPages) {

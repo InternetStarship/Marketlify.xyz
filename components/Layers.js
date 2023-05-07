@@ -1,7 +1,7 @@
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { moveLayer } from '@/utils/moveLayer'
+import { moveLayer } from '@/utils/layer/moveLayer'
 import DraggableLayer from './DraggableLayer'
 
 export default function Layers({ state }) {

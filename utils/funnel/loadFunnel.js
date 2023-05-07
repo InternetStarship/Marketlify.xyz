@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { getPage } from '@/utils/getPage'
+import { getPage } from '@/utils/page/getPage'
 import { cloneDeep } from 'lodash'
 
 export function loadFunnel(state, funnel, id) {

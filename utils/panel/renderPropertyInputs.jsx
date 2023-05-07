@@ -1,6 +1,6 @@
-import { handlePropertyChange } from './handlePropertyChange'
-import { prettyLabel } from './prettyLabel'
-import { removeStyle } from './removeStyle'
+import { handlePropertyChange } from '../style/handlePropertyChange'
+import { prettyLabel } from '../utility/prettyLabel'
+import { removeStyle } from '../style/removeStyle'
 import { FaTimes } from 'react-icons/fa'
 
 export function renderPropertyInputs(styles, properties, setProperties, updatePage, page, selectedId) {

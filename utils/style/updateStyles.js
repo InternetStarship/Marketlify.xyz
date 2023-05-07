@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
-import { findTypeById } from './findTypeById'
-import { getIndexesById } from './getIndexesById'
+import { findTypeById } from '../utility/findTypeById'
+import { getIndexesById } from '../utility/getIndexesById'
 
 export function updateStyles(newStyles, selectedId, page, updatePage) {
   if (selectedId) {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaCode } from 'react-icons/fa'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import { camelCaseToTitleCase } from '@/utils/camelCaseToTitleCase'
+import { camelCaseToTitleCase } from '@/utils/utility/camelCaseToTitleCase'
 
 export default function SearchStyles({ onChange, allCSSProperties, showCSS, setShowCSS }) {
   const [searchValue, setSearchValue] = useState('')

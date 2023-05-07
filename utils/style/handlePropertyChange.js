@@ -1,9 +1,9 @@
 import { cloneDeep } from 'lodash'
-import { findTypeById } from './findTypeById'
-import { getIndexesById } from './getIndexesById'
-import { moveCaretBack } from './moveCaretBack'
-import { processCSSProperty } from '@/utils/processCSSProperty'
-import { shouldAppendPX } from './shouldAppendPX'
+import { findTypeById } from '../utility/findTypeById'
+import { getIndexesById } from '../utility/getIndexesById'
+import { moveCaretBack } from '../utility/moveCaretBack'
+import { processCSSProperty } from '@/utils/css/processCSSProperty'
+import { shouldAppendPX } from '../utility/shouldAppendPX'
 
 export function handlePropertyChange(event, properties, setProperties, updatePage, page, selectedId) {
   const { name, value } = event.target

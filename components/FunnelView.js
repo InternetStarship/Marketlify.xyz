@@ -1,8 +1,8 @@
 import { RiFileAddLine } from 'react-icons/ri'
-import { getPageName } from '@/utils/getPageName'
-import { updateFunnelName } from '@/utils/updateFunnelName'
-import { createPage } from '@/utils/createPage'
-import { loadPage } from '@/utils/loadPage'
+import { getPageName } from '@/utils/page/getPageName'
+import { updateFunnelName } from '@/utils/funnel/updateFunnelName'
+import { createPage } from '@/utils/page/createPage'
+import { loadPage } from '@/utils/page/loadPage'
 
 export default function FunnelView({ state }) {
   return (

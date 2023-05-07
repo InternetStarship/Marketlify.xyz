@@ -1,4 +1,4 @@
-import { buildBreadcrumb } from '@/utils/buildBreadcrumb'
+import { buildBreadcrumb } from '@/utils/utility/buildBreadcrumb'
 
 export default function Breadcrumb({ state }) {
   return (

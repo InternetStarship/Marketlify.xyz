@@ -1,5 +1,5 @@
-import exportHTML from '@/utils/exportHTML'
-import { sanitizeFileName } from '@/utils/santizeFileName'
+import exportHTML from '@/utils/page/exportHTML'
+import { sanitizeFileName } from '@/utils/utility/santizeFileName'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 

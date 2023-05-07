@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
-import { prettySize } from '@/utils/prettySize'
-import { checkLocalStorageSize } from '@/utils/checkLocalStorageSize'
+import { prettySize } from '@/utils/utility/prettySize'
+import { checkLocalStorageSize } from '@/utils/utility/checkLocalStorageSize'
 
 export function save(page, name) {
   page.size = prettySize(JSON.stringify(page))

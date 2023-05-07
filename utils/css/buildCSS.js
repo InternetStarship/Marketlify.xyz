@@ -1,4 +1,4 @@
-import { toKebabCase } from './toKebabCase'
+import { toKebabCase } from '../utility/toKebabCase'
 
 export function buildCSS(type, styles) {
   const cssProps = []

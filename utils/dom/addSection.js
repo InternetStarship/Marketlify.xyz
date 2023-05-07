@@ -1,4 +1,4 @@
-import { generateUniqueId } from './generateUniqueId'
+import { generateUniqueId } from '../utility/generateUniqueId'
 import defaults from '@/utils/defaults'
 import { cloneDeep } from 'lodash'
 

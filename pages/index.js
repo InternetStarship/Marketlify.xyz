@@ -13,7 +13,7 @@ import ExportPopup from '@/components/ExportPopup'
 import NewFunnelPopup from '@/components/NewFunnelPopup'
 import FunnelsPopup from '@/components/FunnelsPopup'
 import state from '@/utils/state'
-import { useUndo } from '@/utils/useUndo'
+import { useUndo } from '@/utils/utility/useUndo'
 
 const globalState = hookstate(state)
 

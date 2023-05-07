@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 import { cloneDeep } from 'lodash'
-import { getPage } from '@/utils/getPage'
+import { getPage } from '@/utils/page/getPage'
 
 export function loadPage(state, id) {
   const page = getPage(id)

@@ -1,4 +1,4 @@
-import { generateUUID } from '@/utils/generateUUID'
+import { generateUUID } from '@/utils/utility/generateUUID'
 
 export function cloneFunnel(id) {
   if (typeof localStorage !== 'undefined') {

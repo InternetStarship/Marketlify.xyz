@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiOutlineCopy } from 'react-icons/ai'
-import { getFunnels } from '@/utils/getFunnels'
-import { removeFunnel } from '@/utils/removeFunnel'
-import { cloneFunnel } from '@/utils/cloneFunnel'
-import { loadFunnel } from '@/utils/loadFunnel'
+import { getFunnels } from '@/utils/funnel/getFunnels'
+import { removeFunnel } from '@/utils/funnel/removeFunnel'
+import { cloneFunnel } from '@/utils/funnel/cloneFunnel'
+import { loadFunnel } from '@/utils/funnel/loadFunnel'
 
 function FunnelsButton({ state }) {
   const [funnels, setFunnels] = useState([])

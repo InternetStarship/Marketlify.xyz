@@ -1,6 +1,6 @@
-import { getIndexesById } from '@/utils/getIndexesById'
+import { getIndexesById } from '@/utils/utility/getIndexesById'
 import defaults from '@/utils/defaults'
-import { generateUniqueId } from '@/utils/generateUniqueId'
+import { generateUniqueId } from '@/utils/utility/generateUniqueId'
 import { cloneDeep } from 'lodash'
 
 function createElement(type, newId) {

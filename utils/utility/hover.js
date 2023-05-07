@@ -1,4 +1,4 @@
-import { findTypeById } from '@/utils/findTypeById'
+import { findTypeById } from '@/utils/utility/findTypeById'
 
 export function hover(state, elementId, isEmpty = false, type = '') {
   let element = document.getElementById(elementId)

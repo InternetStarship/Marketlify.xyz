@@ -15,7 +15,7 @@ import {
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { cloneDeep } from 'lodash'
-import { findContentById } from '@/utils/findContentById'
+import { findContentById } from '@/utils/utility/findContentById'
 import { motion } from 'framer-motion'
 
 export default function TextEditor({

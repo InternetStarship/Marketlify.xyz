@@ -1,4 +1,4 @@
-import { generateUUID } from './generateUUID'
+import { generateUUID } from '../utility/generateUUID'
 import { cloneDeep } from 'lodash'
 import { toast } from 'react-toastify'
 import moment from 'moment'

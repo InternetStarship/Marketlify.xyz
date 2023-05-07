@@ -1,4 +1,4 @@
-import numericCSSProperties from './numericCSSProperties'
+import numericCSSProperties from '../css/numericCSSProperties'
 
 export function shouldAppendPX(obj) {
   if (numericCSSProperties.includes(obj.name)) {

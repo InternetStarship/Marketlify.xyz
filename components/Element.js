@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { findContentById } from '@/utils/findContentById'
-import { getVideoId } from '@/utils/getVideoId'
+import { findContentById } from '@/utils/utility/findContentById'
+import { getVideoId } from '@/utils/utility/getVideoId'
 
 export default function Element({ state, element, style }) {
   const [elementData] = useState(findContentById(element.id, state))
