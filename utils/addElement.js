@@ -1,10 +1,9 @@
 import { getIndexesById } from '@/utils/getIndexesById'
 import defaults from '@/utils/defaults'
-import { cloneDeep } from 'lodash'
 import { generateUniqueId } from '@/utils/generateUniqueId'
 
-export function addElement(state, type, existingIds) {
-  const newId = generateUniqueId(existingIds)
+export function addElement(state, type) {
+  const newId = generateUniqueId(state.active.existingIds.get())
   const currentElement = getIndexesById(state.active.selectedId.get(), state.page.data.get().styles.sections)
 
   const position = state.page.data

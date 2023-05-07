@@ -1,8 +1,8 @@
 import { generateUniqueId } from './generateUniqueId'
 import defaults from '@/utils/defaults'
 
-export function addSection(state, width, existingIds) {
-  const newId = generateUniqueId(existingIds)
+export function addSection(state, width) {
+  const newId = generateUniqueId(state.active.existingIds.get())
   const position = state.page.data
     .get()
     .styles.sections.findIndex(section => section.id === state.active.selectedId.get())

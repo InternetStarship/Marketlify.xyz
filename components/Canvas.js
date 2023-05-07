@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
-import { FaCog, FaTrashAlt } from 'react-icons/fa'
-import { BiCodeAlt } from 'react-icons/bi'
-import { BsLayoutTextWindowReverse } from 'react-icons/bs'
+import { useEffect } from 'react'
+import CanvasFullscreenButton from './CanvasFullscreenButton'
+import CanvasTopBar from './CanvasTopBar'
 import { cloneDeep } from 'lodash'
 import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
 import { hover } from '@/utils/hover'
@@ -11,24 +10,8 @@ import Empty from './Empty'
 import HoverBar from './HoverBar'
 
 export default function Canvas({ state }) {
-  const [position, setPosition] = useState({})
-  const [editingText, setEditingText] = useState(null)
-  const [existingIds] = useState(new Set())
-
   useEffect(() => {
-    state.page.data.get().styles.sections?.forEach(section => {
-      existingIds.add(section.id)
-      section.rows.forEach(row => {
-        existingIds.add(row.id)
-        row.columns.forEach(column => {
-          existingIds.add(column.id)
-          column.elements.forEach(element => {
-            existingIds.add(element.id)
-          })
-        })
-      })
-    })
-    setEditingText(null)
+    state.active.editingTextId.set(null)
     buildGoogleFonts(state.page.data.get())
   }, [])
 
@@ -38,93 +21,17 @@ export default function Canvas({ state }) {
       state.active.hovering.set(true)
     }
     if (data.positions) {
-      setPosition(data.positions)
+      state.active.position.set(data.positions)
     }
     state.active.selectedId.set(data.id)
   }
 
   return (
     <main id="canvasContainer" className={`${state.active.fullscreen.get() ? 'fullscreen' : ''} w-full`}>
-      {state.active.fullscreen.get() && (
-        <div
-          id="fullscreenClose"
-          onClick={() => {
-            state.active.fullscreen.set(false)
-          }}
-        >
-          Close Fullscreen
-        </div>
-      )}
+      <CanvasFullscreenButton state={state} />
 
       <div id="mainCanvas" className={state.active.viewport.get()}>
-        <div className="top-bar">
-          <div className="url-bar">
-            <input
-              type="text"
-              value={state.page.name.get()}
-              onChange={e => {
-                state.page.name.set(e.target.value)
-              }}
-              className="w-full"
-            />
-          </div>
-          <div className="flex space-x-3">
-            <button
-              data-tooltip-id="tooltip"
-              data-tooltip-content="Page Structure"
-              onClick={() => {
-                state.active.current.set('layers')
-                state.active.selectedId.set(null)
-              }}
-            >
-              <BsLayoutTextWindowReverse />
-            </button>
-            <button
-              data-tooltip-id="tooltip"
-              data-tooltip-content="Page Settings"
-              onClick={() => {
-                state.active.current.set('settings')
-                state.active.selectedId.set(null)
-              }}
-            >
-              <FaCog />
-            </button>
-            <button
-              data-tooltip-id="tooltip"
-              data-tooltip-content="Custom Code"
-              onClick={() => {
-                state.active.current.set('custom-code')
-                state.active.selectedId.set(null)
-              }}
-            >
-              <BiCodeAlt />
-            </button>
-            <button
-              data-tooltip-id="tooltip"
-              data-tooltip-content="Delete Page"
-              onClick={() => {
-                const confirm = window.confirm('Are you sure you want to delete this page?')
-                if (confirm) {
-                  const id = state.page.data.get().id
-                  const key = `marketlify_v3_page_${id}`
-
-                  localStorage.removeItem(key)
-
-                  const funnelKey = `marketlify_v3_funnel_${state.funnel.get().id}`
-                  const updatedPages = state.funnel.get().pages.filter(pageId => pageId !== id)
-                  state.funnel.get().pages = updatedPages
-
-                  localStorage.setItem(funnelKey, JSON.stringify(state.funnel.get()))
-
-                  state.funnel.set(cloneDeep(state.funnel.get()))
-                  state.page.data.set(null)
-                }
-              }}
-            >
-              <FaTrashAlt />
-            </button>
-          </div>
-        </div>
+        <CanvasTopBar state={state} />
 
         <div
           id="canvasWrapper"
@@ -148,14 +55,7 @@ export default function Canvas({ state }) {
             ></div>
           )}
 
-          {state.active.hovering.get() && !editingText && (
-            <HoverBar
-              state={state}
-              position={position}
-              page={state.page.data.get()}
-              updatePage={state.page.data.set}
-            />
-          )}
+          {state.active.hovering.get() && !state.active.editingTextId.get() && <HoverBar state={state} />}
 
           {state.page.data.styles.sections.get().length == 0 && (
             <div
@@ -290,9 +190,9 @@ export default function Canvas({ state }) {
                               element.type === 'subheadline' ||
                               element.type === 'paragraph'
                             ) {
-                              setEditingText(element.id)
+                              state.active.editingTextId.set(element.id)
                             } else {
-                              setEditingText(null)
+                              state.active.editingTextId.set(null)
                               state.active.selectedId.set(element.id)
                               state.active.current.set('editing')
                             }
@@ -310,7 +210,7 @@ export default function Canvas({ state }) {
                             )
                           }}
                         >
-                          {editingText === element.id && (
+                          {state.active.editingTextId.get() === element.id && (
                             <TextEditor
                               element={element}
                               data={data}
@@ -321,14 +221,14 @@ export default function Canvas({ state }) {
                               }}
                               closeEditor={() => {
                                 setTimeout(() => {
-                                  setEditingText(null)
+                                  state.active.editingTextId.set(null)
                                 }, 50)
                               }}
                               edit={() => {
                                 state.active.selectedId.set(element.id)
                                 state.active.current.set('editing')
                                 setTimeout(() => {
-                                  setEditingText(null)
+                                  state.active.editingTextId.set(null)
                                 }, 50)
                               }}
                               updateStyle={style => {
@@ -337,11 +237,12 @@ export default function Canvas({ state }) {
                               }}
                             />
                           )}
-                          {editingText && editingText !== element.id && (
-                            <Element element={element} state={state} style={cloneDeep(element.style)} />
-                          )}
+                          {state.active.editingTextId.get() &&
+                            state.active.editingTextId.get() !== element.id && (
+                              <Element element={element} state={state} style={cloneDeep(element.style)} />
+                            )}
 
-                          {!editingText && (
+                          {!state.active.editingTextId.get() && (
                             <Element element={element} state={state} style={cloneDeep(element.style)} />
                           )}
                         </div>

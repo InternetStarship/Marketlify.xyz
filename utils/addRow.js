@@ -3,11 +3,11 @@ import { getIndexesById } from './getIndexesById'
 import { cloneDeep } from 'lodash'
 import defaults from '@/utils/defaults'
 
-export function addRow(state, totalColumns, existingIds) {
-  const newId = generateUniqueId(existingIds)
+export function addRow(state, totalColumns) {
+  const newId = generateUniqueId(state.active.existingIds.get())
   const columns = Array.from({ length: totalColumns }, () => {
     const newColumn = cloneDeep(defaults.column)
-    newColumn.id = generateUniqueId(existingIds)
+    newColumn.id = generateUniqueId(state.active.existingIds.get())
     return newColumn
   })
   const { sectionIndex } = getIndexesById(

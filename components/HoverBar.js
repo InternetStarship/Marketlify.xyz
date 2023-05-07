@@ -5,12 +5,11 @@ import { remove } from '@/utils/remove'
 import { move } from '@/utils/move'
 import AddDropdown from './AddDropdown'
 
-export default function HoverBar({ state, position, page, updatePage }) {
-  const [updatedPosition, setUpdatedPosition] = useState(position)
-  const [existingIds] = useState(new Set())
+export default function HoverBar({ state }) {
   const [popup, setPopup] = useState(false)
 
   useEffect(() => {
+    const existingIds = new Set()
     state.page.data.get().styles.sections?.forEach(section => {
       existingIds.add(section.id)
       section.rows.forEach(row => {
@@ -23,12 +22,9 @@ export default function HoverBar({ state, position, page, updatePage }) {
         })
       })
     })
+    state.active.existingIds.set(existingIds)
+    console.log('loaded')
   }, [])
-
-  useEffect(() => {
-    setUpdatedPosition(position)
-    setPopup(false)
-  }, [position])
 
   return (
     <>
@@ -38,10 +34,10 @@ export default function HoverBar({ state, position, page, updatePage }) {
             id="hoverBar"
             className="border-2 fixed"
             style={{
-              width: updatedPosition.width,
-              height: updatedPosition.height,
-              top: updatedPosition.top,
-              left: updatedPosition.left,
+              width: state.active.position.get().width,
+              height: state.active.position.get().height,
+              top: state.active.position.get().top,
+              left: state.active.position.get().left,
               zIndex: 999999,
             }}
           >
@@ -51,11 +47,11 @@ export default function HoverBar({ state, position, page, updatePage }) {
                   onClick={() => {
                     move(
                       page => {
-                        updatePage(page)
+                        state.page.data.set(page)
                         state.active.hovering.set(false)
                       },
                       -1,
-                      page,
+                      state.page.data.get(),
                       state.active.selectedId.get()
                     )
                   }}
@@ -67,11 +63,11 @@ export default function HoverBar({ state, position, page, updatePage }) {
                   onClick={() => {
                     move(
                       page => {
-                        updatePage(page)
+                        state.page.data.set(page)
                         state.active.hovering.set(false)
                       },
                       1,
-                      page,
+                      state.page.data.get(),
                       state.active.selectedId.get()
                     )
                   }}
@@ -92,10 +88,10 @@ export default function HoverBar({ state, position, page, updatePage }) {
                   onClick={() => {
                     duplicate(
                       page => {
-                        updatePage(page)
+                        state.page.data.set(page)
                         state.active.hovering.set(false)
                       },
-                      page,
+                      state.page.data.get(),
                       state.active.selectedId.get(),
                       existingIds
                     )
@@ -108,10 +104,10 @@ export default function HoverBar({ state, position, page, updatePage }) {
                   onClick={() => {
                     remove(
                       page => {
-                        updatePage(page)
+                        state.page.data.set(page)
                         state.active.hovering.set(false)
                       },
-                      page,
+                      state.page.data.get(),
                       state.active.selectedId.get()
                     )
                   }}
@@ -122,7 +118,7 @@ export default function HoverBar({ state, position, page, updatePage }) {
               </div>
             </div>
 
-            <AddDropdown state={state} popup={popup} setPopup={setPopup} existingIds={existingIds} />
+            <AddDropdown state={state} popup={popup} setPopup={setPopup} />
           </main>
         </div>
       )}

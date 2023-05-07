@@ -28,6 +28,7 @@ const state = {
     existingIds: [],
     editingTextId: '',
     addDropdown: false,
+    position: '',
   },
   undo: {
     history: [],
