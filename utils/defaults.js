@@ -41,6 +41,7 @@ const master = {
       style: {
         fontSize: '37px',
         fontWeight: 800,
+        marginTop: '10px',
       },
     },
 
@@ -53,6 +54,7 @@ const master = {
       style: {
         fontSize: '27px',
         fontWeight: 600,
+        marginTop: '10px',
       },
     },
 
@@ -65,6 +67,7 @@ const master = {
       style: {
         fontSize: '17px',
         fontWeight: 400,
+        marginTop: '10px',
       },
     },
 
@@ -79,6 +82,7 @@ const master = {
       style: {
         width: '100%',
         borderRadius: '5px',
+        marginTop: '10px',
       },
     },
 
@@ -99,6 +103,7 @@ const master = {
         borderRadius: '5px',
         display: 'inline-block',
         textAlign: 'center',
+        marginTop: '10px',
       },
     },
 
@@ -111,6 +116,7 @@ const master = {
       style: {
         fontSize: '17px',
         fontWeight: 400,
+        marginTop: '10px',
       },
     },
 
@@ -122,7 +128,9 @@ const master = {
         type: 'youtube',
         url: 'https://www.youtube.com/watch?v=WYjgHLFZMa0',
       },
-      style: {},
+      style: {
+        marginTop: '10px',
+      },
     },
 
     icon: {
@@ -131,7 +139,9 @@ const master = {
         id: '',
         class: '',
       },
-      style: {},
+      style: {
+        marginTop: '10px',
+      },
     },
 
     divider: {
@@ -154,6 +164,7 @@ const master = {
       style: {
         fontSize: '15px',
         fontWeight: 500,
+        marginTop: '10px',
       },
     },
 

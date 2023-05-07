@@ -40,7 +40,7 @@ export default function Canvas({ state }) {
               className="section"
               id={'marketlify-' + section.id}
               key={section.id}
-              style={cloneDeep(section.styles)}
+              style={cloneDeep(section.style)}
               onClick={e => {
                 e.stopPropagation()
                 state.active.selectedId.set(section.id)

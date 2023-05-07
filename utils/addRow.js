@@ -18,14 +18,22 @@ export function addRow(state, totalColumns) {
   const position = state.page.data
     .get()
     .styles.sections[sectionIndex].rows.findIndex(row => row.id === state.active.selectedId.get())
-  const newPosition = position + 1
 
-  state.page.data.styles.sections[sectionIndex].rows.merge({
-    [newPosition]: {
-      ...defaults.row,
-      id: newId,
-      columns: columns,
-    },
+  state.page.data.styles.sections[sectionIndex].rows.set(rows => {
+    rows.splice(
+      position + 1,
+      0,
+      cloneDeep({
+        ...defaults.row,
+        id: newId,
+        columns: columns,
+        style: {
+          padding: '10px',
+        },
+      })
+    )
+
+    return rows
   })
 
   state.active.addDropdown.set(false)

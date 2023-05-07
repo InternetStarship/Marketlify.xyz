@@ -1,6 +1,7 @@
 import { getIndexesById } from '@/utils/getIndexesById'
 import defaults from '@/utils/defaults'
 import { generateUniqueId } from '@/utils/generateUniqueId'
+import { cloneDeep } from 'lodash'
 
 export function addElement(state, type) {
   const newId = generateUniqueId(state.active.existingIds.get())
@@ -12,15 +13,20 @@ export function addElement(state, type) {
       currentElement.columnIndex
     ].elements.findIndex(element => element.id === state.active.selectedId.get())
 
-  const newPosition = position + 1
   state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
     currentElement.columnIndex
-  ].elements.merge({
-    [newPosition]: {
-      ...defaults.elements[type],
-      id: newId,
-      type: type,
-    },
+  ].elements.set(elements => {
+    elements.splice(
+      position + 1,
+      0,
+      cloneDeep({
+        ...defaults.elements[type],
+        id: newId,
+        type: type,
+      })
+    )
+
+    return elements
   })
 
   let data = {}

@@ -1,5 +1,6 @@
 import { generateUniqueId } from './generateUniqueId'
 import defaults from '@/utils/defaults'
+import { cloneDeep } from 'lodash'
 
 export function addSection(state, width) {
   const newId = generateUniqueId(state.active.existingIds.get())
@@ -7,17 +8,23 @@ export function addSection(state, width) {
     .get()
     .styles.sections.findIndex(section => section.id === state.active.selectedId.get())
 
-  const newPosition = position + 1
-  state.page.data.styles.sections.merge({
-    [newPosition]: {
-      ...defaults.section,
-      id: newId,
-      style: {
-        maxWidth: width,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
-    },
+  state.page.data.styles.sections.set(sections => {
+    sections.splice(
+      position + 1,
+      0,
+      cloneDeep({
+        ...defaults.section,
+        id: newId,
+        style: {
+          maxWidth: width,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          padding: '20px',
+        },
+      })
+    )
+
+    return sections
   })
 
   state.active.addDropdown.set(false)
