@@ -10,7 +10,7 @@ function createSection(newId, width) {
       maxWidth: width,
       marginLeft: 'auto',
       marginRight: 'auto',
-      padding: '20px',
+      padding: '10px',
     },
   })
 }
