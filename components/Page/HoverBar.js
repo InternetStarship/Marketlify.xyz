@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { FaArrowUp, FaArrowDown, FaCopy, FaTrash } from 'react-icons/fa'
-import { duplicate } from '@/utils/utility/duplicate'
-import { remove } from '@/utils/utility/remove'
-import { move } from '@/utils/utility/move'
+import { duplicate } from '@/utils/editor/duplicate'
+import { remove } from '@/utils/editor/remove'
+import { move } from '@/utils/editor/move'
 import AddDropdown from '../Dropdown/AddDropdown'
 import { cloneDeep } from 'lodash'
 

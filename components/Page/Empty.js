@@ -1,4 +1,4 @@
-import { hover } from '@/utils/utility/hover'
+import { hover } from '@/utils/editor/hover'
 
 export default function Empty({ state, type, block = null }) {
   return (

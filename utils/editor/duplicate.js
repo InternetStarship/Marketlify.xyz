@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash'
-import { findById } from './findById'
-import { findTypeById } from './findTypeById'
-import { getIndexesById } from './getIndexesById'
-import { generateUniqueId } from './generateUniqueId'
+import { findById } from '../utility/findById'
+import { findTypeById } from '../utility/findTypeById'
+import { getIndexesById } from '../utility/getIndexesById'
+import { generateUniqueId } from '../utility/generateUniqueId'
 
 const duplicatedIds = new Set()
 

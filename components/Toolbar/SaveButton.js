@@ -1,5 +1,5 @@
 import { FaSave } from 'react-icons/fa'
-import { save } from '@/utils/utility/save'
+import { save } from '@/utils/editor/save'
 
 function SaveButton({ state }) {
   return (

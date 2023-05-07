@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
-import { findTypeById } from './findTypeById'
-import { getIndexesById } from './getIndexesById'
+import { findTypeById } from '../utility/findTypeById'
+import { getIndexesById } from '../utility/getIndexesById'
 
 export function remove(callback, page, selectedId) {
   const confirm = window.confirm('Are you sure you want to delete this?')

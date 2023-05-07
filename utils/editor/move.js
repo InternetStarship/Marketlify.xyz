@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
-import { findTypeById } from './findTypeById'
-import { getIndexesById } from './getIndexesById'
+import { findTypeById } from '../utility/findTypeById'
+import { getIndexesById } from '../utility/getIndexesById'
 
 export function move(callback, direction, page, selectedId) {
   const type = findTypeById(selectedId, page.data.styles.sections)
