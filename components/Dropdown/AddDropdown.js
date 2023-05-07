@@ -4,10 +4,11 @@ import { RxButton, RxDividerHorizontal, RxCheckbox, RxRadiobutton, RxInput, RxCo
 import { TbSelect, TbColumns1, TbColumns2, TbColumns3, TbColumnInsertLeft, TbContainer } from 'react-icons/tb'
 import { MdOutlineOndemandVideo, MdLabelOutline } from 'react-icons/md'
 import { BsTextareaResize } from 'react-icons/bs'
+import { FaPlus } from 'react-icons/fa'
+
 import { addRow } from '@/utils/dom/addRow'
 import { addSection } from '@/utils/dom/addSection'
 import { addElement } from '@/utils/dom/addElement'
-import { FaPlus } from 'react-icons/fa'
 
 const hoverTypeConfig = {
   section: [

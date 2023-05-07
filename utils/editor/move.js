@@ -7,7 +7,6 @@ export function move(state, directionText) {
   const currentElement = getIndexesById(state.active.selectedId.get(), state.page.data.get().styles.sections)
 
   moveItem(state, type, currentElement.sectionIndex, direction, currentElement)
-
   state.active.hovering.set(false)
 }
 
@@ -22,7 +21,9 @@ function moveItem(state, type, currentIndex, direction, currentElement) {
         break
 
       case 'row':
-        state.page.data.styles.sections[currentElement.sectionIndex].rowsv
+        state.page.data.styles.sections[currentElement.sectionIndex].rows.set(items => {
+          return item(items, currentIndex, newIndex)
+        })
         break
 
       case 'column':
