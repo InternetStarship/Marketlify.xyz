@@ -3,24 +3,30 @@ import { getIndexesById } from './getIndexesById'
 import { cloneDeep } from 'lodash'
 import defaults from '@/utils/defaults'
 
-export function addRow(callback, totalColumns, existingIds, selectedId, page) {
+export function addRow(state, totalColumns, existingIds) {
   const newId = generateUniqueId(existingIds)
   const columns = Array.from({ length: totalColumns }, () => {
     const newColumn = cloneDeep(defaults.column)
     newColumn.id = generateUniqueId(existingIds)
     return newColumn
   })
-  const { sectionIndex } = getIndexesById(selectedId, page.data.styles.sections)
+  const { sectionIndex } = getIndexesById(
+    state.active.selectedId.get(),
+    state.page.data.get().styles.sections
+  )
+  const position = state.page.data
+    .get()
+    .styles.sections[sectionIndex].rows.findIndex(row => row.id === state.active.selectedId.get())
+  const newPosition = position + 1
 
-  const position = page.data.styles.sections[sectionIndex].rows.findIndex(row => row.id === selectedId)
+  state.page.data.styles.sections[sectionIndex].rows.merge({
+    [newPosition]: {
+      ...defaults.row,
+      id: newId,
+      columns: columns,
+    },
+  })
 
-  const rowSchema = {
-    ...defaults.row,
-    id: newId,
-    columns: columns,
-  }
-
-  page.data.styles.sections[sectionIndex].rows.splice(position + 1, 0, rowSchema)
-
-  callback(cloneDeep(page))
+  // setPopup(false)
+  // updateHovering(false)
 }

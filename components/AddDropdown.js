@@ -89,35 +89,12 @@ export default function AddDropdown({
   page,
   updatePage,
   setPopup,
-  id,
   updateHovering,
 }) {
   const onClickHandlers = {
     section: ({ width }) => addSection(state, width, existingIds),
-    row: ({ columns }) =>
-      addRow(
-        () => {
-          setPopup(false)
-          updatePage(page)
-          updateHovering(false)
-        },
-        columns,
-        existingIds,
-        selectedId,
-        page
-      ),
-    element: ({ type }) =>
-      addElement(
-        page => {
-          setPopup(false)
-          updatePage(page)
-          updateHovering(false)
-        },
-        type,
-        existingIds,
-        selectedId,
-        page
-      ),
+    row: ({ columns }) => addRow(state, columns, existingIds),
+    element: ({ type }) => addElement(state, type, existingIds),
   }
 
   return (

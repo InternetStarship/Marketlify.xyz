@@ -3,23 +3,32 @@ import defaults from '@/utils/defaults'
 import { cloneDeep } from 'lodash'
 import { generateUniqueId } from '@/utils/generateUniqueId'
 
-export function addElement(callback, type, existingIds, selectedId, page) {
+export function addElement(state, type, existingIds) {
   const newId = generateUniqueId(existingIds)
-  const currentElement = getIndexesById(selectedId, page.data.styles.sections)
+  const currentElement = getIndexesById(state.active.selectedId.get(), state.page.data.get().styles.sections)
 
-  const elementSchema = {
-    ...defaults.elements[type],
-    id: newId,
-    type: type,
-  }
+  const position = state.page.data
+    .get()
+    .styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      currentElement.columnIndex
+    ].elements.findIndex(element => element.id === state.active.selectedId.get())
 
-  const position = page.data.styles.sections[currentElement.sectionIndex].rows[
-    currentElement.rowIndex
-  ].columns[currentElement.columnIndex].elements.findIndex(element => element.id === selectedId)
-
-  page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+  const newPosition = position + 1
+  state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
     currentElement.columnIndex
-  ].elements.splice(position + 1, 0, elementSchema)
+  ].elements.merge({
+    [newPosition]: {
+      ...defaults.elements[type],
+      id: newId,
+      type: type,
+    },
+  })
+
+  console.log(
+    state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      currentElement.columnIndex
+    ].elements.get()
+  )
 
   let data = {}
 
@@ -79,7 +88,7 @@ export function addElement(callback, type, existingIds, selectedId, page) {
 
   data = { ...data, id: newId, type: type }
 
-  page.data.content.push(data)
+  state.page.data.content.merge([data])
 
-  return callback(cloneDeep(page))
+  console.log(state.page.data.content.get())
 }

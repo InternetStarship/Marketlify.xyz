@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { BiCodeAlt } from 'react-icons/bi'
 import { BsLayoutTextWindowReverse } from 'react-icons/bs'
-import { clone, cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash'
 import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
 import { hover } from '@/utils/hover'
 import TextEditor from './TextEditor'
@@ -163,7 +163,7 @@ export default function Canvas({ state }) {
             />
           )}
 
-          {state.page.data.get().styles.sections.length == 0 && (
+          {state.page.data.styles.sections.get().length == 0 && (
             <div
               className="element"
               id={'marketlify-' + 'empty-000'}
@@ -183,7 +183,7 @@ export default function Canvas({ state }) {
             </div>
           )}
 
-          {state.page.data.get().sections?.map((section, sectionIndex) => (
+          {state.page.data.styles.sections.get()?.map((section, sectionIndex) => (
             <div
               className="section"
               id={'marketlify-' + section.id}
@@ -221,7 +221,7 @@ export default function Canvas({ state }) {
                         'marketlify-' + 'empty-' + section.id,
                         true,
                         'row',
-                        data.styles.sections
+                        state.page.data.get().styles.sections
                       )
                     }}
                   >
@@ -275,7 +275,7 @@ export default function Canvas({ state }) {
                                 'marketlify-' + 'empty-' + column.id,
                                 true,
                                 'element',
-                                data.styles.sections
+                                state.page.data.get().styles.sections
                               )
                             }}
                           >
@@ -312,7 +312,7 @@ export default function Canvas({ state }) {
                               'marketlify-' + element.id,
                               false,
                               'element',
-                              data.styles.sections
+                              state.page.data.get().styles.sections
                             )
                           }}
                         >
@@ -344,11 +344,11 @@ export default function Canvas({ state }) {
                             />
                           )}
                           {editingText && editingText !== element.id && (
-                            <Element element={element} data={state.page.data.get()} style={element.style} />
+                            <Element element={element} state={state} style={cloneDeep(element.style)} />
                           )}
 
                           {!editingText && (
-                            <Element element={element} data={state.page.data.get()} style={element.style} />
+                            <Element element={element} state={state} style={cloneDeep(element.style)} />
                           )}
                         </div>
                       ))}

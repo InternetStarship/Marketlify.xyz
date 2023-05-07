@@ -1,6 +1,6 @@
-export function findContentById(id, content = []) {
-  if (Array.isArray(content)) {
-    for (const item of content) {
+export function findContentById(id, state) {
+  if (Array.isArray(state.page.data.content.get())) {
+    for (const item of state.page.data.content.get()) {
       if (item.id === id) return item
     }
   }
