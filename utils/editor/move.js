@@ -6,23 +6,22 @@ export function move(state, directionText) {
   const type = findTypeById(state.active.selectedId.get(), state.page.data.get().styles.sections)
   const currentElement = getIndexesById(state.active.selectedId.get(), state.page.data.get().styles.sections)
 
-  moveItem(state, type, currentElement.sectionIndex, direction, currentElement)
+  moveItem(state, type, direction, currentElement)
   state.active.hovering.set(false)
 }
 
-function moveItem(state, type, currentIndex, direction, currentElement) {
-  const newIndex = currentIndex + direction
-  if (newIndex >= 0) {
+function moveItem(state, type, direction, currentElement) {
+  if (currentElement.sectionIndex >= 0) {
     switch (type) {
       case 'section':
         state.page.data.styles.sections.set(items => {
-          return item(items, currentIndex, newIndex)
+          return item(items, currentElement.sectionIndex, currentElement.sectionIndex + direction)
         })
         break
 
       case 'row':
         state.page.data.styles.sections[currentElement.sectionIndex].rows.set(items => {
-          return item(items, currentIndex, newIndex)
+          return item(items, currentElement.rowIndex, currentElement.rowIndex + direction)
         })
         break
 
@@ -30,7 +29,7 @@ function moveItem(state, type, currentIndex, direction, currentElement) {
         state.page.data.styles.sections[currentElement.sectionIndex].rows[
           currentElement.rowIndex
         ].columns.set(items => {
-          return item(items, currentIndex, newIndex)
+          return item(items, currentElement.columnIndex, currentElement.columnIndex + direction)
         })
         break
 
@@ -38,7 +37,7 @@ function moveItem(state, type, currentIndex, direction, currentElement) {
         state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
           currentElement.columnIndex
         ].elements.set(items => {
-          return item(items, currentIndex, newIndex)
+          return item(items, currentElement.elementIndex, currentElement.elementIndex + direction)
         })
 
         break
