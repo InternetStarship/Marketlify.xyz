@@ -24,26 +24,10 @@ export default function Panel({ state }) {
   const [allCSSProperties] = useState(cssProperties)
   const [mainTab, setMainTab] = useState('styles')
   const [secondaryTab, setSecondaryTab] = useState('default')
-  const [existingIds] = useState(new Set())
   const [showCSS, setShowCSS] = useState(false)
   const [codeBox, setCodeBox] = useState('')
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [filteredFonts, setFilteredFonts] = useState([])
-
-  useEffect(() => {
-    state.page.data.get().styles.sections?.forEach(section => {
-      existingIds.add(section.id)
-      section.rows.forEach(row => {
-        existingIds.add(row.id)
-        row.columns.forEach(column => {
-          existingIds.add(column.id)
-          column.elements.forEach(element => {
-            existingIds.add(element.id)
-          })
-        })
-      })
-    })
-  }, [])
 
   useEffect(() => {
     const currentElement = findById(state.active.selectedId.get(), state.page.data.get().styles.sections)
@@ -102,7 +86,7 @@ export default function Panel({ state }) {
                   },
                   state.page.data.get(),
                   state.active.selectedId.get(),
-                  existingIds
+                  state.active.existingIds.get()
                 )
               }}
               data-tooltip-id="tooltip"

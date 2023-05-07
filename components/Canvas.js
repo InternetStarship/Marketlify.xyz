@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import CanvasFullscreenButton from './CanvasFullscreenButton'
 import CanvasTopBar from './CanvasTopBar'
+import CanvasDisabledOverlay from './CanvasDisabledOverlay'
 import { cloneDeep } from 'lodash'
 import { buildGoogleFonts } from '@/utils/buildGoogleFonts'
 import { hover } from '@/utils/hover'
@@ -11,20 +12,8 @@ import HoverBar from './HoverBar'
 
 export default function Canvas({ state }) {
   useEffect(() => {
-    state.active.editingTextId.set(null)
     buildGoogleFonts(state.page.data.get())
   }, [])
-
-  const updateOnHover = data => {
-    if (data.element) {
-      state.active.hoverType.set(data.type)
-      state.active.hovering.set(true)
-    }
-    if (data.positions) {
-      state.active.position.set(data.positions)
-    }
-    state.active.selectedId.set(data.id)
-  }
 
   return (
     <main id="canvasContainer" className={`${state.active.fullscreen.get() ? 'fullscreen' : ''} w-full`}>
@@ -41,41 +30,10 @@ export default function Canvas({ state }) {
           }}
           style={cloneDeep(state.page.data.styles.body.get())}
         >
-          {state.active.current.get() !== '' && (
-            <div
-              className="w-full h-full hover:bg-slate-900 opacity-25 absolute z-20"
-              onMouseOver={e => {
-                e.preventDefault()
-                e.stopPropagation()
-              }}
-              onClick={e => {
-                state.active.selectedId.set(null)
-                state.active.current.set('')
-              }}
-            ></div>
-          )}
+          <CanvasDisabledOverlay state={state} />
 
           {state.active.hovering.get() && !state.active.editingTextId.get() && <HoverBar state={state} />}
-
-          {state.page.data.styles.sections.get().length == 0 && (
-            <div
-              className="element"
-              id={'marketlify-' + 'empty-000'}
-              onMouseOver={e => {
-                e.stopPropagation()
-                hover(
-                  data => {
-                    updateOnHover(data)
-                  },
-                  'marketlify-' + 'empty-000',
-                  true,
-                  'section'
-                )
-              }}
-            >
-              <Empty message="Add Section" />
-            </div>
-          )}
+          {state.page.data.styles.sections.get().length == 0 && <Empty state={state} type="section" />}
 
           {state.page.data.styles.sections.get()?.map((section, sectionIndex) => (
             <div
@@ -90,39 +48,10 @@ export default function Canvas({ state }) {
               }}
               onMouseOver={e => {
                 e.stopPropagation()
-                hover(
-                  data => {
-                    updateOnHover(data)
-                  },
-                  'marketlify-' + section.id,
-                  false,
-                  'section',
-                  state.page.data.get().styles.sections
-                )
+                hover(state, 'marketlify-' + section.id, false, 'section')
               }}
             >
-              {section.rows.length === 0 && (
-                <div key={sectionIndex} className="p-3">
-                  <div
-                    className="element"
-                    id={'marketlify-' + 'empty-' + section.id}
-                    onMouseOver={e => {
-                      e.stopPropagation()
-                      hover(
-                        data => {
-                          updateOnHover(data)
-                        },
-                        'marketlify-' + 'empty-' + section.id,
-                        true,
-                        'row',
-                        state.page.data.get().styles.sections
-                      )
-                    }}
-                  >
-                    <Empty message="Add Row" />
-                  </div>
-                </div>
-              )}
+              {section.rows.length === 0 && <Empty state={state} type="row" block={section} />}
               {section.rows?.map((row, rowIndex) => (
                 <div
                   className="row"
@@ -136,15 +65,7 @@ export default function Canvas({ state }) {
                   }}
                   onMouseOver={e => {
                     e.stopPropagation()
-                    hover(
-                      data => {
-                        updateOnHover(data)
-                      },
-                      'marketlify-' + row.id,
-                      false,
-                      'row',
-                      state.page.data.get().styles.sections
-                    )
+                    hover(state, 'marketlify-' + row.id, false, 'row')
                   }}
                 >
                   {row.columns?.map((column, colIndex) => (
@@ -154,29 +75,7 @@ export default function Canvas({ state }) {
                       style={cloneDeep(column.style)}
                       id={'marketlify-' + column.id}
                     >
-                      {column.elements.length === 0 && (
-                        <div className="p-3">
-                          <div
-                            className="element"
-                            id={'marketlify-' + 'empty-' + column.id}
-                            onMouseOver={e => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                              hover(
-                                data => {
-                                  updateOnHover(data)
-                                },
-                                'marketlify-' + 'empty-' + column.id,
-                                true,
-                                'element',
-                                state.page.data.get().styles.sections
-                              )
-                            }}
-                          >
-                            <Empty message="Add Element" className="element" />
-                          </div>
-                        </div>
-                      )}
+                      {column.elements.length === 0 && <Empty state={state} type="element" block={column} />}
 
                       {column.elements?.map((element, elementIndex) => (
                         <div
@@ -199,15 +98,7 @@ export default function Canvas({ state }) {
                           }}
                           onMouseOver={e => {
                             e.stopPropagation()
-                            hover(
-                              data => {
-                                updateOnHover(data)
-                              },
-                              'marketlify-' + element.id,
-                              false,
-                              'element',
-                              state.page.data.get().styles.sections
-                            )
+                            hover(state, 'marketlify-' + element.id, false, 'element')
                           }}
                         >
                           {state.active.editingTextId.get() === element.id && (

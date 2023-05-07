@@ -1,12 +1,12 @@
 import { findTypeById } from '@/utils/findTypeById'
 
-export function hover(callback, elementId, isEmpty = false, type = '', sections = []) {
+export function hover(state, elementId, isEmpty = false, type = '') {
   let element = document.getElementById(elementId)
   let positions = {}
   let id = ''
 
   if (type === '') {
-    type = findTypeById(parseInt(elementId.replace('marketlify-', '')), sections)
+    type = findTypeById(parseInt(elementId.replace('marketlify-', '')), state.page.data.get().styles.sections)
   }
 
   if (element) {
@@ -46,12 +46,14 @@ export function hover(callback, elementId, isEmpty = false, type = '', sections 
     } else {
       id = parseInt(elementId.replace('marketlify-', ''))
     }
+    state.active.selectedId.set(id)
   }
 
-  return callback({
-    element,
-    positions,
-    id,
-    type,
-  })
+  if (element) {
+    state.active.hoverType.set(type)
+    state.active.hovering.set(true)
+  }
+  if (positions) {
+    state.active.position.set(positions)
+  }
 }

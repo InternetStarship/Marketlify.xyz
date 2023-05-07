@@ -23,12 +23,6 @@ export function addElement(state, type) {
     },
   })
 
-  console.log(
-    state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
-      currentElement.columnIndex
-    ].elements.get()
-  )
-
   let data = {}
 
   switch (type) {
@@ -88,8 +82,6 @@ export function addElement(state, type) {
   data = { ...data, id: newId, type: type }
 
   state.page.data.content.merge([data])
-
-  console.log(state.page.data.content.get())
 
   state.active.addDropdown.set(false)
   state.active.hovering.set(false)

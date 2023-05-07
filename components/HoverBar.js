@@ -4,6 +4,7 @@ import { duplicate } from '@/utils/duplicate'
 import { remove } from '@/utils/remove'
 import { move } from '@/utils/move'
 import AddDropdown from './AddDropdown'
+import { cloneDeep } from 'lodash'
 
 export default function HoverBar({ state }) {
   const [popup, setPopup] = useState(false)
@@ -22,8 +23,7 @@ export default function HoverBar({ state }) {
         })
       })
     })
-    state.active.existingIds.set(existingIds)
-    console.log('loaded')
+    state.active.existingIds.set(cloneDeep(existingIds))
   }, [])
 
   return (

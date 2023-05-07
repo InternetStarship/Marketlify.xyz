@@ -10,6 +10,7 @@ export function addRow(state, totalColumns) {
     newColumn.id = generateUniqueId(state.active.existingIds.get())
     return newColumn
   })
+
   const { sectionIndex } = getIndexesById(
     state.active.selectedId.get(),
     state.page.data.get().styles.sections
