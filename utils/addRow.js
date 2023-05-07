@@ -3,13 +3,17 @@ import { getIndexesById } from './getIndexesById'
 import { cloneDeep } from 'lodash'
 import defaults from '@/utils/defaults'
 
-export function addRow(state, totalColumns) {
-  const newId = generateUniqueId(state.active.existingIds.get())
-  const columns = Array.from({ length: totalColumns }, () => {
+function createColumns(totalColumns, existingIds) {
+  return Array.from({ length: totalColumns }, () => {
     const newColumn = cloneDeep(defaults.column)
-    newColumn.id = generateUniqueId(state.active.existingIds.get())
+    newColumn.id = generateUniqueId(existingIds)
     return newColumn
   })
+}
+
+export function addRow(state, totalColumns) {
+  const newId = generateUniqueId(state.active.existingIds.get())
+  const columns = createColumns(totalColumns, state.active.existingIds.get())
 
   const { sectionIndex } = getIndexesById(
     state.active.selectedId.get(),
@@ -19,20 +23,17 @@ export function addRow(state, totalColumns) {
     .get()
     .styles.sections[sectionIndex].rows.findIndex(row => row.id === state.active.selectedId.get())
 
-  state.page.data.styles.sections[sectionIndex].rows.set(rows => {
-    rows.splice(
-      position + 1,
-      0,
-      cloneDeep({
-        ...defaults.row,
-        id: newId,
-        columns: columns,
-        style: {
-          padding: '10px',
-        },
-      })
-    )
+  const newRow = cloneDeep({
+    ...defaults.row,
+    id: newId,
+    columns: columns,
+    style: {
+      padding: '10px',
+    },
+  })
 
+  state.page.data.styles.sections[sectionIndex].rows.set(rows => {
+    rows.splice(position + 1, 0, newRow)
     return rows
   })
 
