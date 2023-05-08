@@ -4,19 +4,20 @@ import CodeMirror from '@uiw/react-codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import Popup from '@/components/Popup/Popup'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default function CustomCode({ state }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [code, setCode] = useState('')
   const [type, setType] = useState('head')
 
-  const onChange = useCallback(value => {
+  const updateCode = useCallback((value, type) => {
     if (type === 'head') {
-      state.page.data.get().code.head = value
+      state.page.data.code.head.set(value)
     } else if (type === 'body') {
-      state.page.data.get().code.body = value
+      state.page.data.code.body.set(value)
     } else if (type === 'css') {
-      state.page.data.get().code.css = value
+      state.page.data.code.css.set(value)
     }
     setCode(value)
   }, [])
@@ -41,9 +42,9 @@ export default function CustomCode({ state }) {
         </p>
         <button
           onClick={() => {
-            setModalOpen(true)
             setType('head')
-            setCode(state.page.data.get().code.head)
+            setCode(cloneDeep(state.page.data.code.head.get()))
+            setModalOpen(true)
           }}
           className="page-modal-close-button"
         >
@@ -57,9 +58,9 @@ export default function CustomCode({ state }) {
         </p>
         <button
           onClick={() => {
-            setModalOpen(true)
             setType('body')
-            setCode(state.page.data.get().code.body)
+            setCode(cloneDeep(state.page.data.code.body.get()))
+            setModalOpen(true)
           }}
           className="page-modal-close-button"
         >
@@ -73,9 +74,9 @@ export default function CustomCode({ state }) {
         </p>
         <button
           onClick={() => {
-            setModalOpen(true)
             setType('css')
-            setCode(state.page.data.get().code.css)
+            setCode(cloneDeep(state.page.data.code.css.get()))
+            setModalOpen(true)
           }}
           className="page-modal-close-button"
         >
@@ -83,13 +84,15 @@ export default function CustomCode({ state }) {
         </button>
 
         {modalOpen && (
-          <Popup title="Edit Head Code" closeOverride={() => setModalOpen(false)} open={modalOpen}>
+          <Popup title={`Edit ${type} Code`} closeOverride={() => setModalOpen(false)} open={modalOpen}>
             <div className="border rounded shadow overflow-hidden">
               <CodeMirror
                 value={code}
                 height="400px"
                 extensions={type === 'css' ? [css()] : [html()]}
-                onChange={onChange}
+                onChange={value => {
+                  updateCode(value, type)
+                }}
               />
             </div>
           </Popup>

@@ -23,7 +23,6 @@ function getActiveComponent(state) {
 
 export default function Sidebar({ state }) {
   const mainClassName = !state.sidebar.expanded.get() ? 'closed' : ''
-
   const [ActiveComponent, setActiveComponent] = useState(() => getActiveComponent(state))
 
   useEffect(() => {
