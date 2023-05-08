@@ -27,7 +27,7 @@ export default function Sidebar({ state }) {
 
   useEffect(() => {
     setActiveComponent(getActiveComponent(state))
-  }, [state])
+  }, [state.active.current])
 
   return (
     <main id="sidebar" className={mainClassName}>

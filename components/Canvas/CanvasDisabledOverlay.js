@@ -3,7 +3,7 @@ export default function CanvasDisabledOverlay({ state }) {
 
   return (
     <div
-      className="w-full h-full hover:bg-slate-900 opacity-25 absolute z-20"
+      className="w-full h-full hover:bg-slate-900 opacity-25 absolute z-20 cursor-pointer"
       onMouseOver={e => {
         e.preventDefault()
         e.stopPropagation()

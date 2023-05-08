@@ -4,6 +4,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { moveLayer } from '@/utils/layer/moveLayer'
 import DraggableLayer from './DraggableLayer'
 
+// TODO: improve DndProvider usage
+
 export default function Layers({ state }) {
   return (
     <div>
@@ -20,91 +22,51 @@ export default function Layers({ state }) {
       <div className="p-3 overflow-x-hidden" style={{ height: `calc(100vh - 118px)` }}>
         <DndProvider backend={HTML5Backend}>
           {state.page.data.get().styles.sections.map((section, sectionIndex) => (
-            <div className="relative">
+            <div key={section.id} className="relative">
               <DraggableLayer
-                key={section.id}
+                state={state}
                 index={sectionIndex}
                 id={section.id}
                 type="section"
                 moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
-                  moveLayer(
-                    value => {
-                      state.page.data.set(value)
-                    },
-                    state.page.data.get(),
-                    dragLayer,
-                    hoverLayer,
-                    dragIndex,
-                    hoverIndex,
-                    type
-                  )
+                  moveLayer(state, dragLayer, hoverLayer, dragIndex, hoverIndex, type)
                 }}
               >
                 {section.rows.map((row, rowIndex) => (
-                  <div className="relative">
+                  <div key={row.id} className="relative">
                     <DraggableLayer
-                      key={row.id}
+                      state={state}
                       index={rowIndex}
                       id={row.id}
                       type="row"
                       moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
-                        moveLayer(
-                          value => {
-                            state.page.data.set(value)
-                          },
-                          state.page.data.get(),
-                          dragLayer,
-                          hoverLayer,
-                          dragIndex,
-                          hoverIndex,
-                          type
-                        )
+                        moveLayer(state, dragLayer, hoverLayer, dragIndex, hoverIndex, type)
                       }}
                       sectionId={section.id}
                     >
                       {row.columns.map((column, columnIndex) => (
-                        <div className="relative">
+                        <div key={column.id} className="relative">
                           <DraggableLayer
-                            key={column.id}
+                            state={state}
                             index={columnIndex}
                             id={column.id}
                             type="column"
                             moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
-                              moveLayer(
-                                value => {
-                                  state.page.data.set(value)
-                                },
-                                state.page.data.get(),
-                                dragLayer,
-                                hoverLayer,
-                                dragIndex,
-                                hoverIndex,
-                                type
-                              )
+                              moveLayer(state, dragLayer, hoverLayer, dragIndex, hoverIndex, type)
                             }}
                             sectionId={section.id}
                             rowId={row.id}
                           >
                             {column.elements.map((element, elementIndex) => (
-                              <div className="relative">
+                              <div key={element.id} className="relative">
                                 <DraggableLayer
-                                  key={element.id}
+                                  state={state}
                                   index={elementIndex}
                                   id={element.id}
                                   type="element"
-                                  content={state.page.content.get().data.content}
+                                  content={state.page.data.content.get()}
                                   moveLayer={(dragLayer, hoverLayer, dragIndex, hoverIndex, type) => {
-                                    moveLayer(
-                                      value => {
-                                        state.page.data.set(value)
-                                      },
-                                      state.page.data.get(),
-                                      dragLayer,
-                                      hoverLayer,
-                                      dragIndex,
-                                      hoverIndex,
-                                      type
-                                    )
+                                    moveLayer(state, dragLayer, hoverLayer, dragIndex, hoverIndex, type)
                                   }}
                                   sectionId={section.id}
                                   rowId={row.id}

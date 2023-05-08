@@ -11,6 +11,7 @@ const layerTypes = {
 }
 
 export default function DraggableLayer({
+  state,
   id,
   index,
   type,
@@ -19,7 +20,6 @@ export default function DraggableLayer({
   sectionId,
   rowId,
   columnId,
-  content,
 }) {
   const ref = useRef(null)
   const layer = { id, index, type, sectionId, rowId, columnId }
@@ -72,7 +72,7 @@ export default function DraggableLayer({
         <div
           className={`bg-slate-50 border p-2 mb-2 border-slate-300 rounded shadow-sm w-full flex justify-between items-center z-10 relative`}
         >
-          <span className="font-medium text-sm">{`${findContentById(id, content)?.type || type}`}</span>
+          <span className="font-medium text-sm">{`${findContentById(id, state)?.type || type}`}</span>
           <span className="text-sm font-bold text-slate-400">
             <MdOutlineDragIndicator />
           </span>

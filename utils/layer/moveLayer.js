@@ -1,62 +1,98 @@
-export function moveLayer(callback, page, dragLayer, hoverLayer, dragIndex, hoverIndex, type) {
-  const updatedPage = { ...page }
-
-  const findSection = sectionId => updatedPage.data.styles.sections.find(section => section.id === sectionId)
-  const findRow = (section, rowId) => section.rows.find(row => row.id === rowId)
-  const findColumn = (row, columnId) => row.columns.find(column => column.id === columnId)
+// TODO: moveOutside not working
+export function moveLayer(state, dragLayer, hoverLayer, dragIndex, hoverIndex, type) {
+  const findSection = sectionId =>
+    state.page.data.styles.sections.get().findIndex(section => section.id === sectionId)
+  const findRow = (section, rowId) => section.rows.get().findIndex(row => row.id === rowId)
+  const findColumn = (row, columnId) => row.columns.get().findIndex(column => column.id === columnId)
 
   switch (type) {
     case 'section':
-      moveArrayItem(updatedPage.data.styles.sections, dragIndex, hoverIndex)
+      moveInside(state.page.data.styles.sections, dragIndex, hoverIndex)
       break
 
     case 'row':
       {
-        const dragSection = findSection(dragLayer.sectionId)
-        const hoverSection = findSection(hoverLayer.sectionId)
+        const dragSectionIndex = findSection(dragLayer.sectionId)
+        const hoverSectionIndex = findSection(hoverLayer.sectionId)
 
-        moveArrayItem(dragSection.rows, dragIndex, hoverIndex)
-
-        if (dragLayer.sectionId !== hoverLayer.sectionId) {
-          const row = dragSection.rows.splice(dragIndex, 1)[0]
-          hoverSection.rows.splice(hoverIndex, 0, row)
+        if (dragSectionIndex !== hoverSectionIndex) {
+          moveOutside(
+            state.page.data.styles.sections.at(dragSectionIndex).rows,
+            state.page.data.styles.sections.at(hoverSectionIndex).rows,
+            dragIndex,
+            hoverIndex
+          )
+        } else {
+          moveInside(state.page.data.styles.sections.at(dragSectionIndex).rows, dragIndex, hoverIndex)
         }
       }
       break
 
     case 'column':
       {
-        const dragSection = findSection(dragLayer.sectionId)
-        const hoverSection = findSection(hoverLayer.sectionId)
+        const dragSectionIndex = findSection(dragLayer.sectionId)
+        const hoverSectionIndex = findSection(hoverLayer.sectionId)
+        const dragRowIndex = findRow(state.page.data.styles.sections.at(dragSectionIndex), dragLayer.rowId)
+        const hoverRowIndex = findRow(state.page.data.styles.sections.at(hoverSectionIndex), hoverLayer.rowId)
 
-        const dragRow = findRow(dragSection, dragLayer.rowId)
-        const hoverRow = findRow(hoverSection, hoverLayer.rowId)
-
-        moveArrayItem(dragRow.columns, dragIndex, hoverIndex)
-
-        if (dragLayer.rowId !== hoverLayer.rowId) {
-          const column = dragRow.columns.splice(dragIndex, 1)[0]
-          hoverRow.columns.splice(hoverIndex, 0, column)
+        if (dragSectionIndex !== hoverSectionIndex || dragRowIndex !== hoverRowIndex) {
+          moveOutside(
+            state.page.data.styles.sections.at(dragSectionIndex).rows.at(dragRowIndex).columns,
+            state.page.data.styles.sections.at(hoverSectionIndex).rows.at(hoverRowIndex).columns,
+            dragIndex,
+            hoverIndex
+          )
+        } else {
+          moveInside(
+            state.page.data.styles.sections.at(dragSectionIndex).rows.at(dragRowIndex).columns,
+            dragIndex,
+            hoverIndex
+          )
         }
       }
       break
 
     case 'element':
       {
-        const dragSection = findSection(dragLayer.sectionId)
-        const hoverSection = findSection(hoverLayer.sectionId)
+        const dragSectionIndex = findSection(dragLayer.sectionId)
+        const hoverSectionIndex = findSection(hoverLayer.sectionId)
+        const dragRowIndex = findRow(state.page.data.styles.sections.at(dragSectionIndex), dragLayer.rowId)
+        const hoverRowIndex = findRow(state.page.data.styles.sections.at(hoverSectionIndex), hoverLayer.rowId)
+        const dragColumnIndex = findColumn(
+          state.page.data.styles.sections.at(dragSectionIndex).rows.at(dragRowIndex),
+          dragLayer.columnId
+        )
+        const hoverColumnIndex = findColumn(
+          state.page.data.styles.sections.at(hoverSectionIndex).rows.at(hoverRowIndex),
+          hoverLayer.columnId
+        )
 
-        const dragRow = findRow(dragSection, dragLayer.rowId)
-        const hoverRow = findRow(hoverSection, hoverLayer.rowId)
-
-        const dragColumn = findColumn(dragRow, dragLayer.columnId)
-        const hoverColumn = findColumn(hoverRow, hoverLayer.columnId)
-
-        moveArrayItem(dragColumn.elements, dragIndex, hoverIndex)
-
-        if (dragLayer.columnId !== hoverLayer.columnId) {
-          const element = dragColumn.elements.splice(dragIndex, 1)[0]
-          hoverColumn.elements.splice(hoverIndex, 0, element)
+        if (
+          dragSectionIndex !== hoverSectionIndex ||
+          dragRowIndex !== hoverRowIndex ||
+          dragColumnIndex !== hoverColumnIndex
+        ) {
+          moveOutside(
+            state.page.data.styles.sections
+              .at(dragSectionIndex)
+              .rows.at(dragRowIndex)
+              .columns.at(dragColumnIndex).elements,
+            state.page.data.styles.sections
+              .at(hoverSectionIndex)
+              .rows.at(hoverRowIndex)
+              .columns.at(hoverColumnIndex).elements,
+            dragIndex,
+            hoverIndex
+          )
+        } else {
+          moveInside(
+            state.page.data.styles.sections
+              .at(dragSectionIndex)
+              .rows.at(dragRowIndex)
+              .columns.at(dragColumnIndex).elements,
+            dragIndex,
+            hoverIndex
+          )
         }
       }
       break
@@ -64,23 +100,26 @@ export function moveLayer(callback, page, dragLayer, hoverLayer, dragIndex, hove
     default:
       break
   }
-
-  const debouncedUpdatePage = debounce(callback, 100)
-
-  debouncedUpdatePage(updatedPage)
 }
 
-const moveArrayItem = (arr, fromIndex, toIndex) => {
-  const item = arr[fromIndex]
-  arr.splice(fromIndex, 1)
-  arr.splice(toIndex, 0, item)
+const moveInside = (arr, fromIndex, toIndex) => {
+  arr.set(items => {
+    const item = items.splice(fromIndex, 1)[0]
+    items.splice(toIndex, 0, item)
+    return items
+  })
 }
 
-function debounce(func, wait) {
-  let timeout
-  return function (...args) {
-    const context = this
-    clearTimeout(timeout)
-    timeout = setTimeout(() => func.apply(context, args), wait)
-  }
+const moveOutside = (dragArr, hoverArr, fromIndex, toIndex) => {
+  let itemToMove
+
+  dragArr.set(items => {
+    itemToMove = items.splice(fromIndex, 1)[0]
+    return items
+  })
+
+  hoverArr.set(items => {
+    items.splice(toIndex, 0, itemToMove)
+    return items
+  })
 }
