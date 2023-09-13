@@ -31,10 +31,10 @@ export default function Toolbar({ state }) {
           }}
           className="flex items-center toolbar-button"
           data-tooltip-id="tooltip"
-          data-tooltip-content="Create New Funnel"
+          data-tooltip-content="Create New Project"
         >
           <AiOutlinePlusCircle />
-          <span className="hidden xl:inline-block">New Funnel</span>
+          <span className="hidden xl:inline-block">New Project</span>
         </button>
       </div>
 

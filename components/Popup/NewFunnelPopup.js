@@ -16,7 +16,7 @@ function NewFunnelPopup({ state }) {
         <div className="page-modal-overlay">
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
-              <h2 className="page-modal-title">New Funnel</h2>
+              <h2 className="page-modal-title">New Project</h2>
               <div>
                 <button onClick={close} className="page-modal-close-button">
                   Close
