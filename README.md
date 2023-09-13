@@ -1,5 +1,7 @@
 <img src="/public/images/logo.png" width="400" />
 
+# !!!! Work in Progress !!!! Does not work fully yet.
+
 ## Project Goals
 
 - Create a multi-page builder that works right away. (speed)
