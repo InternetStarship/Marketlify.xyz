@@ -13,6 +13,7 @@
 
 ## Features
 
+- [ ] Make everything that is on screen work.
 - [ ] States: hover, mobile
 - [ ] All Basic Element
 - [ ] Add action to button, select and video properties, etc
