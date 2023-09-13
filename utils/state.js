@@ -1,7 +1,7 @@
 const state = {
   funnel: {
     id: '',
-    name: 'Untitled Funnel',
+    name: 'Untitled Project',
     pages: [],
   },
   page: {

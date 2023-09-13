@@ -44,7 +44,7 @@ function FunnelsButton({ state }) {
 
   const remove = e => {
     e.stopPropagation()
-    const confirm = window.confirm('Are you sure you want to delete this funnel and all of its pages?')
+    const confirm = window.confirm('Are you sure you want to delete this project and all of its pages?')
     if (confirm) {
       removeFunnel(funnel.id)
       setFunnels(getFunnels())
@@ -58,7 +58,7 @@ function FunnelsButton({ state }) {
         <div className="page-modal-overlay">
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-4">
-              <h2 className="page-modal-title">Funnels</h2>
+              <h2 className="page-modal-title">Projects</h2>
               <div>
                 <button onClick={close} className="page-modal-close-button">
                   Close
@@ -69,7 +69,7 @@ function FunnelsButton({ state }) {
             {funnels.length > 0 && (
               <input
                 type="text"
-                placeholder="Search funnels..."
+                placeholder="Search projects..."
                 className="w-full p-2 active:outline-none border rounded shadow-xs mb-2"
                 defaultValue={''}
                 onChange={search}
@@ -79,14 +79,12 @@ function FunnelsButton({ state }) {
             <div className="page-list">
               {funnels.length === 0 && (
                 <div className="px-12 py-3">
-                  <h3 className="mb-6 text-xl font-bold">Oops! No funnels here...yet! 🤔</h3>
+                  <h3 className="mb-6 text-xl font-bold">Oops! No projects here...yet! 🤔</h3>
                   <p className="mb-6 text-lg">
-                    This is where all your crafted funnels will reside, ready for easy access - even when
-                    you're offline.
+                    This is where all your crafted web pages will reside, ready for easy access - even when you're offline.
                   </p>
                   <p className="mb-6 text-lg">
-                    To begin your funnel-making adventure, dive into our user-friendly page builder and hit
-                    'save' to store your masterpiece safely in your local browser.
+                    To begin your page-making adventure, dive into our user-friendly page builder and hit 'save' to store your masterpiece safely in your local browser.
                   </p>
                 </div>
               )}

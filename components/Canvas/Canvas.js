@@ -4,6 +4,7 @@ import CanvasTopBar from './CanvasTopBar'
 import CanvasDisabledOverlay from './CanvasDisabledOverlay'
 import { buildGoogleFonts } from '@/utils/googleFonts/buildGoogleFonts'
 import { hover } from '@/utils/editor/hover'
+import { cloneDeep } from 'lodash'
 import TextEditor from '../Editor/TextEditor'
 import Element from '../Page/Element'
 import Empty from '../Page/Empty'
@@ -91,11 +92,12 @@ const CanvasElement = ({ state, element }) => {
       {state.active.editingTextId.get() === element.id && (
         <TextEditor
           element={element}
-          data={data}
+          state={state}
           style={{ ...element.style }}
           updateContent={value => {
-            data.content.filter(content => content.id === element.id)[0].content = value
-            state.page.data.set(data)
+            const currentContent = state.page.data.content.filter(content => content.id === parseInt(element.id));
+            currentContent.content = value
+            state.page.data.set(cloneDeep(state.page.data.get()))
           }}
           closeEditor={() => {
             setTimeout(() => {
@@ -110,8 +112,16 @@ const CanvasElement = ({ state, element }) => {
             }, 50)
           }}
           updateStyle={style => {
-            element.style = style
-            state.page.data.set(data)
+            // element.style.set(cloneDeep(style))
+
+            console.log(element, 'currentContent')
+            console.log(cloneDeep(state.page.data.get()), 'hi o')
+
+            // console.log(style, element.style, 'dd')
+            // element.style.set(style)
+            state.page.data.set(cloneDeep(state.page.data.get()))
+
+            
           }}
         />
       )}

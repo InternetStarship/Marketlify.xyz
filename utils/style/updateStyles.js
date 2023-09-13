@@ -7,6 +7,8 @@ export function updateStyles(newStyles, selectedId, page, updatePage) {
     const currentElement = getIndexesById(selectedId, page.data.styles.sections)
     const type = findTypeById(selectedId, page.data.styles.sections)
 
+    console.log(page.data)
+
     if (type === 'section') {
       page.data.styles.sections[currentElement.sectionIndex].style = newStyles
     } else if (type === 'row') {

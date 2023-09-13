@@ -29,7 +29,6 @@ export default function ExportPopup({ state }) {
             >
               Download (.zip)
             </button>
-            <button className="toolbar-button mt-2">Export to ClickFunnels 2.0 (coming soon)</button>
           </div>
         </div>
       </Popup>

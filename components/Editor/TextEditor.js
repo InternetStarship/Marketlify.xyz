@@ -21,7 +21,7 @@ import { motion } from 'framer-motion'
 export default function TextEditor({
   updateContent,
   element,
-  data,
+  state,
   style,
   closeEditor,
   edit,
@@ -29,7 +29,7 @@ export default function TextEditor({
   width,
   height,
 }) {
-  const [elementData] = useState(findContentById(element.id, data.data.content))
+  const [elementData] = useState(findContentById(element.id, state))
 
   const editor = useEditor({
     extensions: [StarterKit],
