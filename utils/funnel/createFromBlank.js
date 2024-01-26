@@ -65,5 +65,7 @@ export function createFromBlank(state, name, numberOfPages) {
   state.page.created_at.set(firstPage.created_at)
   state.popup.open.set(false)
 
+  state.active.current.set(funnelId)
+
   toast('New project created.')
 }

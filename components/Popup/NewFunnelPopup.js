@@ -17,11 +17,25 @@ function NewFunnelPopup({ state }) {
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
               <h2 className="page-modal-title">New Project</h2>
-              <div>
-                <button onClick={close} className="page-modal-close-button">
-                  Close
-                </button>
-              </div>
+              {state.funnel.id.get() && (
+                <div>
+                  <button onClick={close} className="page-modal-close-button">
+                    Close
+                  </button>
+                </div>
+              )}
+              {!state.funnel.id.get() && (
+                <div>
+                  <button
+                    onClick={() => {
+                      state.popup.type.set('new-funnel')
+                    }}
+                    className="page-modal-close-button"
+                  >
+                    Browse Projects
+                  </button>
+                </div>
+              )}
             </div>
             <div className="page-modal-content">
               <div className="flex mb-4 space-x-4">

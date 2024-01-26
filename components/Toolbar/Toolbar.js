@@ -21,7 +21,7 @@ export default function Toolbar({ state }) {
           data-tooltip-content="Saved Funnels"
         >
           <IoFunnel />
-          <span className="hidden xl:inline-block">Funnels</span>
+          <span className="hidden xl:inline-block">Projects</span>
         </button>
 
         <button

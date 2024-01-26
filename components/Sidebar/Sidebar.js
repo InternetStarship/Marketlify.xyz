@@ -29,6 +29,10 @@ export default function Sidebar({ state }) {
     setActiveComponent(getActiveComponent(state))
   }, [state.active.current])
 
+  // useEffect(() => {
+  //   console.log('thhe state', state)
+  // }, [state])
+
   return (
     <main id="sidebar" className={mainClassName}>
       {ActiveComponent}

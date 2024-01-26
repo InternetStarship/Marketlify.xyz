@@ -16,6 +16,8 @@ export function loadFunnel(state, funnel, id) {
     state.page.created_at.set(page.created_at)
     state.undo.history.set([cloneDeep(page)])
 
+    state.active.current.set(id)
+
     toast('Funnel has been loaded.')
   } else {
     toast(`Error: Funnel with ID "${id}" not found.`)
