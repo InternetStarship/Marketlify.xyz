@@ -28,7 +28,7 @@ function NewFunnelPopup({ state }) {
                 <div>
                   <button
                     onClick={() => {
-                      state.popup.type.set('new-funnel')
+                      state.popup.type.set('funnels')
                     }}
                     className="page-modal-close-button"
                   >

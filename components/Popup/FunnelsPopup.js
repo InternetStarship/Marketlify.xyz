@@ -35,9 +35,9 @@ function FunnelsButton({ state }) {
     }
   }
 
-  const duplicate = e => {
+  const duplicate = (e, funnelID) => {
     e.stopPropagation()
-    cloneFunnel(funnel.id)
+    cloneFunnel(funnelID)
     setFunnels(getFunnels())
     toast('Page has been duplicated.')
   }
@@ -70,7 +70,7 @@ function FunnelsButton({ state }) {
                 <div>
                   <button
                     onClick={() => {
-                      state.popup.type.set('funnels')
+                      state.popup.type.set('new-funnel')
                     }}
                     className="page-modal-close-button"
                   >
@@ -114,7 +114,9 @@ function FunnelsButton({ state }) {
                     </div>
                     <div className="space-x-2 pt-2">
                       <button
-                        onClick={duplicate}
+                        onClick={e => {
+                          duplicate(e, funnel.id)
+                        }}
                         className="page-item-button"
                         data-tooltip-id="tooltip"
                         data-tooltip-content="Duplicate Funnel"

@@ -8,10 +8,10 @@ export default function FunnelView({ state }) {
   return (
     <>
       {!state.funnel.id.get() && (
-        <>
-          <h3>No Project Loaded</h3>
-          <p>Please click "new project" to get started or select a previously saved project.</p>
-        </>
+        <div className="p-12 text-center">
+          <h3 className="text-2xl font-bold mb-1">No Project Loaded</h3>
+          <p className="text-sm">Please click "new project" to get started or select an existing project.</p>
+        </div>
       )}
       {state.funnel.id.get() && (
         <div className="p-6">

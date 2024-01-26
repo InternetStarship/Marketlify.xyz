@@ -12,6 +12,7 @@ export function cloneFunnel(id) {
       const duplicatedFunnelData = JSON.parse(JSON.stringify(originalFunnelData))
 
       duplicatedFunnelData.id = duplicatedFunnelId
+      duplicatedFunnelData.name = `${duplicatedFunnelData.name} (Copy)`
 
       duplicatedFunnelData.pages = []
 
