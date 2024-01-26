@@ -42,11 +42,11 @@ function FunnelsButton({ state }) {
     toast('Page has been duplicated.')
   }
 
-  const remove = e => {
+  const remove = (e, funnelID) => {
     e.stopPropagation()
     const confirm = window.confirm('Are you sure you want to delete this project and all of its pages?')
     if (confirm) {
-      removeFunnel(funnel.id)
+      removeFunnel(funnelID)
       setFunnels(getFunnels())
       toast('Page has been deleted.')
     }
@@ -81,10 +81,12 @@ function FunnelsButton({ state }) {
                 <div className="px-12 py-3">
                   <h3 className="mb-6 text-xl font-bold">Oops! No projects here...yet! 🤔</h3>
                   <p className="mb-6 text-lg">
-                    This is where all your crafted web pages will reside, ready for easy access - even when you're offline.
+                    This is where all your crafted web pages will reside, ready for easy access - even when
+                    you're offline.
                   </p>
                   <p className="mb-6 text-lg">
-                    To begin your page-making adventure, dive into our user-friendly page builder and hit 'save' to store your masterpiece safely in your local browser.
+                    To begin your page-making adventure, dive into our user-friendly page builder and hit
+                    'save' to store your masterpiece safely in your local browser.
                   </p>
                 </div>
               )}
@@ -106,7 +108,9 @@ function FunnelsButton({ state }) {
                         <AiOutlineCopy />
                       </button>
                       <button
-                        onClick={remove}
+                        onClick={e => {
+                          remove(e, funnel.id)
+                        }}
                         className="page-item-button"
                         data-tooltip-id="tooltip"
                         data-tooltip-content="Delete Funnel"
