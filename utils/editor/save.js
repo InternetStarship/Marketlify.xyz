@@ -9,7 +9,7 @@ export function save(state) {
   const dataSize = new Blob([page], { type: 'application/json' }).size
 
   if (checkLocalStorageSize(dataSize)) {
-    localStorage.setItem(`marketlify_v3_page_${state.page.id.get()}`, page)
+    localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
     toast('Page has been saved.')
     return true
   } else {

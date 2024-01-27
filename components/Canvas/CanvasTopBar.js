@@ -1,6 +1,8 @@
 import { FaCog, FaTrashAlt } from 'react-icons/fa'
 import { BiCodeAlt } from 'react-icons/bi'
 import { BsLayoutTextWindowReverse } from 'react-icons/bs'
+import { toast } from 'react-toastify'
+import { cloneDeep } from 'lodash'
 
 export default function CanvasTopBar({ state }) {
   return (
@@ -11,6 +13,12 @@ export default function CanvasTopBar({ state }) {
           value={state.page.name.get()}
           onChange={e => {
             state.page.name.set(e.target.value)
+
+            // add debounce
+            const page = JSON.stringify(cloneDeep(state.page.get()))
+            localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
+
+            state.active.current.set(state.page.id.get() + '-' + Date.now())
           }}
           className="w-full"
         />
@@ -52,19 +60,21 @@ export default function CanvasTopBar({ state }) {
           onClick={() => {
             const confirm = window.confirm('Are you sure you want to delete this page?')
             if (confirm) {
-              const id = state.page.data.get().id
-              const key = `marketlify_v3_page_${id}`
+              const id = state.page.id.get()
+              const key = `marketlify_v4_page_${id}`
 
               localStorage.removeItem(key)
 
-              const funnelKey = `marketlify_v3_funnel_${state.funnel.get().id}`
-              const updatedPages = state.funnel.get().pages.filter(pageId => pageId !== id)
-              state.funnel.get().pages = updatedPages
+              const projectKey = `marketlify_v4_project_${state.project.get().id}`
+              const updatedPages = state.project.get().pages.filter(pageId => pageId !== id)
+              state.project.pages.set(cloneDeep(updatedPages))
 
-              localStorage.setItem(funnelKey, JSON.stringify(state.funnel.get()))
+              localStorage.setItem(projectKey, JSON.stringify(state.project.get()))
 
-              state.funnel.set(cloneDeep(state.funnel.get()))
+              state.project.set(cloneDeep(state.project.get()))
               state.page.data.set(null)
+
+              state.active.current.set('deleted-' + id)
             }
           }}
         >

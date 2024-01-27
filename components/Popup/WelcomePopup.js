@@ -4,9 +4,7 @@ export default function WelcomePopup({ state }) {
   return (
     state.popup.type.get() === 'welcome' && (
       <Popup title="Welcome to Marketlify 🎉" close={false} open={true}>
-        <p className="text-lg">
-          Discover the magic of Marketlify, your go-to free multi-page builder!
-        </p>
+        <p className="text-lg">Discover the magic of Marketlify, your go-to free multi-page builder!</p>
 
         <div className="bg-slate-50 border border-slate-200 p-6 rounded shadow-sm my-3">
           <h3 className="text-xl font-bold">✨ Start Fresh</h3>
@@ -14,7 +12,7 @@ export default function WelcomePopup({ state }) {
           <button
             onClick={() => {
               state.popup.open.set(true)
-              state.popup.type.set('new-funnel')
+              state.popup.type.set('new-project')
             }}
             className="page-modal-close-button mt-2"
           >
@@ -28,7 +26,7 @@ export default function WelcomePopup({ state }) {
           <button
             onClick={() => {
               state.popup.open.set(true)
-              state.popup.type.set('funnels')
+              state.popup.type.set('projects')
             }}
             className="page-modal-close-button mt-2"
           >

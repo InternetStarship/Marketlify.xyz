@@ -20,6 +20,9 @@ export default function CustomCode({ state }) {
       state.page.data.code.css.set(value)
     }
     setCode(value)
+
+    const page = JSON.stringify(cloneDeep(state.page.get()))
+    localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
   }, [])
 
   return (

@@ -4,7 +4,7 @@ import Settings from '../Page/Settings'
 import Layers from '../Layer/Layers'
 import CustomCode from '../Editor/CustomCode'
 import SidebarExpandButton from './SidebarExpandButton'
-import FunnelView from '../Funnel/FunnelView'
+import ProjectView from '../Project/ProjectView'
 
 function getActiveComponent(state) {
   switch (state.active.current.get()) {
@@ -17,7 +17,7 @@ function getActiveComponent(state) {
     case 'layers':
       return <Layers state={state} />
     default:
-      return state.funnel.get() && <FunnelView state={state} />
+      return <ProjectView state={state} />
   }
 }
 
@@ -26,6 +26,7 @@ export default function Sidebar({ state }) {
   const [ActiveComponent, setActiveComponent] = useState(() => getActiveComponent(state))
 
   useEffect(() => {
+    console.log('active current state has changed:', state.active.current.get())
     setActiveComponent(getActiveComponent(state))
   }, [state.active.current])
 

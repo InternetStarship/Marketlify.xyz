@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiOutlineCopy } from 'react-icons/ai'
-import { getFunnels } from '@/utils/funnel/getFunnels'
-import { removeFunnel } from '@/utils/funnel/removeFunnel'
-import { cloneFunnel } from '@/utils/funnel/cloneFunnel'
-import { loadFunnel } from '@/utils/funnel/loadFunnel'
+import { getProjects } from '@/utils/project/getProjects'
+import { removeProject } from '@/utils/project/removeProject'
+import { cloneProject } from '@/utils/project/cloneProject'
+import { loadProject } from '@/utils/project/loadProject'
 
-function FunnelsButton({ state }) {
-  const [funnels, setFunnels] = useState([])
+function ProjectsPopup({ state }) {
+  const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    setFunnels(getFunnels())
+    setProjects(getProjects())
   }, [])
 
   const close = () => {
@@ -22,55 +22,55 @@ function FunnelsButton({ state }) {
   const search = event => {
     const value = event.target.value
     if (value) {
-      document.querySelectorAll('.funnel').forEach(funnel => {
-        const name = funnel.getAttribute('data-name')
+      document.querySelectorAll('.project').forEach(project => {
+        const name = project.getAttribute('data-name')
         if (!name.includes(value)) {
-          funnel.classList.add('hidden')
+          project.classList.add('hidden')
         }
       })
     } else {
-      document.querySelectorAll('.funnel').forEach(funnel => {
-        funnel.classList.remove('hidden')
+      document.querySelectorAll('.project').forEach(project => {
+        project.classList.remove('hidden')
       })
     }
   }
 
-  const duplicate = (e, funnelID) => {
+  const duplicate = (e, projectID) => {
     e.stopPropagation()
-    cloneFunnel(funnelID)
-    setFunnels(getFunnels())
+    cloneProject(projectID)
+    setProjects(getProjects())
     toast('Page has been duplicated.')
   }
 
-  const remove = (e, funnelID) => {
+  const remove = (e, projectID) => {
     e.stopPropagation()
     const confirm = window.confirm('Are you sure you want to delete this project and all of its pages?')
     if (confirm) {
-      removeFunnel(funnelID)
-      setFunnels(getFunnels())
+      removeProject(projectID)
+      setProjects(getProjects())
       toast('Page has been deleted.')
     }
   }
 
   return (
     <>
-      {state.popup.open.get() && state.popup.type.get() === 'funnels' && (
+      {state.popup.open.get() && state.popup.type.get() === 'projects' && (
         <div className="page-modal-overlay">
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-4">
               <h2 className="page-modal-title">Projects</h2>
-              {state.funnel.id.get() && (
+              {state.project.id.get() && (
                 <div>
                   <button onClick={close} className="page-modal-close-button">
                     Close
                   </button>
                 </div>
               )}
-              {!state.funnel.id.get() && (
+              {!state.project.id.get() && (
                 <div>
                   <button
                     onClick={() => {
-                      state.popup.type.set('new-funnel')
+                      state.popup.type.set('new-project')
                     }}
                     className="page-modal-close-button"
                   >
@@ -80,7 +80,7 @@ function FunnelsButton({ state }) {
               )}
             </div>
 
-            {funnels.length > 0 && (
+            {projects.length > 0 && (
               <input
                 type="text"
                 placeholder="Search projects..."
@@ -91,7 +91,7 @@ function FunnelsButton({ state }) {
             )}
 
             <div className="page-list">
-              {funnels.length === 0 && (
+              {projects.length === 0 && (
                 <div className="px-12 py-3">
                   <h3 className="mb-6 text-xl font-bold">Oops! No projects here...yet! 🤔</h3>
                   <p className="mb-6 text-lg">
@@ -105,31 +105,31 @@ function FunnelsButton({ state }) {
                 </div>
               )}
 
-              {funnels.map(funnel => (
-                <div key={funnel.id} className="funnel" data-name={funnel.name}>
-                  <div className="page-item" onClick={() => loadFunnel(state, funnel, funnel.pages[0])}>
+              {projects.map(project => (
+                <div key={project.id} className="project" data-name={project.name}>
+                  <div className="page-item" onClick={() => loadProject(state, project, project.pages[0])}>
                     <div>
-                      <h3 className="font-medium">{funnel.name}</h3>
-                      <h4 className="text-xs opacity-50">{funnel.pages.length} pages</h4>
+                      <h3 className="font-medium">{project.name}</h3>
+                      <h4 className="text-xs opacity-50">{project.pages.length} pages</h4>
                     </div>
                     <div className="space-x-2 pt-2">
                       <button
                         onClick={e => {
-                          duplicate(e, funnel.id)
+                          duplicate(e, project.id)
                         }}
                         className="page-item-button"
                         data-tooltip-id="tooltip"
-                        data-tooltip-content="Duplicate Funnel"
+                        data-tooltip-content="Duplicate"
                       >
                         <AiOutlineCopy />
                       </button>
                       <button
                         onClick={e => {
-                          remove(e, funnel.id)
+                          remove(e, project.id)
                         }}
                         className="page-item-button"
                         data-tooltip-id="tooltip"
-                        data-tooltip-content="Delete Funnel"
+                        data-tooltip-content="Delete"
                       >
                         <FaRegTrashAlt />
                       </button>
@@ -145,4 +145,4 @@ function FunnelsButton({ state }) {
   )
 }
 
-export default FunnelsButton
+export default ProjectsPopup

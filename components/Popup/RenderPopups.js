@@ -1,14 +1,14 @@
 import WelcomePopup from '@/components/Popup/WelcomePopup'
 import ExportPopup from '@/components/Popup/ExportPopup'
-import NewFunnelPopup from '@/components/Popup/NewFunnelPopup'
-import FunnelsPopup from '@/components/Popup/FunnelsPopup'
+import NewProjectPopup from '@/components/Popup/NewProjectPopup'
+import ProjectsPopup from '@/components/Popup/ProjectsPopup'
 
 export function RenderPopups({ state }) {
   return (
     <>
       <WelcomePopup state={state} />
-      <NewFunnelPopup state={state} />
-      <FunnelsPopup state={state} />
+      <NewProjectPopup state={state} />
+      <ProjectsPopup state={state} />
       <ExportPopup state={state} />
     </>
   )

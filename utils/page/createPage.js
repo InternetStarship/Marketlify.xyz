@@ -43,21 +43,24 @@ function updateLocalStorage(key, value) {
 
 export function createPage(state) {
   const id = generateUUID()
-  const pageName = getPageName(state.funnel.pages.get())
+  const pageName = getPageName(state.project.pages.get())
   const pageData = createPageData(id, pageName)
 
-  const key = `marketlify_v3_page_${id}`
-  const funnelKey = `marketlify_v3_funnel_${state.funnel.get().id}`
+  const key = `marketlify_v4_page_${id}`
+  const projectKey = `marketlify_v4_project_${state.project.get().id}`
   updateLocalStorage(key, pageData)
-  updateLocalStorage(funnelKey, state.funnel.get())
+  updateLocalStorage(projectKey, state.project.get())
 
-  state.funnel.pages.set([...state.funnel.pages.get(), id])
+  state.project.pages.set([...state.project.pages.get(), id])
+  state.page.name.set(pageData.name)
   state.page.data.set(pageData.data)
   state.page.id.set(pageData.id)
   state.page.size.set(pageData.size)
   state.page.created_at.set(pageData.created_at)
-  state.funnel.set(cloneDeep(state.funnel.get()))
+  state.project.set(cloneDeep(state.project.get()))
   state.undo.history.set([pageData])
 
-  toast('Page has been added to funnel.')
+  state.active.current.set(id)
+
+  toast('Page has been added to project.')
 }

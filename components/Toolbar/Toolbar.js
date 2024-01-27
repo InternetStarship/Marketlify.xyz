@@ -14,11 +14,11 @@ export default function Toolbar({ state }) {
         <button
           onClick={() => {
             state.popup.open.set(true)
-            state.popup.type.set('funnels')
+            state.popup.type.set('projects')
           }}
           className="flex items-center toolbar-button"
           data-tooltip-id="tooltip"
-          data-tooltip-content="Saved Funnels"
+          data-tooltip-content="Saved Projects"
         >
           <IoFunnel />
           <span className="hidden xl:inline-block">Projects</span>
@@ -27,7 +27,7 @@ export default function Toolbar({ state }) {
         <button
           onClick={() => {
             state.popup.open.set(true)
-            state.popup.type.set('new-funnel')
+            state.popup.type.set('new-project')
           }}
           className="flex items-center toolbar-button"
           data-tooltip-id="tooltip"

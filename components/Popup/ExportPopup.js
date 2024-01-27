@@ -1,4 +1,4 @@
-import { exportFunnel } from '@/utils/funnel/exportFunnel'
+import { exportProject } from '@/utils/project/exportProject'
 import Popup from '@/components/Popup/Popup'
 
 export default function ExportPopup({ state }) {
@@ -6,7 +6,7 @@ export default function ExportPopup({ state }) {
     state.popup.open.get() &&
     state.popup.type.get() === 'export' && (
       <Popup
-        title="Export Funnel"
+        title="Export Project"
         open={true}
         closeOverride={() => {
           state.popup.open.set(false)
@@ -23,7 +23,7 @@ export default function ExportPopup({ state }) {
           <div className="flex space-x-2">
             <button
               onClick={() => {
-                exportFunnel(state.funnel.get())
+                exportProject(state.project.get())
               }}
               className="page-modal-close-button mt-2"
             >

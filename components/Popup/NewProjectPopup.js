@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { createFromBlank } from '@/utils/funnel/createFromBlank'
+import { createFromBlank } from '@/utils/project/createFromBlank'
 
-function NewFunnelPopup({ state }) {
+function NewProjectPopup({ state }) {
   const [name, setName] = useState('')
   const [numberOfPages, setNumberOfPages] = useState(1)
 
@@ -12,23 +12,23 @@ function NewFunnelPopup({ state }) {
 
   return (
     <>
-      {state.popup.open.get() && state.popup.type.get() === 'new-funnel' && (
+      {state.popup.open.get() && state.popup.type.get() === 'new-project' && (
         <div className="page-modal-overlay">
           <div className="page-modal">
             <div className="flex items-center justify-between w-full border-b border-slate-200 pb-6 mb-6">
               <h2 className="page-modal-title">New Project</h2>
-              {state.funnel.id.get() && (
+              {state.project.id.get() && (
                 <div>
                   <button onClick={close} className="page-modal-close-button">
                     Close
                   </button>
                 </div>
               )}
-              {!state.funnel.id.get() && (
+              {!state.project.id.get() && (
                 <div>
                   <button
                     onClick={() => {
-                      state.popup.type.set('funnels')
+                      state.popup.type.set('projects')
                     }}
                     className="page-modal-close-button"
                   >
@@ -80,4 +80,4 @@ function NewFunnelPopup({ state }) {
   )
 }
 
-export default NewFunnelPopup
+export default NewProjectPopup

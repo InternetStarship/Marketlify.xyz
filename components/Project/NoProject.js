@@ -1,4 +1,4 @@
-export default function NoFunnel() {
+export default function NoProject() {
   return (
     <div className="w-full text-center text-slate-500 font-medium text-xs p-12">
       <h3 className="text-xl mb-1">

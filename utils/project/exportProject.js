@@ -3,10 +3,10 @@ import { sanitizeFileName } from '@/utils/utility/santizeFileName'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
-export function exportFunnel(funnel) {
+export function exportProject(project) {
   const pages = []
-  funnel.pages.map(pageId => {
-    const key = `marketlify_v3_page_${pageId}`
+  project.pages.map(pageId => {
+    const key = `marketlify_v4_page_${pageId}`
     const page = JSON.parse(localStorage.getItem(key))
     const html = exportHTML(page.data)
     pages.push({
@@ -22,6 +22,6 @@ export function exportFunnel(funnel) {
   })
 
   zip.generateAsync({ type: 'blob' }).then(blob => {
-    saveAs(blob, `${sanitizeFileName(funnel.name)}.zip`)
+    saveAs(blob, `${sanitizeFileName(project.name)}.zip`)
   })
 }

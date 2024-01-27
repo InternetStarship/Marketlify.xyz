@@ -11,6 +11,11 @@ export default function Settings({ state }) {
     setSeo(state.page.data.get().seo)
   }, [])
 
+  const quickSave = () => {
+    const page = JSON.stringify(cloneDeep(state.page.get()))
+    localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
+  }
+
   return (
     <>
       <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
@@ -58,8 +63,8 @@ export default function Settings({ state }) {
               value={seo.title}
               onChange={e => {
                 setSeo({ ...seo, title: e.target.value })
-                state.page.data.get().seo = seo
-                state.page.data.set(cloneDeep(state.page.data.get()))
+                state.page.data.seo.title.set(e.target.value)
+                quickSave()
               }}
             />
           </div>
@@ -71,7 +76,8 @@ export default function Settings({ state }) {
               value={seo.description}
               onChange={e => {
                 setSeo({ ...seo, description: e.target.value })
-                state.page.data.set(cloneDeep(state.page.data.get()))
+                state.page.data.seo.description.set(e.target.value)
+                quickSave()
               }}
             ></textarea>
           </div>
@@ -83,8 +89,8 @@ export default function Settings({ state }) {
               value={seo.image}
               onChange={e => {
                 setSeo({ ...seo, image: e.target.value })
-                state.page.data.get().seo = seo
-                state.page.data.set(cloneDeep(state.page.data.get()))
+                state.page.data.seo.image.set(e.target.value)
+                quickSave()
               }}
             />
           </div>
@@ -96,8 +102,8 @@ export default function Settings({ state }) {
               value={seo.favicon}
               onChange={e => {
                 setSeo({ ...seo, favicon: e.target.value })
-                state.page.data.get().seo = seo
-                state.page.data.set(cloneDeep(state.page.data.get()))
+                state.page.data.seo.favicon.set(e.target.value)
+                quickSave()
               }}
             />
           </div>
@@ -109,8 +115,8 @@ export default function Settings({ state }) {
               value={seo.url}
               onChange={e => {
                 setSeo({ ...seo, url: e.target.value })
-                state.page.data.get().seo = seo
-                state.page.data.set(cloneDeep(state.page.data.get()))
+                state.page.data.seo.url.set(e.target.value)
+                quickSave()
               }}
             />
           </div>

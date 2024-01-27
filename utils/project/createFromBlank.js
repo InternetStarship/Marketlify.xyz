@@ -3,13 +3,13 @@ import { generateUUID } from '../utility/generateUUID'
 import moment from 'moment'
 
 export function createFromBlank(state, name, numberOfPages) {
-  const funnelId = generateUUID()
+  const projectId = generateUUID()
   const numberOfPagesInt = parseInt(numberOfPages)
 
-  const funnelKey = `marketlify_v3_funnel_${funnelId}`
+  const projectKey = `marketlify_v4_project_${projectId}`
 
-  const funnelData = {
-    id: funnelId,
+  const projectData = {
+    id: projectId,
     name: name,
     size: 0,
     pages: [],
@@ -18,9 +18,9 @@ export function createFromBlank(state, name, numberOfPages) {
 
   for (let i = 0; i < numberOfPagesInt; i++) {
     const pageId = generateUUID()
-    const pageKey = `marketlify_v3_page_${pageId}`
+    const pageKey = `marketlify_v4_page_${pageId}`
     const pageName = `Page ${i + 1}`
-    funnelData.pages.push(pageId)
+    projectData.pages.push(pageId)
 
     const pageData = {
       id: pageId,
@@ -53,19 +53,19 @@ export function createFromBlank(state, name, numberOfPages) {
     localStorage.setItem(pageKey, JSON.stringify(pageData))
   }
 
-  localStorage.setItem(funnelKey, JSON.stringify(funnelData))
+  localStorage.setItem(projectKey, JSON.stringify(projectData))
 
-  const firstPage = JSON.parse(localStorage.getItem(`marketlify_v3_page_${funnelData.pages[0]}`))
+  const firstPage = JSON.parse(localStorage.getItem(`marketlify_v4_page_${projectData.pages[0]}`))
 
-  state.funnel.name.set(funnelData.name)
-  state.funnel.pages.set(funnelData.pages)
+  state.project.name.set(projectData.name)
+  state.project.pages.set(projectData.pages)
   state.page.data.set(firstPage.data)
   state.page.id.set(firstPage.id)
   state.page.size.set(firstPage.size)
   state.page.created_at.set(firstPage.created_at)
   state.popup.open.set(false)
 
-  state.active.current.set(funnelId)
+  state.active.current.set(projectId)
 
   toast('New project created.')
 }
