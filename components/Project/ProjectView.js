@@ -17,7 +17,7 @@ export default function ProjectView({ state }) {
         <div className="p-6">
           <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-2">Project</h4>
           <h2
-            className="text-2xl font-bold pb-4 text-slate-900 pr-12"
+            className="text-2xl font-bold text-slate-900 pr-4"
             onBlur={() => {
               updateProjectName(state)
             }}
@@ -26,7 +26,7 @@ export default function ProjectView({ state }) {
           >
             {state.project.name.get()}
           </h2>
-          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-3">Pages</h4>
+          <h4 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-1 mt-4">Pages</h4>
           <div className="overflow-hidden">
             {state.project.pages.get() &&
               state.project.pages.get().map((id, index) => (
