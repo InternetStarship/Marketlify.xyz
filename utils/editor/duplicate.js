@@ -118,6 +118,9 @@ export function duplicate(state) {
 
   duplicateInnerContent(state)
 
+  const page = JSON.stringify(cloneDeep(state.page.get()))
+  localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
+
   state.active.selectedId.set('')
   state.active.current.set('')
   state.active.hovering.set(false)

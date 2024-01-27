@@ -1,5 +1,6 @@
 import { findTypeById } from '../utility/findTypeById'
 import { getIndexesById } from '../utility/getIndexesById'
+import { cloneDeep } from 'lodash'
 
 export function move(state, directionText) {
   const direction = directionText === 'up' ? -1 : 1
@@ -42,6 +43,9 @@ function moveItem(state, type, direction, currentElement) {
 
         break
     }
+
+    const page = JSON.stringify(cloneDeep(state.page.get()))
+    localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
   }
 }
 
