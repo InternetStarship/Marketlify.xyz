@@ -47,6 +47,12 @@ export default function Panel({ state }) {
     }
   }, [])
 
+  const quickSave = data => {
+    const page = JSON.stringify(data)
+    localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
+    console.log('quick save')
+  }
+
   const debouncedUpdateCSS = useCallback(
     debounce(value => {
       setCodeBox(value)
@@ -56,18 +62,11 @@ export default function Panel({ state }) {
         secondaryTab,
         state.active.selectedId.get(),
         state.page.data.get(),
-        state.page.data.set,
+        quickSave,
         setStyles
       )
     }, 1300),
-    [
-      codeBox,
-      secondaryTab,
-      state.active.selectedId.get(),
-      state.page.data.get(),
-      state.page.data.set,
-      setStyles,
-    ]
+    [codeBox, secondaryTab, state.active.selectedId.get(), state.page.data.get(), quickSave, setStyles]
   )
 
   return (
@@ -169,7 +168,7 @@ export default function Panel({ state }) {
                   setStyles,
                   state.active.selectedId.get(),
                   state.page.data.get(),
-                  state.page.data.set
+                  quickSave
                 )
               }}
               allCSSProperties={allCSSProperties}
@@ -183,7 +182,7 @@ export default function Panel({ state }) {
                     secondaryTab,
                     state.active.selectedId.get(),
                     state.page.data.get(),
-                    state.page.data.set,
+                    quickSave,
                     setStyles
                   )
                 }
@@ -195,7 +194,7 @@ export default function Panel({ state }) {
               {renderStyleInputs(
                 styles,
                 setStyles,
-                state.page.data.set,
+                quickSave,
                 state.page.data.get(),
                 state.active.selectedId.get(),
                 showColorPicker,
@@ -228,7 +227,7 @@ export default function Panel({ state }) {
               styles,
               properties,
               setProperties,
-              state.page.data.set,
+              quickSave,
               state.page.data.get(),
               state.active.selectedId.get()
             )}

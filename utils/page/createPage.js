@@ -46,11 +46,6 @@ export function createPage(state) {
   const pageName = getPageName(state.project.pages.get())
   const pageData = createPageData(id, pageName)
 
-  const key = `marketlify_v4_page_${id}`
-  const projectKey = `marketlify_v4_project_${state.project.get().id}`
-  updateLocalStorage(key, pageData)
-  updateLocalStorage(projectKey, state.project.get())
-
   state.project.pages.set([...state.project.pages.get(), id])
   state.page.name.set(pageData.name)
   state.page.data.set(pageData.data)
@@ -58,6 +53,13 @@ export function createPage(state) {
   state.page.size.set(pageData.size)
   state.page.created_at.set(pageData.created_at)
   state.project.set(cloneDeep(state.project.get()))
+
+  const key = `marketlify_v4_page_${id}`
+  const projectKey = `marketlify_v4_project_${state.project.get().id}`
+
+  updateLocalStorage(key, pageData)
+  updateLocalStorage(projectKey, state.project.get())
+
   state.undo.history.set([pageData])
 
   state.active.current.set(id)

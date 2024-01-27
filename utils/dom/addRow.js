@@ -39,4 +39,8 @@ export function addRow(state, totalColumns) {
 
   state.active.addDropdown.set(false)
   state.active.hovering.set(false)
+
+  state.active.current.set('')
+  const page = JSON.stringify(cloneDeep(state.page.get()))
+  localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
 }

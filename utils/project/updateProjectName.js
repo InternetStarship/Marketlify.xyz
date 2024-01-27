@@ -22,5 +22,7 @@ export function updateProjectName(state) {
 
   updateLocalStorage(projectKey, project)
 
+  state.active.current.set('updated-name: ' + projectName)
+
   toast('Project name has been updated.')
 }

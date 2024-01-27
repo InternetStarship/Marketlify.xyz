@@ -70,4 +70,8 @@ export function addElement(state, type) {
   state.page.data.content.merge([data])
   state.active.addDropdown.set(false)
   state.active.hovering.set(false)
+
+  state.active.current.set('')
+  const page = JSON.stringify(cloneDeep(state.page.get()))
+  localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
 }

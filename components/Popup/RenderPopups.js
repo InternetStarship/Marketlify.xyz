@@ -7,9 +7,9 @@ export function RenderPopups({ state }) {
   return (
     <>
       <WelcomePopup state={state} />
-      <NewProjectPopup state={state} />
-      <ProjectsPopup state={state} />
-      <ExportPopup state={state} />
+      {state.popup.type.get() === 'new-project' && <NewProjectPopup state={state} />}
+      {state.popup.type.get() === 'projects' && <ProjectsPopup state={state} />}
+      {state.popup.type.get() === 'export' && <ExportPopup state={state} />}
     </>
   )
 }

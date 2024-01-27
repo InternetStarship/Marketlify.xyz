@@ -3,9 +3,9 @@ import { AiOutlineMobile } from 'react-icons/ai'
 import { BiDesktop } from 'react-icons/bi'
 import { FaDownload, FaTabletAlt, FaUndo } from 'react-icons/fa'
 import { updateRowLayout } from '@/utils/utility/updateRowLayout'
-import SaveButton from './SaveButton'
+// import SaveButton from './SaveButton'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { IoFunnel } from 'react-icons/io5'
+import { RiPagesLine } from 'react-icons/ri'
 
 export default function Toolbar({ state }) {
   return (
@@ -20,7 +20,7 @@ export default function Toolbar({ state }) {
           data-tooltip-id="tooltip"
           data-tooltip-content="Saved Projects"
         >
-          <IoFunnel />
+          <RiPagesLine />
           <span className="hidden xl:inline-block">Projects</span>
         </button>
 
@@ -101,7 +101,7 @@ export default function Toolbar({ state }) {
               <FaUndo />
             </button>
 
-            <SaveButton state={state} />
+            {/* <SaveButton state={state} /> */}
 
             <button
               onClick={() => {
