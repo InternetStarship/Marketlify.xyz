@@ -1,5 +1,5 @@
 #sidebar {
-  @apply bg-white shadow-sm hidden md:block relative;
+  @apply relative hidden bg-white shadow-sm md:block;
   max-width: 340px;
   width: 100%;
   height: calc(100vh - 54px);
@@ -9,45 +9,48 @@
   position: fixed;
 }
 .sidebar-fieldset {
-  @apply px-3 py-1 flex items-center justify-between relative;
+  @apply relative flex items-center justify-between px-3 py-1;
 }
 .sidebar-label {
-  @apply text-slate-700 font-medium text-sm w-full flex items-center justify-between pr-2 lowercase;
+  @apply flex w-full items-center justify-between pr-2 text-sm font-medium lowercase capitalize text-slate-700;
 }
 .sidebar-label div {
-  @apply cursor-pointer hidden;
+  @apply hidden cursor-pointer;
 }
 .sidebar-label:hover div {
   @apply block;
 }
 input.sidebar-input {
-  @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
+  @apply w-full rounded border border-slate-300 p-2 text-center text-sm font-medium text-slate-700 shadow-sm;
   max-width: 125px;
   width: 100%;
+}
+.sidebar-property input.sidebar-input {
+  max-width: 225px;
 }
 .sidebar-input.full {
   width: 100%;
   max-width: 100% !important;
 }
 textarea.sidebar-input {
-  @apply border border-slate-300 font-medium text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
+  @apply w-full rounded border border-slate-300 p-2 text-center text-sm font-medium text-slate-700 shadow-sm;
   max-width: 125px;
   width: 100%;
 }
 select.sidebar-input {
-  @apply border border-slate-300 font-medium  text-slate-700 p-2 text-sm w-full rounded shadow-sm text-center;
+  @apply w-full rounded border  border-slate-300 p-2 text-center text-sm font-medium text-slate-700 shadow-sm;
   max-width: 125px;
   width: 100%;
 }
 
 .sidebar-fieldset-full {
-  @apply px-3 py-2 border-b border-slate-200 relative;
+  @apply relative border-b border-slate-200 px-3 py-2;
 }
 .sidebar-fieldset-full label {
   @apply mb-1;
 }
 .sidebar-input-full {
-  @apply border border-slate-300 p-2 text-sm w-full rounded shadow-sm;
+  @apply w-full rounded border border-slate-300 p-2 text-sm shadow-sm;
   width: 100%;
 }
 
@@ -68,7 +71,7 @@ select.sidebar-input {
 }
 
 #expander {
-  @apply text-lg p-2 bg-white rounded-br-md cursor-pointer absolute;
+  @apply absolute cursor-pointer rounded-br-md bg-white p-2 text-lg;
   top: 0;
   right: -32px;
 }

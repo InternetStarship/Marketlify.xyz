@@ -1,21 +1,8 @@
 import { buildCSS } from './buildCSS'
+import { updateStyles } from '@/utils/style/updateStyles'
 
-export function updateCSS(
-  value = null,
-  codeBox = null,
-  secondaryTab = null,
-  selectedId,
-  page,
-  updatePage,
-  setStyles
-) {
+export function updateCSS(value = null, codeBox = null, secondaryTab = null, selectedId, state, updatePage) {
   let codes = codeBox
-  if (!codes) {
-    codes = buildCSS(secondaryTab)
-  }
-  if (value) {
-    codes = value
-  }
   const cssProps = codes
     .match(/{([^}]*)}/)[1]
     .trim()
@@ -30,6 +17,14 @@ export function updateCSS(
     }
   })
 
-  setStyles(styleObj)
-  updateStyles(styleObj, selectedId, page, updatePage)
+  if (!codes) {
+    console.log(secondaryTab, 'updateCSS secondaryTab')
+    codes = buildCSS(secondaryTab, styleObj)
+  }
+  if (value) {
+    codes = value
+  }
+
+  // setStyles(styleObj)
+  updateStyles(styleObj, selectedId, state, updatePage)
 }

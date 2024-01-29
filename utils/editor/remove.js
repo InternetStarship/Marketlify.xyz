@@ -1,5 +1,6 @@
 import { findTypeById } from '../utility/findTypeById'
 import { getIndexesById } from '../utility/getIndexesById'
+import { cloneDeep } from 'lodash'
 
 export function remove(state) {
   const type = findTypeById(state.active.selectedId.get(), state.page.data.get().styles.sections)
@@ -29,7 +30,7 @@ export function remove(state) {
         items => {
           items.splice(currentElement.columnIndex, 1)
           return items
-        }
+        },
       )
       break
 

@@ -11,7 +11,7 @@ export function processCSSProperty(obj) {
 
   const numericValue = parseFloat(obj.value)
   if (!isNaN(numericValue) && numericValue.toString() === obj.value) {
-    return `${obj.value}px`
+    return obj.value
   }
 
   return obj.value

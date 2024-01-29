@@ -1,14 +1,14 @@
-import { useEffect } from 'react'
-import CanvasFullscreenButton from './CanvasFullscreenButton'
-import CanvasTopBar from './CanvasTopBar'
-import CanvasDisabledOverlay from './CanvasDisabledOverlay'
-import { buildGoogleFonts } from '@/utils/googleFonts/buildGoogleFonts'
 import { hover } from '@/utils/editor/hover'
+import { buildGoogleFonts } from '@/utils/googleFonts/buildGoogleFonts'
 import { cloneDeep } from 'lodash'
+import { useEffect } from 'react'
 import TextEditor from '../Editor/TextEditor'
 import Element from '../Page/Element'
 import Empty from '../Page/Empty'
 import HoverBar from '../Page/HoverBar'
+import CanvasDisabledOverlay from './CanvasDisabledOverlay'
+import CanvasFullscreenButton from './CanvasFullscreenButton'
+import CanvasTopBar from './CanvasTopBar'
 
 const CanvasSection = ({ state, section }) => {
   return (
@@ -70,6 +70,11 @@ const CanvasColumn = ({ state, column }) => {
 }
 
 const CanvasElement = ({ state, element }) => {
+  const quickSave = () => {
+    const page = JSON.stringify(cloneDeep(state.page.get()))
+    localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
+  }
+
   return (
     <div
       className={`element ${element.type === 'divider' ? 'dividerFix' : ''}`}
@@ -95,9 +100,13 @@ const CanvasElement = ({ state, element }) => {
           state={state}
           style={{ ...element.style }}
           updateContent={value => {
-            const currentContent = state.page.data.content.filter(content => content.id === parseInt(element.id));
-            currentContent.content = value
-            state.page.data.set(cloneDeep(state.page.data.get()))
+            const allContents = state.page.data.content.get()
+            allContents.forEach((content, index) => {
+              if (content.id === parseInt(element.id)) {
+                state.page.data.content[index].content.set(value)
+                quickSave()
+              }
+            })
           }}
           closeEditor={() => {
             setTimeout(() => {
@@ -112,16 +121,14 @@ const CanvasElement = ({ state, element }) => {
             }, 50)
           }}
           updateStyle={style => {
-            // element.style.set(cloneDeep(style))
+            element.style.set(cloneDeep(style))
 
-            console.log(element, 'currentContent')
-            console.log(cloneDeep(state.page.data.get()), 'hi o')
+            // console.log(element, 'currentContent')
+            // console.log(cloneDeep(state.page.data.get()), 'hi o')
 
-            // console.log(style, element.style, 'dd')
-            // element.style.set(style)
-            state.page.data.set(cloneDeep(state.page.data.get()))
-
-            
+            // // console.log(style, element.style, 'dd')
+            // // element.style.set(style)
+            // state.page.data.set(cloneDeep(state.page.data.get()))
           }}
         />
       )}

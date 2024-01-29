@@ -3,13 +3,20 @@ import { FaCode } from 'react-icons/fa'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { camelCaseToTitleCase } from '@/utils/utility/camelCaseToTitleCase'
 
-export default function SearchStyles({ onChange, allCSSProperties, showCSS, setShowCSS }) {
+export default function SearchStyles({
+  onChange,
+  allCSSProperties,
+  showCSS,
+  setShowCSS,
+  setStyles,
+  codeBox,
+}) {
   const [searchValue, setSearchValue] = useState('')
 
   return (
-    <div className="relative w-full flex items-center space-x-2">
+    <div className="relative flex w-full items-center space-x-2">
       <div
-        className={`relative w-full ${showCSS ? 'pointer-events-none opacity-30 cursor-not-allowed' : ''}`}
+        className={`relative w-full ${showCSS ? 'pointer-events-none cursor-not-allowed opacity-30' : ''}`}
       >
         <ReactSearchAutocomplete
           items={allCSSProperties}
@@ -28,10 +35,26 @@ export default function SearchStyles({ onChange, allCSSProperties, showCSS, setS
       </div>
       <div
         onClick={() => {
+          if (showCSS && codeBox) {
+            const cssProps = codeBox
+              .match(/{([^}]*)}/)[1]
+              .trim()
+              .split(';')
+
+            const styleObj = {}
+            cssProps.forEach(prop => {
+              if (prop.trim() !== '') {
+                const [key, value] = prop.split(':').map(item => item.trim())
+                const camelCaseKey = key.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+                styleObj[camelCaseKey] = value
+              }
+            })
+            setStyles(styleObj)
+          }
           setShowCSS(!showCSS)
         }}
-        className={`text-xl p-3 pl-3 cursor-pointer ${
-          showCSS ? 'text-orange-700 rounded bg-orange-200' : ''
+        className={`cursor-pointer p-3 pl-3 text-xl ${
+          showCSS ? 'rounded bg-orange-200 text-orange-700' : ''
         }`}
         data-tooltip-id="tooltip"
         data-tooltip-content="Toggle CSS"

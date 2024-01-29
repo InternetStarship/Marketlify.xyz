@@ -47,35 +47,27 @@ export default function Panel({ state }) {
     }
   }, [])
 
-  const quickSave = data => {
+  const quickSave = (styleObj, selectedId, data, updatePage) => {
     const page = JSON.stringify(data)
     localStorage.setItem(`marketlify_v4_page_${state.page.id.get()}`, page)
-    console.log('quick save')
   }
 
   const debouncedUpdateCSS = useCallback(
     debounce(value => {
+      console.log('debounced')
       setCodeBox(value)
-      updateCSS(
-        value,
-        codeBox,
-        secondaryTab,
-        state.active.selectedId.get(),
-        state.page.data.get(),
-        quickSave,
-        setStyles
-      )
-    }, 1300),
-    [codeBox, secondaryTab, state.active.selectedId.get(), state.page.data.get(), quickSave, setStyles]
+      updateCSS(value, value, secondaryTab, state.active.selectedId.get(), state, quickSave)
+    }, 200),
+    [codeBox, secondaryTab, state.active.selectedId.get(), state.page.data.get(), quickSave],
   )
 
   return (
     <>
       {state.active.selectedId.get() && (
-        <div className="text-xl py-4 px-3 text-slate-800 flex items-center justify-between font-bold">
+        <div className="flex items-center justify-between px-3 py-4 text-xl font-bold text-slate-800">
           <h3 className="capitalize">{selectedType}</h3>
 
-          <div className="space-x-3 flex items-center">
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => {
                 duplicate(state)
@@ -105,12 +97,12 @@ export default function Panel({ state }) {
         </div>
       )}
       <div className="px-3">
-        <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
+        <div className="flex items-center justify-evenly overflow-hidden rounded border border-slate-300 font-bold text-slate-700">
           <div
             onClick={() => {
               setMainTab('styles')
             }}
-            className={`text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 border-r border-slate-300 ${
+            className={`w-full cursor-pointer border-r border-slate-300 p-2 text-center text-sm hover:bg-orange-100 hover:text-orange-800 ${
               mainTab === 'styles' ? 'bg-slate-100' : ''
             }`}
           >
@@ -120,7 +112,7 @@ export default function Panel({ state }) {
             onClick={() => {
               setMainTab('properties')
             }}
-            className={`text-sm p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 ${
+            className={`w-full cursor-pointer p-2 text-center text-sm hover:bg-orange-100 hover:text-orange-800 ${
               mainTab === 'properties' ? 'bg-slate-100' : ''
             }`}
           >
@@ -132,12 +124,12 @@ export default function Panel({ state }) {
       {mainTab === 'styles' && (
         <>
           <div className="px-3 pt-3">
-            <div className="border border-slate-300 rounded text-slate-700 items-center font-bold flex justify-evenly overflow-hidden">
+            <div className="flex items-center justify-evenly overflow-hidden rounded border border-slate-300 font-bold text-slate-700">
               <div
                 onClick={() => {
                   setSecondaryTab('default')
                 }}
-                className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800 bg-slate-100 border-r border-slate-300"
+                className="w-full cursor-pointer border-r border-slate-300 bg-slate-100 p-2 text-center text-xs hover:bg-orange-100 hover:text-orange-800"
               >
                 Default
               </div>
@@ -145,7 +137,7 @@ export default function Panel({ state }) {
                 onClick={() => {
                   setSecondaryTab('hover')
                 }}
-                className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800"
+                className="w-full cursor-pointer p-2 text-center text-xs hover:bg-orange-100 hover:text-orange-800"
               >
                 Hover
               </div>
@@ -153,13 +145,13 @@ export default function Panel({ state }) {
                 onClick={() => {
                   setSecondaryTab('mobile')
                 }}
-                className="text-xs p-2 cursor-pointer w-full text-center hover:bg-orange-100 hover:text-orange-800"
+                className="w-full cursor-pointer p-2 text-center text-xs hover:bg-orange-100 hover:text-orange-800"
               >
                 Mobile
               </div>
             </div>
           </div>
-          <div className="text-sm py-3 px-3 pb-2 text-slate-700 relative" style={{ zIndex: 99999999 }}>
+          <div className="relative px-3 py-3 pb-2 text-sm text-slate-700" style={{ zIndex: 99999999 }}>
             <SearchStyles
               onChange={value => {
                 addStyle(
@@ -168,24 +160,15 @@ export default function Panel({ state }) {
                   setStyles,
                   state.active.selectedId.get(),
                   state.page.data.get(),
-                  quickSave
+                  quickSave,
                 )
               }}
               allCSSProperties={allCSSProperties}
               showCSS={showCSS}
+              codeBox={codeBox}
+              setStyles={setStyles}
               setShowCSS={() => {
                 setShowCSS(!showCSS)
-                if (showCSS) {
-                  updateCSS(
-                    null,
-                    codeBox,
-                    secondaryTab,
-                    state.active.selectedId.get(),
-                    state.page.data.get(),
-                    quickSave,
-                    setStyles
-                  )
-                }
               }}
             />
           </div>
@@ -195,21 +178,21 @@ export default function Panel({ state }) {
                 styles,
                 setStyles,
                 quickSave,
-                state.page.data.get(),
+                state,
                 state.active.selectedId.get(),
                 showColorPicker,
                 setShowColorPicker,
                 filteredFonts,
-                setFilteredFonts
+                setFilteredFonts,
               )}
             </div>
           )}
           {showCSS && (
             <>
-              <div className="pb-8 px-3 pt-3">
-                <div className="border rounded shadow overflow-hidden">
+              <div className="px-3 pb-8 pt-3">
+                <div className="overflow-hidden rounded border shadow">
                   <CodeMirror
-                    value={buildCSS(secondaryTab, styles)}
+                    value={buildCSS(secondaryTab, styles, properties)}
                     height="450px"
                     extensions={[css()]}
                     onChange={debouncedUpdateCSS}
@@ -223,14 +206,7 @@ export default function Panel({ state }) {
       {mainTab === 'properties' && (
         <>
           <div className="pb-8 pt-3">
-            {renderPropertyInputs(
-              styles,
-              properties,
-              setProperties,
-              quickSave,
-              state.page.data.get(),
-              state.active.selectedId.get()
-            )}
+            {renderPropertyInputs(styles, properties, setProperties, state, state.active.selectedId.get())}
           </div>
         </>
       )}

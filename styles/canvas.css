@@ -1,5 +1,5 @@
 #canvasContainer {
-  @apply p-6 h-screen overflow-y-scroll pb-32;
+  @apply h-screen overflow-y-scroll p-6 pb-32;
   transition: width height 0.5s ease;
 }
 
@@ -20,10 +20,11 @@
 } */
 
 #mainCanvas {
-  @apply mx-auto border border-slate-300 shadow bg-white;
+  @apply mx-auto border border-slate-300 bg-white shadow;
   width: 100%;
   max-width: 1200px;
   transition: all 0.48s ease;
+  /* overflow: hidden; */
 }
 
 #canvasWrapper {
@@ -53,7 +54,7 @@
 }
 
 #fullscreenClose {
-  @apply absolute top-0 mx-auto rounded-b-md text-sm text-center font-bold cursor-pointer bg-slate-200 text-slate-700 shadow-xl;
+  @apply absolute top-0 mx-auto cursor-pointer rounded-b-md bg-slate-200 text-center text-sm font-bold text-slate-700 shadow-xl;
   padding: 10px;
   display: none;
   width: 150px;

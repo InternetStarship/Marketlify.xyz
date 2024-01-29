@@ -1,23 +1,27 @@
 import { toKebabCase } from '../utility/toKebabCase'
 
-export function buildCSS(type, styles) {
+export function buildCSS(type, styles, properties) {
   const cssProps = []
 
   Object.entries(styles).forEach(([key, value]) => {
-    const cssKey = toKebabCase(key)
-    cssProps.push(`${cssKey}: ${value};`)
+    cssProps.push(`${toKebabCase(key)}: ${value};`)
   })
 
   let selector = ''
+  let elementID = 'element'
+  if (properties && properties?.id) {
+    elementID = properties.id
+  }
+
   switch (type) {
     case 'default':
-      selector = '#element'
+      selector = `#${elementID}`
       break
     case 'hover':
-      selector = '#element:hover'
+      selector = `#${elementID}:hover`
       break
     case 'mobile':
-      selector = '@media (max-width: 480px) {\n  #element'
+      selector = `@media (max-width: 480px) {\n  #${elementID}`
       break
     default:
       return ''

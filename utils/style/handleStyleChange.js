@@ -6,11 +6,11 @@ export function handleStyleChange(event, styles, setStyles, handleSave) {
   const { name, value } = event.target
   const newStyles = { ...styles, [name]: processCSSProperty({ name, value }) }
 
-  if (shouldAppendPX({ name, value })) {
-    setTimeout(() => {
-      moveCaretBack(2)
-    }, 0)
-  }
+  // if (shouldAppendPX({ name, value })) {
+  //   setTimeout(() => {
+  //     moveCaretBack(2)
+  //   }, 0)
+  // }
 
   setStyles(newStyles)
   handleSave(newStyles)

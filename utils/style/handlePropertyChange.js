@@ -1,40 +1,39 @@
-import { cloneDeep } from 'lodash'
 import { findTypeById } from '../utility/findTypeById'
 import { getIndexesById } from '../utility/getIndexesById'
 import { moveCaretBack } from '../utility/moveCaretBack'
 import { processCSSProperty } from '@/utils/css/processCSSProperty'
 import { shouldAppendPX } from '../utility/shouldAppendPX'
 
-export function handlePropertyChange(event, properties, setProperties, updatePage, page, selectedId) {
+export function handlePropertyChange(event, properties, setProperties, state, selectedId) {
   const { name, value } = event.target
   const newProperties = { ...properties, [name]: processCSSProperty({ name, value }) }
 
-  if (shouldAppendPX({ name, value })) {
-    setTimeout(() => {
-      moveCaretBack(2)
-    }, 0)
-  }
+  // if (shouldAppendPX({ name, value })) {
+  //   setTimeout(() => {
+  //     moveCaretBack(2)
+  //   }, 0)
+  // }
 
   if (selectedId) {
-    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
-    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, state.page.data.styles.sections.get())
+    const type = findTypeById(selectedId, state.page.data.styles.sections.get())
 
     if (type === 'section') {
-      page.data.styles.sections[currentElement.sectionIndex].properties = newProperties
+      state.page.data.styles.sections[currentElement.sectionIndex].properties.set(newProperties)
     } else if (type === 'row') {
-      page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].properties =
-        newProperties
+      state.page.data.styles.sections[currentElement.sectionIndex].rows[
+        currentElement.rowIndex
+      ].properties.set(newProperties)
     } else if (type === 'column') {
-      page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
         currentElement.columnIndex
-      ].properties = newProperties
+      ].properties.set(newProperties)
     } else if (type === 'element') {
-      page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
         currentElement.columnIndex
-      ].elements[currentElement.elementIndex].properties = newProperties
+      ].elements[currentElement.elementIndex].properties.set(newProperties)
     }
   }
 
   setProperties(newProperties)
-  updatePage(cloneDeep(page))
 }

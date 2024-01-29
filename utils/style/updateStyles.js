@@ -2,27 +2,27 @@ import { cloneDeep } from 'lodash'
 import { findTypeById } from '../utility/findTypeById'
 import { getIndexesById } from '../utility/getIndexesById'
 
-export function updateStyles(newStyles, selectedId, page, updatePage) {
+export function updateStyles(newStyles, selectedId, state) {
   if (selectedId) {
-    const currentElement = getIndexesById(selectedId, page.data.styles.sections)
-    const type = findTypeById(selectedId, page.data.styles.sections)
+    const currentElement = getIndexesById(selectedId, state.page.data.styles.sections.get())
+    const type = findTypeById(selectedId, state.page.data.styles.sections.get())
 
     if (type === 'section') {
-      page.data.styles.sections[currentElement.sectionIndex].style = newStyles
+      state.page.data.styles.sections[currentElement.sectionIndex].style.set(newStyles)
     } else if (type === 'row') {
-      page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style = newStyles
+      state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].style.set(
+        newStyles,
+      )
     } else if (type === 'column') {
-      page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
         currentElement.columnIndex
-      ].style = newStyles
+      ].style.set(newStyles)
     } else if (type === 'element') {
-      page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
+      state.page.data.styles.sections[currentElement.sectionIndex].rows[currentElement.rowIndex].columns[
         currentElement.columnIndex
-      ].elements[currentElement.elementIndex].style = newStyles
+      ].elements[currentElement.elementIndex].style.set(newStyles)
     }
   } else {
-    page.data.styles.body = newStyles
+    state.page.data.styles.body = newStyles
   }
-
-  updatePage(cloneDeep(page))
 }

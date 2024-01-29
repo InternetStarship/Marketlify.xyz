@@ -23,12 +23,12 @@ export function renderStyleInputs(
   styles,
   setStyles,
   updatePage,
-  page,
+  state,
   selectedId,
   showColorPicker,
   setShowColorPicker,
   filteredFonts,
-  setFilteredFonts
+  setFilteredFonts,
 ) {
   if (styles) {
     return Object.entries(styles).map(([key, value]) => {
@@ -44,7 +44,7 @@ export function renderStyleInputs(
             value={value}
             onChange={() => {
               handleStyleChange(event, styles, setStyles, newStyles => {
-                updateStyles(newStyles, selectedId, page, updatePage)
+                updateStyles(newStyles, selectedId, state, updatePage)
               })
             }}
           >
@@ -63,7 +63,7 @@ export function renderStyleInputs(
             {prettyLabel(key)}
             <div
               onClick={() => {
-                removeStyle(key, styles, setStyles, selectedId, page, updatePage)
+                removeStyle(key, styles, setStyles, selectedId, state, updatePage)
               }}
             >
               <FaTimes />
@@ -73,9 +73,9 @@ export function renderStyleInputs(
           {key === 'fontFamily' && (
             <>
               <div
-                className={`text-xl mr-2 ${
+                className={`mr-2 text-xl ${
                   showColorPicker === key ? 'text-blue-600' : 'text-slate-300'
-                } hover:text-slate-800 cursor-pointer`}
+                } cursor-pointer hover:text-slate-800`}
                 onClick={() => {
                   if (showColorPicker === key) {
                     setShowColorPicker(null)
@@ -110,17 +110,17 @@ export function renderStyleInputs(
                     />
                     {filteredFonts.length > 0 && (
                       <div
-                        className="p-1 text-xs text-slate-500 bg-white rounded shadow overflow-y-auto"
+                        className="overflow-y-auto rounded bg-white p-1 text-xs text-slate-500 shadow"
                         style={{ maxHeight: 200 }}
                       >
                         {filteredFonts.map(font => {
                           return (
                             <div
                               key={font}
-                              className="p-2 rounded cursor-pointer hover:text-orange-800 hover:bg-orange-100"
+                              className="cursor-pointer rounded p-2 hover:bg-orange-100 hover:text-orange-800"
                               onClick={() => {
                                 handleFontChange(font, styles, setStyles, newStyles => {
-                                  updateStyles(newStyles, selectedId, page, updatePage)
+                                  updateStyles(newStyles, selectedId, state, updatePage)
                                 })
                                 setShowColorPicker(null)
                               }}
@@ -142,7 +142,7 @@ export function renderStyleInputs(
                       activeFontFamily={value}
                       onChange={nextFont => {
                         handleFontChange(nextFont.family, styles, setStyles, newStyles => {
-                          updateStyles(newStyles, selectedId, page, updatePage)
+                          updateStyles(newStyles, selectedId, state, updatePage)
                         })
                       }}
                       families={googleFonts}
@@ -159,9 +159,9 @@ export function renderStyleInputs(
           {key.toLowerCase().includes('color') && (
             <>
               <div
-                className={`text-xl mr-2 ${
+                className={`mr-2 text-xl ${
                   showColorPicker === key ? 'text-blue-600' : 'text-slate-300'
-                } hover:text-slate-800 cursor-pointer`}
+                } cursor-pointer hover:text-slate-800`}
                 onClick={() => {
                   if (showColorPicker === key) {
                     setShowColorPicker(null)
@@ -179,7 +179,7 @@ export function renderStyleInputs(
                       color={value}
                       onChange={value => {
                         handleColorChange(value, key, styles, setStyles, newStyles => {
-                          updateStyles(newStyles, selectedId, page, updatePage)
+                          updateStyles(newStyles, selectedId, state, updatePage)
                         })
                       }}
                     />
@@ -202,7 +202,7 @@ export function renderStyleInputs(
               value={value}
               onChange={() => {
                 handleStyleChange(event, styles, setStyles, newStyles => {
-                  updateStyles(newStyles, selectedId, page, updatePage)
+                  updateStyles(newStyles, selectedId, state, updatePage)
                 })
               }}
             />
